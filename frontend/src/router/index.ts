@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import Dashboard from '../views/Dashboard.vue'
 import CharacterList from '../views/DataManage/CharacterList.vue'
 import WeaponList from '../views/DataManage/WeaponList.vue'
 import EquipmentList from '../views/DataManage/EquipmentList.vue'
@@ -12,7 +13,7 @@ import TimelineEditor from '../views/Simulator/TimelineEditor.vue'
 import TeamSimulator from '../views/Simulator/TeamSimulator.vue'
 
 const routes = [
-  { path: '/', redirect: '/characters' },
+  { path: '/', name: 'Dashboard', component: Dashboard },
   { path: '/characters', name: 'CharacterList', component: CharacterList },
   { path: '/weapons', name: 'WeaponList', component: WeaponList },
   { path: '/equipment', name: 'EquipmentList', component: EquipmentList },

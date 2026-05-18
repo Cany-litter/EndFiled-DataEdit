@@ -24,7 +24,7 @@
               <span>{{ i + 1 }}. {{ step.label }}</span>
               <el-button size="small" type="danger" link @click="rotation.splice(i, 1)">✕</el-button>
             </div>
-            <el-button size="small" style="margin-top:8px" @click="rotation = []">清空</el-button>
+            <el-button size="small" style="margin-top:8px" @click="rotation.splice(0)">清空</el-button>
           </div>
           <div v-else style="color:#909399;font-size:13px">请从上方添加技能到循环序列</div>
 

@@ -10,7 +10,7 @@
           active-text-color="#409eff"
           style="border: none"
         >
-          <el-menu-item index="/">首页</el-menu-item>
+          <el-menu-item index="/">仪表盘</el-menu-item>
           <el-menu-item index="/characters">角色管理</el-menu-item>
           <el-menu-item index="/weapons">武器管理</el-menu-item>
           <el-menu-item index="/equipment">装备管理</el-menu-item>
