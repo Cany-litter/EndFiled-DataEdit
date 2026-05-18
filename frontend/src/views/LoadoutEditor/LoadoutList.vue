@@ -22,15 +22,17 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import api from '../../api'
 
+const router = useRouter()
 const list = ref<any[]>([])
 const loading = ref(false)
 
 async function load() { loading.value = true; list.value = (await api.get('/builds')).data; loading.value = false }
 function del(row: any) { api.delete(`/builds/${row.id}`).then(load).then(() => ElMessage.success('已删除')) }
-function edit(row: any) { /* TODO: 跳转到配装编辑器 */ ElMessage.info('配装编辑器待实现') }
-function goCreate() { /* TODO: 跳转到配装编辑器 */ ElMessage.info('配装编辑器待实现') }
+function edit(row: any) { router.push(`/loadout/${row.id}`) }
+function goCreate() { router.push('/loadout') }
 onMounted(load)
 </script>

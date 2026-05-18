@@ -14,12 +14,12 @@ public class EquipmentController {
     public EquipmentController(EquipmentService equipmentService) { this.equipmentService = equipmentService; }
 
     @GetMapping
-    public List<Equipment> list(@RequestParam(required = false) String setName) {
-        if (setName != null && !setName.isEmpty()) {
-            return equipmentService.list(new LambdaQueryWrapper<Equipment>()
-                    .like(Equipment::getSetName, setName));
-        }
-        return equipmentService.list();
+    public List<Equipment> list(@RequestParam(required = false) String setName,
+                                @RequestParam(required = false) String slot) {
+        var q = new LambdaQueryWrapper<Equipment>();
+        if (setName != null && !setName.isEmpty()) q.like(Equipment::getSetName, setName);
+        if (slot != null && !slot.isEmpty()) q.eq(Equipment::getSlot, slot);
+        return equipmentService.list(q);
     }
 
     @GetMapping("/{id}")

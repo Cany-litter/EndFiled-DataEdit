@@ -14,12 +14,12 @@ public class WeaponController {
     public WeaponController(WeaponService weaponService) { this.weaponService = weaponService; }
 
     @GetMapping
-    public List<Weapon> list(@RequestParam(required = false) String name) {
-        if (name != null && !name.isEmpty()) {
-            return weaponService.list(new LambdaQueryWrapper<Weapon>()
-                    .like(Weapon::getName, name));
-        }
-        return weaponService.list();
+    public List<Weapon> list(@RequestParam(required = false) String name,
+                             @RequestParam(required = false) String type) {
+        var q = new LambdaQueryWrapper<Weapon>();
+        if (name != null && !name.isEmpty()) q.like(Weapon::getName, name);
+        if (type != null && !type.isEmpty()) q.eq(Weapon::getType, type);
+        return weaponService.list(q);
     }
 
     @GetMapping("/{id}")
