@@ -1,23 +1,10 @@
-/**
- * AKEDatabase 数据同步脚本
- *
- * 方案：构建时从 raw.githubusercontent.com 拉取 JSON（方案二）
- * 优点：不依赖 git submodule，不影响克隆项目的其他人
- *
- * 用法：
- *   node scripts/fetch-akedb.js          # 全量拉取
- *   node scripts/fetch-akedb.js --cache  # 使用缓存（不重新下载）
- *
- * 数据源：https://github.com/nagiyume/AKEDatabase
- */
-
 const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
 const RAW_BASE = 'https://raw.githubusercontent.com/nagiyume/AKEDatabase/refs/heads/main/public/CH';
 const DATA_DIR = path.join(__dirname, '..', 'data', 'akedb');
-const MANIFESTS = ['character', 'weapon', 'equip', 'enemy'];
+const CATEGORIES = ['character', 'weapon', 'equip', 'enemy'];
 
 function fetch(url) {
   return new Promise((resolve, reject) => {
@@ -33,46 +20,52 @@ function fetch(url) {
   });
 }
 
-async function ensureDir(dir) {
-  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+function ensureDir(dir) { if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true }); }
+
+function saveJson(filePath, obj) {
+  ensureDir(path.dirname(filePath));
+  fs.writeFileSync(filePath, JSON.stringify(obj, null, 2));
 }
 
-async function fetchManifest(category) {
-  const url = `${RAW_BASE}/${category}/manifest.json`;
-  console.log(`  [manifest] ${url}`);
+async function fetchAndSave(url, filePath) {
+  if (fs.existsSync(filePath)) return;
   const raw = await fetch(url);
-  const json = JSON.parse(raw);
-  const outPath = path.join(DATA_DIR, category, 'manifest.json');
-  await ensureDir(path.dirname(outPath));
-  fs.writeFileSync(outPath, JSON.stringify(json, null, 2));
-  return json;
+  const parsed = JSON.parse(raw);
+  saveJson(filePath, parsed);
+  return parsed;
 }
 
-async function fetchAllFiles(category, manifest) {
-  // manifest 结构: { "chr_0005_chen": "character/chr_0005_chen.json", ... }
-  const entries = Object.entries(manifest);
-  console.log(`  [files] ${category}: ${entries.length} files`);
-  for (const [id, relPath] of entries) {
-    const url = `${RAW_BASE}/${relPath}`;
-    const outPath = path.join(DATA_DIR, relPath);
-    if (fs.existsSync(outPath)) continue; // 跳过已缓存
+async function syncCategory(category) {
+  console.log(`\n[${category}]`);
+
+  // 1. fetch manifest
+  const manifestUrl = `${RAW_BASE}/${category}/manifest.json`;
+  const manifestPath = path.join(DATA_DIR, category, 'manifest.json');
+  console.log(`  manifest -> ${manifestUrl}`);
+  const manifest = await fetchAndSave(manifestUrl, manifestPath);
+  if (!manifest) return;
+
+  // 2. download each file listed in manifest
+  const files = manifest.map(entry => {
+    const contentFile = entry.contentFile || entry.file || `${category}/${entry.id || entry.charId || entry.weaponId || entry.suitID}.json`;
+    return {
+      id: entry.id || entry.charId || entry.weaponId || entry.suitID || entry.name,
+      relPath: contentFile.replace(/^\/?public\/CH\//, ''),
+    };
+  });
+
+  console.log(`  files: ${files.length}`);
+  for (const f of files) {
+    const url = `${RAW_BASE}/${f.relPath}`;
+    const outPath = path.join(DATA_DIR, f.relPath);
+    if (fs.existsSync(outPath)) continue;
     try {
-      const raw = await fetch(url);
-      await ensureDir(path.dirname(outPath));
-      // 美化格式方便阅读
-      const parsed = JSON.parse(raw);
-      fs.writeFileSync(outPath, JSON.stringify(parsed, null, 2));
-      console.log(`    ✓ ${id}`);
+      await fetchAndSave(url, outPath);
+      console.log(`    ✓ ${f.id}`);
     } catch (err) {
-      console.error(`    ✗ ${id}: ${err.message}`);
+      console.error(`    ✗ ${f.id}: ${err.message}`);
     }
   }
-}
-
-async function fetchCategory(category) {
-  console.log(`\n[${category}]`);
-  const manifest = await fetchManifest(category);
-  await fetchAllFiles(category, manifest);
 }
 
 async function main() {
@@ -80,15 +73,11 @@ async function main() {
   console.log(`源: ${RAW_BASE}`);
   console.log(`目标: ${DATA_DIR}\n`);
 
-  for (const cat of MANIFESTS) {
-    await fetchCategory(cat);
+  for (const cat of CATEGORIES) {
+    await syncCategory(cat);
   }
 
   console.log('\n=== 同步完成 ===');
-  console.log(`数据已保存到: ${DATA_DIR}`);
 }
 
-main().catch((err) => {
-  console.error('同步失败:', err.message);
-  process.exit(1);
-});
+main().catch((err) => { console.error('失败:', err.message); process.exit(1); });
