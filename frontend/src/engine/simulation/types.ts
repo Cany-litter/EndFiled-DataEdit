@@ -15,6 +15,26 @@ export interface RotationStep {
   skillId: string
   skillType: SkillType
   label: string
+  charIndex?: number
+}
+
+export interface TeamMemberConfig {
+  name: string
+  attack: number
+  skills: SkillConfig[]
+  rotation: RotationStep[]
+}
+
+export interface TeamSimulationResult {
+  members: {
+    name: string
+    totalDamage: number
+    dps: number
+    totalCasts: number
+    skillBreakdown: Record<string, { count: number; totalDamage: number }>
+  }[]
+  teamTotalDamage: number
+  teamDps: number
 }
 
 export interface SimulationConfig {
@@ -25,6 +45,7 @@ export interface SimulationConfig {
   critRate: number
   critDamage: number
   damageBonus: number
+  targetCount: number
 }
 
 export interface SimEvent {

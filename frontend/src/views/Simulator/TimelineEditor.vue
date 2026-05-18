@@ -32,6 +32,9 @@
           <el-form-item label="模拟时长 (秒)">
             <el-slider v-model="simDuration" :min="10" :max="300" :step="10" show-input />
           </el-form-item>
+          <el-form-item label="目标数量">
+            <el-input-number v-model="targetCount" :min="1" :max="10" size="small" />
+          </el-form-item>
           <el-form-item label="目标防御">
             <el-input-number v-model="targetDef" :min="0" :max="500" size="small" />
           </el-form-item>
@@ -113,6 +116,7 @@ const simDuration = ref(120)
 const targetDef = ref(50)
 const targetResistance = ref(20)
 const targetResistanceIgnore = ref(0)
+const targetCount = ref(1)
 const critRate = ref(0.05)
 const critDamage = ref(1.3)
 const damageBonus = ref(0.2)
@@ -188,6 +192,7 @@ function runSim() {
     critRate: critRate.value,
     critDamage: critDamage.value,
     damageBonus: damageBonus.value,
+    targetCount: targetCount.value,
   }, skillConfigs, [...rotation])
 }
 

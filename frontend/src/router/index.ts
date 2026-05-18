@@ -9,6 +9,7 @@ import LoadoutEditor from '../views/LoadoutEditor/LoadoutEditor.vue'
 import TeamList from '../views/TeamBuilder/TeamList.vue'
 import TeamDetail from '../views/TeamBuilder/TeamDetail.vue'
 import TimelineEditor from '../views/Simulator/TimelineEditor.vue'
+import TeamSimulator from '../views/Simulator/TeamSimulator.vue'
 
 const routes = [
   { path: '/', redirect: '/characters' },
@@ -23,6 +24,7 @@ const routes = [
   { path: '/teams', name: 'TeamList', component: TeamList },
   { path: '/team/:id', name: 'TeamDetail', component: TeamDetail },
   { path: '/simulator', name: 'TimelineEditor', component: TimelineEditor },
+  { path: '/team-sim', name: 'TeamSimulator', component: TeamSimulator },
 ]
 
 export default createRouter({ history: createWebHistory(), routes })

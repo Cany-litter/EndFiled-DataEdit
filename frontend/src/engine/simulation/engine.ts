@@ -43,7 +43,7 @@ export function runSimulation(
       comboBonus: skill.type === 'chain' ? 0.3 : 0,
       specialMultiplier: 1,
     })
-    totalDamage += dmg.finalDamage
+    totalDamage += dmg.finalDamage * (config.targetCount || 1)
     totalCasts++
     if (!skillBreakdown[skill.id]) skillBreakdown[skill.id] = { count: 0, totalDamage: 0 }
     skillBreakdown[skill.id].count++
