@@ -6,6 +6,8 @@ import GainList from '../views/DataManage/GainList.vue'
 import SkillList from '../views/DataManage/SkillList.vue'
 import BuildList from '../views/LoadoutEditor/LoadoutList.vue'
 import LoadoutEditor from '../views/LoadoutEditor/LoadoutEditor.vue'
+import TeamList from '../views/TeamBuilder/TeamList.vue'
+import TeamDetail from '../views/TeamBuilder/TeamDetail.vue'
 
 const routes = [
   { path: '/', redirect: '/characters' },
@@ -17,6 +19,8 @@ const routes = [
   { path: '/builds', name: 'BuildList', component: BuildList },
   { path: '/loadout', name: 'LoadoutEditor', component: LoadoutEditor },
   { path: '/loadout/:id', name: 'LoadoutEditorEdit', component: LoadoutEditor },
+  { path: '/teams', name: 'TeamList', component: TeamList },
+  { path: '/team/:id', name: 'TeamDetail', component: TeamDetail },
 ]
 
 export default createRouter({ history: createWebHistory(), routes })

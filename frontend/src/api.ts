@@ -71,10 +71,25 @@ export const SkillLevelApi = {
 }
 
 export const BuildApi = {
-  list: () => api.get('/builds').then(r => r.data as Build[]),
+  list: (characterId?: string) => api.get('/builds', { params: { characterId } }).then(r => r.data as Build[]),
   get: (id: string) => api.get(`/builds/${id}`).then(r => r.data as Build),
   save: (b: Build) => b.id ? api.put(`/builds/${b.id}`, b) : api.post('/builds', b),
   delete: (id: string) => api.delete(`/builds/${id}`),
+}
+
+export interface Team {
+  id?: string; name: string;
+  charAId?: string; buildAId?: string;
+  charBId?: string; buildBId?: string;
+  charCId?: string; buildCId?: string;
+  charDId?: string; buildDId?: string;
+}
+
+export const TeamApi = {
+  list: () => api.get('/teams').then(r => r.data as Team[]),
+  get: (id: string) => api.get(`/teams/${id}`).then(r => r.data as Team),
+  save: (t: Team) => t.id ? api.put(`/teams/${t.id}`, t) : api.post('/teams', t),
+  delete: (id: string) => api.delete(`/teams/${id}`),
 }
 
 export default api
