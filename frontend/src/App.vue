@@ -18,6 +18,7 @@
           <el-menu-item index="/skills">技能管理</el-menu-item>
           <el-menu-item index="/builds">配装方案</el-menu-item>
           <el-menu-item index="/teams">配队管理</el-menu-item>
+          <el-menu-item index="/simulator">排轴模拟</el-menu-item>
         </el-menu>
       </el-aside>
       <el-container>
