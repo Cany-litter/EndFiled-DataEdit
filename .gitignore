@@ -25,3 +25,6 @@ Thumbs.db
 
 # Data cache (downloaded AKEDatabase JSON)
 data/akedb/
+
+# Local credentials
+md/本地数据库.md
