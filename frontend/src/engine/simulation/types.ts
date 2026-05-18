@@ -22,6 +22,9 @@ export interface SimulationConfig {
   targetResistance: number
   targetResistanceIgnore: number
   duration: number
+  critRate: number
+  critDamage: number
+  damageBonus: number
 }
 
 export interface SimEvent {

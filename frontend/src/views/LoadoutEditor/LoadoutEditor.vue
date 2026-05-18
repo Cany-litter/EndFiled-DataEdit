@@ -25,6 +25,10 @@
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
             <el-statistic title="攻击力" :value="stats.attack" />
             <el-statistic title="生命值" :value="stats.hp" />
+            <el-statistic title="防御加成" :value="(stats.defPercent*100).toFixed(1)+'%'" />
+            <el-statistic title="暴击率" :value="(stats.critRate*100).toFixed(1)+'%'" />
+            <el-statistic title="暴击伤害" :value="(stats.critDamage*100).toFixed(1)+'%'" />
+            <el-statistic title="增伤加成" :value="(stats.damageBonus*100).toFixed(1)+'%'" />
             <el-statistic title="力量" :value="stats.str" />
             <el-statistic title="敏捷" :value="stats.agi" />
             <el-statistic title="智识" :value="stats.int" />
@@ -58,6 +62,28 @@
             </el-tag>
           </div>
           <div v-else style="color:#909399;font-size:13px">尚未选择装备</div>
+
+          <el-divider content-position="left">战斗参数</el-divider>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+            <el-form-item label="暴击率">
+              <el-input-number v-model="battleConfig.critRate" :min="0" :max="1" :step="0.01" size="small" style="width:100%" @change="recalc" />
+            </el-form-item>
+            <el-form-item label="暴击伤害">
+              <el-input-number v-model="battleConfig.critDamage" :min="0" :max="5" :step="0.01" size="small" style="width:100%" @change="recalc" />
+            </el-form-item>
+            <el-form-item label="增伤加成">
+              <el-input-number v-model="battleConfig.damageBonus" :min="0" :max="5" :step="0.01" size="small" style="width:100%" @change="recalc" />
+            </el-form-item>
+            <el-form-item label="目标防御">
+              <el-input-number v-model="battleConfig.targetDef" :min="0" :max="500" size="small" style="width:100%" @change="recalc" />
+            </el-form-item>
+            <el-form-item label="目标抗性">
+              <el-input-number v-model="battleConfig.targetResistance" :min="0" :max="100" size="small" style="width:100%" @change="recalc" />
+            </el-form-item>
+            <el-form-item label="抗性穿透">
+              <el-input-number v-model="battleConfig.targetResistanceIgnore" :min="0" :max="100" size="small" style="width:100%" @change="recalc" />
+            </el-form-item>
+          </div>
         </template>
       </el-form>
     </el-card>
@@ -96,10 +122,8 @@ import { useRoute } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { CharacterApi, WeaponApi, EquipmentApi, SkillApi, SkillLevelApi, BuildApi } from '../../api'
 import type { Character, Weapon, Equipment, Skill } from '../../api'
-import { calcFinalStats } from '../../engine/formulas/stats'
+import { calcFinalStats, type FinalStats } from '../../engine/formulas/stats'
 import { calcDamage } from '../../engine/formulas/damage'
-import { exportBuild } from '../../utils/exportExcel'
-import type { FinalStats } from '../../engine/formulas/stats'
 
 const route = useRoute()
 
@@ -120,8 +144,15 @@ const equipSlots = reactive([
   { key: 'accessory2', label: '配件2', value: null as Equipment | null },
 ])
 
-const stats = ref<FinalStats>({ attack: 0, hp: 0, str: 0, agi: 0, int: 0, wil: 0, attrBonus: 0 })
+const stats = ref<FinalStats>({ attack: 0, hp: 0, str: 0, agi: 0, int: 0, wil: 0, attrBonus: 0, defPercent: 0, critRate: 0, critDamage: 0, damageBonus: 0 })
 const skillMult = reactive<Record<string, number>>({})
+
+const battleConfig = reactive({
+  critRate: 0.05, critDamage: 1.3, damageBonus: 0.2, targetDef: 50,
+  targetResistance: 0, targetResistanceIgnore: 0,
+  isStaggered: false, staggerMultiplier: 1,
+  comboBonus: 0, specialMultiplier: 1,
+})
 
 const setCounts = computed(() => {
   const map = new Map<string, number>()
@@ -168,7 +199,7 @@ function recalc() {
   const c = selectedChar.value
   if (!c) return
   // Compute equipment stats: sum attr bonuses from selected equipment
-  const equip = { str: 0, agi: 0, int: 0, wil: 0, atkPercent: 0, hpPercent: 0 }
+  const equip = { str: 0, agi: 0, int: 0, wil: 0, atkPercent: 0, hpPercent: 0, defPercent: 0, critRate: 0, critDamage: 0, damageBonus: 0 }
   for (const s of equipSlots) {
     const e = s.value
     if (!e) continue
@@ -215,54 +246,59 @@ function refineValue(base: number | undefined, v1?: number, v2?: number, v3?: nu
   return vals[Math.min(refine, 3)] ?? vals[0]
 }
 
-function applyAttr(equip: { str: number; agi: number; int: number; wil: number; atkPercent: number; hpPercent: number }, type: string, value: number) {
+function toPercent(v: number): number { return v < 1 ? v : v / 100 }
+
+function applyAttr(equip: { str: number; agi: number; int: number; wil: number; atkPercent: number; hpPercent: number; defPercent: number; critRate: number; critDamage: number; damageBonus: number }, type: string, value: number) {
   if (type.includes('力量') || type === 'str') { equip.str += value; return }
   if (type.includes('敏捷') || type === 'agi') { equip.agi += value; return }
   if (type.includes('智识') || type === 'int') { equip.int += value; return }
   if (type.includes('意志') || type === 'wil') { equip.wil += value; return }
-  if (type.includes('攻击力') || type === 'atk' || type.includes('atk_up')) {
-    if (value < 1) equip.atkPercent += value; else equip.atkPercent += value / 100
-    return
-  }
-  if (type.includes('生命值') || type === 'hp') {
-    if (value < 1) equip.hpPercent += value; else equip.hpPercent += value / 100
-    return
-  }
+  if (type.includes('攻击力') || type === 'atk' || type.includes('atk_up')) { equip.atkPercent += toPercent(value); return }
+  if (type.includes('生命值') || type === 'hp') { equip.hpPercent += toPercent(value); return }
+  if (type.includes('防御力') || type === 'def') { equip.defPercent += toPercent(value); return }
+  if (type.includes('暴击率') || type.includes('crit_rate')) { equip.critRate += toPercent(value); return }
+  if (type.includes('暴击伤害') || type.includes('crit_dmg')) { equip.critDamage += toPercent(value); return }
+  if (type.includes('增伤') || type.includes('damage_bonus') || type.includes('伤害加成')) { equip.damageBonus += toPercent(value); return }
 }
 
 function damageRows(sk: Skill) {
   const s = stats.value
   const mult = skillMult[sk.id] ?? 0
+  const totalDamageBonus = s.damageBonus + battleConfig.damageBonus
+  const totalCritRate = s.critRate + battleConfig.critRate
+  const totalCritDmg = s.critDamage + battleConfig.critDamage
+  const comboBonus = (sk.type === 'chain' ? 0.3 : 0) + battleConfig.comboBonus
   const dmg = calcDamage({
     attack: s.attack,
     skillMultiplier: mult,
     baseDamageFlat: 0,
-    critRate: 0.05,
-    critDamage: 1.3,
-    damageBonus: 0.2,
+    critRate: totalCritRate,
+    critDamage: totalCritDmg,
+    damageBonus: totalDamageBonus,
     damageReduction: [],
     amplifyBonus: 0,
     weakenReduction: [],
     shelterValue: 0,
     fragileBonus: 0,
     vulnerableBonus: 0,
-    defense: 50,
-    isTrueDamage: sk.type === 'other',
-    isStaggered: false,
-    staggerMultiplier: 1,
-    resistance: 0,
-    resistanceIgnore: 0,
+    defense: battleConfig.targetDef,
+    isTrueDamage: sk.damageType === 'true',
+    isStaggered: battleConfig.isStaggered,
+    staggerMultiplier: battleConfig.staggerMultiplier,
+    resistance: battleConfig.targetResistance,
+    resistanceIgnore: battleConfig.targetResistanceIgnore,
     nonControlledReduction: 0,
-    comboBonus: sk.type === 'chain' ? 0.3 : 0,
-    specialMultiplier: 1,
+    comboBonus: comboBonus,
+    specialMultiplier: battleConfig.specialMultiplier,
   })
   return [
     { zone: '基础伤害', formula: '攻击×倍率', value: dmg.baseDamage.toFixed(1) },
-    { zone: '暴击区', formula: `1+${dmg.critMult > 1 ? '暴击' : '0%暴击'}`, value: `x${dmg.critMult.toFixed(3)}` },
-    { zone: '增伤区', formula: '1+增伤', value: `x${dmg.damageBonusMult.toFixed(3)}` },
-    { zone: '防御区', formula: '1000/(防御+1000)', value: `x${dmg.defenseMult.toFixed(3)}` },
-    { zone: '连击区', formula: '1+连击增伤', value: `x${dmg.comboMult.toFixed(3)}` },
-    { zone: '最终伤害', formula: '', value: dmg.finalDamage.toFixed(1), bold: true },
+    { zone: '暴击区', formula: '1+暴击率×爆伤', value: `x${dmg.critMult.toFixed(3)}` },
+    { zone: '增伤区', formula: '1+增伤加成', value: `x${dmg.damageBonusMult.toFixed(3)}` },
+    { zone: '防御区', formula: '1-def/(def+100)', value: `x${dmg.defenseMult.toFixed(3)}` },
+    { zone: '抗性区', formula: '1-抗性+穿透', value: `x${dmg.resistanceMult.toFixed(3)}` },
+    { zone: '连击增伤区', formula: '1+连击增伤', value: `x${dmg.comboMult.toFixed(3)}` },
+    { zone: '最终伤害', formula: '全乘区连乘', value: dmg.finalDamage.toFixed(1), bold: true },
   ]
 }
 

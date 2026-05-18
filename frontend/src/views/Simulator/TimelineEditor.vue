@@ -41,6 +41,15 @@
           <el-form-item label="抗性穿透">
             <el-input-number v-model="targetResistanceIgnore" :min="0" :max="100" size="small" />
           </el-form-item>
+          <el-form-item label="暴击率">
+            <el-input-number v-model="critRate" :min="0" :max="1" :step="0.01" size="small" />
+          </el-form-item>
+          <el-form-item label="暴击伤害">
+            <el-input-number v-model="critDamage" :min="0" :max="5" :step="0.01" size="small" />
+          </el-form-item>
+          <el-form-item label="增伤加成">
+            <el-input-number v-model="damageBonus" :min="0" :max="5" :step="0.01" size="small" />
+          </el-form-item>
 
           <el-button type="primary" style="width:100%" :disabled="!rotation.length" @click="runSim">开始模拟</el-button>
         </template>
@@ -104,6 +113,9 @@ const simDuration = ref(120)
 const targetDef = ref(50)
 const targetResistance = ref(20)
 const targetResistanceIgnore = ref(0)
+const critRate = ref(0.05)
+const critDamage = ref(1.3)
+const damageBonus = ref(0.2)
 
 function skillTypeLabel(t: string) {
   const map: Record<string, string> = { normal: '普攻', skill: '战技', chain: '连携', ultimate: '终结技', other: '其他' }
@@ -173,6 +185,9 @@ function runSim() {
     targetResistance: targetResistance.value,
     targetResistanceIgnore: targetResistanceIgnore.value,
     duration: simDuration.value,
+    critRate: critRate.value,
+    critDamage: critDamage.value,
+    damageBonus: damageBonus.value,
   }, skillConfigs, [...rotation])
 }
 

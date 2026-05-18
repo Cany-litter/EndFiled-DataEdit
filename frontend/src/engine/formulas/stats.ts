@@ -8,6 +8,10 @@ export interface FinalStats {
   int: number
   wil: number
   attrBonus: number
+  defPercent: number
+  critRate: number
+  critDamage: number
+  damageBonus: number
 }
 
 export interface CharConfig {
@@ -25,6 +29,7 @@ export interface WeaponConfig {
 export interface EquipStats {
   str: number; agi: number; int: number; wil: number
   atkPercent: number; hpPercent: number
+  defPercent: number; critRate: number; critDamage: number; damageBonus: number
 }
 
 const trustMap: Record<number, number> = { 1: 10, 2: 25, 3: 40, 4: 60 }
@@ -56,7 +61,12 @@ export function calcFinalStats(
 
   const hp = calcHp({ baseHp: char.baseHp, percentBonus: equip.hpPercent, flatBonus: 0 })
 
-  return { attack, hp, str, agi, int, wil, attrBonus }
+  const defPercent = equip.defPercent
+  const critRate = equip.critRate
+  const critDamage = equip.critDamage
+  const damageBonus = equip.damageBonus
+
+  return { attack, hp, str, agi, int, wil, attrBonus, defPercent, critRate, critDamage, damageBonus }
 }
 
 function getAttr(str: number, agi: number, int: number, wil: number, attr: string): number {

@@ -31,7 +31,7 @@ export function runSimulation(
       attack,
       skillMultiplier: mult,
       baseDamageFlat: 0,
-      critRate: 0.05, critDamage: 1.3, damageBonus: 0.2,
+      critRate: config.critRate, critDamage: config.critDamage, damageBonus: config.damageBonus,
       damageReduction: [], amplifyBonus: 0,
       weakenReduction: [], shelterValue: 0, fragileBonus: 0,
       vulnerableBonus: 0, defense: config.targetDef,
