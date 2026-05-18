@@ -1,0 +1,11 @@
+{
+  "private": true,
+  "scripts": {
+    "fetch": "node scripts/fetch-akedb.js",
+    "map": "node scripts/map-akedb.js",
+    "import": "node scripts/import-akedb.js"
+  },
+  "dependencies": {
+    "mysql2": "^3.12.0"
+  }
+}

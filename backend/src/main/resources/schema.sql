@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `weapon` (
 
 -- 3. 装备表
 CREATE TABLE IF NOT EXISTS `equipment` (
-    `id`                    VARCHAR(32)     NOT NULL PRIMARY KEY COMMENT '装备ID',
+    `id`                    VARCHAR(64)     NOT NULL PRIMARY KEY COMMENT '装备ID',
     `name`                  VARCHAR(50)     NOT NULL COMMENT '装备名称',
     `icon`                  TEXT COMMENT '装备图标',
     `slot`                  VARCHAR(10)     NOT NULL COMMENT '部位 armor/glove/accessory',
