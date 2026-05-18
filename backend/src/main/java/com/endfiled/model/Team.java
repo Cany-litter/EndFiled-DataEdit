@@ -1,8 +1,10 @@
 package com.endfiled.model;
 
 import com.baomidou.mybatisplus.annotation.*;
+import lombok.Data;
 import java.time.LocalDateTime;
 
+@Data
 @TableName("team")
 public class Team {
     @TableId
