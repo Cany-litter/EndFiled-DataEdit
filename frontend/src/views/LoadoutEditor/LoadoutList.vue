@@ -3,6 +3,7 @@
     <el-card>
       <div style="margin-bottom: 15px">
         <el-button type="primary" @click="goCreate">新建配装方案</el-button>
+        <el-button @click="exportAll">导出所有方案</el-button>
       </div>
       <el-table :data="list" border stripe v-loading="loading">
         <el-table-column prop="id" label="ID" width="150" />
@@ -25,6 +26,7 @@ import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import api from '../../api'
+import { exportList } from '../../utils/exportExcel'
 
 const router = useRouter()
 const list = ref<any[]>([])
@@ -34,5 +36,9 @@ async function load() { loading.value = true; list.value = (await api.get('/buil
 function del(row: any) { api.delete(`/builds/${row.id}`).then(load).then(() => ElMessage.success('已删除')) }
 function edit(row: any) { router.push(`/loadout/${row.id}`) }
 function goCreate() { router.push('/loadout') }
+function exportAll() {
+  exportList(list.value, '配装方案列表', '配装方案')
+  ElMessage.success('已导出')
+}
 onMounted(load)
 </script>

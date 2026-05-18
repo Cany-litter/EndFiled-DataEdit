@@ -3,6 +3,7 @@
     <el-card>
       <div style="margin-bottom:15px">
         <el-button type="primary" @click="$router.push('/team/new')">新建配队</el-button>
+        <el-button @click="exportAll">导出所有配队</el-button>
       </div>
       <el-table :data="list" border stripe v-loading="loading">
         <el-table-column prop="id" label="ID" width="180" />
@@ -35,6 +36,7 @@ import { ref, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
 import { TeamApi, CharacterApi } from '../../api'
 import type { Character } from '../../api'
+import { exportTeams } from '../../utils/exportExcel'
 
 const list = ref<any[]>([])
 const chars = ref<Character[]>([])
@@ -44,6 +46,13 @@ function charName(id: string | undefined) {
   if (!id) return '-'
   const c = chars.value.find(ch => ch.id === id)
   return c ? c.name : id
+}
+
+function exportAll() {
+  const charMap: Record<string, string> = {}
+  for (const c of chars.value) charMap[c.id] = c.name
+  exportTeams(list.value, charMap)
+  ElMessage.success('已导出')
 }
 
 async function load() {

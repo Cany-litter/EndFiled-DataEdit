@@ -7,6 +7,7 @@
           <span>配装编辑器</span>
           <div>
             <el-button type="primary" size="small" @click="saveBuild">保存方案</el-button>
+            <el-button size="small" @click="exportCurrent">导出 Excel</el-button>
             <el-button size="small" @click="$router.push('/builds')">返回</el-button>
           </div>
         </div>
@@ -97,6 +98,7 @@ import { CharacterApi, WeaponApi, EquipmentApi, SkillApi, SkillLevelApi, BuildAp
 import type { Character, Weapon, Equipment, Skill } from '../../api'
 import { calcFinalStats } from '../../engine/formulas/stats'
 import { calcDamage } from '../../engine/formulas/damage'
+import { exportBuild } from '../../utils/exportExcel'
 import type { FinalStats } from '../../engine/formulas/stats'
 
 const route = useRoute()
@@ -262,6 +264,23 @@ function damageRows(sk: Skill) {
     { zone: '连击区', formula: '1+连击增伤', value: `x${dmg.comboMult.toFixed(3)}` },
     { zone: '最终伤害', formula: '', value: dmg.finalDamage.toFixed(1), bold: true },
   ]
+}
+
+function exportCurrent() {
+  if (!selectedChar.value) { ElMessage.warning('请先选择角色'); return }
+  const rows: Record<string, any[]> = {}
+  for (const sk of skills.value) {
+    rows[skillLabel(sk)] = damageRows(sk).map(r => ({
+      乘区: r.zone,
+      公式: r.formula,
+      数值: r.value,
+    }))
+  }
+  exportBuild({
+    name: `${selectedChar.value.name}配装方案`,
+    characterId: selectedChar.value.id,
+    weaponId: selectedWeapon.value?.id,
+  }, rows, stats.value)
 }
 
 async function saveBuild() {
