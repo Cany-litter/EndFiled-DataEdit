@@ -88,7 +88,7 @@
                 <el-checkbox-group v-model="selectedGainIds" size="small">
                   <div v-for="cat in gainCategories" :key="cat" style="margin-bottom:4px">
                     <div style="font-size:11px;color:#909399;margin-bottom:2px">{{ cat }}</div>
-                    <el-checkbox-button v-for="g in gainsByCategory(cat)" :key="g.id" :label="g.id">
+                    <el-checkbox-button v-for="g in gainsByCategory(cat)" :key="g.id" :value="g.id">
                       {{ g.name }}
                     </el-checkbox-button>
                   </div>

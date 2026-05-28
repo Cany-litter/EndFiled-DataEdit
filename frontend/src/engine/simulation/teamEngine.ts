@@ -117,6 +117,8 @@ function simulateMember(
   member: MemberState, config: SimulationConfig,
 ): void {
   let time = 0
+  let stuckCount = 0
+  const maxStuck = member.rotation.length * 2
 
   while (time < config.duration) {
     if (member.nextAutoTime <= time + 0.05) {
@@ -128,8 +130,14 @@ function simulateMember(
     if (!step) { time = config.duration; break }
 
     const skill = member.skillMap.get(step.skillId)
-    if (!skill) { member.rotIdx++; continue }
+    if (!skill) {
+      member.rotIdx++
+      stuckCount++
+      if (stuckCount > maxStuck) { time = config.duration; break }
+      continue
+    }
 
+    stuckCount = 0
     const cdReady = !member.cooldowns.has(skill.id) || member.cooldowns.get(skill.id)! <= time
     const energyOk = member.energy >= skill.energyCost
 

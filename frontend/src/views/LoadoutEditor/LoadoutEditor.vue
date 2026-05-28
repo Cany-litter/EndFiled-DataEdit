@@ -198,7 +198,7 @@
               <div v-for="(gs, cat) in groupedGains" :key="cat" class="gain-cat">
                 <div class="gain-cat-title">{{ cat }}</div>
                 <div v-for="g in gs" :key="g.id" class="gain-item">
-                  <el-checkbox v-model="selectedGainIds" :label="g.id" @change="recalc" size="small">
+                  <el-checkbox v-model="selectedGainIds" :value="g.id" @change="recalc" size="small">
                     <span class="gain-name">{{ g.name }}</span>
                     <span v-if="g.effectValue" class="gain-val">({{ g.effectValue }}{{ g.valueType === 'percentage' ? '%' : '' }})</span>
                   </el-checkbox>
