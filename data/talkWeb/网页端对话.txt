@@ -1,0 +1,291 @@
+查看这个网站都有哪些内容：https://www.end-axis.com/timeline
+正在阅读
+正在阅读
+根据你提供的网址 https://www.end-axis.com/timeline，这个网站是《明日方舟：终末地》的一款玩家自制的可视化排轴规划工具，名为“排轴终端”（ENDAXIS），当前版本为 v1.2.0。
+
+网站主要内容和功能
+核心工具区域：
+
+一个时间轴操作区（带有“-5s”、“0s”、“5s”等刻度按钮，可缩放比例）。
+
+干员选择：可添加多个干员（有“请选择干员”的下拉框）。
+
+敌人设置：可自定义敌人，包括属性（失衡上限、失衡节点、踉跄时长等）。
+
+队伍属性：可设置初始技力、技力回复速度等。
+
+提供导入/导出、加载、重置等数据管理功能。
+
+辅助及信息区：
+
+语言切换：支持简体中文、English、Русский。
+
+公告与说明：说明工具性质为玩家自制，数据已填充大部分干员、敌人、装备；移动端仅可读。
+
+相关资源链接：
+
+视频教程、文本教程、项目仓库（GitHub类）。
+
+友情链接：终末地互动地图（zmdmap.com）、终末地一图流（yituliu.cn）。
+
+其他操作：
+
+“登录”功能（具体作用未详细说明）。
+
+可拖放文件以导入数据。
+
+重要提示
+这是非官方的粉丝制作工具，并非游戏本体。
+
+部分内容（如干员“庄方宜”的技能数据）标注为“先凑合一下”，可能存在数据不完整。
+
+移动端目前仅支持查看，无法进行编辑操作。
+
+如果你想了解某个具体功能的使用方法（比如如何导入导出排轴方案），或者需要查找某个干员是否在数据中，我可以进一步为你说明。
+
+这是我使用这个网站里的功能将排轴内容导出的结果，分析这个json文本包含的信息。
+这个 JSON 文件是 《明日方舟：终末地》排轴工具导出的完整规划数据，记录了你创建和编辑的多个战斗轴方案（Scenario）。文件内容非常详细，结构清晰，主要包含以下几大类信息：
+
+一、文件元信息（头部）
+json
+"timestamp": 1779417773902,
+"version": "1.0.0",
+"timeUnit": "frame",
+"fps": 60,
+"activeScenarioId": "sc_hpifdym"
+timestamp：导出时间戳（毫秒级 Unix 时间）。
+
+version：导出数据格式版本。
+
+timeUnit / fps：时间单位使用“帧”，每秒 60 帧（常用于精确排轴）。
+
+activeScenarioId：当前激活的方案 ID（最后打开或编辑的是 sc_hpifdym）。
+
+二、全局系统常量（systemConstants）
+json
+"systemConstants": {
+  "maxSp": 300,
+  "initialSp": 200,
+  "spRegenRate": 8,
+  "skillSpCostDefault": 100,
+  "linkCdReduction": 0,
+  "maxStagger": 280,
+  "staggerNodeCount": 1,
+  "staggerNodeDuration": 120,
+  "staggerBreakDuration": 600,
+  "executionRecovery": 100
+}
+这些是战斗中通用的规则：
+
+SP 相关：最大 SP 300，初始 200，每秒回复 8 点，默认技能消耗 100 SP。
+
+韧性/失衡系统：最大失衡值 280，1 个节点，节点持续 120 帧，破韧持续 600 帧，处决回复 100 点。
+
+三、方案列表（scenarioList）
+核心内容，包含 9 个不同的方案，每个方案是一个独立的“排轴方案”。
+你给出的文件中包含以下方案（按 id 和 name）：
+
+ID	名称
+sc_10dd6p6	骏卫洛丽塔
+sc_is6unjv	汤汤洛丽塔
+sc_zfre4az	双锋碎冰队
+sc_h1uu0mw	伊汤冰队
+sc_1mtld2i	方案 5 (副本)
+sc_abmkhd0	方案 5 (副本) (副本)
+sc_hpifdym	方案 5 (副本) (副本) (副本)
+可见你多次复制了“方案 5”来调整不同配置。
+
+四、单个方案（Scenario）的内部结构
+以一个方案为例（如 骏卫洛丽塔），包含以下关键字段：
+
+1. 轨道（tracks）
+每个 干员 对应一个 track，里面记录该干员的所有 动作序列。
+
+json
+"tracks": [
+  {
+    "id": "ROSSI",   // 干员标识
+    "actions": [ ... ],   // 动作列表
+    "initialGauge": 0,
+    "maxGaugeOverride": null,
+    "gaugeEfficiency": 100,
+    "weaponId": null,
+    "stats": { ... },
+    ...
+  }
+]
+2. 动作（actions）类型
+每个动作是一个对象，常见类型包括：
+
+攻击（attack）：普通攻击/重击，包含连段序列（attackSegmentIndex）。
+
+战技（skill）：消耗 SP 的技能。
+
+连携（link）：连携技，有冷却时间（cooldown）。
+
+终结技（ultimate）：消耗技力槽（gaugeCost）的大招。
+
+处决（execution）：破韧后的处决动作。
+
+每个动作都包含非常详细的参数：
+
+json
+{
+  "id": "ROSSI_attack_seg1",
+  "type": "attack",
+  "name": "重击 1",
+  "duration": 32,          // 持续帧数
+  "cooldown": 0,
+  "spCost": 0,
+  "gaugeGain": 0,
+  "damageTicks": [         // 伤害判定时间点
+    { "offset": 16, "stagger": 0, "sp": 0 }
+  ],
+  "allowedTypes": [ ... ], // 可触发的异常/反应
+  "physicalAnomaly": [],
+  "startTime": 432,        // 在时间轴上的起始帧
+  "logicalStartTime": 432
+}
+3. 装备与属性（stats）
+每个干员轨道中都有：
+
+武器（weaponId）、装备（equipArmorId 等）
+
+属性加成：如 agility, intellect, crit_rate, ult_charge_eff 等
+
+专精/精炼等级（如 weaponCommon1Tier: 9）
+
+例如“双锋碎冰队”中的 ROSSI 有：
+
+json
+"stats": {
+  "agility": 372,
+  "crit_rate": 40.1,
+  "ultimate_dmg_bonus": 43.1,
+  "ult_charge_eff": 119.3
+}
+4. 敌人设置
+json
+"activeEnemyId": "eny_0051_rodin",
+"customEnemyParams": {
+  "maxStagger": 100,
+  "staggerNodeCount": 0,
+  ...
+}
+表示当前目标敌人是“罗丁”，且自定义了失衡参数（例如节点数为 0，可能表示特殊机制）。
+
+5. 队伍资源
+json
+"systemConstants": { ... }   // 可覆盖全局设定
+"prepDuration": 300,         // 准备时间（帧）
+五、你看到的“重复方案”含义
+末尾的多个 方案 5 (副本) 是你在工具中 复制并修改 的不同尝试。例如：
+
+sc_1mtld2i：包含干员 ENDMINISTRATOR, DAPAN, POGRANICHNK, ROSSI
+
+sc_abmkhd0：同样干员，但动作时间点、装备、覆盖参数（characterOverrides）不同
+
+这些副本通常用于 测试不同配装、技能顺序或敌人参数的影响。
+
+六、特殊机制记录
+1. 连段连携（Combo）
+例如 ROSSI 的“洛茜·一段 / 二段”：
+
+json
+"comboGroupId": "combo_qyj0zr0",
+"comboSegmentIndex": 1,
+"comboLinked": true,
+"comboFollowupDelay": 1.2333333333333334
+表示这是一个多段连携技，中间有延迟。
+
+2. 异常与效果（physicalAnomaly）
+记录每帧触发的异常，如：
+
+json
+"physicalAnomaly": [
+  [
+    { "_id": "kh40ut5", "type": "blaze_attach", "stacks": 1, "offset": 300 }
+  ]
+]
+表示在 300 帧时附加 1 层 灼燃附着。
+
+3. 角色覆盖（characterOverrides）
+用于在不修改原始技能定义的情况下，局部调整某个技能的参数（如伤害 tick、sp 获得等）。
+
+总结：这个 JSON 完整记录了什么？
+类别	内容
+干员	动作序列（攻击/技能/连携/终结技/处决）、装备、属性、武器
+敌人	类型、失衡参数
+队伍	SP 规则、技力效率、冷却缩减
+时间轴	每个动作的精确起始时间（帧）、持续时间、伤害判定点
+方案	多个可切换的排轴配置，每个有独立干员组合和参数
+副本	你复制并微调的迭代版本
+连段	多段连携技的连接关系与延迟
+异常	精确到帧的元素附着和反应触发
+这个文件完全可以 重新导入到排轴工具 中完整还原你的所有方案，也可用于 数据分析、分享、备份或模拟计算（如总伤害、技能循环效率）。
+
+如果你需要我帮你 提取某个干员的完整技能循环时间线，或者 对比两个方案的装备/属性差异，我可以进一步为你分析。
+
+利用这些信息我可以复刻类似的功能出来吗？
+基于你提供的这份详细的 JSON 数据，理论上完全可以复刻出一个功能相似的排轴工具。这份数据定义了工具的核心数据结构，但真正实现一个可用的工具，还需要做大量开发工作。
+
+下面是具体的分析：
+
+✅ 可以直接利用的信息
+完整的数据模型 (Data Schema)
+
+这是最有价值的部分。你有了干员、动作、敌人、装备、队伍属性等完整的 JSON 结构定义，相当于拿到了数据库的设计蓝图。
+
+干员与技能的动作库 (Action Library)
+
+文件中包含了大量技能数据，如 ROSSI 的“重击”、“战技”、“连携”等。每个技能的 duration, damageTicks, spCost, gaugeGain 都是宝贵的游戏机制参数。
+
+装备与属性系统框架 (Stats Framework)
+
+weaponId, equipmentAppliedDeltas, gaugeEfficiency 等字段，揭示了游戏内属性是如何通过装备叠加并影响战斗循环的。
+
+核心战斗机制参数 (Game Mechanics Constants)
+
+systemConstants 里的 maxSp, spRegenRate, maxStagger, staggerBreakDuration 等，是整个战斗循环的基础规则，可以直接复用。
+
+❌ 无法直接获得，需要自己开发的部分
+前端用户界面 (Frontend UI)
+
+JSON 只包含数据，没有界面代码。你需要从头构建一个交互界面，包括时间轴画布、拖拽操作、干员选择面板等所有可视化元素。
+
+可视化与交互逻辑 (Visualization & Interaction)
+
+数据中的 startTime 和 duration 只是数字。你需要编写代码，将它们渲染为时间轴上的彩色条块，并实现拖拽、缩放、对齐等所有交互功能。
+
+计算引擎 (Calculation Engine)
+
+这是核心难点。你需要根据 systemConstants 和干员的 actions，实时模拟 SP 回复、技力增长、技能冷却等，并确保界面和数据模型的状态始终保持一致。
+
+数据导入/导出功能 (Import/Export)
+
+JSON 文件本身是导出格式。你需要开发功能，让工具能解析你提供的这种 JSON 结构，重建整个场景，同时也要能将当前场景导出为同样格式的文件。
+
+后端与账号服务 (Backend & Account Service)
+
+原网站有“登录”功能，意味着它有后端服务来保存用户数据。如果要复刻完整功能，你需要搭建后端服务器和数据库。
+
+📋 开发路径建议
+如果你确实想复刻，可以考虑以下步骤：
+
+明确核心目标：是做一个仅供自己使用的桌面端工具，还是一个可以多人访问的 Web 应用？这会决定你的技术栈和投入。
+
+选择技术栈：Web 端的话，可以考虑 React 或 Vue 框架，配合 Canvas 或 SVG 来绘制时间轴。
+
+分阶段实现：
+
+第一阶段：搭建基础界面，并手动将 JSON 中的静态数据（如干员列表、技能库）转化为 JavaScript 对象，不做计算和交互。
+
+第二阶段：实现“播放”功能。编写一个核心循环（Loop），根据 systemConstants 和动作列表，在时间轴上刷新 SP/技力等数值。
+
+第三阶段：实现编辑功能。允许用户拖拽动作条来改变 startTime，并实时触发计算引擎更新。
+
+第四阶段：实现导入/导出功能，能够读写你提供的这种 JSON 文件。
+
+总的来说，这份 JSON 文件是 一份极其详尽的需求文档和数据结构原型，为复刻工作扫清了最大的障碍。接下来考验的就是具体开发的技术能力了。
+
+如果你想了解某个特定环节（比如时间轴绘制或 SP 循环计算）的实现思路，我可以为你提供更具体的方案。

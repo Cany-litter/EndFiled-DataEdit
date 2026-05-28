@@ -1,36 +1,42 @@
 package com.endfiled.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.endfiled.common.PageResult;
+import com.endfiled.common.Result;
+import com.endfiled.mapper.SkillMapper;
 import com.endfiled.model.Skill;
-import com.endfiled.service.SkillService;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
+
+import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/skills")
-@CrossOrigin
-public class SkillController {
-    private final SkillService skillService;
-    public SkillController(SkillService skillService) { this.skillService = skillService; }
+@RequestMapping("/api/v1/skills")
+public class SkillController extends BaseController<Skill, SkillMapper> {
+    public SkillController(SkillMapper skillMapper) { super(skillMapper); }
+
+    @GetMapping("/all")
+    public Result<java.util.List<Skill>> all() { return defaultAll(); }
 
     @GetMapping
-    public List<Skill> list(@RequestParam(required = false) String characterId) {
-        if (characterId != null) {
-            return skillService.list(new LambdaQueryWrapper<Skill>()
-                    .eq(Skill::getCharacterId, characterId));
-        }
-        return skillService.list();
+    public Result<PageResult<Skill>> list(
+            @RequestParam(required = false) String characterId,
+            @RequestParam(defaultValue = "1") Integer page,
+            @RequestParam(defaultValue = "20") Integer size) {
+        var q = new LambdaQueryWrapper<Skill>();
+        if (characterId != null) q.eq(Skill::getCharacterId, characterId);
+        return defaultPage(new Page<>(page, size), q);
     }
 
     @GetMapping("/{id}")
-    public Skill get(@PathVariable String id) { return skillService.getById(id); }
+    public Result<Skill> get(@PathVariable String id) { return defaultGet(id); }
 
     @PostMapping
-    public Skill create(@RequestBody Skill s) { skillService.save(s); return s; }
+    public Result<Skill> create(@Valid @RequestBody Skill s) { return defaultCreate(s); }
 
     @PutMapping("/{id}")
-    public Skill update(@PathVariable String id, @RequestBody Skill s) { s.setId(id); skillService.updateById(s); return s; }
+    public Result<Skill> update(@PathVariable String id, @Valid @RequestBody Skill s) { return defaultUpdate(id, s); }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable String id) { skillService.removeById(id); }
+    public Result<Void> delete(@PathVariable String id) { return defaultDelete(id); }
 }

@@ -2,13 +2,12 @@ import { describe, it, expect } from 'vitest'
 import { calcAnomalyLevel, calc法术等级系数, calc物理等级系数, calc源石技艺强度区, calc法术异常伤害, calc物理异常伤害, calc附带效果增强, 法术异常倍率Map, 物理异常倍率Map, 连击增伤Map } from '../anomaly'
 
 describe('calcAnomalyLevel', () => {
-  it('小于 100 返回 1', () => { expect(calcAnomalyLevel(50)).toBe(1) })
-  it('100-199 返回 2', () => { expect(calcAnomalyLevel(150)).toBe(2) })
-  it('200-299 返回 3', () => { expect(calcAnomalyLevel(250)).toBe(3) })
-  it('300+ 返回 4', () => { expect(calcAnomalyLevel(350)).toBe(4) })
-  it('边界值 100', () => { expect(calcAnomalyLevel(100)).toBe(2) })
-  it('边界值 200', () => { expect(calcAnomalyLevel(200)).toBe(3) })
-  it('边界值 300', () => { expect(calcAnomalyLevel(300)).toBe(4) })
+  it('消耗1层 = 1级', () => { expect(calcAnomalyLevel(1)).toBe(1) })
+  it('消耗2层 = 2级', () => { expect(calcAnomalyLevel(2)).toBe(2) })
+  it('消耗3层 = 3级', () => { expect(calcAnomalyLevel(3)).toBe(3) })
+  it('消耗4层 = 4级', () => { expect(calcAnomalyLevel(4)).toBe(4) })
+  it('消耗0层下限为1', () => { expect(calcAnomalyLevel(0)).toBe(1) })
+  it('消耗5层上限为4', () => { expect(calcAnomalyLevel(5)).toBe(4) })
 })
 
 describe('等级系数', () => {

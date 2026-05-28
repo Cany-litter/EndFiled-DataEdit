@@ -23,6 +23,25 @@ function loadDir(dir) {
     .map(f => JSON.parse(fs.readFileSync(path.join(p, f), 'utf-8')));
 }
 
+/** 映射天赋 → 技能条目 */
+function mapTalents(raw) {
+  if (!raw.talents || !Array.isArray(raw.talents)) return [];
+  const seen = new Set();
+  const result = [];
+  for (let i = 0; i < raw.talents.length; i++) {
+    const t = raw.talents[i];
+    if (!t.name || seen.has(t.name)) continue;
+    seen.add(t.name);
+    result.push({
+      id: `${raw.charId}_talent_${result.length + 1}`,
+      name: t.name,
+      description: t.description || '',
+      values: t.values || {},
+    });
+  }
+  return result;
+}
+
 /** 映射角色 */
 function mapCharacter(raw) {
   const g = raw.growth || {};
@@ -45,10 +64,20 @@ function mapCharacter(raw) {
     },
     talents: raw.talents || [],
     potentials: raw.potentials || [],
-    skills: raw.skill ? Object.entries(raw.skill).map(([id, s]) => ({
-      id, name: s.name,
-      values: { atk_scale: s.values?.atk_scale || [], costValue: s.values?.costValue || [], coolDown: s.values?.coolDown }
-    })) : [],
+    skills: [
+      ...(raw.skill ? Object.entries(raw.skill).map(([id, s]) => ({
+        id, name: s.name, description: s.description || '',
+        values: {
+          atk_scale: s.values?.atk_scale || [],
+          costValue: s.values?.costValue || [],
+          coolDown: s.values?.coolDown || [],
+          usp: s.values?.usp || [],
+          poise: s.values?.poise || [],
+          airborne_scale: s.values?.airborne_scale || s.values?.['浮空倍率'] || [],
+        }
+      })) : []),
+      ...mapTalents(raw),
+    ],
   };
 }
 
@@ -75,7 +104,7 @@ function mapEquipment(raw) {
     主词条: e['主词条'] ? { desc: e['主词条'].desc, value: e['主词条'].value } : null,
     副词条: e['副词条'] ? Object.entries(e['副词条']).map(([k, v]) => ({ key: k, desc: v.desc, value: v.value })) : [],
   }));
-  return { suitID: raw.suitID, 套组名称: raw['套组名称'], value: raw.value, items };
+  return { suitID: raw.suitID, 套组名称: raw['套组名称'], 技能描述: raw['技能描述'] || '', value: raw.value, items };
 }
 
 function main() {

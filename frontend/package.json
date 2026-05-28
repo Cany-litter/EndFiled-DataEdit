@@ -10,7 +10,9 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "sync-data": "node ../scripts/fetch-akedb.js",
-    "map-data": "node ../scripts/map-akedb.js"
+    "map-data": "node ../scripts/map-akedb.js",
+    "map-gains": "node ../scripts/map-gains.js",
+    "import-db": "node ../scripts/map-gains.js; if ($?) { node ../scripts/import-akedb.js }"
   },
   "dependencies": {
     "axios": "^1.7",

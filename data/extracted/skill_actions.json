@@ -1,0 +1,4473 @@
+{
+  "ENDMINISTRATOR_skill": {
+    "skill_id": "ENDMINISTRATOR_skill",
+    "character_id": "ENDMINISTRATOR",
+    "character_name": "管理员",
+    "skill_type": "skill",
+    "skill_type_label": "战技",
+    "duration": 0.8,
+    "cast_time": 0.8,
+    "sp_cost": 100,
+    "gauge_gain": 6.5,
+    "team_gauge_gain": 6.5,
+    "cooldown": null,
+    "allowed_types": [
+      "stagger",
+      "break",
+      "ice_shatter"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 0.37,
+        "stagger": 10,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "stagger",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 0.37
+          }
+        ]
+      }
+    ]
+  },
+  "ENDMINISTRATOR_link": {
+    "skill_id": "ENDMINISTRATOR_link",
+    "character_id": "ENDMINISTRATOR",
+    "character_name": "管理员",
+    "skill_type": "chain",
+    "skill_type_label": "连携技",
+    "duration": 0.77,
+    "cast_time": 0.77,
+    "sp_cost": null,
+    "gauge_gain": 10,
+    "team_gauge_gain": null,
+    "cooldown": 16,
+    "allowed_types": [
+      "endmin_debuff"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 0.77,
+        "stagger": 10,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "endmin_debuff",
+            "stacks": 1,
+            "duration": 4,
+            "offset": 0.77
+          }
+        ]
+      }
+    ]
+  },
+  "ENDMINISTRATOR_ultimate": {
+    "skill_id": "ENDMINISTRATOR_ultimate",
+    "character_id": "ENDMINISTRATOR",
+    "character_name": "管理员",
+    "skill_type": "ultimate",
+    "skill_type_label": "终结技",
+    "duration": 1.83,
+    "cast_time": 1.83,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "default"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 1.67,
+        "stagger": 25,
+        "sp": 0
+      }
+    ],
+    "anomalies": [],
+    "ultimate_gauge_max": 80,
+    "ultimate_gauge_reply": 0
+  },
+  "ENDMINISTRATOR_execution": {
+    "skill_id": "ENDMINISTRATOR_execution",
+    "character_id": "ENDMINISTRATOR",
+    "character_name": "管理员",
+    "skill_type": "normal",
+    "skill_type_label": "处决",
+    "duration": 1.5,
+    "cast_time": 1.5,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "conductive",
+      "emag_attach",
+      "emag_burst",
+      "blaze_burst",
+      "burning",
+      "blaze_attach",
+      "knockup",
+      "break",
+      "ice_shatter",
+      "nature_attach",
+      "corrosion",
+      "nature_burst",
+      "knockdown",
+      "cold_attach",
+      "frozen",
+      "cold_burst",
+      "stagger",
+      "armor_break"
+    ],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "POGRANICHNK_skill": {
+    "skill_id": "POGRANICHNK_skill",
+    "character_id": "POGRANICHNK",
+    "character_name": "骏卫",
+    "skill_type": "skill",
+    "skill_type_label": "战技",
+    "duration": 1.5,
+    "cast_time": 1.5,
+    "sp_cost": 100,
+    "gauge_gain": 6.5,
+    "team_gauge_gain": 6.5,
+    "cooldown": null,
+    "allowed_types": [
+      "armor_break",
+      "break",
+      "ice_shatter"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 0.93,
+        "stagger": 5,
+        "sp": 0
+      },
+      {
+        "offset": 1.27,
+        "stagger": 5,
+        "sp": 0
+      }
+    ],
+    "anomalies": []
+  },
+  "POGRANICHNK_link": {
+    "skill_id": "POGRANICHNK_link",
+    "character_id": "POGRANICHNK",
+    "character_name": "骏卫",
+    "skill_type": "chain",
+    "skill_type_label": "连携技",
+    "duration": 2.2,
+    "cast_time": 2.2,
+    "sp_cost": null,
+    "gauge_gain": 10,
+    "team_gauge_gain": null,
+    "cooldown": 18,
+    "allowed_types": [],
+    "damage_ticks": [
+      {
+        "offset": 0.77,
+        "stagger": 3,
+        "sp": 5
+      },
+      {
+        "offset": 1.23,
+        "stagger": 3,
+        "sp": 7
+      },
+      {
+        "offset": 2.03,
+        "stagger": 9,
+        "sp": 23
+      }
+    ],
+    "anomalies": []
+  },
+  "POGRANICHNK_ultimate": {
+    "skill_id": "POGRANICHNK_ultimate",
+    "character_id": "POGRANICHNK",
+    "character_name": "骏卫",
+    "skill_type": "ultimate",
+    "skill_type_label": "终结技",
+    "duration": 3,
+    "cast_time": 3,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "pograni_buff"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 2.47,
+        "stagger": 10,
+        "sp": 0
+      },
+      {
+        "offset": 2.53,
+        "stagger": 0,
+        "sp": 7.5
+      },
+      {
+        "offset": 2.53,
+        "stagger": 0,
+        "sp": 7.5
+      },
+      {
+        "offset": 2.53,
+        "stagger": 0,
+        "sp": 7.5
+      },
+      {
+        "offset": 2.53,
+        "stagger": 0,
+        "sp": 7.5
+      },
+      {
+        "offset": 2.53,
+        "stagger": 15,
+        "sp": 30
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "pograni_buff",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 2.53
+          },
+          {
+            "type": "pograni_buff",
+            "stacks": 2,
+            "duration": 0,
+            "offset": 2.53
+          },
+          {
+            "type": "pograni_buff",
+            "stacks": 3,
+            "duration": 0,
+            "offset": 2.53
+          },
+          {
+            "type": "pograni_buff",
+            "stacks": 4,
+            "duration": 0,
+            "offset": 2.53
+          },
+          {
+            "type": "pograni_buff",
+            "stacks": 5,
+            "duration": 0,
+            "offset": 2.53
+          }
+        ]
+      }
+    ],
+    "ultimate_gauge_max": 90,
+    "ultimate_gauge_reply": 0
+  },
+  "POGRANICHNK_execution": {
+    "skill_id": "POGRANICHNK_execution",
+    "character_id": "POGRANICHNK",
+    "character_name": "骏卫",
+    "skill_type": "normal",
+    "skill_type_label": "处决",
+    "duration": 1.5,
+    "cast_time": 1.5,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "burning",
+      "blaze_attach",
+      "blaze_burst",
+      "nature_attach",
+      "corrosion",
+      "nature_burst",
+      "knockup",
+      "break",
+      "ice_shatter",
+      "knockdown",
+      "cold_attach",
+      "frozen",
+      "cold_burst",
+      "stagger",
+      "armor_break",
+      "emag_attach",
+      "conductive",
+      "emag_burst"
+    ],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "POGRANICHNK_variant_0_0": {
+    "skill_id": "POGRANICHNK_variant_0_0",
+    "character_id": "POGRANICHNK",
+    "character_name": "骏卫",
+    "skill_type": "variant_0",
+    "skill_type_label": "变体-0",
+    "duration": 0.8,
+    "cast_time": 0.8,
+    "sp_cost": null,
+    "gauge_gain": 10,
+    "allowed_types": [],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "POGRANICHNK_variant_1_0": {
+    "skill_id": "POGRANICHNK_variant_1_0",
+    "character_id": "POGRANICHNK",
+    "character_name": "骏卫",
+    "skill_type": "variant_1",
+    "skill_type_label": "变体-1",
+    "duration": 1.4,
+    "cast_time": 1.4,
+    "sp_cost": null,
+    "gauge_gain": 10,
+    "allowed_types": [],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "POGRANICHNK_variant_2_0": {
+    "skill_id": "POGRANICHNK_variant_2_0",
+    "character_id": "POGRANICHNK",
+    "character_name": "骏卫",
+    "skill_type": "variant_2",
+    "skill_type_label": "变体-2",
+    "duration": 2.2,
+    "cast_time": 2.2,
+    "sp_cost": null,
+    "gauge_gain": 10,
+    "allowed_types": [],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "POGRANICHNK_variant_3_0": {
+    "skill_id": "POGRANICHNK_variant_3_0",
+    "character_id": "POGRANICHNK",
+    "character_name": "骏卫",
+    "skill_type": "variant_3",
+    "skill_type_label": "变体-3",
+    "duration": 1.5,
+    "cast_time": 1.5,
+    "sp_cost": 100,
+    "gauge_gain": 6.5,
+    "allowed_types": [],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "POGRANICHNK_variant_4_0": {
+    "skill_id": "POGRANICHNK_variant_4_0",
+    "character_id": "POGRANICHNK",
+    "character_name": "骏卫",
+    "skill_type": "variant_4",
+    "skill_type_label": "变体-4",
+    "duration": 1.5,
+    "cast_time": 1.5,
+    "sp_cost": 100,
+    "gauge_gain": 6.5,
+    "allowed_types": [],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "POGRANICHNK_variant_5_0": {
+    "skill_id": "POGRANICHNK_variant_5_0",
+    "character_id": "POGRANICHNK",
+    "character_name": "骏卫",
+    "skill_type": "variant_5",
+    "skill_type_label": "变体-5",
+    "duration": 1.5,
+    "cast_time": 1.5,
+    "sp_cost": 100,
+    "gauge_gain": 6.5,
+    "allowed_types": [],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "POGRANICHNK_variant_6_0": {
+    "skill_id": "POGRANICHNK_variant_6_0",
+    "character_id": "POGRANICHNK",
+    "character_name": "骏卫",
+    "skill_type": "variant_6",
+    "skill_type_label": "变体-6",
+    "duration": 1.5,
+    "cast_time": 1.5,
+    "sp_cost": 100,
+    "gauge_gain": 6.5,
+    "allowed_types": [],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "ARDELIA_skill": {
+    "skill_id": "ARDELIA_skill",
+    "character_id": "ARDELIA",
+    "character_name": "艾尔黛拉",
+    "skill_type": "skill",
+    "skill_type_label": "战技",
+    "duration": 1.57,
+    "cast_time": 1.57,
+    "sp_cost": 100,
+    "gauge_gain": 6.5,
+    "team_gauge_gain": 6.5,
+    "cooldown": null,
+    "allowed_types": [
+      "spell_vulnerable",
+      "physical_vulnerable"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 1.07,
+        "stagger": 10,
+        "sp": 0
+      }
+    ],
+    "anomalies": []
+  },
+  "ARDELIA_link": {
+    "skill_id": "ARDELIA_link",
+    "character_id": "ARDELIA",
+    "character_name": "艾尔黛拉",
+    "skill_type": "chain",
+    "skill_type_label": "连携技",
+    "duration": 0.77,
+    "cast_time": 0.77,
+    "sp_cost": null,
+    "gauge_gain": 10,
+    "team_gauge_gain": null,
+    "cooldown": 18,
+    "allowed_types": [
+      "corrosion",
+      "nature_attach",
+      "nature_burst"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 0.67,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 2.4,
+        "stagger": 10,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "corrosion",
+            "stacks": 1,
+            "duration": 10,
+            "offset": 2.4
+          }
+        ]
+      }
+    ]
+  },
+  "ARDELIA_ultimate": {
+    "skill_id": "ARDELIA_ultimate",
+    "character_id": "ARDELIA",
+    "character_name": "艾尔黛拉",
+    "skill_type": "ultimate",
+    "skill_type_label": "终结技",
+    "duration": 6.97,
+    "cast_time": 6.97,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [],
+    "damage_ticks": [
+      {
+        "offset": 2.7,
+        "stagger": 2,
+        "sp": 0
+      },
+      {
+        "offset": 1.8,
+        "stagger": 2,
+        "sp": 0
+      },
+      {
+        "offset": 6.7,
+        "stagger": 2,
+        "sp": 0
+      }
+    ],
+    "anomalies": [],
+    "ultimate_gauge_max": 90,
+    "ultimate_gauge_reply": 0
+  },
+  "ARDELIA_execution": {
+    "skill_id": "ARDELIA_execution",
+    "character_id": "ARDELIA",
+    "character_name": "艾尔黛拉",
+    "skill_type": "normal",
+    "skill_type_label": "处决",
+    "duration": 1.5,
+    "cast_time": 1.5,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "conductive",
+      "emag_attach",
+      "emag_burst",
+      "corrosion",
+      "nature_attach",
+      "nature_burst",
+      "burning",
+      "blaze_attach",
+      "blaze_burst",
+      "knockup",
+      "break",
+      "ice_shatter",
+      "knockdown",
+      "cold_attach",
+      "frozen",
+      "cold_burst",
+      "stagger",
+      "armor_break"
+    ],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "ARDELIA_variant_0_0": {
+    "skill_id": "ARDELIA_variant_0_0",
+    "character_id": "ARDELIA",
+    "character_name": "艾尔黛拉",
+    "skill_type": "variant_0",
+    "skill_type_label": "变体-0",
+    "duration": 1.57,
+    "cast_time": 1.57,
+    "sp_cost": 100,
+    "gauge_gain": 6.5,
+    "allowed_types": [],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "LASTRITE_skill": {
+    "skill_id": "LASTRITE_skill",
+    "character_id": "LASTRITE",
+    "character_name": "别礼",
+    "skill_type": "skill",
+    "skill_type_label": "战技",
+    "duration": 0.5,
+    "cast_time": 0.5,
+    "sp_cost": 100,
+    "gauge_gain": 16,
+    "team_gauge_gain": 0,
+    "cooldown": null,
+    "allowed_types": [
+      "lastrite_buff"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 0.2,
+        "stagger": 0,
+        "sp": 30
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "lastrite_buff",
+            "stacks": 1,
+            "duration": 15,
+            "offset": 0
+          }
+        ]
+      }
+    ]
+  },
+  "LASTRITE_link": {
+    "skill_id": "LASTRITE_link",
+    "character_id": "LASTRITE",
+    "character_name": "别礼",
+    "skill_type": "chain",
+    "skill_type_label": "连携技",
+    "duration": 2.17,
+    "cast_time": 2.17,
+    "sp_cost": null,
+    "gauge_gain": 85,
+    "team_gauge_gain": null,
+    "cooldown": 9,
+    "allowed_types": [],
+    "damage_ticks": [
+      {
+        "offset": 0.43,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 2.1,
+        "stagger": 15,
+        "sp": 0
+      }
+    ],
+    "anomalies": []
+  },
+  "LASTRITE_ultimate": {
+    "skill_id": "LASTRITE_ultimate",
+    "character_id": "LASTRITE",
+    "character_name": "别礼",
+    "skill_type": "ultimate",
+    "skill_type_label": "终结技",
+    "duration": 4.67,
+    "cast_time": 4.67,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [],
+    "damage_ticks": [
+      {
+        "offset": 2.87,
+        "stagger": 5,
+        "sp": 0
+      },
+      {
+        "offset": 3.5,
+        "stagger": 5,
+        "sp": 0
+      },
+      {
+        "offset": 4.47,
+        "stagger": 10,
+        "sp": 0
+      }
+    ],
+    "anomalies": [],
+    "ultimate_gauge_max": 240,
+    "ultimate_gauge_reply": 0
+  },
+  "LASTRITE_execution": {
+    "skill_id": "LASTRITE_execution",
+    "character_id": "LASTRITE",
+    "character_name": "别礼",
+    "skill_type": "normal",
+    "skill_type_label": "处决",
+    "duration": 1.5,
+    "cast_time": 1.5,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "burning",
+      "blaze_attach",
+      "blaze_burst",
+      "conductive",
+      "emag_attach",
+      "emag_burst",
+      "nature_attach",
+      "corrosion",
+      "nature_burst",
+      "knockdown",
+      "break",
+      "ice_shatter",
+      "knockup",
+      "stagger",
+      "cold_attach",
+      "frozen",
+      "cold_burst",
+      "armor_break"
+    ],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "GILBERTA_skill": {
+    "skill_id": "GILBERTA_skill",
+    "character_id": "GILBERTA",
+    "character_name": "洁尔佩塔",
+    "skill_type": "skill",
+    "skill_type_label": "战技",
+    "duration": 4.1,
+    "cast_time": 4.1,
+    "sp_cost": 100,
+    "gauge_gain": 6.5,
+    "team_gauge_gain": 6.5,
+    "cooldown": null,
+    "allowed_types": [
+      "corrosion",
+      "nature_attach",
+      "nature_burst"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 0.97,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 1.53,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 2.067,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 2.6,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 3.6,
+        "stagger": 10,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "nature_attach",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 3.6
+          }
+        ]
+      }
+    ]
+  },
+  "GILBERTA_link": {
+    "skill_id": "GILBERTA_link",
+    "character_id": "GILBERTA",
+    "character_name": "洁尔佩塔",
+    "skill_type": "chain",
+    "skill_type_label": "连携技",
+    "duration": 1.77,
+    "cast_time": 1.77,
+    "sp_cost": null,
+    "gauge_gain": 10,
+    "team_gauge_gain": null,
+    "cooldown": 20,
+    "allowed_types": [
+      "knockup",
+      "break",
+      "ice_shatter"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 1.6,
+        "stagger": 5,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "knockup",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 1.6
+          }
+        ]
+      }
+    ]
+  },
+  "GILBERTA_ultimate": {
+    "skill_id": "GILBERTA_ultimate",
+    "character_id": "GILBERTA",
+    "character_name": "洁尔佩塔",
+    "skill_type": "ultimate",
+    "skill_type_label": "终结技",
+    "duration": 2.13,
+    "cast_time": 2.13,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "nature_attach",
+      "corrosion",
+      "nature_burst",
+      "affix_slow",
+      "spell_vulnerable"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 2,
+        "stagger": 20,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "affix_slow",
+            "stacks": 1,
+            "duration": 5,
+            "offset": 2
+          }
+        ]
+      },
+      {
+        "group_index": 1,
+        "types": [
+          {
+            "type": "spell_vulnerable",
+            "stacks": 1,
+            "duration": 5,
+            "offset": 2
+          }
+        ]
+      },
+      {
+        "group_index": 2,
+        "types": [
+          {
+            "type": "nature_attach",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 2
+          }
+        ]
+      }
+    ],
+    "ultimate_gauge_max": 90,
+    "ultimate_gauge_reply": 0
+  },
+  "GILBERTA_execution": {
+    "skill_id": "GILBERTA_execution",
+    "character_id": "GILBERTA",
+    "character_name": "洁尔佩塔",
+    "skill_type": "normal",
+    "skill_type_label": "处决",
+    "duration": 1.5,
+    "cast_time": 1.5,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "conductive",
+      "emag_attach",
+      "emag_burst",
+      "blaze_burst",
+      "burning",
+      "blaze_attach",
+      "knockup",
+      "break",
+      "ice_shatter",
+      "nature_attach",
+      "corrosion",
+      "nature_burst",
+      "knockdown",
+      "cold_attach",
+      "frozen",
+      "cold_burst",
+      "stagger",
+      "armor_break"
+    ],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "YVONNE_skill": {
+    "skill_id": "YVONNE_skill",
+    "character_id": "YVONNE",
+    "character_name": "伊冯",
+    "skill_type": "skill",
+    "skill_type_label": "战技",
+    "duration": 1.13,
+    "cast_time": 1.13,
+    "sp_cost": 100,
+    "gauge_gain": 6.5,
+    "team_gauge_gain": 6.5,
+    "cooldown": null,
+    "allowed_types": [
+      "frozen",
+      "cold_attach",
+      "cold_burst"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 0.17,
+        "stagger": 10,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "frozen",
+            "stacks": 1,
+            "duration": 5,
+            "offset": 0.17
+          }
+        ]
+      }
+    ]
+  },
+  "YVONNE_link": {
+    "skill_id": "YVONNE_link",
+    "character_id": "YVONNE",
+    "character_name": "伊冯",
+    "skill_type": "chain",
+    "skill_type_label": "连携技",
+    "duration": 0.63,
+    "cast_time": 0.63,
+    "sp_cost": null,
+    "gauge_gain": 20,
+    "team_gauge_gain": null,
+    "cooldown": 22,
+    "allowed_types": [
+      "cold_burst",
+      "frozen",
+      "cold_attach"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 0.63,
+        "stagger": 10,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "frozen",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 0.63
+          }
+        ]
+      }
+    ]
+  },
+  "YVONNE_ultimate": {
+    "skill_id": "YVONNE_ultimate",
+    "character_id": "YVONNE",
+    "character_name": "伊冯",
+    "skill_type": "ultimate",
+    "skill_type_label": "终结技",
+    "duration": 2.13,
+    "cast_time": 2.13,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "frozen",
+      "cold_attach",
+      "cold_burst"
+    ],
+    "damage_ticks": [],
+    "anomalies": [],
+    "ultimate_gauge_max": 200,
+    "ultimate_gauge_reply": 0
+  },
+  "YVONNE_execution": {
+    "skill_id": "YVONNE_execution",
+    "character_id": "YVONNE",
+    "character_name": "伊冯",
+    "skill_type": "normal",
+    "skill_type_label": "处决",
+    "duration": 1.5,
+    "cast_time": 1.5,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "burning",
+      "blaze_attach",
+      "blaze_burst",
+      "conductive",
+      "emag_attach",
+      "emag_burst",
+      "nature_attach",
+      "corrosion",
+      "nature_burst",
+      "knockup",
+      "break",
+      "ice_shatter",
+      "knockdown",
+      "cold_attach",
+      "frozen",
+      "cold_burst",
+      "stagger",
+      "armor_break"
+    ],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "YVONNE_variant_0_0": {
+    "skill_id": "YVONNE_variant_0_0",
+    "character_id": "YVONNE",
+    "character_name": "伊冯",
+    "skill_type": "variant_0",
+    "skill_type_label": "变体-0",
+    "duration": 3.5940000000000003,
+    "cast_time": 3.5940000000000003,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "allowed_types": [],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "LAEVATAIN_skill": {
+    "skill_id": "LAEVATAIN_skill",
+    "character_id": "LAEVATAIN",
+    "character_name": "莱万汀",
+    "skill_type": "skill",
+    "skill_type_label": "战技",
+    "duration": 2.2,
+    "cast_time": 2.2,
+    "sp_cost": 100,
+    "gauge_gain": 6.5,
+    "team_gauge_gain": 6.5,
+    "cooldown": null,
+    "allowed_types": [
+      "burning",
+      "blaze_attach",
+      "blaze_burst",
+      "magma_1",
+      "magma_2",
+      "magma_3",
+      "magma_4",
+      "magma_0"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 0.73,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 0.967,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 1.1,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 1.23,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 1.367,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 1.5,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 1.63,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 1.8,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 1.93,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 2.067,
+        "stagger": 10,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "magma_1",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 0.73
+          }
+        ]
+      }
+    ]
+  },
+  "LAEVATAIN_link": {
+    "skill_id": "LAEVATAIN_link",
+    "character_id": "LAEVATAIN",
+    "character_name": "莱万汀",
+    "skill_type": "chain",
+    "skill_type_label": "连携技",
+    "duration": 1.37,
+    "cast_time": 1.37,
+    "sp_cost": null,
+    "gauge_gain": 30,
+    "team_gauge_gain": null,
+    "cooldown": 10,
+    "allowed_types": [
+      "magma_1",
+      "magma_2",
+      "magma_3",
+      "magma_4",
+      "magma_0"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 0.67,
+        "stagger": 10,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "magma_1",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 0.67
+          }
+        ]
+      }
+    ]
+  },
+  "LAEVATAIN_ultimate": {
+    "skill_id": "LAEVATAIN_ultimate",
+    "character_id": "LAEVATAIN",
+    "character_name": "莱万汀",
+    "skill_type": "ultimate",
+    "skill_type_label": "终结技",
+    "duration": 2.37,
+    "cast_time": 2.37,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "magma_1",
+      "magma_2",
+      "magma_3",
+      "magma_4",
+      "blaze_attach",
+      "burning",
+      "blaze_burst",
+      "magma_0"
+    ],
+    "damage_ticks": [],
+    "anomalies": [],
+    "ultimate_gauge_max": 300,
+    "ultimate_gauge_reply": 0
+  },
+  "LAEVATAIN_execution": {
+    "skill_id": "LAEVATAIN_execution",
+    "character_id": "LAEVATAIN",
+    "character_name": "莱万汀",
+    "skill_type": "normal",
+    "skill_type_label": "处决",
+    "duration": 1.5,
+    "cast_time": 1.5,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "magma_1",
+      "magma_2",
+      "magma_3",
+      "magma_4",
+      "conductive",
+      "emag_attach",
+      "emag_burst",
+      "nature_attach",
+      "corrosion",
+      "nature_burst",
+      "blaze_burst",
+      "burning",
+      "blaze_attach",
+      "knockdown",
+      "break",
+      "ice_shatter",
+      "knockup",
+      "cold_attach",
+      "frozen",
+      "cold_burst",
+      "stagger",
+      "armor_break",
+      "magma_0"
+    ],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "LAEVATAIN_variant_0_0": {
+    "skill_id": "LAEVATAIN_variant_0_0",
+    "character_id": "LAEVATAIN",
+    "character_name": "莱万汀",
+    "skill_type": "variant_0",
+    "skill_type_label": "变体-0",
+    "duration": 3.3,
+    "cast_time": 3.3,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "allowed_types": [],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "LAEVATAIN_variant_1_0": {
+    "skill_id": "LAEVATAIN_variant_1_0",
+    "character_id": "LAEVATAIN",
+    "character_name": "莱万汀",
+    "skill_type": "variant_1",
+    "skill_type_label": "变体-1",
+    "duration": 1.1,
+    "cast_time": 1.1,
+    "sp_cost": 100,
+    "gauge_gain": 6.5,
+    "allowed_types": [],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "LAEVATAIN_variant_2_0": {
+    "skill_id": "LAEVATAIN_variant_2_0",
+    "character_id": "LAEVATAIN",
+    "character_name": "莱万汀",
+    "skill_type": "variant_2",
+    "skill_type_label": "变体-2",
+    "duration": 1.9,
+    "cast_time": 1.9,
+    "sp_cost": 100,
+    "gauge_gain": 6.5,
+    "allowed_types": [],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "LAEVATAIN_variant_3_0": {
+    "skill_id": "LAEVATAIN_variant_3_0",
+    "character_id": "LAEVATAIN",
+    "character_name": "莱万汀",
+    "skill_type": "variant_3",
+    "skill_type_label": "变体-3",
+    "duration": 3.9,
+    "cast_time": 3.9,
+    "sp_cost": 100,
+    "gauge_gain": 106.5,
+    "allowed_types": [],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "LIFENG_skill": {
+    "skill_id": "LIFENG_skill",
+    "character_id": "LIFENG",
+    "character_name": "黎风",
+    "skill_type": "skill",
+    "skill_type_label": "战技",
+    "duration": 2.23,
+    "cast_time": 2.23,
+    "sp_cost": 100,
+    "gauge_gain": 6.5,
+    "team_gauge_gain": 6.5,
+    "cooldown": null,
+    "allowed_types": [
+      "knockdown",
+      "break",
+      "ice_shatter",
+      "physical_vulnerable"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 0.23,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 0.67,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 1.8,
+        "stagger": 10,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "knockdown",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 1.8
+          }
+        ]
+      },
+      {
+        "group_index": 1,
+        "types": [
+          {
+            "type": "physical_vulnerable",
+            "stacks": 1,
+            "duration": 10,
+            "offset": 1.8
+          }
+        ]
+      }
+    ]
+  },
+  "LIFENG_link": {
+    "skill_id": "LIFENG_link",
+    "character_id": "LIFENG",
+    "character_name": "黎风",
+    "skill_type": "chain",
+    "skill_type_label": "连携技",
+    "duration": 1.67,
+    "cast_time": 1.67,
+    "sp_cost": null,
+    "gauge_gain": 10,
+    "team_gauge_gain": null,
+    "cooldown": 16,
+    "allowed_types": [
+      "combo"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 0.63,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 1.6,
+        "stagger": 10,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "combo",
+            "stacks": 1,
+            "duration": 20,
+            "offset": 0.63
+          }
+        ]
+      }
+    ]
+  },
+  "LIFENG_ultimate": {
+    "skill_id": "LIFENG_ultimate",
+    "character_id": "LIFENG",
+    "character_name": "黎风",
+    "skill_type": "ultimate",
+    "skill_type_label": "终结技",
+    "duration": 2.2,
+    "cast_time": 2.2,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "knockdown",
+      "break",
+      "ice_shatter"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 2.13,
+        "stagger": 5,
+        "sp": 0
+      },
+      {
+        "offset": 4.13,
+        "stagger": 5,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "knockdown",
+            "stacks": 1,
+            "duration": 2,
+            "offset": 2.13
+          },
+          {
+            "type": "knockdown",
+            "stacks": 1,
+            "duration": 1.9,
+            "offset": 4.13
+          }
+        ]
+      }
+    ],
+    "ultimate_gauge_max": 90,
+    "ultimate_gauge_reply": 0
+  },
+  "LIFENG_execution": {
+    "skill_id": "LIFENG_execution",
+    "character_id": "LIFENG",
+    "character_name": "黎风",
+    "skill_type": "normal",
+    "skill_type_label": "处决",
+    "duration": 1.5,
+    "cast_time": 1.5,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "break",
+      "armor_break",
+      "stagger",
+      "knockdown",
+      "knockup",
+      "blaze_attach",
+      "emag_attach",
+      "cold_attach",
+      "nature_attach",
+      "blaze_burst",
+      "emag_burst",
+      "cold_burst",
+      "nature_burst",
+      "burning",
+      "conductive",
+      "frozen",
+      "ice_shatter",
+      "corrosion"
+    ],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "LIFENG_variant_0_0": {
+    "skill_id": "LIFENG_variant_0_0",
+    "character_id": "LIFENG",
+    "character_name": "黎风",
+    "skill_type": "variant_0",
+    "skill_type_label": "变体-0",
+    "duration": 2.2,
+    "cast_time": 2.2,
+    "sp_cost": null,
+    "gauge_gain": 0,
+    "allowed_types": [],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "EMBER_skill": {
+    "skill_id": "EMBER_skill",
+    "character_id": "EMBER",
+    "character_name": "余烬",
+    "skill_type": "skill",
+    "skill_type_label": "战技",
+    "duration": 1.7,
+    "cast_time": 1.7,
+    "sp_cost": 100,
+    "gauge_gain": 6.5,
+    "team_gauge_gain": 6.5,
+    "cooldown": null,
+    "allowed_types": [
+      "knockdown",
+      "break",
+      "ice_shatter"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 0.33,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 1.27,
+        "stagger": 10,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "knockdown",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 1.27
+          }
+        ]
+      }
+    ]
+  },
+  "EMBER_link": {
+    "skill_id": "EMBER_link",
+    "character_id": "EMBER",
+    "character_name": "余烬",
+    "skill_type": "chain",
+    "skill_type_label": "连携技",
+    "duration": 1.27,
+    "cast_time": 1.27,
+    "sp_cost": null,
+    "gauge_gain": 10,
+    "team_gauge_gain": null,
+    "cooldown": 19,
+    "allowed_types": [
+      "knockdown",
+      "break",
+      "ice_shatter"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 0.87,
+        "stagger": 10,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "knockdown",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 0.87
+          }
+        ]
+      }
+    ]
+  },
+  "EMBER_ultimate": {
+    "skill_id": "EMBER_ultimate",
+    "character_id": "EMBER",
+    "character_name": "余烬",
+    "skill_type": "ultimate",
+    "skill_type_label": "终结技",
+    "duration": 1.67,
+    "cast_time": 1.67,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [],
+    "damage_ticks": [
+      {
+        "offset": 1.67,
+        "stagger": 0,
+        "sp": 0
+      }
+    ],
+    "anomalies": [],
+    "ultimate_gauge_max": 100,
+    "ultimate_gauge_reply": 0
+  },
+  "EMBER_execution": {
+    "skill_id": "EMBER_execution",
+    "character_id": "EMBER",
+    "character_name": "余烬",
+    "skill_type": "normal",
+    "skill_type_label": "处决",
+    "duration": 1.5,
+    "cast_time": 1.5,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "break",
+      "armor_break",
+      "stagger",
+      "knockdown",
+      "knockup",
+      "blaze_attach",
+      "emag_attach",
+      "cold_attach",
+      "nature_attach",
+      "blaze_burst",
+      "emag_burst",
+      "cold_burst",
+      "nature_burst",
+      "burning",
+      "conductive",
+      "frozen",
+      "ice_shatter",
+      "corrosion"
+    ],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "TANGTANG_skill": {
+    "skill_id": "TANGTANG_skill",
+    "character_id": "TANGTANG",
+    "character_name": "汤汤",
+    "skill_type": "skill",
+    "skill_type_label": "战技",
+    "duration": 1.67,
+    "cast_time": 1.67,
+    "sp_cost": 100,
+    "gauge_gain": 6.5,
+    "team_gauge_gain": 6.5,
+    "cooldown": null,
+    "allowed_types": [
+      "cold_attach",
+      "frozen",
+      "cold_burst",
+      "skillwater",
+      "spell_vulnerable"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 0.77,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 0.9,
+        "stagger": 10,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "cold_attach",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 0.77
+          }
+        ]
+      },
+      {
+        "group_index": 1,
+        "types": [
+          {
+            "type": "skillwater",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 0.77
+          }
+        ]
+      }
+    ]
+  },
+  "TANGTANG_link": {
+    "skill_id": "TANGTANG_link",
+    "character_id": "TANGTANG",
+    "character_name": "汤汤",
+    "skill_type": "chain",
+    "skill_type_label": "连携技",
+    "duration": 1.03,
+    "cast_time": 1.03,
+    "sp_cost": null,
+    "gauge_gain": 10,
+    "team_gauge_gain": null,
+    "cooldown": 13,
+    "allowed_types": [
+      "comboskillwater"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 0.87,
+        "stagger": 10,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "comboskillwater",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 0.87
+          }
+        ]
+      }
+    ]
+  },
+  "TANGTANG_ultimate": {
+    "skill_id": "TANGTANG_ultimate",
+    "character_id": "TANGTANG",
+    "character_name": "汤汤",
+    "skill_type": "ultimate",
+    "skill_type_label": "终结技",
+    "duration": 2.8,
+    "cast_time": 2.8,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "ultskilldebuff",
+      "skillwater",
+      "spell_vulnerable",
+      "cold_burst",
+      "frozen",
+      "cold_attach"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 2.53,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 6.97,
+        "stagger": 15,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "ultskilldebuff",
+            "stacks": 1,
+            "duration": 4,
+            "offset": 2.53
+          }
+        ]
+      }
+    ],
+    "ultimate_gauge_max": 100,
+    "ultimate_gauge_reply": 0
+  },
+  "TANGTANG_execution": {
+    "skill_id": "TANGTANG_execution",
+    "character_id": "TANGTANG",
+    "character_name": "汤汤",
+    "skill_type": "normal",
+    "skill_type_label": "处决",
+    "duration": 1.5,
+    "cast_time": 1.5,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "break",
+      "armor_break",
+      "stagger",
+      "knockdown",
+      "knockup",
+      "blaze_attach",
+      "emag_attach",
+      "cold_attach",
+      "nature_attach",
+      "blaze_burst",
+      "emag_burst",
+      "cold_burst",
+      "nature_burst",
+      "burning",
+      "conductive",
+      "frozen",
+      "ice_shatter",
+      "corrosion"
+    ],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "TANGTANG_variant_0_0": {
+    "skill_id": "TANGTANG_variant_0_0",
+    "character_id": "TANGTANG",
+    "character_name": "汤汤",
+    "skill_type": "variant_0",
+    "skill_type_label": "变体-0",
+    "duration": 1.67,
+    "cast_time": 1.67,
+    "sp_cost": 100,
+    "gauge_gain": 6.5,
+    "allowed_types": [],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "TANGTANG_variant_1_0": {
+    "skill_id": "TANGTANG_variant_1_0",
+    "character_id": "TANGTANG",
+    "character_name": "汤汤",
+    "skill_type": "variant_1",
+    "skill_type_label": "变体-1",
+    "duration": 1.67,
+    "cast_time": 1.67,
+    "sp_cost": 100,
+    "gauge_gain": 6.5,
+    "allowed_types": [],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "TANGTANG_variant_2_0": {
+    "skill_id": "TANGTANG_variant_2_0",
+    "character_id": "TANGTANG",
+    "character_name": "汤汤",
+    "skill_type": "variant_2",
+    "skill_type_label": "变体-2",
+    "duration": 2.8,
+    "cast_time": 2.8,
+    "sp_cost": null,
+    "gauge_gain": 0,
+    "allowed_types": [],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "TANGTANG_variant_3_0": {
+    "skill_id": "TANGTANG_variant_3_0",
+    "character_id": "TANGTANG",
+    "character_name": "汤汤",
+    "skill_type": "variant_3",
+    "skill_type_label": "变体-3",
+    "duration": 2.8,
+    "cast_time": 2.8,
+    "sp_cost": null,
+    "gauge_gain": 0,
+    "allowed_types": [],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "TANGTANG_variant_4_0": {
+    "skill_id": "TANGTANG_variant_4_0",
+    "character_id": "TANGTANG",
+    "character_name": "汤汤",
+    "skill_type": "variant_4",
+    "skill_type_label": "变体-4",
+    "duration": 2.8,
+    "cast_time": 2.8,
+    "sp_cost": null,
+    "gauge_gain": 0,
+    "allowed_types": [],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "ROSSI_skill": {
+    "skill_id": "ROSSI_skill",
+    "character_id": "ROSSI",
+    "character_name": "洛茜",
+    "skill_type": "skill",
+    "skill_type_label": "战技",
+    "duration": 1.27,
+    "cast_time": 1.27,
+    "sp_cost": 100,
+    "gauge_gain": 6.5,
+    "team_gauge_gain": 6.5,
+    "cooldown": null,
+    "allowed_types": [
+      "knockup",
+      "break",
+      "ice_shatter",
+      "wulfa_blood",
+      "talent_wulfa_02"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 0.53,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 0.73,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 1.17,
+        "stagger": 5,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "knockup",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 1.17
+          }
+        ]
+      }
+    ]
+  },
+  "ROSSI_link": {
+    "skill_id": "ROSSI_link",
+    "character_id": "ROSSI",
+    "character_name": "洛茜",
+    "skill_type": "chain",
+    "skill_type_label": "连携技",
+    "duration": 0.7,
+    "cast_time": 0.7,
+    "sp_cost": null,
+    "gauge_gain": 0,
+    "team_gauge_gain": null,
+    "cooldown": 0,
+    "allowed_types": [],
+    "damage_ticks": [
+      {
+        "offset": 0.4,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 0.63,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 0.67,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 0.7,
+        "stagger": 0,
+        "sp": 0
+      }
+    ],
+    "anomalies": []
+  },
+  "ROSSI_ultimate": {
+    "skill_id": "ROSSI_ultimate",
+    "character_id": "ROSSI",
+    "character_name": "洛茜",
+    "skill_type": "ultimate",
+    "skill_type_label": "终结技",
+    "duration": 5.17,
+    "cast_time": 5.17,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "blaze_burst",
+      "burning",
+      "blaze_attach",
+      "talent_wulfa_02"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 2.1,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 2.17,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 2.2,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 2.3,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 2.37,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 2.47,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 2.5,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 2.567,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 2.6,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 2.67,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 2.77,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 2.8,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 2.9,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 2.93,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 3,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 3.07,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 3.13,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 3.2,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 3.23,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 3.3,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 3.4,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 3.43,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 3.53,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 3.6,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 3.7,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 4.07,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 4.37,
+        "stagger": 25,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "blaze_attach",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 4.37
+          }
+        ]
+      }
+    ],
+    "ultimate_gauge_max": 100,
+    "ultimate_gauge_reply": 0
+  },
+  "ROSSI_execution": {
+    "skill_id": "ROSSI_execution",
+    "character_id": "ROSSI",
+    "character_name": "洛茜",
+    "skill_type": "normal",
+    "skill_type_label": "处决",
+    "duration": 1.5,
+    "cast_time": 1.5,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "break",
+      "armor_break",
+      "stagger",
+      "knockdown",
+      "knockup",
+      "blaze_attach",
+      "emag_attach",
+      "cold_attach",
+      "nature_attach",
+      "blaze_burst",
+      "emag_burst",
+      "cold_burst",
+      "nature_burst",
+      "burning",
+      "conductive",
+      "frozen",
+      "ice_shatter",
+      "corrosion",
+      "talent_wulfa_02"
+    ],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "ROSSI_variant_0_0": {
+    "skill_id": "ROSSI_variant_0_0",
+    "character_id": "ROSSI",
+    "character_name": "洛茜",
+    "skill_type": "variant_0",
+    "skill_type_label": "变体-0",
+    "duration": 1.47,
+    "cast_time": 1.47,
+    "sp_cost": 100,
+    "gauge_gain": 6.5,
+    "allowed_types": [],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "XAIHI_skill": {
+    "skill_id": "XAIHI_skill",
+    "character_id": "XAIHI",
+    "character_name": "赛希",
+    "skill_type": "skill",
+    "skill_type_label": "战技",
+    "duration": 1,
+    "cast_time": 1,
+    "sp_cost": 100,
+    "gauge_gain": 6.5,
+    "team_gauge_gain": 6.5,
+    "cooldown": null,
+    "allowed_types": [
+      "skill_seraph",
+      "spell_enhance"
+    ],
+    "damage_ticks": [],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "skill_seraph",
+            "stacks": 1,
+            "duration": 20,
+            "offset": 0.23
+          }
+        ]
+      },
+      {
+        "group_index": 1,
+        "types": [
+          {
+            "type": "spell_enhance",
+            "stacks": 1,
+            "duration": 25,
+            "offset": 0.23
+          }
+        ]
+      }
+    ]
+  },
+  "XAIHI_link": {
+    "skill_id": "XAIHI_link",
+    "character_id": "XAIHI",
+    "character_name": "赛希",
+    "skill_type": "chain",
+    "skill_type_label": "连携技",
+    "duration": 0.83,
+    "cast_time": 0.83,
+    "sp_cost": null,
+    "gauge_gain": 10,
+    "team_gauge_gain": null,
+    "cooldown": 8,
+    "allowed_types": [
+      "cold_attach",
+      "frozen",
+      "cold_burst"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 0.8,
+        "stagger": 10,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "cold_attach",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 0.8
+          }
+        ]
+      }
+    ]
+  },
+  "XAIHI_ultimate": {
+    "skill_id": "XAIHI_ultimate",
+    "character_id": "XAIHI",
+    "character_name": "赛希",
+    "skill_type": "ultimate",
+    "skill_type_label": "终结技",
+    "duration": 2.23,
+    "cast_time": 2.23,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "cryst_enhance",
+      "natural_enhance"
+    ],
+    "damage_ticks": [],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "cryst_enhance",
+            "stacks": 1,
+            "duration": 12,
+            "offset": 1.93
+          }
+        ]
+      },
+      {
+        "group_index": 1,
+        "types": [
+          {
+            "type": "natural_enhance",
+            "stacks": 1,
+            "duration": 12,
+            "offset": 1.93
+          }
+        ]
+      }
+    ],
+    "ultimate_gauge_max": 72,
+    "ultimate_gauge_reply": 0
+  },
+  "XAIHI_execution": {
+    "skill_id": "XAIHI_execution",
+    "character_id": "XAIHI",
+    "character_name": "赛希",
+    "skill_type": "normal",
+    "skill_type_label": "处决",
+    "duration": 1.5,
+    "cast_time": 1.5,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "break",
+      "armor_break",
+      "stagger",
+      "knockdown",
+      "knockup",
+      "blaze_attach",
+      "emag_attach",
+      "cold_attach",
+      "nature_attach",
+      "blaze_burst",
+      "emag_burst",
+      "cold_burst",
+      "nature_burst",
+      "burning",
+      "conductive",
+      "frozen",
+      "ice_shatter",
+      "corrosion"
+    ],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "SNOWSHINE_skill": {
+    "skill_id": "SNOWSHINE_skill",
+    "character_id": "SNOWSHINE",
+    "character_name": "昼雪",
+    "skill_type": "skill",
+    "skill_type_label": "战技",
+    "duration": 4.5,
+    "cast_time": 4.5,
+    "sp_cost": 100,
+    "gauge_gain": 6.5,
+    "team_gauge_gain": 6.5,
+    "cooldown": null,
+    "allowed_types": [
+      "cold_attach",
+      "frozen",
+      "cold_burst",
+      "shelter"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 3.57,
+        "stagger": 20,
+        "sp": 30
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "cold_attach",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 3.57
+          }
+        ]
+      }
+    ]
+  },
+  "SNOWSHINE_link": {
+    "skill_id": "SNOWSHINE_link",
+    "character_id": "SNOWSHINE",
+    "character_name": "昼雪",
+    "skill_type": "chain",
+    "skill_type_label": "连携技",
+    "duration": 0.5,
+    "cast_time": 0.5,
+    "sp_cost": null,
+    "gauge_gain": 10,
+    "team_gauge_gain": null,
+    "cooldown": 25,
+    "allowed_types": [
+      "combo_skill_aurora"
+    ],
+    "damage_ticks": [],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "combo_skill_aurora",
+            "stacks": 1,
+            "duration": 3,
+            "offset": 0.4
+          }
+        ]
+      }
+    ]
+  },
+  "SNOWSHINE_ultimate": {
+    "skill_id": "SNOWSHINE_ultimate",
+    "character_id": "SNOWSHINE",
+    "character_name": "昼雪",
+    "skill_type": "ultimate",
+    "skill_type_label": "终结技",
+    "duration": 2.37,
+    "cast_time": 2.37,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "frozen",
+      "cold_attach",
+      "cold_burst"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 2.07,
+        "stagger": 15,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "frozen",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 2.07
+          }
+        ]
+      }
+    ],
+    "ultimate_gauge_max": 80,
+    "ultimate_gauge_reply": 0
+  },
+  "SNOWSHINE_execution": {
+    "skill_id": "SNOWSHINE_execution",
+    "character_id": "SNOWSHINE",
+    "character_name": "昼雪",
+    "skill_type": "normal",
+    "skill_type_label": "处决",
+    "duration": 1.5,
+    "cast_time": 1.5,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "break",
+      "armor_break",
+      "stagger",
+      "knockdown",
+      "knockup",
+      "blaze_attach",
+      "emag_attach",
+      "cold_attach",
+      "nature_attach",
+      "blaze_burst",
+      "emag_burst",
+      "cold_burst",
+      "nature_burst",
+      "burning",
+      "conductive",
+      "frozen",
+      "ice_shatter",
+      "corrosion"
+    ],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "ARCLIGHT_skill": {
+    "skill_id": "ARCLIGHT_skill",
+    "character_id": "ARCLIGHT",
+    "character_name": "弧光",
+    "skill_type": "skill",
+    "skill_type_label": "战技",
+    "duration": 1.2,
+    "cast_time": 1.2,
+    "sp_cost": 100,
+    "gauge_gain": 6.5,
+    "team_gauge_gain": 6.5,
+    "cooldown": null,
+    "allowed_types": [],
+    "damage_ticks": [
+      {
+        "offset": 0.63,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 0.8,
+        "stagger": 5,
+        "sp": 0
+      }
+    ],
+    "anomalies": []
+  },
+  "ARCLIGHT_link": {
+    "skill_id": "ARCLIGHT_link",
+    "character_id": "ARCLIGHT",
+    "character_name": "弧光",
+    "skill_type": "chain",
+    "skill_type_label": "连携技",
+    "duration": 0.9,
+    "cast_time": 0.9,
+    "sp_cost": null,
+    "gauge_gain": 5,
+    "team_gauge_gain": null,
+    "cooldown": 3,
+    "allowed_types": [],
+    "damage_ticks": [
+      {
+        "offset": 0.57,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 0.7,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 0.83,
+        "stagger": 5,
+        "sp": 8
+      }
+    ],
+    "anomalies": []
+  },
+  "ARCLIGHT_ultimate": {
+    "skill_id": "ARCLIGHT_ultimate",
+    "character_id": "ARCLIGHT",
+    "character_name": "弧光",
+    "skill_type": "ultimate",
+    "skill_type_label": "终结技",
+    "duration": 2.57,
+    "cast_time": 2.57,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "emag_attach",
+      "conductive",
+      "emag_burst"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 2.03,
+        "stagger": 7,
+        "sp": 0
+      },
+      {
+        "offset": 3.9,
+        "stagger": 7,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "emag_attach",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 2.03
+          },
+          {
+            "type": "conductive",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 3.9
+          }
+        ]
+      }
+    ],
+    "ultimate_gauge_max": 76.5,
+    "ultimate_gauge_reply": 0
+  },
+  "ARCLIGHT_execution": {
+    "skill_id": "ARCLIGHT_execution",
+    "character_id": "ARCLIGHT",
+    "character_name": "弧光",
+    "skill_type": "normal",
+    "skill_type_label": "处决",
+    "duration": 1.5,
+    "cast_time": 1.5,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "break",
+      "armor_break",
+      "stagger",
+      "knockdown",
+      "knockup",
+      "blaze_attach",
+      "emag_attach",
+      "cold_attach",
+      "nature_attach",
+      "blaze_burst",
+      "emag_burst",
+      "cold_burst",
+      "nature_burst",
+      "burning",
+      "conductive",
+      "frozen",
+      "ice_shatter",
+      "corrosion"
+    ],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "ARCLIGHT_variant_0_0": {
+    "skill_id": "ARCLIGHT_variant_0_0",
+    "character_id": "ARCLIGHT",
+    "character_name": "弧光",
+    "skill_type": "variant_0",
+    "skill_type_label": "变体-0",
+    "duration": 1.6,
+    "cast_time": 1.6,
+    "sp_cost": 100,
+    "gauge_gain": 6.5,
+    "allowed_types": [],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "AVYWENNA_skill": {
+    "skill_id": "AVYWENNA_skill",
+    "character_id": "AVYWENNA",
+    "character_name": "艾维文娜",
+    "skill_type": "skill",
+    "skill_type_label": "战技",
+    "duration": 1.13,
+    "cast_time": 1.13,
+    "sp_cost": 100,
+    "gauge_gain": 6.5,
+    "team_gauge_gain": 6.5,
+    "cooldown": null,
+    "allowed_types": [
+      "emag_burst",
+      "conductive",
+      "emag_attach"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 0.6,
+        "stagger": 5,
+        "sp": 0
+      }
+    ],
+    "anomalies": []
+  },
+  "AVYWENNA_link": {
+    "skill_id": "AVYWENNA_link",
+    "character_id": "AVYWENNA",
+    "character_name": "艾维文娜",
+    "skill_type": "chain",
+    "skill_type_label": "连携技",
+    "duration": 0.7,
+    "cast_time": 0.7,
+    "sp_cost": null,
+    "gauge_gain": 10,
+    "team_gauge_gain": null,
+    "cooldown": 13,
+    "allowed_types": [
+      "Thunderlances"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 0.47,
+        "stagger": 10,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "Thunderlances",
+            "stacks": 3,
+            "duration": 0,
+            "offset": 0.47
+          }
+        ]
+      }
+    ]
+  },
+  "AVYWENNA_ultimate": {
+    "skill_id": "AVYWENNA_ultimate",
+    "character_id": "AVYWENNA",
+    "character_name": "艾维文娜",
+    "skill_type": "ultimate",
+    "skill_type_label": "终结技",
+    "duration": 1.9,
+    "cast_time": 1.9,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "Thunderlances EX"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 1.7,
+        "stagger": 0,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "Thunderlances EX",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 1.7
+          }
+        ]
+      }
+    ],
+    "ultimate_gauge_max": 85,
+    "ultimate_gauge_reply": 0
+  },
+  "AVYWENNA_execution": {
+    "skill_id": "AVYWENNA_execution",
+    "character_id": "AVYWENNA",
+    "character_name": "艾维文娜",
+    "skill_type": "normal",
+    "skill_type_label": "处决",
+    "duration": 1.5,
+    "cast_time": 1.5,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "break",
+      "armor_break",
+      "stagger",
+      "knockdown",
+      "knockup",
+      "blaze_attach",
+      "emag_attach",
+      "cold_attach",
+      "nature_attach",
+      "blaze_burst",
+      "emag_burst",
+      "cold_burst",
+      "nature_burst",
+      "burning",
+      "conductive",
+      "frozen",
+      "ice_shatter",
+      "corrosion"
+    ],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "AVYWENNA_variant_0_0": {
+    "skill_id": "AVYWENNA_variant_0_0",
+    "character_id": "AVYWENNA",
+    "character_name": "艾维文娜",
+    "skill_type": "variant_0",
+    "skill_type_label": "变体-0",
+    "duration": 1.13,
+    "cast_time": 1.13,
+    "sp_cost": 100,
+    "gauge_gain": 6.5,
+    "allowed_types": [],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "DAPAN_skill": {
+    "skill_id": "DAPAN_skill",
+    "character_id": "DAPAN",
+    "character_name": "大潘",
+    "skill_type": "skill",
+    "skill_type_label": "战技",
+    "duration": 2.17,
+    "cast_time": 2.17,
+    "sp_cost": 100,
+    "gauge_gain": 6.5,
+    "team_gauge_gain": 6.5,
+    "cooldown": null,
+    "allowed_types": [
+      "knockup",
+      "break",
+      "ice_shatter"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 0.27,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 1.43,
+        "stagger": 10,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "knockup",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 1.43
+          }
+        ]
+      }
+    ]
+  },
+  "DAPAN_link": {
+    "skill_id": "DAPAN_link",
+    "character_id": "DAPAN",
+    "character_name": "大潘",
+    "skill_type": "chain",
+    "skill_type_label": "连携技",
+    "duration": 0.8,
+    "cast_time": 0.8,
+    "sp_cost": null,
+    "gauge_gain": 10,
+    "team_gauge_gain": null,
+    "cooldown": 20,
+    "allowed_types": [
+      "stagger",
+      "break",
+      "ice_shatter"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 1.76,
+        "stagger": 15,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "stagger",
+            "stacks": 4,
+            "duration": 0,
+            "offset": 0.77
+          }
+        ]
+      }
+    ]
+  },
+  "DAPAN_ultimate": {
+    "skill_id": "DAPAN_ultimate",
+    "character_id": "DAPAN",
+    "character_name": "大潘",
+    "skill_type": "ultimate",
+    "skill_type_label": "终结技",
+    "duration": 2.87,
+    "cast_time": 2.87,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "knockdown",
+      "break",
+      "ice_shatter",
+      "knockup",
+      "dapan_buff"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 1.4,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 2.67,
+        "stagger": 0,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "knockup",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 1.4
+          },
+          {
+            "type": "knockdown",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 2.67
+          }
+        ]
+      },
+      {
+        "group_index": 1,
+        "types": [
+          {
+            "type": "dapan_buff",
+            "stacks": 1,
+            "duration": 20,
+            "offset": 2.67
+          }
+        ]
+      }
+    ],
+    "ultimate_gauge_max": 76.5,
+    "ultimate_gauge_reply": 0
+  },
+  "DAPAN_execution": {
+    "skill_id": "DAPAN_execution",
+    "character_id": "DAPAN",
+    "character_name": "大潘",
+    "skill_type": "normal",
+    "skill_type_label": "处决",
+    "duration": 1.5,
+    "cast_time": 1.5,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "break",
+      "armor_break",
+      "stagger",
+      "knockdown",
+      "knockup",
+      "blaze_attach",
+      "emag_attach",
+      "cold_attach",
+      "nature_attach",
+      "blaze_burst",
+      "emag_burst",
+      "cold_burst",
+      "nature_burst",
+      "burning",
+      "conductive",
+      "frozen",
+      "ice_shatter",
+      "corrosion"
+    ],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "WULFGARD_skill": {
+    "skill_id": "WULFGARD_skill",
+    "character_id": "WULFGARD",
+    "character_name": "狼卫",
+    "skill_type": "skill",
+    "skill_type_label": "战技",
+    "duration": 1.07,
+    "cast_time": 1.07,
+    "sp_cost": 100,
+    "gauge_gain": 6.5,
+    "team_gauge_gain": 6.5,
+    "cooldown": null,
+    "allowed_types": [
+      "blaze_attach",
+      "burning",
+      "blaze_burst"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 0.2,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 0.53,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 0.767,
+        "stagger": 5,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "blaze_attach",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 0.767
+          }
+        ]
+      }
+    ]
+  },
+  "WULFGARD_link": {
+    "skill_id": "WULFGARD_link",
+    "character_id": "WULFGARD",
+    "character_name": "狼卫",
+    "skill_type": "chain",
+    "skill_type_label": "连携技",
+    "duration": 1,
+    "cast_time": 1,
+    "sp_cost": null,
+    "gauge_gain": 10,
+    "team_gauge_gain": null,
+    "cooldown": 20,
+    "allowed_types": [
+      "blaze_attach",
+      "burning",
+      "blaze_burst"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 0.9,
+        "stagger": 10,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "blaze_attach",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 0.9
+          }
+        ]
+      }
+    ]
+  },
+  "WULFGARD_ultimate": {
+    "skill_id": "WULFGARD_ultimate",
+    "character_id": "WULFGARD",
+    "character_name": "狼卫",
+    "skill_type": "ultimate",
+    "skill_type_label": "终结技",
+    "duration": 2.5,
+    "cast_time": 2.5,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "burning",
+      "blaze_attach",
+      "blaze_burst"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 1.53,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 1.73,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 1.967,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 1.13,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 2.3,
+        "stagger": 15,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "burning",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 2.3
+          }
+        ]
+      }
+    ],
+    "ultimate_gauge_max": 76.5,
+    "ultimate_gauge_reply": 0
+  },
+  "WULFGARD_execution": {
+    "skill_id": "WULFGARD_execution",
+    "character_id": "WULFGARD",
+    "character_name": "狼卫",
+    "skill_type": "normal",
+    "skill_type_label": "处决",
+    "duration": 1.5,
+    "cast_time": 1.5,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "break",
+      "armor_break",
+      "stagger",
+      "knockdown",
+      "knockup",
+      "blaze_attach",
+      "emag_attach",
+      "cold_attach",
+      "nature_attach",
+      "blaze_burst",
+      "emag_burst",
+      "cold_burst",
+      "nature_burst",
+      "burning",
+      "conductive",
+      "frozen",
+      "ice_shatter",
+      "corrosion"
+    ],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "WULFGARD_variant_0_0": {
+    "skill_id": "WULFGARD_variant_0_0",
+    "character_id": "WULFGARD",
+    "character_name": "狼卫",
+    "skill_type": "variant_0",
+    "skill_type_label": "变体-0",
+    "duration": 2.07,
+    "cast_time": 2.07,
+    "sp_cost": 100,
+    "gauge_gain": 6.5,
+    "allowed_types": [],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "PERLICA_skill": {
+    "skill_id": "PERLICA_skill",
+    "character_id": "PERLICA",
+    "character_name": "佩丽卡",
+    "skill_type": "skill",
+    "skill_type_label": "战技",
+    "duration": 0.93,
+    "cast_time": 0.93,
+    "sp_cost": 100,
+    "gauge_gain": 6.5,
+    "team_gauge_gain": 6.5,
+    "cooldown": null,
+    "allowed_types": [
+      "emag_attach",
+      "conductive",
+      "emag_burst"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 0.43,
+        "stagger": 10,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "emag_attach",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 0.43
+          }
+        ]
+      }
+    ]
+  },
+  "PERLICA_link": {
+    "skill_id": "PERLICA_link",
+    "character_id": "PERLICA",
+    "character_name": "佩丽卡",
+    "skill_type": "chain",
+    "skill_type_label": "连携技",
+    "duration": 0.83,
+    "cast_time": 0.83,
+    "sp_cost": null,
+    "gauge_gain": 10,
+    "team_gauge_gain": null,
+    "cooldown": 20,
+    "allowed_types": [
+      "conductive",
+      "emag_attach",
+      "emag_burst"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 0.8,
+        "stagger": 10,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "conductive",
+            "stacks": 1,
+            "duration": 8.75,
+            "offset": 0.8
+          }
+        ]
+      }
+    ]
+  },
+  "PERLICA_ultimate": {
+    "skill_id": "PERLICA_ultimate",
+    "character_id": "PERLICA",
+    "character_name": "佩丽卡",
+    "skill_type": "ultimate",
+    "skill_type_label": "终结技",
+    "duration": 2.1,
+    "cast_time": 2.1,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [],
+    "damage_ticks": [
+      {
+        "offset": 1.93,
+        "stagger": 0,
+        "sp": 0
+      }
+    ],
+    "anomalies": [],
+    "ultimate_gauge_max": 68,
+    "ultimate_gauge_reply": 0
+  },
+  "PERLICA_execution": {
+    "skill_id": "PERLICA_execution",
+    "character_id": "PERLICA",
+    "character_name": "佩丽卡",
+    "skill_type": "normal",
+    "skill_type_label": "处决",
+    "duration": 1.5,
+    "cast_time": 1.5,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "break",
+      "armor_break",
+      "stagger",
+      "knockdown",
+      "knockup",
+      "blaze_attach",
+      "emag_attach",
+      "cold_attach",
+      "nature_attach",
+      "blaze_burst",
+      "emag_burst",
+      "cold_burst",
+      "nature_burst",
+      "burning",
+      "conductive",
+      "frozen",
+      "ice_shatter",
+      "corrosion"
+    ],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "CHENQIANYU_skill": {
+    "skill_id": "CHENQIANYU_skill",
+    "character_id": "CHENQIANYU",
+    "character_name": "陈千语",
+    "skill_type": "skill",
+    "skill_type_label": "战技",
+    "duration": 0.83,
+    "cast_time": 0.83,
+    "sp_cost": 100,
+    "gauge_gain": 6.5,
+    "team_gauge_gain": 6.5,
+    "cooldown": null,
+    "allowed_types": [
+      "knockup",
+      "break",
+      "ice_shatter"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 0.43,
+        "stagger": 10,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "knockup",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 0.43
+          }
+        ]
+      }
+    ]
+  },
+  "CHENQIANYU_link": {
+    "skill_id": "CHENQIANYU_link",
+    "character_id": "CHENQIANYU",
+    "character_name": "陈千语",
+    "skill_type": "chain",
+    "skill_type_label": "连携技",
+    "duration": 0.77,
+    "cast_time": 0.77,
+    "sp_cost": null,
+    "gauge_gain": 10,
+    "team_gauge_gain": null,
+    "cooldown": 16,
+    "allowed_types": [
+      "knockup",
+      "break",
+      "ice_shatter"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 0.57,
+        "stagger": 10,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "knockup",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 0.57
+          }
+        ]
+      }
+    ]
+  },
+  "CHENQIANYU_ultimate": {
+    "skill_id": "CHENQIANYU_ultimate",
+    "character_id": "CHENQIANYU",
+    "character_name": "陈千语",
+    "skill_type": "ultimate",
+    "skill_type_label": "终结技",
+    "duration": 3.73,
+    "cast_time": 3.73,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [],
+    "damage_ticks": [
+      {
+        "offset": 1.93,
+        "stagger": 15,
+        "sp": 0
+      },
+      {
+        "offset": 2.1,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 2.267,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 2.4,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 2.53,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 2.67,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 3.43,
+        "stagger": 20,
+        "sp": 0
+      }
+    ],
+    "anomalies": [],
+    "ultimate_gauge_max": 59.5,
+    "ultimate_gauge_reply": 0
+  },
+  "CHENQIANYU_execution": {
+    "skill_id": "CHENQIANYU_execution",
+    "character_id": "CHENQIANYU",
+    "character_name": "陈千语",
+    "skill_type": "normal",
+    "skill_type_label": "处决",
+    "duration": 2.5,
+    "cast_time": 2.5,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "break",
+      "blaze_attach",
+      "burning",
+      "blaze_burst",
+      "emag_burst",
+      "conductive",
+      "emag_attach",
+      "frozen",
+      "cold_attach",
+      "cold_burst",
+      "ice_shatter",
+      "corrosion",
+      "nature_attach",
+      "nature_burst",
+      "knockdown",
+      "knockup",
+      "stagger",
+      "armor_break"
+    ],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "ALESH_skill": {
+    "skill_id": "ALESH_skill",
+    "character_id": "ALESH",
+    "character_name": "阿列什",
+    "skill_type": "skill",
+    "skill_type_label": "战技",
+    "duration": 1.67,
+    "cast_time": 1.67,
+    "sp_cost": 100,
+    "gauge_gain": 17,
+    "team_gauge_gain": 8.5,
+    "cooldown": null,
+    "allowed_types": [
+      "frozen",
+      "cold_attach",
+      "cold_burst"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 0.9,
+        "stagger": 10,
+        "sp": 0
+      }
+    ],
+    "anomalies": []
+  },
+  "ALESH_link": {
+    "skill_id": "ALESH_link",
+    "character_id": "ALESH",
+    "character_name": "阿列什",
+    "skill_type": "chain",
+    "skill_type_label": "连携技",
+    "duration": 1.3,
+    "cast_time": 1.3,
+    "sp_cost": null,
+    "gauge_gain": 10,
+    "team_gauge_gain": null,
+    "cooldown": 9,
+    "allowed_types": [],
+    "damage_ticks": [
+      {
+        "offset": 1.27,
+        "stagger": 10,
+        "sp": 10
+      }
+    ],
+    "anomalies": []
+  },
+  "ALESH_ultimate": {
+    "skill_id": "ALESH_ultimate",
+    "character_id": "ALESH",
+    "character_name": "阿列什",
+    "skill_type": "ultimate",
+    "skill_type_label": "终结技",
+    "duration": 3.2,
+    "cast_time": 3.2,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "cold_burst",
+      "frozen",
+      "cold_attach"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 3,
+        "stagger": 20,
+        "sp": 20
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "cold_attach",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 3
+          }
+        ]
+      }
+    ],
+    "ultimate_gauge_max": 85,
+    "ultimate_gauge_reply": 0
+  },
+  "ALESH_execution": {
+    "skill_id": "ALESH_execution",
+    "character_id": "ALESH",
+    "character_name": "阿列什",
+    "skill_type": "normal",
+    "skill_type_label": "处决",
+    "duration": 1.5,
+    "cast_time": 1.5,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "frozen",
+      "cold_attach",
+      "cold_burst",
+      "emag_burst",
+      "conductive",
+      "emag_attach",
+      "blaze_attach",
+      "burning",
+      "blaze_burst",
+      "break",
+      "armor_break",
+      "ice_shatter",
+      "knockdown",
+      "knockup",
+      "stagger",
+      "corrosion",
+      "nature_attach",
+      "nature_burst"
+    ],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "ALESH_variant_0_0": {
+    "skill_id": "ALESH_variant_0_0",
+    "character_id": "ALESH",
+    "character_name": "阿列什",
+    "skill_type": "variant_0",
+    "skill_type_label": "变体-0",
+    "duration": 1.67,
+    "cast_time": 1.67,
+    "sp_cost": 100,
+    "gauge_gain": 17,
+    "allowed_types": [],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "ALESH_variant_1_0": {
+    "skill_id": "ALESH_variant_1_0",
+    "character_id": "ALESH",
+    "character_name": "阿列什",
+    "skill_type": "variant_1",
+    "skill_type_label": "变体-1",
+    "duration": 1.67,
+    "cast_time": 1.67,
+    "sp_cost": 100,
+    "gauge_gain": 17,
+    "allowed_types": [],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "ALESH_variant_2_0": {
+    "skill_id": "ALESH_variant_2_0",
+    "character_id": "ALESH",
+    "character_name": "阿列什",
+    "skill_type": "variant_2",
+    "skill_type_label": "变体-2",
+    "duration": 1.67,
+    "cast_time": 1.67,
+    "sp_cost": 100,
+    "gauge_gain": 17,
+    "allowed_types": [],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "ALESH_variant_3_0": {
+    "skill_id": "ALESH_variant_3_0",
+    "character_id": "ALESH",
+    "character_name": "阿列什",
+    "skill_type": "variant_3",
+    "skill_type_label": "变体-3",
+    "duration": 1.67,
+    "cast_time": 1.67,
+    "sp_cost": 100,
+    "gauge_gain": 17,
+    "allowed_types": [],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "ALESH_variant_4_0": {
+    "skill_id": "ALESH_variant_4_0",
+    "character_id": "ALESH",
+    "character_name": "阿列什",
+    "skill_type": "variant_4",
+    "skill_type_label": "变体-4",
+    "duration": 1.3,
+    "cast_time": 1.3,
+    "sp_cost": null,
+    "gauge_gain": 10,
+    "allowed_types": [],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "CATCHER_skill": {
+    "skill_id": "CATCHER_skill",
+    "character_id": "CATCHER",
+    "character_name": "卡契尔",
+    "skill_type": "skill",
+    "skill_type_label": "战技",
+    "duration": 3.17,
+    "cast_time": 3.17,
+    "sp_cost": 100,
+    "gauge_gain": 6.5,
+    "team_gauge_gain": 6.5,
+    "cooldown": null,
+    "allowed_types": [
+      "break"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 2.77,
+        "stagger": 20,
+        "sp": 30
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "break",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 2.77
+          }
+        ]
+      }
+    ]
+  },
+  "CATCHER_link": {
+    "skill_id": "CATCHER_link",
+    "character_id": "CATCHER",
+    "character_name": "卡契尔",
+    "skill_type": "chain",
+    "skill_type_label": "连携技",
+    "duration": 0.8,
+    "cast_time": 0.8,
+    "sp_cost": null,
+    "gauge_gain": 10,
+    "team_gauge_gain": null,
+    "cooldown": 15,
+    "allowed_types": [],
+    "damage_ticks": [
+      {
+        "offset": 0.57,
+        "stagger": 10,
+        "sp": 0
+      }
+    ],
+    "anomalies": []
+  },
+  "CATCHER_ultimate": {
+    "skill_id": "CATCHER_ultimate",
+    "character_id": "CATCHER",
+    "character_name": "卡契尔",
+    "skill_type": "ultimate",
+    "skill_type_label": "终结技",
+    "duration": 3.43,
+    "cast_time": 3.43,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "knockdown",
+      "break",
+      "ice_shatter",
+      "weak"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 1.53,
+        "stagger": 5,
+        "sp": 0
+      },
+      {
+        "offset": 2.13,
+        "stagger": 5,
+        "sp": 0
+      },
+      {
+        "offset": 2.83,
+        "stagger": 10,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "knockdown",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 2.83
+          }
+        ]
+      },
+      {
+        "group_index": 1,
+        "types": [
+          {
+            "type": "weak",
+            "stacks": 1,
+            "duration": 8,
+            "offset": 2.83
+          }
+        ]
+      }
+    ],
+    "ultimate_gauge_max": 72,
+    "ultimate_gauge_reply": 0
+  },
+  "CATCHER_execution": {
+    "skill_id": "CATCHER_execution",
+    "character_id": "CATCHER",
+    "character_name": "卡契尔",
+    "skill_type": "normal",
+    "skill_type_label": "处决",
+    "duration": 1.5,
+    "cast_time": 1.5,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "break",
+      "armor_break",
+      "stagger",
+      "knockdown",
+      "knockup",
+      "blaze_attach",
+      "emag_attach",
+      "cold_attach",
+      "nature_attach",
+      "blaze_burst",
+      "emag_burst",
+      "cold_burst",
+      "nature_burst",
+      "burning",
+      "conductive",
+      "frozen",
+      "ice_shatter",
+      "corrosion"
+    ],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "FLUORITE_skill": {
+    "skill_id": "FLUORITE_skill",
+    "character_id": "FLUORITE",
+    "character_name": "萤石",
+    "skill_type": "skill",
+    "skill_type_label": "战技",
+    "duration": 1.13,
+    "cast_time": 1.13,
+    "sp_cost": 100,
+    "gauge_gain": 6.5,
+    "team_gauge_gain": 6.5,
+    "cooldown": null,
+    "allowed_types": [
+      "nature_attach",
+      "corrosion",
+      "nature_burst"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 0.33,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 2.97,
+        "stagger": 10,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "nature_attach",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 2.97
+          }
+        ]
+      }
+    ]
+  },
+  "FLUORITE_link": {
+    "skill_id": "FLUORITE_link",
+    "character_id": "FLUORITE",
+    "character_name": "萤石",
+    "skill_type": "chain",
+    "skill_type_label": "连携技",
+    "duration": 0.57,
+    "cast_time": 0.57,
+    "sp_cost": null,
+    "gauge_gain": 10,
+    "team_gauge_gain": null,
+    "cooldown": 25,
+    "allowed_types": [
+      "cold_attach",
+      "cold_burst",
+      "nature_attach",
+      "nature_burst"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 0.5,
+        "stagger": 10,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "cold_attach",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 0.5
+          }
+        ]
+      },
+      {
+        "group_index": 1,
+        "types": [
+          {
+            "type": "nature_attach",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 0.5
+          }
+        ]
+      }
+    ]
+  },
+  "FLUORITE_ultimate": {
+    "skill_id": "FLUORITE_ultimate",
+    "character_id": "FLUORITE",
+    "character_name": "萤石",
+    "skill_type": "ultimate",
+    "skill_type_label": "终结技",
+    "duration": 2.57,
+    "cast_time": 2.57,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "nature_attach",
+      "cold_attach"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 1.97,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 2.1,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 2.23,
+        "stagger": 0,
+        "sp": 0
+      },
+      {
+        "offset": 2.4,
+        "stagger": 20,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "nature_attach",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 2.4
+          }
+        ]
+      },
+      {
+        "group_index": 1,
+        "types": [
+          {
+            "type": "nature_attach",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 2.4
+          }
+        ]
+      }
+    ],
+    "ultimate_gauge_max": 72,
+    "ultimate_gauge_reply": 0
+  },
+  "FLUORITE_execution": {
+    "skill_id": "FLUORITE_execution",
+    "character_id": "FLUORITE",
+    "character_name": "萤石",
+    "skill_type": "normal",
+    "skill_type_label": "处决",
+    "duration": 1.5,
+    "cast_time": 1.5,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "break",
+      "armor_break",
+      "stagger",
+      "knockdown",
+      "knockup",
+      "blaze_attach",
+      "emag_attach",
+      "cold_attach",
+      "nature_attach",
+      "blaze_burst",
+      "emag_burst",
+      "cold_burst",
+      "nature_burst",
+      "burning",
+      "conductive",
+      "frozen",
+      "ice_shatter",
+      "corrosion"
+    ],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "ANTAL_skill": {
+    "skill_id": "ANTAL_skill",
+    "character_id": "ANTAL",
+    "character_name": "安塔尔",
+    "skill_type": "skill",
+    "skill_type_label": "战技",
+    "duration": 1,
+    "cast_time": 1,
+    "sp_cost": 100,
+    "gauge_gain": 6.5,
+    "team_gauge_gain": 6.5,
+    "cooldown": null,
+    "allowed_types": [
+      "antal_buff"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 0.67,
+        "stagger": 0,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "antal_buff",
+            "stacks": 1,
+            "duration": 60,
+            "offset": 0.67
+          }
+        ]
+      }
+    ]
+  },
+  "ANTAL_link": {
+    "skill_id": "ANTAL_link",
+    "character_id": "ANTAL",
+    "character_name": "安塔尔",
+    "skill_type": "chain",
+    "skill_type_label": "连携技",
+    "duration": 0.8,
+    "cast_time": 0.8,
+    "sp_cost": null,
+    "gauge_gain": 10,
+    "team_gauge_gain": null,
+    "cooldown": 15,
+    "allowed_types": [
+      "emag_attach",
+      "conductive",
+      "emag_burst",
+      "cold_attach",
+      "frozen",
+      "cold_burst",
+      "burning",
+      "blaze_attach",
+      "blaze_burst",
+      "nature_burst",
+      "corrosion",
+      "nature_attach"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 0.7,
+        "stagger": 10,
+        "sp": 0
+      }
+    ],
+    "anomalies": []
+  },
+  "ANTAL_ultimate": {
+    "skill_id": "ANTAL_ultimate",
+    "character_id": "ANTAL",
+    "character_name": "安塔尔",
+    "skill_type": "ultimate",
+    "skill_type_label": "终结技",
+    "duration": 1.87,
+    "cast_time": 1.87,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "pulse_enhance",
+      "fire_enhance"
+    ],
+    "damage_ticks": [],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "pulse_enhance",
+            "stacks": 1,
+            "duration": 12,
+            "offset": 1.63
+          }
+        ]
+      },
+      {
+        "group_index": 1,
+        "types": [
+          {
+            "type": "fire_enhance",
+            "stacks": 1,
+            "duration": 12,
+            "offset": 1.63
+          }
+        ]
+      }
+    ],
+    "ultimate_gauge_max": 90,
+    "ultimate_gauge_reply": 0
+  },
+  "ANTAL_execution": {
+    "skill_id": "ANTAL_execution",
+    "character_id": "ANTAL",
+    "character_name": "安塔尔",
+    "skill_type": "normal",
+    "skill_type_label": "处决",
+    "duration": 1.5,
+    "cast_time": 1.5,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "break",
+      "armor_break",
+      "stagger",
+      "knockdown",
+      "knockup",
+      "blaze_attach",
+      "emag_attach",
+      "cold_attach",
+      "nature_attach",
+      "blaze_burst",
+      "emag_burst",
+      "cold_burst",
+      "nature_burst",
+      "burning",
+      "conductive",
+      "frozen",
+      "ice_shatter",
+      "corrosion"
+    ],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "ESTELLA_skill": {
+    "skill_id": "ESTELLA_skill",
+    "character_id": "ESTELLA",
+    "character_name": "埃特拉",
+    "skill_type": "skill",
+    "skill_type_label": "战技",
+    "duration": 1.5,
+    "cast_time": 1.5,
+    "sp_cost": 100,
+    "gauge_gain": 6.5,
+    "team_gauge_gain": 6.5,
+    "cooldown": null,
+    "allowed_types": [
+      "cold_burst",
+      "frozen",
+      "cold_attach"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 0.7,
+        "stagger": 10,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "cold_attach",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 0.7
+          }
+        ]
+      }
+    ]
+  },
+  "ESTELLA_link": {
+    "skill_id": "ESTELLA_link",
+    "character_id": "ESTELLA",
+    "character_name": "埃特拉",
+    "skill_type": "chain",
+    "skill_type_label": "连携技",
+    "duration": 0.67,
+    "cast_time": 0.67,
+    "sp_cost": null,
+    "gauge_gain": 10,
+    "team_gauge_gain": null,
+    "cooldown": 15,
+    "allowed_types": [
+      "knockup",
+      "break",
+      "ice_shatter",
+      "physical_vulnerable"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 0.63,
+        "stagger": 10,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "ice_shatter",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 0.63
+          }
+        ]
+      },
+      {
+        "group_index": 1,
+        "types": [
+          {
+            "type": "knockup",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 0.63
+          }
+        ]
+      },
+      {
+        "group_index": 2,
+        "types": [
+          {
+            "type": "physical_vulnerable",
+            "stacks": 1,
+            "duration": 6,
+            "offset": 0.63
+          }
+        ]
+      }
+    ]
+  },
+  "ESTELLA_ultimate": {
+    "skill_id": "ESTELLA_ultimate",
+    "character_id": "ESTELLA",
+    "character_name": "埃特拉",
+    "skill_type": "ultimate",
+    "skill_type_label": "终结技",
+    "duration": 2,
+    "cast_time": 2,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "knockup",
+      "break",
+      "ice_shatter"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 1.8,
+        "stagger": 0,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "knockup",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 1.8
+          }
+        ]
+      }
+    ],
+    "ultimate_gauge_max": 63,
+    "ultimate_gauge_reply": 0
+  },
+  "ESTELLA_execution": {
+    "skill_id": "ESTELLA_execution",
+    "character_id": "ESTELLA",
+    "character_name": "埃特拉",
+    "skill_type": "normal",
+    "skill_type_label": "处决",
+    "duration": 1.5,
+    "cast_time": 1.5,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "armor_break",
+      "break",
+      "ice_shatter",
+      "stagger",
+      "knockdown",
+      "knockup",
+      "blaze_burst",
+      "burning",
+      "blaze_attach",
+      "nature_attach",
+      "corrosion",
+      "nature_burst",
+      "cold_attach",
+      "frozen",
+      "cold_burst",
+      "emag_attach",
+      "conductive",
+      "emag_burst"
+    ],
+    "damage_ticks": [],
+    "anomalies": []
+  },
+  "AKEKURI_skill": {
+    "skill_id": "AKEKURI_skill",
+    "character_id": "AKEKURI",
+    "character_name": "秋栗",
+    "skill_type": "skill",
+    "skill_type_label": "战技",
+    "duration": 1.33,
+    "cast_time": 1.33,
+    "sp_cost": 100,
+    "gauge_gain": 6.5,
+    "team_gauge_gain": 6.5,
+    "cooldown": null,
+    "allowed_types": [
+      "blaze_attach",
+      "burning",
+      "blaze_burst"
+    ],
+    "damage_ticks": [
+      {
+        "offset": 0.67,
+        "stagger": 10,
+        "sp": 0
+      }
+    ],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "blaze_attach",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 0.67
+          }
+        ]
+      }
+    ]
+  },
+  "AKEKURI_link": {
+    "skill_id": "AKEKURI_link",
+    "character_id": "AKEKURI",
+    "character_name": "秋栗",
+    "skill_type": "chain",
+    "skill_type_label": "连携技",
+    "duration": 1.27,
+    "cast_time": 1.27,
+    "sp_cost": null,
+    "gauge_gain": 10,
+    "team_gauge_gain": null,
+    "cooldown": 15,
+    "allowed_types": [],
+    "damage_ticks": [
+      {
+        "offset": 0.73,
+        "stagger": 5,
+        "sp": 7.5
+      },
+      {
+        "offset": 1.03,
+        "stagger": 5,
+        "sp": 7.5
+      }
+    ],
+    "anomalies": []
+  },
+  "AKEKURI_ultimate": {
+    "skill_id": "AKEKURI_ultimate",
+    "character_id": "AKEKURI",
+    "character_name": "秋栗",
+    "skill_type": "ultimate",
+    "skill_type_label": "终结技",
+    "duration": 4.3,
+    "cast_time": 4.3,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "combo"
+    ],
+    "damage_ticks": [],
+    "anomalies": [
+      {
+        "group_index": 0,
+        "types": [
+          {
+            "type": "combo",
+            "stacks": 1,
+            "duration": 20,
+            "offset": 0.03
+          }
+        ]
+      }
+    ],
+    "ultimate_gauge_max": 108,
+    "ultimate_gauge_reply": 0
+  },
+  "AKEKURI_execution": {
+    "skill_id": "AKEKURI_execution",
+    "character_id": "AKEKURI",
+    "character_name": "秋栗",
+    "skill_type": "normal",
+    "skill_type_label": "处决",
+    "duration": 1.5,
+    "cast_time": 1.5,
+    "sp_cost": null,
+    "gauge_gain": null,
+    "team_gauge_gain": null,
+    "cooldown": null,
+    "allowed_types": [
+      "ice_shatter",
+      "corrosion",
+      "nature_attach",
+      "nature_burst",
+      "burning",
+      "blaze_attach",
+      "blaze_burst",
+      "conductive",
+      "emag_attach",
+      "emag_burst",
+      "cold_attach",
+      "frozen",
+      "cold_burst",
+      "knockdown",
+      "break",
+      "knockup",
+      "stagger",
+      "armor_break"
+    ],
+    "damage_ticks": [],
+    "anomalies": []
+  }
+}

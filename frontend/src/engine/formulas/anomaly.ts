@@ -1,8 +1,6 @@
-export function calcAnomalyLevel(源石技艺强度: number): number {
-  if (源石技艺强度 < 100) return 1
-  if (源石技艺强度 < 200) return 2
-  if (源石技艺强度 < 300) return 3
-  return 4
+// 异常等级 = 消耗的破防/附着层数（最高4级）
+export function calcAnomalyLevel(consumedStacks: number): number {
+  return Math.min(Math.max(1, Math.floor(consumedStacks)), 4)
 }
 
 export function calc法术等级系数(level: number): number {

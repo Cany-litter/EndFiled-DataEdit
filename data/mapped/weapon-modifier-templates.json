@@ -1,0 +1,1892 @@
+[
+  {
+    "modifierId": "primary_ability",
+    "size": "small",
+    "level": 0,
+    "value": 8
+  },
+  {
+    "modifierId": "primary_ability",
+    "size": "small",
+    "level": 1,
+    "value": 15
+  },
+  {
+    "modifierId": "primary_ability",
+    "size": "small",
+    "level": 2,
+    "value": 21
+  },
+  {
+    "modifierId": "primary_ability",
+    "size": "small",
+    "level": 3,
+    "value": 28
+  },
+  {
+    "modifierId": "primary_ability",
+    "size": "small",
+    "level": 4,
+    "value": 35
+  },
+  {
+    "modifierId": "primary_ability",
+    "size": "small",
+    "level": 5,
+    "value": 42
+  },
+  {
+    "modifierId": "primary_ability",
+    "size": "small",
+    "level": 6,
+    "value": 48
+  },
+  {
+    "modifierId": "primary_ability",
+    "size": "small",
+    "level": 7,
+    "value": 55
+  },
+  {
+    "modifierId": "primary_ability",
+    "size": "small",
+    "level": 8,
+    "value": 65
+  },
+  {
+    "modifierId": "primary_ability",
+    "size": "large",
+    "level": 0,
+    "value": 14
+  },
+  {
+    "modifierId": "primary_ability",
+    "size": "large",
+    "level": 1,
+    "value": 25
+  },
+  {
+    "modifierId": "primary_ability",
+    "size": "large",
+    "level": 2,
+    "value": 36
+  },
+  {
+    "modifierId": "primary_ability",
+    "size": "large",
+    "level": 3,
+    "value": 47
+  },
+  {
+    "modifierId": "primary_ability",
+    "size": "large",
+    "level": 4,
+    "value": 58
+  },
+  {
+    "modifierId": "primary_ability",
+    "size": "large",
+    "level": 5,
+    "value": 70
+  },
+  {
+    "modifierId": "primary_ability",
+    "size": "large",
+    "level": 6,
+    "value": 81
+  },
+  {
+    "modifierId": "primary_ability",
+    "size": "large",
+    "level": 7,
+    "value": 92
+  },
+  {
+    "modifierId": "primary_ability",
+    "size": "large",
+    "level": 8,
+    "value": 109
+  },
+  {
+    "modifierId": "strength",
+    "size": "small",
+    "level": 0,
+    "value": 12
+  },
+  {
+    "modifierId": "strength",
+    "size": "small",
+    "level": 1,
+    "value": 21
+  },
+  {
+    "modifierId": "strength",
+    "size": "small",
+    "level": 2,
+    "value": 31
+  },
+  {
+    "modifierId": "strength",
+    "size": "small",
+    "level": 3,
+    "value": 40
+  },
+  {
+    "modifierId": "strength",
+    "size": "small",
+    "level": 4,
+    "value": 50
+  },
+  {
+    "modifierId": "strength",
+    "size": "small",
+    "level": 5,
+    "value": 60
+  },
+  {
+    "modifierId": "strength",
+    "size": "small",
+    "level": 6,
+    "value": 69
+  },
+  {
+    "modifierId": "strength",
+    "size": "small",
+    "level": 7,
+    "value": 79
+  },
+  {
+    "modifierId": "strength",
+    "size": "small",
+    "level": 8,
+    "value": 93
+  },
+  {
+    "modifierId": "strength",
+    "size": "medium",
+    "level": 0,
+    "value": 16
+  },
+  {
+    "modifierId": "strength",
+    "size": "medium",
+    "level": 1,
+    "value": 28
+  },
+  {
+    "modifierId": "strength",
+    "size": "medium",
+    "level": 2,
+    "value": 41
+  },
+  {
+    "modifierId": "strength",
+    "size": "medium",
+    "level": 3,
+    "value": 54
+  },
+  {
+    "modifierId": "strength",
+    "size": "medium",
+    "level": 4,
+    "value": 67
+  },
+  {
+    "modifierId": "strength",
+    "size": "medium",
+    "level": 5,
+    "value": 80
+  },
+  {
+    "modifierId": "strength",
+    "size": "medium",
+    "level": 6,
+    "value": 92
+  },
+  {
+    "modifierId": "strength",
+    "size": "medium",
+    "level": 7,
+    "value": 105
+  },
+  {
+    "modifierId": "strength",
+    "size": "medium",
+    "level": 8,
+    "value": 124
+  },
+  {
+    "modifierId": "strength",
+    "size": "large",
+    "level": 0,
+    "value": 20
+  },
+  {
+    "modifierId": "strength",
+    "size": "large",
+    "level": 1,
+    "value": 36
+  },
+  {
+    "modifierId": "strength",
+    "size": "large",
+    "level": 2,
+    "value": 52
+  },
+  {
+    "modifierId": "strength",
+    "size": "large",
+    "level": 3,
+    "value": 68
+  },
+  {
+    "modifierId": "strength",
+    "size": "large",
+    "level": 4,
+    "value": 84
+  },
+  {
+    "modifierId": "strength",
+    "size": "large",
+    "level": 5,
+    "value": 100
+  },
+  {
+    "modifierId": "strength",
+    "size": "large",
+    "level": 6,
+    "value": 116
+  },
+  {
+    "modifierId": "strength",
+    "size": "large",
+    "level": 7,
+    "value": 132
+  },
+  {
+    "modifierId": "strength",
+    "size": "large",
+    "level": 8,
+    "value": 156
+  },
+  {
+    "modifierId": "agility",
+    "size": "small",
+    "level": 0,
+    "value": 12
+  },
+  {
+    "modifierId": "agility",
+    "size": "small",
+    "level": 1,
+    "value": 21
+  },
+  {
+    "modifierId": "agility",
+    "size": "small",
+    "level": 2,
+    "value": 31
+  },
+  {
+    "modifierId": "agility",
+    "size": "small",
+    "level": 3,
+    "value": 40
+  },
+  {
+    "modifierId": "agility",
+    "size": "small",
+    "level": 4,
+    "value": 50
+  },
+  {
+    "modifierId": "agility",
+    "size": "small",
+    "level": 5,
+    "value": 60
+  },
+  {
+    "modifierId": "agility",
+    "size": "small",
+    "level": 6,
+    "value": 69
+  },
+  {
+    "modifierId": "agility",
+    "size": "small",
+    "level": 7,
+    "value": 79
+  },
+  {
+    "modifierId": "agility",
+    "size": "small",
+    "level": 8,
+    "value": 93
+  },
+  {
+    "modifierId": "agility",
+    "size": "medium",
+    "level": 0,
+    "value": 16
+  },
+  {
+    "modifierId": "agility",
+    "size": "medium",
+    "level": 1,
+    "value": 28
+  },
+  {
+    "modifierId": "agility",
+    "size": "medium",
+    "level": 2,
+    "value": 41
+  },
+  {
+    "modifierId": "agility",
+    "size": "medium",
+    "level": 3,
+    "value": 54
+  },
+  {
+    "modifierId": "agility",
+    "size": "medium",
+    "level": 4,
+    "value": 67
+  },
+  {
+    "modifierId": "agility",
+    "size": "medium",
+    "level": 5,
+    "value": 80
+  },
+  {
+    "modifierId": "agility",
+    "size": "medium",
+    "level": 6,
+    "value": 92
+  },
+  {
+    "modifierId": "agility",
+    "size": "medium",
+    "level": 7,
+    "value": 105
+  },
+  {
+    "modifierId": "agility",
+    "size": "medium",
+    "level": 8,
+    "value": 124
+  },
+  {
+    "modifierId": "agility",
+    "size": "large",
+    "level": 0,
+    "value": 20
+  },
+  {
+    "modifierId": "agility",
+    "size": "large",
+    "level": 1,
+    "value": 36
+  },
+  {
+    "modifierId": "agility",
+    "size": "large",
+    "level": 2,
+    "value": 52
+  },
+  {
+    "modifierId": "agility",
+    "size": "large",
+    "level": 3,
+    "value": 68
+  },
+  {
+    "modifierId": "agility",
+    "size": "large",
+    "level": 4,
+    "value": 84
+  },
+  {
+    "modifierId": "agility",
+    "size": "large",
+    "level": 5,
+    "value": 100
+  },
+  {
+    "modifierId": "agility",
+    "size": "large",
+    "level": 6,
+    "value": 116
+  },
+  {
+    "modifierId": "agility",
+    "size": "large",
+    "level": 7,
+    "value": 132
+  },
+  {
+    "modifierId": "agility",
+    "size": "large",
+    "level": 8,
+    "value": 156
+  },
+  {
+    "modifierId": "intellect",
+    "size": "small",
+    "level": 0,
+    "value": 12
+  },
+  {
+    "modifierId": "intellect",
+    "size": "small",
+    "level": 1,
+    "value": 21
+  },
+  {
+    "modifierId": "intellect",
+    "size": "small",
+    "level": 2,
+    "value": 31
+  },
+  {
+    "modifierId": "intellect",
+    "size": "small",
+    "level": 3,
+    "value": 40
+  },
+  {
+    "modifierId": "intellect",
+    "size": "small",
+    "level": 4,
+    "value": 50
+  },
+  {
+    "modifierId": "intellect",
+    "size": "small",
+    "level": 5,
+    "value": 60
+  },
+  {
+    "modifierId": "intellect",
+    "size": "small",
+    "level": 6,
+    "value": 69
+  },
+  {
+    "modifierId": "intellect",
+    "size": "small",
+    "level": 7,
+    "value": 79
+  },
+  {
+    "modifierId": "intellect",
+    "size": "small",
+    "level": 8,
+    "value": 93
+  },
+  {
+    "modifierId": "intellect",
+    "size": "medium",
+    "level": 0,
+    "value": 16
+  },
+  {
+    "modifierId": "intellect",
+    "size": "medium",
+    "level": 1,
+    "value": 28
+  },
+  {
+    "modifierId": "intellect",
+    "size": "medium",
+    "level": 2,
+    "value": 41
+  },
+  {
+    "modifierId": "intellect",
+    "size": "medium",
+    "level": 3,
+    "value": 54
+  },
+  {
+    "modifierId": "intellect",
+    "size": "medium",
+    "level": 4,
+    "value": 67
+  },
+  {
+    "modifierId": "intellect",
+    "size": "medium",
+    "level": 5,
+    "value": 80
+  },
+  {
+    "modifierId": "intellect",
+    "size": "medium",
+    "level": 6,
+    "value": 92
+  },
+  {
+    "modifierId": "intellect",
+    "size": "medium",
+    "level": 7,
+    "value": 105
+  },
+  {
+    "modifierId": "intellect",
+    "size": "medium",
+    "level": 8,
+    "value": 124
+  },
+  {
+    "modifierId": "intellect",
+    "size": "large",
+    "level": 0,
+    "value": 20
+  },
+  {
+    "modifierId": "intellect",
+    "size": "large",
+    "level": 1,
+    "value": 36
+  },
+  {
+    "modifierId": "intellect",
+    "size": "large",
+    "level": 2,
+    "value": 52
+  },
+  {
+    "modifierId": "intellect",
+    "size": "large",
+    "level": 3,
+    "value": 68
+  },
+  {
+    "modifierId": "intellect",
+    "size": "large",
+    "level": 4,
+    "value": 84
+  },
+  {
+    "modifierId": "intellect",
+    "size": "large",
+    "level": 5,
+    "value": 100
+  },
+  {
+    "modifierId": "intellect",
+    "size": "large",
+    "level": 6,
+    "value": 116
+  },
+  {
+    "modifierId": "intellect",
+    "size": "large",
+    "level": 7,
+    "value": 132
+  },
+  {
+    "modifierId": "intellect",
+    "size": "large",
+    "level": 8,
+    "value": 156
+  },
+  {
+    "modifierId": "will",
+    "size": "small",
+    "level": 0,
+    "value": 12
+  },
+  {
+    "modifierId": "will",
+    "size": "small",
+    "level": 1,
+    "value": 21
+  },
+  {
+    "modifierId": "will",
+    "size": "small",
+    "level": 2,
+    "value": 31
+  },
+  {
+    "modifierId": "will",
+    "size": "small",
+    "level": 3,
+    "value": 40
+  },
+  {
+    "modifierId": "will",
+    "size": "small",
+    "level": 4,
+    "value": 50
+  },
+  {
+    "modifierId": "will",
+    "size": "small",
+    "level": 5,
+    "value": 60
+  },
+  {
+    "modifierId": "will",
+    "size": "small",
+    "level": 6,
+    "value": 69
+  },
+  {
+    "modifierId": "will",
+    "size": "small",
+    "level": 7,
+    "value": 79
+  },
+  {
+    "modifierId": "will",
+    "size": "small",
+    "level": 8,
+    "value": 93
+  },
+  {
+    "modifierId": "will",
+    "size": "medium",
+    "level": 0,
+    "value": 16
+  },
+  {
+    "modifierId": "will",
+    "size": "medium",
+    "level": 1,
+    "value": 28
+  },
+  {
+    "modifierId": "will",
+    "size": "medium",
+    "level": 2,
+    "value": 41
+  },
+  {
+    "modifierId": "will",
+    "size": "medium",
+    "level": 3,
+    "value": 54
+  },
+  {
+    "modifierId": "will",
+    "size": "medium",
+    "level": 4,
+    "value": 67
+  },
+  {
+    "modifierId": "will",
+    "size": "medium",
+    "level": 5,
+    "value": 80
+  },
+  {
+    "modifierId": "will",
+    "size": "medium",
+    "level": 6,
+    "value": 92
+  },
+  {
+    "modifierId": "will",
+    "size": "medium",
+    "level": 7,
+    "value": 105
+  },
+  {
+    "modifierId": "will",
+    "size": "medium",
+    "level": 8,
+    "value": 124
+  },
+  {
+    "modifierId": "will",
+    "size": "large",
+    "level": 0,
+    "value": 20
+  },
+  {
+    "modifierId": "will",
+    "size": "large",
+    "level": 1,
+    "value": 36
+  },
+  {
+    "modifierId": "will",
+    "size": "large",
+    "level": 2,
+    "value": 52
+  },
+  {
+    "modifierId": "will",
+    "size": "large",
+    "level": 3,
+    "value": 68
+  },
+  {
+    "modifierId": "will",
+    "size": "large",
+    "level": 4,
+    "value": 84
+  },
+  {
+    "modifierId": "will",
+    "size": "large",
+    "level": 5,
+    "value": 100
+  },
+  {
+    "modifierId": "will",
+    "size": "large",
+    "level": 6,
+    "value": 116
+  },
+  {
+    "modifierId": "will",
+    "size": "large",
+    "level": 7,
+    "value": 132
+  },
+  {
+    "modifierId": "will",
+    "size": "large",
+    "level": 8,
+    "value": 156
+  },
+  {
+    "modifierId": "attack",
+    "size": "small",
+    "level": 0,
+    "value": 3
+  },
+  {
+    "modifierId": "attack",
+    "size": "small",
+    "level": 1,
+    "value": 5.4
+  },
+  {
+    "modifierId": "attack",
+    "size": "small",
+    "level": 2,
+    "value": 7.8
+  },
+  {
+    "modifierId": "attack",
+    "size": "small",
+    "level": 3,
+    "value": 10.2
+  },
+  {
+    "modifierId": "attack",
+    "size": "small",
+    "level": 4,
+    "value": 12.6
+  },
+  {
+    "modifierId": "attack",
+    "size": "small",
+    "level": 5,
+    "value": 15
+  },
+  {
+    "modifierId": "attack",
+    "size": "small",
+    "level": 6,
+    "value": 17.4
+  },
+  {
+    "modifierId": "attack",
+    "size": "small",
+    "level": 7,
+    "value": 19.8
+  },
+  {
+    "modifierId": "attack",
+    "size": "small",
+    "level": 8,
+    "value": 23.4
+  },
+  {
+    "modifierId": "attack",
+    "size": "medium",
+    "level": 0,
+    "value": 4
+  },
+  {
+    "modifierId": "attack",
+    "size": "medium",
+    "level": 1,
+    "value": 7.2
+  },
+  {
+    "modifierId": "attack",
+    "size": "medium",
+    "level": 2,
+    "value": 10.4
+  },
+  {
+    "modifierId": "attack",
+    "size": "medium",
+    "level": 3,
+    "value": 13.6
+  },
+  {
+    "modifierId": "attack",
+    "size": "medium",
+    "level": 4,
+    "value": 16.8
+  },
+  {
+    "modifierId": "attack",
+    "size": "medium",
+    "level": 5,
+    "value": 20
+  },
+  {
+    "modifierId": "attack",
+    "size": "medium",
+    "level": 6,
+    "value": 23.2
+  },
+  {
+    "modifierId": "attack",
+    "size": "medium",
+    "level": 7,
+    "value": 26.4
+  },
+  {
+    "modifierId": "attack",
+    "size": "medium",
+    "level": 8,
+    "value": 31.2
+  },
+  {
+    "modifierId": "attack",
+    "size": "large",
+    "level": 0,
+    "value": 5
+  },
+  {
+    "modifierId": "attack",
+    "size": "large",
+    "level": 1,
+    "value": 9
+  },
+  {
+    "modifierId": "attack",
+    "size": "large",
+    "level": 2,
+    "value": 13
+  },
+  {
+    "modifierId": "attack",
+    "size": "large",
+    "level": 3,
+    "value": 17
+  },
+  {
+    "modifierId": "attack",
+    "size": "large",
+    "level": 4,
+    "value": 21
+  },
+  {
+    "modifierId": "attack",
+    "size": "large",
+    "level": 5,
+    "value": 25
+  },
+  {
+    "modifierId": "attack",
+    "size": "large",
+    "level": 6,
+    "value": 29
+  },
+  {
+    "modifierId": "attack",
+    "size": "large",
+    "level": 7,
+    "value": 33
+  },
+  {
+    "modifierId": "attack",
+    "size": "large",
+    "level": 8,
+    "value": 39
+  },
+  {
+    "modifierId": "hp",
+    "size": "small",
+    "level": 0,
+    "value": 6
+  },
+  {
+    "modifierId": "hp",
+    "size": "small",
+    "level": 1,
+    "value": 10.8
+  },
+  {
+    "modifierId": "hp",
+    "size": "small",
+    "level": 2,
+    "value": 15.6
+  },
+  {
+    "modifierId": "hp",
+    "size": "small",
+    "level": 3,
+    "value": 20.4
+  },
+  {
+    "modifierId": "hp",
+    "size": "small",
+    "level": 4,
+    "value": 25.2
+  },
+  {
+    "modifierId": "hp",
+    "size": "small",
+    "level": 5,
+    "value": 30
+  },
+  {
+    "modifierId": "hp",
+    "size": "small",
+    "level": 6,
+    "value": 34.8
+  },
+  {
+    "modifierId": "hp",
+    "size": "small",
+    "level": 7,
+    "value": 39.6
+  },
+  {
+    "modifierId": "hp",
+    "size": "small",
+    "level": 8,
+    "value": 46.8
+  },
+  {
+    "modifierId": "hp",
+    "size": "medium",
+    "level": 0,
+    "value": 8
+  },
+  {
+    "modifierId": "hp",
+    "size": "medium",
+    "level": 1,
+    "value": 14.4
+  },
+  {
+    "modifierId": "hp",
+    "size": "medium",
+    "level": 2,
+    "value": 20.8
+  },
+  {
+    "modifierId": "hp",
+    "size": "medium",
+    "level": 3,
+    "value": 27.2
+  },
+  {
+    "modifierId": "hp",
+    "size": "medium",
+    "level": 4,
+    "value": 33.6
+  },
+  {
+    "modifierId": "hp",
+    "size": "medium",
+    "level": 5,
+    "value": 40
+  },
+  {
+    "modifierId": "hp",
+    "size": "medium",
+    "level": 6,
+    "value": 46.4
+  },
+  {
+    "modifierId": "hp",
+    "size": "medium",
+    "level": 7,
+    "value": 52.8
+  },
+  {
+    "modifierId": "hp",
+    "size": "medium",
+    "level": 8,
+    "value": 62.4
+  },
+  {
+    "modifierId": "hp",
+    "size": "large",
+    "level": 0,
+    "value": 10
+  },
+  {
+    "modifierId": "hp",
+    "size": "large",
+    "level": 1,
+    "value": 18
+  },
+  {
+    "modifierId": "hp",
+    "size": "large",
+    "level": 2,
+    "value": 26
+  },
+  {
+    "modifierId": "hp",
+    "size": "large",
+    "level": 3,
+    "value": 34
+  },
+  {
+    "modifierId": "hp",
+    "size": "large",
+    "level": 4,
+    "value": 42
+  },
+  {
+    "modifierId": "hp",
+    "size": "large",
+    "level": 5,
+    "value": 50
+  },
+  {
+    "modifierId": "hp",
+    "size": "large",
+    "level": 6,
+    "value": 58
+  },
+  {
+    "modifierId": "hp",
+    "size": "large",
+    "level": 7,
+    "value": 66
+  },
+  {
+    "modifierId": "hp",
+    "size": "large",
+    "level": 8,
+    "value": 78
+  },
+  {
+    "modifierId": "crit_rate",
+    "size": "large",
+    "level": 0,
+    "value": 2.5
+  },
+  {
+    "modifierId": "crit_rate",
+    "size": "large",
+    "level": 1,
+    "value": 4.5
+  },
+  {
+    "modifierId": "crit_rate",
+    "size": "large",
+    "level": 2,
+    "value": 6.5
+  },
+  {
+    "modifierId": "crit_rate",
+    "size": "large",
+    "level": 3,
+    "value": 8.5
+  },
+  {
+    "modifierId": "crit_rate",
+    "size": "large",
+    "level": 4,
+    "value": 10.5
+  },
+  {
+    "modifierId": "crit_rate",
+    "size": "large",
+    "level": 5,
+    "value": 12.5
+  },
+  {
+    "modifierId": "crit_rate",
+    "size": "large",
+    "level": 6,
+    "value": 14.5
+  },
+  {
+    "modifierId": "crit_rate",
+    "size": "large",
+    "level": 7,
+    "value": 16.5
+  },
+  {
+    "modifierId": "crit_rate",
+    "size": "large",
+    "level": 8,
+    "value": 19.5
+  },
+  {
+    "modifierId": "blaze_dmg",
+    "size": "medium",
+    "level": 0,
+    "value": 4.4
+  },
+  {
+    "modifierId": "blaze_dmg",
+    "size": "medium",
+    "level": 1,
+    "value": 8
+  },
+  {
+    "modifierId": "blaze_dmg",
+    "size": "medium",
+    "level": 2,
+    "value": 11.6
+  },
+  {
+    "modifierId": "blaze_dmg",
+    "size": "medium",
+    "level": 3,
+    "value": 15.1
+  },
+  {
+    "modifierId": "blaze_dmg",
+    "size": "medium",
+    "level": 4,
+    "value": 18.7
+  },
+  {
+    "modifierId": "blaze_dmg",
+    "size": "medium",
+    "level": 5,
+    "value": 22.2
+  },
+  {
+    "modifierId": "blaze_dmg",
+    "size": "medium",
+    "level": 6,
+    "value": 25.8
+  },
+  {
+    "modifierId": "blaze_dmg",
+    "size": "medium",
+    "level": 7,
+    "value": 29.3
+  },
+  {
+    "modifierId": "blaze_dmg",
+    "size": "medium",
+    "level": 8,
+    "value": 34.7
+  },
+  {
+    "modifierId": "blaze_dmg",
+    "size": "large",
+    "level": 0,
+    "value": 5.6
+  },
+  {
+    "modifierId": "blaze_dmg",
+    "size": "large",
+    "level": 1,
+    "value": 10
+  },
+  {
+    "modifierId": "blaze_dmg",
+    "size": "large",
+    "level": 2,
+    "value": 14.4
+  },
+  {
+    "modifierId": "blaze_dmg",
+    "size": "large",
+    "level": 3,
+    "value": 18.9
+  },
+  {
+    "modifierId": "blaze_dmg",
+    "size": "large",
+    "level": 4,
+    "value": 23.3
+  },
+  {
+    "modifierId": "blaze_dmg",
+    "size": "large",
+    "level": 5,
+    "value": 27.8
+  },
+  {
+    "modifierId": "blaze_dmg",
+    "size": "large",
+    "level": 6,
+    "value": 32.2
+  },
+  {
+    "modifierId": "blaze_dmg",
+    "size": "large",
+    "level": 7,
+    "value": 36.7
+  },
+  {
+    "modifierId": "blaze_dmg",
+    "size": "large",
+    "level": 8,
+    "value": 43.3
+  },
+  {
+    "modifierId": "emag_dmg",
+    "size": "medium",
+    "level": 0,
+    "value": 4.4
+  },
+  {
+    "modifierId": "emag_dmg",
+    "size": "medium",
+    "level": 1,
+    "value": 8
+  },
+  {
+    "modifierId": "emag_dmg",
+    "size": "medium",
+    "level": 2,
+    "value": 11.6
+  },
+  {
+    "modifierId": "emag_dmg",
+    "size": "medium",
+    "level": 3,
+    "value": 15.1
+  },
+  {
+    "modifierId": "emag_dmg",
+    "size": "medium",
+    "level": 4,
+    "value": 18.7
+  },
+  {
+    "modifierId": "emag_dmg",
+    "size": "medium",
+    "level": 5,
+    "value": 22.2
+  },
+  {
+    "modifierId": "emag_dmg",
+    "size": "medium",
+    "level": 6,
+    "value": 25.8
+  },
+  {
+    "modifierId": "emag_dmg",
+    "size": "medium",
+    "level": 7,
+    "value": 29.3
+  },
+  {
+    "modifierId": "emag_dmg",
+    "size": "medium",
+    "level": 8,
+    "value": 34.7
+  },
+  {
+    "modifierId": "cold_dmg",
+    "size": "large",
+    "level": 0,
+    "value": 5.6
+  },
+  {
+    "modifierId": "cold_dmg",
+    "size": "large",
+    "level": 1,
+    "value": 10
+  },
+  {
+    "modifierId": "cold_dmg",
+    "size": "large",
+    "level": 2,
+    "value": 14.4
+  },
+  {
+    "modifierId": "cold_dmg",
+    "size": "large",
+    "level": 3,
+    "value": 18.9
+  },
+  {
+    "modifierId": "cold_dmg",
+    "size": "large",
+    "level": 4,
+    "value": 23.3
+  },
+  {
+    "modifierId": "cold_dmg",
+    "size": "large",
+    "level": 5,
+    "value": 27.8
+  },
+  {
+    "modifierId": "cold_dmg",
+    "size": "large",
+    "level": 6,
+    "value": 32.2
+  },
+  {
+    "modifierId": "cold_dmg",
+    "size": "large",
+    "level": 7,
+    "value": 36.7
+  },
+  {
+    "modifierId": "cold_dmg",
+    "size": "large",
+    "level": 8,
+    "value": 43.3
+  },
+  {
+    "modifierId": "healing_effect",
+    "size": "large",
+    "level": 0,
+    "value": 6
+  },
+  {
+    "modifierId": "healing_effect",
+    "size": "large",
+    "level": 1,
+    "value": 10.7
+  },
+  {
+    "modifierId": "healing_effect",
+    "size": "large",
+    "level": 2,
+    "value": 15.5
+  },
+  {
+    "modifierId": "healing_effect",
+    "size": "large",
+    "level": 3,
+    "value": 20.2
+  },
+  {
+    "modifierId": "healing_effect",
+    "size": "large",
+    "level": 4,
+    "value": 25
+  },
+  {
+    "modifierId": "healing_effect",
+    "size": "large",
+    "level": 5,
+    "value": 29.8
+  },
+  {
+    "modifierId": "healing_effect",
+    "size": "large",
+    "level": 6,
+    "value": 34.5
+  },
+  {
+    "modifierId": "healing_effect",
+    "size": "large",
+    "level": 7,
+    "value": 39.3
+  },
+  {
+    "modifierId": "healing_effect",
+    "size": "large",
+    "level": 8,
+    "value": 46.4
+  },
+  {
+    "modifierId": "physical_dmg",
+    "size": "small",
+    "level": 0,
+    "value": 3.3
+  },
+  {
+    "modifierId": "physical_dmg",
+    "size": "small",
+    "level": 1,
+    "value": 6
+  },
+  {
+    "modifierId": "physical_dmg",
+    "size": "small",
+    "level": 2,
+    "value": 8.7
+  },
+  {
+    "modifierId": "physical_dmg",
+    "size": "small",
+    "level": 3,
+    "value": 11.3
+  },
+  {
+    "modifierId": "physical_dmg",
+    "size": "small",
+    "level": 4,
+    "value": 14
+  },
+  {
+    "modifierId": "physical_dmg",
+    "size": "small",
+    "level": 5,
+    "value": 16.7
+  },
+  {
+    "modifierId": "physical_dmg",
+    "size": "small",
+    "level": 6,
+    "value": 19.3
+  },
+  {
+    "modifierId": "physical_dmg",
+    "size": "small",
+    "level": 7,
+    "value": 22
+  },
+  {
+    "modifierId": "physical_dmg",
+    "size": "small",
+    "level": 8,
+    "value": 26
+  },
+  {
+    "modifierId": "physical_dmg",
+    "size": "medium",
+    "level": 0,
+    "value": 4.4
+  },
+  {
+    "modifierId": "physical_dmg",
+    "size": "medium",
+    "level": 1,
+    "value": 8
+  },
+  {
+    "modifierId": "physical_dmg",
+    "size": "medium",
+    "level": 2,
+    "value": 11.6
+  },
+  {
+    "modifierId": "physical_dmg",
+    "size": "medium",
+    "level": 3,
+    "value": 15.1
+  },
+  {
+    "modifierId": "physical_dmg",
+    "size": "medium",
+    "level": 4,
+    "value": 18.7
+  },
+  {
+    "modifierId": "physical_dmg",
+    "size": "medium",
+    "level": 5,
+    "value": 22.2
+  },
+  {
+    "modifierId": "physical_dmg",
+    "size": "medium",
+    "level": 6,
+    "value": 25.8
+  },
+  {
+    "modifierId": "physical_dmg",
+    "size": "medium",
+    "level": 7,
+    "value": 29.3
+  },
+  {
+    "modifierId": "physical_dmg",
+    "size": "medium",
+    "level": 8,
+    "value": 34.7
+  },
+  {
+    "modifierId": "physical_dmg",
+    "size": "large",
+    "level": 0,
+    "value": 5.6
+  },
+  {
+    "modifierId": "physical_dmg",
+    "size": "large",
+    "level": 1,
+    "value": 10
+  },
+  {
+    "modifierId": "physical_dmg",
+    "size": "large",
+    "level": 2,
+    "value": 14.4
+  },
+  {
+    "modifierId": "physical_dmg",
+    "size": "large",
+    "level": 3,
+    "value": 18.9
+  },
+  {
+    "modifierId": "physical_dmg",
+    "size": "large",
+    "level": 4,
+    "value": 23.3
+  },
+  {
+    "modifierId": "physical_dmg",
+    "size": "large",
+    "level": 5,
+    "value": 27.8
+  },
+  {
+    "modifierId": "physical_dmg",
+    "size": "large",
+    "level": 6,
+    "value": 32.2
+  },
+  {
+    "modifierId": "physical_dmg",
+    "size": "large",
+    "level": 7,
+    "value": 36.7
+  },
+  {
+    "modifierId": "physical_dmg",
+    "size": "large",
+    "level": 8,
+    "value": 43.3
+  },
+  {
+    "modifierId": "arts_dmg",
+    "size": "small",
+    "level": 0,
+    "value": 3.3
+  },
+  {
+    "modifierId": "arts_dmg",
+    "size": "small",
+    "level": 1,
+    "value": 6
+  },
+  {
+    "modifierId": "arts_dmg",
+    "size": "small",
+    "level": 2,
+    "value": 8.7
+  },
+  {
+    "modifierId": "arts_dmg",
+    "size": "small",
+    "level": 3,
+    "value": 11.3
+  },
+  {
+    "modifierId": "arts_dmg",
+    "size": "small",
+    "level": 4,
+    "value": 14
+  },
+  {
+    "modifierId": "arts_dmg",
+    "size": "small",
+    "level": 5,
+    "value": 16.7
+  },
+  {
+    "modifierId": "arts_dmg",
+    "size": "small",
+    "level": 6,
+    "value": 19.3
+  },
+  {
+    "modifierId": "arts_dmg",
+    "size": "small",
+    "level": 7,
+    "value": 22
+  },
+  {
+    "modifierId": "arts_dmg",
+    "size": "small",
+    "level": 8,
+    "value": 26
+  },
+  {
+    "modifierId": "arts_dmg",
+    "size": "medium",
+    "level": 0,
+    "value": 4.4
+  },
+  {
+    "modifierId": "arts_dmg",
+    "size": "medium",
+    "level": 1,
+    "value": 8
+  },
+  {
+    "modifierId": "arts_dmg",
+    "size": "medium",
+    "level": 2,
+    "value": 11.6
+  },
+  {
+    "modifierId": "arts_dmg",
+    "size": "medium",
+    "level": 3,
+    "value": 15.1
+  },
+  {
+    "modifierId": "arts_dmg",
+    "size": "medium",
+    "level": 4,
+    "value": 18.7
+  },
+  {
+    "modifierId": "arts_dmg",
+    "size": "medium",
+    "level": 5,
+    "value": 22.2
+  },
+  {
+    "modifierId": "arts_dmg",
+    "size": "medium",
+    "level": 6,
+    "value": 25.8
+  },
+  {
+    "modifierId": "arts_dmg",
+    "size": "medium",
+    "level": 7,
+    "value": 29.3
+  },
+  {
+    "modifierId": "arts_dmg",
+    "size": "medium",
+    "level": 8,
+    "value": 34.7
+  },
+  {
+    "modifierId": "originium_arts_power",
+    "size": "medium",
+    "level": 0,
+    "value": 8
+  },
+  {
+    "modifierId": "originium_arts_power",
+    "size": "medium",
+    "level": 1,
+    "value": 14
+  },
+  {
+    "modifierId": "originium_arts_power",
+    "size": "medium",
+    "level": 2,
+    "value": 20
+  },
+  {
+    "modifierId": "originium_arts_power",
+    "size": "medium",
+    "level": 3,
+    "value": 27
+  },
+  {
+    "modifierId": "originium_arts_power",
+    "size": "medium",
+    "level": 4,
+    "value": 33
+  },
+  {
+    "modifierId": "originium_arts_power",
+    "size": "medium",
+    "level": 5,
+    "value": 40
+  },
+  {
+    "modifierId": "originium_arts_power",
+    "size": "medium",
+    "level": 6,
+    "value": 46
+  },
+  {
+    "modifierId": "originium_arts_power",
+    "size": "medium",
+    "level": 7,
+    "value": 52
+  },
+  {
+    "modifierId": "originium_arts_power",
+    "size": "medium",
+    "level": 8,
+    "value": 62
+  },
+  {
+    "modifierId": "originium_arts_power",
+    "size": "large",
+    "level": 0,
+    "value": 10
+  },
+  {
+    "modifierId": "originium_arts_power",
+    "size": "large",
+    "level": 1,
+    "value": 18
+  },
+  {
+    "modifierId": "originium_arts_power",
+    "size": "large",
+    "level": 2,
+    "value": 26
+  },
+  {
+    "modifierId": "originium_arts_power",
+    "size": "large",
+    "level": 3,
+    "value": 34
+  },
+  {
+    "modifierId": "originium_arts_power",
+    "size": "large",
+    "level": 4,
+    "value": 42
+  },
+  {
+    "modifierId": "originium_arts_power",
+    "size": "large",
+    "level": 5,
+    "value": 50
+  },
+  {
+    "modifierId": "originium_arts_power",
+    "size": "large",
+    "level": 6,
+    "value": 58
+  },
+  {
+    "modifierId": "originium_arts_power",
+    "size": "large",
+    "level": 7,
+    "value": 66
+  },
+  {
+    "modifierId": "originium_arts_power",
+    "size": "large",
+    "level": 8,
+    "value": 78
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "size": "medium",
+    "level": 0,
+    "value": 4.8
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "size": "medium",
+    "level": 1,
+    "value": 8.6
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "size": "medium",
+    "level": 2,
+    "value": 12.4
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "size": "medium",
+    "level": 3,
+    "value": 16.2
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "size": "medium",
+    "level": 4,
+    "value": 20
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "size": "medium",
+    "level": 5,
+    "value": 23.8
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "size": "medium",
+    "level": 6,
+    "value": 27.6
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "size": "medium",
+    "level": 7,
+    "value": 31.4
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "size": "medium",
+    "level": 8,
+    "value": 37.1
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "size": "large",
+    "level": 0,
+    "value": 6
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "size": "large",
+    "level": 1,
+    "value": 10.7
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "size": "large",
+    "level": 2,
+    "value": 15.5
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "size": "large",
+    "level": 3,
+    "value": 20.2
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "size": "large",
+    "level": 4,
+    "value": 25
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "size": "large",
+    "level": 5,
+    "value": 29.8
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "size": "large",
+    "level": 6,
+    "value": 34.5
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "size": "large",
+    "level": 7,
+    "value": 39.3
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "size": "large",
+    "level": 8,
+    "value": 46.4
+  }
+]

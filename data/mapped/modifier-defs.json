@@ -1,0 +1,127 @@
+[
+  {
+    "id": "primary_ability",
+    "label": "主能力提升",
+    "unit": "flat"
+  },
+  {
+    "id": "secondary_ability",
+    "label": "副能力提升",
+    "unit": "flat"
+  },
+  {
+    "id": "strength",
+    "label": "力量提升",
+    "unit": "flat"
+  },
+  {
+    "id": "agility",
+    "label": "敏捷提升",
+    "unit": "flat"
+  },
+  {
+    "id": "intellect",
+    "label": "智识提升",
+    "unit": "flat"
+  },
+  {
+    "id": "will",
+    "label": "意志提升",
+    "unit": "flat"
+  },
+  {
+    "id": "attack",
+    "label": "攻击提升",
+    "unit": "percent"
+  },
+  {
+    "id": "hp",
+    "label": "生命提升",
+    "unit": "percent"
+  },
+  {
+    "id": "crit_rate",
+    "label": "暴击率提升",
+    "unit": "percent"
+  },
+  {
+    "id": "blaze_dmg",
+    "label": "灼热伤害提升",
+    "unit": "percent"
+  },
+  {
+    "id": "emag_dmg",
+    "label": "电磁伤害提升",
+    "unit": "percent"
+  },
+  {
+    "id": "cold_dmg",
+    "label": "寒冷伤害提升",
+    "unit": "percent"
+  },
+  {
+    "id": "nature_dmg",
+    "label": "自然伤害提升",
+    "unit": "percent"
+  },
+  {
+    "id": "healing_effect",
+    "label": "治疗效果提升",
+    "unit": "percent"
+  },
+  {
+    "id": "physical_dmg",
+    "label": "物理伤害提升",
+    "unit": "percent"
+  },
+  {
+    "id": "arts_dmg",
+    "label": "法术伤害提升",
+    "unit": "percent"
+  },
+  {
+    "id": "originium_arts_power",
+    "label": "源石技艺强度提升",
+    "unit": "flat"
+  },
+  {
+    "id": "ult_charge_eff",
+    "label": "终结技充能效率提升",
+    "unit": "percent"
+  },
+  {
+    "id": "link_cd_reduction",
+    "label": "连携冷却缩减提升",
+    "unit": "flat"
+  },
+  {
+    "id": "attack_dmg_bonus",
+    "label": "普通攻击伤害加成提升",
+    "unit": "flat"
+  },
+  {
+    "id": "skill_dmg_bonus",
+    "label": "战技伤害加成提升",
+    "unit": "flat"
+  },
+  {
+    "id": "link_dmg_bonus",
+    "label": "连携技伤害加成提升",
+    "unit": "flat"
+  },
+  {
+    "id": "ultimate_dmg_bonus",
+    "label": "终结技伤害加成提升",
+    "unit": "flat"
+  },
+  {
+    "id": "all_skill_dmg_bonus",
+    "label": "所有技能伤害加成提升",
+    "unit": "flat"
+  },
+  {
+    "id": "broken_dmg_bonus",
+    "label": "对失衡目标伤害加成提升",
+    "unit": "flat"
+  }
+]

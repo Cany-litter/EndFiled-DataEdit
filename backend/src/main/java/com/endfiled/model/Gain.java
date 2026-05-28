@@ -4,12 +4,14 @@ import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import javax.validation.constraints.NotBlank;
 
 @Data
 @TableName("gain")
 public class Gain {
     @TableId
     private String id;
+    @NotBlank
     private String name;
     private String source;
     private String gainType;
@@ -23,8 +25,8 @@ public class Gain {
     private String triggerCondition;
     private BigDecimal duration;
     private Integer maxStacks;
-    private String reserve1;
-    private String reserve2;
+    private String sourceType;
+    private String sourceRefId;
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createdAt;
     @TableField(fill = FieldFill.INSERT_UPDATE)

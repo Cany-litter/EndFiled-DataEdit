@@ -1,36 +1,42 @@
 package com.endfiled.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.endfiled.model.Character;
-import com.endfiled.service.CharacterService;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.endfiled.common.PageResult;
+import com.endfiled.common.Result;
+import com.endfiled.mapper.CharacterMapper;
+import com.endfiled.model.GameCharacter;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
+
+import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/characters")
-@CrossOrigin
-public class CharacterController {
-    private final CharacterService characterService;
-    public CharacterController(CharacterService characterService) { this.characterService = characterService; }
+@RequestMapping("/api/v1/characters")
+public class CharacterController extends BaseController<GameCharacter, CharacterMapper> {
+    public CharacterController(CharacterMapper characterMapper) { super(characterMapper); }
+
+    @GetMapping("/all")
+    public Result<java.util.List<GameCharacter>> all() { return defaultAll(); }
 
     @GetMapping
-    public List<Character> list(@RequestParam(required = false) String name) {
-        if (name != null && !name.isEmpty()) {
-            return characterService.list(new LambdaQueryWrapper<Character>()
-                    .like(Character::getName, name));
-        }
-        return characterService.list();
+    public Result<PageResult<GameCharacter>> list(
+            @RequestParam(required = false) String name,
+            @RequestParam(defaultValue = "1") Integer page,
+            @RequestParam(defaultValue = "20") Integer size) {
+        var q = new LambdaQueryWrapper<GameCharacter>();
+        if (name != null && !name.isEmpty()) q.like(GameCharacter::getName, name);
+        return defaultPage(new Page<>(page, size), q);
     }
 
     @GetMapping("/{id}")
-    public Character get(@PathVariable String id) { return characterService.getById(id); }
+    public Result<GameCharacter> get(@PathVariable String id) { return defaultGet(id); }
 
     @PostMapping
-    public Character create(@RequestBody Character c) { characterService.save(c); return c; }
+    public Result<GameCharacter> create(@Valid @RequestBody GameCharacter c) { return defaultCreate(c); }
 
     @PutMapping("/{id}")
-    public Character update(@PathVariable String id, @RequestBody Character c) { c.setId(id); characterService.updateById(c); return c; }
+    public Result<GameCharacter> update(@PathVariable String id, @Valid @RequestBody GameCharacter c) { return defaultUpdate(id, c); }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable String id) { characterService.removeById(id); }
+    public Result<Void> delete(@PathVariable String id) { return defaultDelete(id); }
 }

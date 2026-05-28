@@ -3,12 +3,14 @@ package com.endfiled.model;
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 import java.time.LocalDateTime;
+import javax.validation.constraints.NotBlank;
 
 @Data
 @TableName("team")
 public class Team {
     @TableId
     private String id;
+    @NotBlank
     private String name;
     private String charAId;
     private String buildAId;

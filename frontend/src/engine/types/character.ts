@@ -22,5 +22,4 @@ export interface Character {
   element: ElementType;
   weaponType: WeaponType;
   potential: number;
-  trustTalentLevel: number;
 }

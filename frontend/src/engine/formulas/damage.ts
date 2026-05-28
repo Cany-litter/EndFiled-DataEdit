@@ -51,7 +51,7 @@ export function calcDamage(input: DamageInput): DamageBreakdown {
   const shelterMult = 1 - input.shelterValue
   const fragileMult = 1 + input.fragileBonus
   const vulnerableMult = 1 + input.vulnerableBonus
-  const defenseMult = input.isTrueDamage ? 1 : 1 - input.defense / (input.defense + 100)
+  const defenseMult = input.isTrueDamage ? 1 : 100 / (input.defense + 100)
   const staggerMult = input.isStaggered ? input.staggerMultiplier : 1
   const resistanceMult = 1 - input.resistance / 100 + input.resistanceIgnore / 100
   const nonControlledMult = 1 - input.nonControlledReduction

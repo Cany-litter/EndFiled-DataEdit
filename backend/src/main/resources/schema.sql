@@ -20,7 +20,6 @@ CREATE TABLE IF NOT EXISTS `character` (
     `element`       VARCHAR(20)     NOT NULL COMMENT '属性 pyro/cryo/electro/natural/physical',
     `weapon_type`   VARCHAR(20)     NOT NULL COMMENT '可用武器类型',
     `potential`     TINYINT         NOT NULL DEFAULT 0 CHECK (`potential` BETWEEN 0 AND 5) COMMENT '潜能 0~5',
-    `trust_talent`  TINYINT         NOT NULL DEFAULT 1 CHECK (`trust_talent` BETWEEN 1 AND 4) COMMENT '信赖天赋 1~4',
     `reserve1`      VARCHAR(255)    COMMENT '备用1',
     `reserve2`      VARCHAR(255)    COMMENT '备用2',
     `created_at`    DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -116,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `equipment` (
 
 -- 4. 增益表
 CREATE TABLE IF NOT EXISTS `gain` (
-    `id`                VARCHAR(32)     NOT NULL PRIMARY KEY COMMENT '增益ID',
+    `id`                VARCHAR(64)     NOT NULL PRIMARY KEY COMMENT '增益ID',
     `name`              VARCHAR(100)    NOT NULL COMMENT '增益名称',
     `source`            VARCHAR(200)    NOT NULL COMMENT '增益来源',
     `gain_type`         VARCHAR(10)     NOT NULL COMMENT 'permanent/limited',
@@ -130,8 +129,8 @@ CREATE TABLE IF NOT EXISTS `gain` (
     `trigger_condition` VARCHAR(200)    COMMENT '触发条件',
     `duration`          DECIMAL(8,4)    COMMENT '持续秒',
     `max_stacks`        INT             DEFAULT 1 COMMENT '最大叠加',
-    `reserve1`          VARCHAR(255)    COMMENT '备用1',
-    `reserve2`          VARCHAR(255)    COMMENT '备用2',
+    `source_type`       VARCHAR(255)    COMMENT '来源类型: character/weapon/set/other',
+    `source_ref_id`     VARCHAR(255)    COMMENT '来源引用ID',
     `created_at`        DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updated_at`        DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     INDEX `idx_name` (`name`),
@@ -198,13 +197,20 @@ CREATE TABLE IF NOT EXISTS `build` (
     `name`              VARCHAR(100)    NOT NULL COMMENT '方案名称',
     `character_id`      VARCHAR(32)     NOT NULL COMMENT '角色ID',
     `weapon_id`         VARCHAR(32)     COMMENT '武器ID',
-    `armor_id`          VARCHAR(32)     COMMENT '护甲ID',
-    `glove_id`          VARCHAR(32)     COMMENT '护手ID',
-    `accessory1_id`     VARCHAR(32)     COMMENT '配件1ID',
-    `accessory2_id`     VARCHAR(32)     COMMENT '配件2ID',
+    `armor_id`          VARCHAR(64)     COMMENT '护甲ID',
+    `glove_id`          VARCHAR(64)     COMMENT '护手ID',
+    `accessory1_id`     VARCHAR(64)     COMMENT '配件1ID',
+    `accessory2_id`     VARCHAR(64)     COMMENT '配件2ID',
     `char_level`        INT             COMMENT '角色等级快照',
     `weapon_level`      INT             COMMENT '武器等级快照',
     `equip_level`       INT             COMMENT '装备等级快照',
+    `affix1_level`      TINYINT         DEFAULT 1 COMMENT '武器词条1等级',
+    `affix2_level`      TINYINT         DEFAULT 1 COMMENT '武器词条2等级',
+    `affix3_level`      TINYINT         DEFAULT 1 COMMENT '武器词条3等级',
+    `equip_refines`     JSON            COMMENT '装备精锻数据',
+    `selected_gains`    JSON            COMMENT '已选增益ID列表',
+    `char_potential`    TINYINT         DEFAULT 0 COMMENT '角色潜能',
+    `weapon_potential`  TINYINT         DEFAULT 0 COMMENT '武器潜能',
     `reserve1`          VARCHAR(255)    COMMENT '备用1',
     `reserve2`          VARCHAR(255)    COMMENT '备用2',
     `created_at`        DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -235,3 +241,223 @@ CREATE TABLE IF NOT EXISTS `team` (
     `created_at`        DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updated_at`        DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='配队方案';
+
+-- 10. 角色等级属性表 (v1.2+)
+CREATE TABLE IF NOT EXISTS `character_stat` (
+    `character_id`      VARCHAR(32)     NOT NULL COMMENT '角色ID',
+    `level`             TINYINT         NOT NULL CHECK (`level` BETWEEN 1 AND 90) COMMENT '等级 1~90',
+    `hp`                DECIMAL(12,4)   NOT NULL COMMENT '生命值',
+    `atk`               DECIMAL(12,4)   NOT NULL COMMENT '攻击力',
+    `str`               DECIMAL(10,4)   NOT NULL COMMENT '力量',
+    `agi`               DECIMAL(10,4)   NOT NULL COMMENT '敏捷',
+    `int`               DECIMAL(10,4)   NOT NULL COMMENT '智识',
+    `wil`               DECIMAL(10,4)   NOT NULL COMMENT '意志',
+    `phys_dmg_coeff`    DECIMAL(10,4)   COMMENT '物理异常伤害系数',
+    `magic_dmg_coeff`   DECIMAL(10,4)   COMMENT '法术异常伤害系数',
+    `created_at`        DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at`        DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`character_id`, `level`),
+    FOREIGN KEY (`character_id`) REFERENCES `character`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='角色等级属性';
+
+-- 11. 武器等级属性表 (v1.2+)
+CREATE TABLE IF NOT EXISTS `weapon_stat` (
+    `weapon_id`         VARCHAR(32)     NOT NULL COMMENT '武器ID',
+    `level`             TINYINT         NOT NULL CHECK (`level` BETWEEN 1 AND 90) COMMENT '等级 1~90',
+    `base_atk`          DECIMAL(12,4)   NOT NULL COMMENT '基础攻击力',
+    `created_at`        DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at`        DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`weapon_id`, `level`),
+    FOREIGN KEY (`weapon_id`) REFERENCES `weapon`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='武器等级属性';
+
+-- 12. 武器词条潜能表 (v1.2+)
+CREATE TABLE IF NOT EXISTS `weapon_affix` (
+    `weapon_id`         VARCHAR(32)     NOT NULL COMMENT '武器ID',
+    `affix_index`       TINYINT         NOT NULL COMMENT '词条序号 1/2/3',
+    `potential`         TINYINT         NOT NULL CHECK (`potential` BETWEEN 0 AND 8) COMMENT '潜能等级 0~8',
+    `name`              VARCHAR(50)     COMMENT '词条名称',
+    `type`              VARCHAR(20)     COMMENT '词条类型(键)',
+    `size`              VARCHAR(10)     COMMENT '规格 small/medium/large',
+    `value`             DECIMAL(12,4)   COMMENT '词条数值',
+    `effect1`           VARCHAR(100)    COMMENT '词条3效果1',
+    `effect2`           VARCHAR(100)    COMMENT '词条3效果2',
+    `effect3`           VARCHAR(100)    COMMENT '词条3效果3',
+    `created_at`        DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at`        DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`weapon_id`, `affix_index`, `potential`),
+    FOREIGN KEY (`weapon_id`) REFERENCES `weapon`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='武器词条潜能';
+
+-- 13. 角色天赋表 (v1.2+)
+CREATE TABLE IF NOT EXISTS `character_talent` (
+    `id`                VARCHAR(32)     NOT NULL PRIMARY KEY COMMENT '天赋ID',
+    `character_id`      VARCHAR(32)     NOT NULL COMMENT '角色ID',
+    `name`              VARCHAR(50)     NOT NULL COMMENT '天赋名称',
+    `talent_index`      TINYINT         NOT NULL CHECK (`talent_index` BETWEEN 1 AND 4) COMMENT '天赋序号 1~4',
+    `stage`             TINYINT         NOT NULL DEFAULT 1 CHECK (`stage` BETWEEN 1 AND 4) COMMENT '天赋阶段 1~4',
+    `description`       TEXT            COMMENT '天赋描述',
+    `values`            JSON            COMMENT '天赋数值',
+    `created_at`        DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at`        DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX `idx_character` (`character_id`),
+    FOREIGN KEY (`character_id`) REFERENCES `character`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='角色天赋';
+
+-- 15. 排轴方案表 (v1.3+)
+CREATE TABLE IF NOT EXISTS `timeline_scenario` (
+    `id`                    VARCHAR(32)     NOT NULL PRIMARY KEY COMMENT '排轴方案ID',
+    `name`                  VARCHAR(100)    NOT NULL COMMENT '方案名称',
+    `team_id`               VARCHAR(32)     COMMENT '关联配队ID',
+    `system_constants`      TEXT            COMMENT '战斗常量JSON (maxSp, spRegenRate等)',
+    `prep_duration`         DECIMAL(8,4)    DEFAULT 0 COMMENT '准备时间(秒)',
+    `active_enemy_id`       VARCHAR(32)     COMMENT '当前敌人ID',
+    `custom_enemy_params`   TEXT            COMMENT '自定义敌人参数JSON',
+    `tracks`                 LONGTEXT        COMMENT '干员轨道与动作数据JSON',
+    `enemies`                LONGTEXT        COMMENT '敌人配置JSON(TimelineEnemy[])',
+    `sort_order`            INT             DEFAULT 0 COMMENT '排序序号',
+    `enemy_buffs`           TEXT            COMMENT '敌人增益JSON',
+    `reserve2`              TEXT            COMMENT '备用2',
+    `reserve3`              TEXT            COMMENT '备用3',
+    `reserve4`              TEXT            COMMENT '备用4',
+    `created_at`            DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at`            DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX `idx_team_id` (`team_id`),
+    INDEX `idx_name` (`name`),
+    FOREIGN KEY (`team_id`) REFERENCES `team`(`id`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='排轴方案数据';
+
+-- 14. 技能消耗表 (v1.2+)
+CREATE TABLE IF NOT EXISTS `skill_cost` (
+    `skill_id`          VARCHAR(32)     NOT NULL COMMENT '技能ID',
+    `level`             TINYINT         NOT NULL CHECK (`level` BETWEEN 1 AND 12) COMMENT '等级 1~12',
+    `cost_value`        INT             COMMENT '技力消耗',
+    `cool_down`         DECIMAL(8,4)    COMMENT '冷却时间(秒)',
+    `usp`               INT             COMMENT '终结技能量',
+    `poise`             DECIMAL(8,4)    COMMENT '失衡倍率',
+    `airborne_scale`    DECIMAL(8,4)    COMMENT '浮空倍率',
+    `created_at`        DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at`        DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`skill_id`, `level`),
+    FOREIGN KEY (`skill_id`) REFERENCES `skill`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='技能消耗参数';
+
+-- 16. 技能动作表扩展 (v1.4+ 排轴模拟)
+ALTER TABLE `skill_action`
+    ADD COLUMN IF NOT EXISTS `duration`              DECIMAL(8,4)    COMMENT '技能动画时长(秒)',
+    ADD COLUMN IF NOT EXISTS `sp_cost`               INT              COMMENT '技力消耗',
+    ADD COLUMN IF NOT EXISTS `gauge_gain`            DECIMAL(8,4)    COMMENT '连携量表获取',
+    ADD COLUMN IF NOT EXISTS `team_gauge_gain`       DECIMAL(8,4)    COMMENT '队伍连携量表获取',
+    ADD COLUMN IF NOT EXISTS `cooldown`              DECIMAL(8,4)    COMMENT '冷却时间(秒)',
+    ADD COLUMN IF NOT EXISTS `allowed_types`         JSON             COMMENT '允许的异常/攻击类型列表',
+    ADD COLUMN IF NOT EXISTS `ultimate_gauge_max`    INT              COMMENT '终结技能量上限',
+    ADD COLUMN IF NOT EXISTS `ultimate_gauge_reply`  INT              COMMENT '终结技能量回复',
+    ADD COLUMN IF NOT EXISTS `damage_ticks`          TEXT             COMMENT '伤害判定帧JSON';
+
+-- 17. 技能伤害判定帧表 (v1.4+)
+CREATE TABLE IF NOT EXISTS `skill_damage_tick` (
+    `skill_id`          VARCHAR(32)     NOT NULL COMMENT '技能ID',
+    `tick_index`        TINYINT         NOT NULL COMMENT '伤害帧序号',
+    `offset`            DECIMAL(8,4)    NOT NULL COMMENT '相对技能开始时间偏移(秒)',
+    `stagger`           INT             DEFAULT 0 COMMENT '失衡值',
+    `sp`                INT             DEFAULT 0 COMMENT '技力获取',
+    `bound_effects`     JSON            COMMENT '绑定的效果ID列表',
+    `created_at`        DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at`        DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`skill_id`, `tick_index`),
+    FOREIGN KEY (`skill_id`) REFERENCES `skill_action`(`skill_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='技能伤害判定帧';
+
+-- 18. 技能异常附着表 (v1.4+)
+CREATE TABLE IF NOT EXISTS `skill_anomaly` (
+    `skill_id`          VARCHAR(32)     NOT NULL COMMENT '技能ID',
+    `anomaly_index`     TINYINT         NOT NULL COMMENT '异常序号',
+    `group_index`       TINYINT         NOT NULL DEFAULT 0 COMMENT '异常组索引',
+    `type`              VARCHAR(32)     NOT NULL COMMENT '异常类型',
+    `stacks`            INT             DEFAULT 1 COMMENT '叠加层数',
+    `duration`          DECIMAL(8,4)    DEFAULT 0 COMMENT '持续时间(秒)',
+    `offset`            DECIMAL(8,4)    DEFAULT 0 COMMENT '触发偏移(秒)',
+    `delay`             DECIMAL(8,4)    DEFAULT 0 COMMENT '异常延迟(秒)',
+    `created_at`        DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at`        DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`skill_id`, `anomaly_index`),
+    FOREIGN KEY (`skill_id`) REFERENCES `skill_action`(`skill_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='技能异常附着';
+
+-- 19. 普攻分段表 (v1.4+)
+CREATE TABLE IF NOT EXISTS `attack_segment` (
+    `character_id`      VARCHAR(32)     NOT NULL COMMENT '角色ID',
+    `segment_index`     TINYINT         NOT NULL COMMENT '段数 0开始',
+    `duration`          DECIMAL(8,4)    NOT NULL COMMENT '本段动画时长(秒)',
+    `gauge_gain`        DECIMAL(8,4)    DEFAULT 0 COMMENT '连携量表获取',
+    `allowed_types`     JSON            COMMENT '允许的异常类型列表',
+    `created_at`        DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at`        DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`character_id`, `segment_index`),
+    FOREIGN KEY (`character_id`) REFERENCES `character`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='普攻分段参数';
+
+-- 20. 普攻分段伤害帧表 (v1.4+)
+CREATE TABLE IF NOT EXISTS `attack_segment_tick` (
+    `character_id`      VARCHAR(32)     NOT NULL COMMENT '角色ID',
+    `segment_index`     TINYINT         NOT NULL COMMENT '段数',
+    `tick_index`        TINYINT         NOT NULL COMMENT '伤害帧序号',
+    `offset`            DECIMAL(8,4)    NOT NULL COMMENT '相对段开始偏移(秒)',
+    `stagger`           INT             DEFAULT 0 COMMENT '失衡值',
+    `sp`                INT             DEFAULT 0 COMMENT '技力获取',
+    `created_at`        DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at`        DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`character_id`, `segment_index`, `tick_index`),
+    FOREIGN KEY (`character_id`, `segment_index`) REFERENCES `attack_segment`(`character_id`, `segment_index`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='普攻分段伤害帧';
+
+-- 21. 敌人数据库表 (v1.4+)
+CREATE TABLE IF NOT EXISTS `enemy` (
+    `id`                    VARCHAR(32)     NOT NULL PRIMARY KEY COMMENT '敌人ID',
+    `name`                  VARCHAR(50)     NOT NULL COMMENT '敌人名称',
+    `category`              VARCHAR(32)     COMMENT '敌人类型',
+    `tier`                  VARCHAR(10)     COMMENT '等级 tier',
+    `max_stagger`           INT             DEFAULT 0 COMMENT '最大失衡值',
+    `stagger_node_count`    INT             DEFAULT 1 COMMENT '失衡节点数',
+    `stagger_node_duration` DECIMAL(8,4)    COMMENT '失衡节点持续时间(秒)',
+    `stagger_break_duration` DECIMAL(8,4)   COMMENT '失衡击破持续时间(秒)',
+    `execution_recovery`    DECIMAL(8,4)    COMMENT '处决回复',
+    `created_at`            DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at`            DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX `idx_name` (`name`),
+    INDEX `idx_category` (`category`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='敌人数据库';
+
+-- 22. 修饰符定义表 (v1.4+)
+CREATE TABLE IF NOT EXISTS `modifier_def` (
+    `id`            VARCHAR(32)     NOT NULL PRIMARY KEY COMMENT '修饰符ID',
+    `label`         VARCHAR(50)     NOT NULL COMMENT '中文标签',
+    `unit`          VARCHAR(10)     DEFAULT 'flat' COMMENT '单位: flat/percent',
+    `created_at`    DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at`    DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='修饰符定义';
+
+-- 23. 武器词条模板数值表 (v1.4+)
+CREATE TABLE IF NOT EXISTS `weapon_modifier_template` (
+    `modifier_id`   VARCHAR(32)     NOT NULL COMMENT '修饰符ID',
+    `size`          VARCHAR(10)     NOT NULL COMMENT 'small/medium/large',
+    `level`         TINYINT         NOT NULL CHECK (`level` BETWEEN 0 AND 8) COMMENT '词条等级 0~8',
+    `value`         DECIMAL(10,4)   NOT NULL COMMENT '数值',
+    `created_at`    DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at`    DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`modifier_id`, `size`, `level`),
+    FOREIGN KEY (`modifier_id`) REFERENCES `modifier_def`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='武器词条模板数值';
+
+-- 24. 装备适配槽模板数值表 (v1.4+)
+CREATE TABLE IF NOT EXISTS `equipment_adapter_template` (
+    `modifier_id`   VARCHAR(32)     NOT NULL COMMENT '修饰符ID',
+    `slot`          VARCHAR(10)     NOT NULL COMMENT 'armor/gloves/accessory',
+    `config`        VARCHAR(10)     NOT NULL COMMENT 'Single/Dual',
+    `refine`        TINYINT         NOT NULL CHECK (`refine` BETWEEN 0 AND 3) COMMENT '精锻等级 0~3',
+    `value`         DECIMAL(10,4)   NOT NULL COMMENT '数值',
+    `created_at`    DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at`    DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`modifier_id`, `slot`, `config`, `refine`),
+    FOREIGN KEY (`modifier_id`) REFERENCES `modifier_def`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='装备适配槽模板数值';

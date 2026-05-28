@@ -15,3 +15,20 @@ export {
   物理异常倍率Map,
   连击增伤Map,
 } from './anomaly'
+export {
+  piecewiseLinear,
+  resolveEffectValue,
+  matchesCondition,
+  collectCrit,
+  ARTS_INTENSITY_CURVE,
+} from './effectResolver'
+export type { EffectDef, MetaDef, ConditionDef, SaturationScaleDef } from './effectResolver'
+export {
+  calcDamageByCategories,
+  DAMAGE_CATEGORIES,
+} from './damageCategories'
+export type { CategoryDef, CategoryBreakdown, CategoryBreakdownEntry, CalcCategoriesResult } from './damageCategories'
+export {
+  GAIN_CATEGORY_TO_DAMAGE_CAT,
+  gainToEffectDef,
+} from './stats'

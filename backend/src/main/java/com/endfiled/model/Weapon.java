@@ -4,12 +4,14 @@ import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import javax.validation.constraints.NotBlank;
 
 @Data
 @TableName("weapon")
 public class Weapon {
     @TableId
     private String id;
+    @NotBlank
     private String name;
     private String icon;
     private Integer rarity;

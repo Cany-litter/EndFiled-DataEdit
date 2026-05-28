@@ -3,13 +3,16 @@ package com.endfiled.model;
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 import java.time.LocalDateTime;
+import javax.validation.constraints.NotBlank;
 
 @Data
 @TableName("skill")
 public class Skill {
     @TableId
     private String id;
+    @NotBlank
     private String characterId;
+    @NotBlank
     private String name;
     private String type;
     private String damageType;

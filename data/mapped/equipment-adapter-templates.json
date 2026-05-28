@@ -1,0 +1,1542 @@
+[
+  {
+    "modifierId": "primary_ability",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 0,
+    "value": 20.7
+  },
+  {
+    "modifierId": "primary_ability",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 1,
+    "value": 22.8
+  },
+  {
+    "modifierId": "primary_ability",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 2,
+    "value": 24.8
+  },
+  {
+    "modifierId": "primary_ability",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 3,
+    "value": 26.9
+  },
+  {
+    "modifierId": "secondary_ability",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 0,
+    "value": 10.4
+  },
+  {
+    "modifierId": "secondary_ability",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 1,
+    "value": 11.4
+  },
+  {
+    "modifierId": "secondary_ability",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 2,
+    "value": 12.4
+  },
+  {
+    "modifierId": "secondary_ability",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 3,
+    "value": 13.5
+  },
+  {
+    "modifierId": "secondary_ability",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 0,
+    "value": 20.7
+  },
+  {
+    "modifierId": "secondary_ability",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 1,
+    "value": 22.8
+  },
+  {
+    "modifierId": "secondary_ability",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 2,
+    "value": 24.8
+  },
+  {
+    "modifierId": "secondary_ability",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 3,
+    "value": 26.9
+  },
+  {
+    "modifierId": "crit_rate",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 0,
+    "value": 5.2
+  },
+  {
+    "modifierId": "crit_rate",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 1,
+    "value": 5.7
+  },
+  {
+    "modifierId": "crit_rate",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 2,
+    "value": 6.2
+  },
+  {
+    "modifierId": "crit_rate",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 3,
+    "value": 6.7
+  },
+  {
+    "modifierId": "crit_rate",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 0,
+    "value": 8.6
+  },
+  {
+    "modifierId": "crit_rate",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 1,
+    "value": 9.5
+  },
+  {
+    "modifierId": "crit_rate",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 2,
+    "value": 10.3
+  },
+  {
+    "modifierId": "crit_rate",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 3,
+    "value": 11.2
+  },
+  {
+    "modifierId": "crit_rate",
+    "slot": "accessory",
+    "config": "Single",
+    "refine": 0,
+    "value": 10.8
+  },
+  {
+    "modifierId": "crit_rate",
+    "slot": "accessory",
+    "config": "Single",
+    "refine": 1,
+    "value": 11.9
+  },
+  {
+    "modifierId": "crit_rate",
+    "slot": "accessory",
+    "config": "Single",
+    "refine": 2,
+    "value": 13
+  },
+  {
+    "modifierId": "crit_rate",
+    "slot": "accessory",
+    "config": "Single",
+    "refine": 3,
+    "value": 14
+  },
+  {
+    "modifierId": "crit_rate",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 0,
+    "value": 10.3
+  },
+  {
+    "modifierId": "crit_rate",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 1,
+    "value": 11.4
+  },
+  {
+    "modifierId": "crit_rate",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 2,
+    "value": 12.4
+  },
+  {
+    "modifierId": "crit_rate",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 3,
+    "value": 13.5
+  },
+  {
+    "modifierId": "originium_arts_power",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 0,
+    "value": 20
+  },
+  {
+    "modifierId": "originium_arts_power",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 1,
+    "value": 22
+  },
+  {
+    "modifierId": "originium_arts_power",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 2,
+    "value": 24
+  },
+  {
+    "modifierId": "originium_arts_power",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 3,
+    "value": 26
+  },
+  {
+    "modifierId": "originium_arts_power",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 0,
+    "value": 34
+  },
+  {
+    "modifierId": "originium_arts_power",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 1,
+    "value": 37
+  },
+  {
+    "modifierId": "originium_arts_power",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 2,
+    "value": 41
+  },
+  {
+    "modifierId": "originium_arts_power",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 3,
+    "value": 44
+  },
+  {
+    "modifierId": "originium_arts_power",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 0,
+    "value": 41
+  },
+  {
+    "modifierId": "originium_arts_power",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 1,
+    "value": 45
+  },
+  {
+    "modifierId": "originium_arts_power",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 2,
+    "value": 49
+  },
+  {
+    "modifierId": "originium_arts_power",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 3,
+    "value": 53
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "slot": "armor",
+    "config": "Single",
+    "refine": 0,
+    "value": 12.9
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "slot": "armor",
+    "config": "Single",
+    "refine": 1,
+    "value": 14.1
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "slot": "armor",
+    "config": "Single",
+    "refine": 2,
+    "value": 15.4
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "slot": "armor",
+    "config": "Single",
+    "refine": 3,
+    "value": 16.7
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 0,
+    "value": 12.3
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 1,
+    "value": 13.6
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 2,
+    "value": 14.8
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 3,
+    "value": 16
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 0,
+    "value": 20.5
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 1,
+    "value": 22.6
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 2,
+    "value": 24.6
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 3,
+    "value": 26.7
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "slot": "accessory",
+    "config": "Single",
+    "refine": 0,
+    "value": 25.7
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "slot": "accessory",
+    "config": "Single",
+    "refine": 1,
+    "value": 28.3
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "slot": "accessory",
+    "config": "Single",
+    "refine": 2,
+    "value": 30.9
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "slot": "accessory",
+    "config": "Single",
+    "refine": 3,
+    "value": 33.4
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 0,
+    "value": 24.6
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 1,
+    "value": 27.1
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 2,
+    "value": 29.6
+  },
+  {
+    "modifierId": "ult_charge_eff",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 3,
+    "value": 32
+  },
+  {
+    "modifierId": "attack_dmg_bonus",
+    "slot": "armor",
+    "config": "Single",
+    "refine": 0,
+    "value": 14.4
+  },
+  {
+    "modifierId": "attack_dmg_bonus",
+    "slot": "armor",
+    "config": "Single",
+    "refine": 1,
+    "value": 15.8
+  },
+  {
+    "modifierId": "attack_dmg_bonus",
+    "slot": "armor",
+    "config": "Single",
+    "refine": 2,
+    "value": 17.3
+  },
+  {
+    "modifierId": "attack_dmg_bonus",
+    "slot": "armor",
+    "config": "Single",
+    "refine": 3,
+    "value": 18.7
+  },
+  {
+    "modifierId": "attack_dmg_bonus",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 0,
+    "value": 13.8
+  },
+  {
+    "modifierId": "attack_dmg_bonus",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 1,
+    "value": 15.2
+  },
+  {
+    "modifierId": "attack_dmg_bonus",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 2,
+    "value": 16.6
+  },
+  {
+    "modifierId": "attack_dmg_bonus",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 3,
+    "value": 17.9
+  },
+  {
+    "modifierId": "attack_dmg_bonus",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 0,
+    "value": 23
+  },
+  {
+    "modifierId": "attack_dmg_bonus",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 1,
+    "value": 25.3
+  },
+  {
+    "modifierId": "attack_dmg_bonus",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 2,
+    "value": 27.6
+  },
+  {
+    "modifierId": "attack_dmg_bonus",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 3,
+    "value": 29.9
+  },
+  {
+    "modifierId": "attack_dmg_bonus",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 0,
+    "value": 27.6
+  },
+  {
+    "modifierId": "attack_dmg_bonus",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 1,
+    "value": 30.4
+  },
+  {
+    "modifierId": "attack_dmg_bonus",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 2,
+    "value": 33.1
+  },
+  {
+    "modifierId": "attack_dmg_bonus",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 3,
+    "value": 35.9
+  },
+  {
+    "modifierId": "skill_dmg_bonus",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 0,
+    "value": 20.7
+  },
+  {
+    "modifierId": "skill_dmg_bonus",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 1,
+    "value": 22.8
+  },
+  {
+    "modifierId": "skill_dmg_bonus",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 2,
+    "value": 24.8
+  },
+  {
+    "modifierId": "skill_dmg_bonus",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 3,
+    "value": 26.9
+  },
+  {
+    "modifierId": "skill_dmg_bonus",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 0,
+    "value": 34.5
+  },
+  {
+    "modifierId": "skill_dmg_bonus",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 1,
+    "value": 38
+  },
+  {
+    "modifierId": "skill_dmg_bonus",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 2,
+    "value": 41.4
+  },
+  {
+    "modifierId": "skill_dmg_bonus",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 3,
+    "value": 44.9
+  },
+  {
+    "modifierId": "skill_dmg_bonus",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 0,
+    "value": 41.4
+  },
+  {
+    "modifierId": "skill_dmg_bonus",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 1,
+    "value": 45.5
+  },
+  {
+    "modifierId": "skill_dmg_bonus",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 2,
+    "value": 49.7
+  },
+  {
+    "modifierId": "skill_dmg_bonus",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 3,
+    "value": 53.8
+  },
+  {
+    "modifierId": "link_dmg_bonus",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 0,
+    "value": 20.7
+  },
+  {
+    "modifierId": "link_dmg_bonus",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 1,
+    "value": 22.8
+  },
+  {
+    "modifierId": "link_dmg_bonus",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 2,
+    "value": 24.8
+  },
+  {
+    "modifierId": "link_dmg_bonus",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 3,
+    "value": 26.9
+  },
+  {
+    "modifierId": "link_dmg_bonus",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 0,
+    "value": 34.5
+  },
+  {
+    "modifierId": "link_dmg_bonus",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 1,
+    "value": 38
+  },
+  {
+    "modifierId": "link_dmg_bonus",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 2,
+    "value": 41.4
+  },
+  {
+    "modifierId": "link_dmg_bonus",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 3,
+    "value": 44.9
+  },
+  {
+    "modifierId": "link_dmg_bonus",
+    "slot": "accessory",
+    "config": "Single",
+    "refine": 0,
+    "value": 43.2
+  },
+  {
+    "modifierId": "link_dmg_bonus",
+    "slot": "accessory",
+    "config": "Single",
+    "refine": 1,
+    "value": 47.5
+  },
+  {
+    "modifierId": "link_dmg_bonus",
+    "slot": "accessory",
+    "config": "Single",
+    "refine": 2,
+    "value": 51.8
+  },
+  {
+    "modifierId": "link_dmg_bonus",
+    "slot": "accessory",
+    "config": "Single",
+    "refine": 3,
+    "value": 56.2
+  },
+  {
+    "modifierId": "link_dmg_bonus",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 0,
+    "value": 41.4
+  },
+  {
+    "modifierId": "link_dmg_bonus",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 1,
+    "value": 45.5
+  },
+  {
+    "modifierId": "link_dmg_bonus",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 2,
+    "value": 49.7
+  },
+  {
+    "modifierId": "link_dmg_bonus",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 3,
+    "value": 53.8
+  },
+  {
+    "modifierId": "ultimate_dmg_bonus",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 0,
+    "value": 25.9
+  },
+  {
+    "modifierId": "ultimate_dmg_bonus",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 1,
+    "value": 28.5
+  },
+  {
+    "modifierId": "ultimate_dmg_bonus",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 2,
+    "value": 31.1
+  },
+  {
+    "modifierId": "ultimate_dmg_bonus",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 3,
+    "value": 33.6
+  },
+  {
+    "modifierId": "ultimate_dmg_bonus",
+    "slot": "gloves",
+    "config": "Single",
+    "refine": 0,
+    "value": 45
+  },
+  {
+    "modifierId": "ultimate_dmg_bonus",
+    "slot": "gloves",
+    "config": "Single",
+    "refine": 1,
+    "value": 49.5
+  },
+  {
+    "modifierId": "ultimate_dmg_bonus",
+    "slot": "gloves",
+    "config": "Single",
+    "refine": 2,
+    "value": 54
+  },
+  {
+    "modifierId": "ultimate_dmg_bonus",
+    "slot": "gloves",
+    "config": "Single",
+    "refine": 3,
+    "value": 58.5
+  },
+  {
+    "modifierId": "ultimate_dmg_bonus",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 0,
+    "value": 43.1
+  },
+  {
+    "modifierId": "ultimate_dmg_bonus",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 1,
+    "value": 47.4
+  },
+  {
+    "modifierId": "ultimate_dmg_bonus",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 2,
+    "value": 51.7
+  },
+  {
+    "modifierId": "ultimate_dmg_bonus",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 3,
+    "value": 56.1
+  },
+  {
+    "modifierId": "ultimate_dmg_bonus",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 0,
+    "value": 51.7
+  },
+  {
+    "modifierId": "ultimate_dmg_bonus",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 1,
+    "value": 56.9
+  },
+  {
+    "modifierId": "ultimate_dmg_bonus",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 2,
+    "value": 62.1
+  },
+  {
+    "modifierId": "ultimate_dmg_bonus",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 3,
+    "value": 67.3
+  },
+  {
+    "modifierId": "broken_dmg_bonus",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 0,
+    "value": 20.7
+  },
+  {
+    "modifierId": "broken_dmg_bonus",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 1,
+    "value": 22.8
+  },
+  {
+    "modifierId": "broken_dmg_bonus",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 2,
+    "value": 24.8
+  },
+  {
+    "modifierId": "broken_dmg_bonus",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 3,
+    "value": 26.9
+  },
+  {
+    "modifierId": "broken_dmg_bonus",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 0,
+    "value": 41.4
+  },
+  {
+    "modifierId": "broken_dmg_bonus",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 1,
+    "value": 45.5
+  },
+  {
+    "modifierId": "broken_dmg_bonus",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 2,
+    "value": 49.7
+  },
+  {
+    "modifierId": "broken_dmg_bonus",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 3,
+    "value": 53.8
+  },
+  {
+    "modifierId": "all_skill_dmg_bonus",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 0,
+    "value": 13.8
+  },
+  {
+    "modifierId": "all_skill_dmg_bonus",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 1,
+    "value": 15.2
+  },
+  {
+    "modifierId": "all_skill_dmg_bonus",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 2,
+    "value": 16.6
+  },
+  {
+    "modifierId": "all_skill_dmg_bonus",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 3,
+    "value": 17.9
+  },
+  {
+    "modifierId": "all_skill_dmg_bonus",
+    "slot": "gloves",
+    "config": "Single",
+    "refine": 0,
+    "value": 24
+  },
+  {
+    "modifierId": "all_skill_dmg_bonus",
+    "slot": "gloves",
+    "config": "Single",
+    "refine": 1,
+    "value": 26.4
+  },
+  {
+    "modifierId": "all_skill_dmg_bonus",
+    "slot": "gloves",
+    "config": "Single",
+    "refine": 2,
+    "value": 28.8
+  },
+  {
+    "modifierId": "all_skill_dmg_bonus",
+    "slot": "gloves",
+    "config": "Single",
+    "refine": 3,
+    "value": 31.2
+  },
+  {
+    "modifierId": "all_skill_dmg_bonus",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 0,
+    "value": 23
+  },
+  {
+    "modifierId": "all_skill_dmg_bonus",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 1,
+    "value": 25.3
+  },
+  {
+    "modifierId": "all_skill_dmg_bonus",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 2,
+    "value": 27.6
+  },
+  {
+    "modifierId": "all_skill_dmg_bonus",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 3,
+    "value": 29.9
+  },
+  {
+    "modifierId": "all_skill_dmg_bonus",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 0,
+    "value": 27.6
+  },
+  {
+    "modifierId": "all_skill_dmg_bonus",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 1,
+    "value": 30.4
+  },
+  {
+    "modifierId": "all_skill_dmg_bonus",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 2,
+    "value": 33.1
+  },
+  {
+    "modifierId": "all_skill_dmg_bonus",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 3,
+    "value": 35.9
+  },
+  {
+    "modifierId": "cold_dmg",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 0,
+    "value": 11.5
+  },
+  {
+    "modifierId": "cold_dmg",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 1,
+    "value": 12.7
+  },
+  {
+    "modifierId": "cold_dmg",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 2,
+    "value": 13.8
+  },
+  {
+    "modifierId": "cold_dmg",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 3,
+    "value": 14.9
+  },
+  {
+    "modifierId": "cold_dmg",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 0,
+    "value": 19.2
+  },
+  {
+    "modifierId": "cold_dmg",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 1,
+    "value": 21.1
+  },
+  {
+    "modifierId": "cold_dmg",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 2,
+    "value": 23
+  },
+  {
+    "modifierId": "cold_dmg",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 3,
+    "value": 24.9
+  },
+  {
+    "modifierId": "cold_dmg",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 0,
+    "value": 23
+  },
+  {
+    "modifierId": "cold_dmg",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 1,
+    "value": 25.3
+  },
+  {
+    "modifierId": "cold_dmg",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 2,
+    "value": 27.6
+  },
+  {
+    "modifierId": "cold_dmg",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 3,
+    "value": 29.9
+  },
+  {
+    "modifierId": "emag_dmg",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 0,
+    "value": 11.5
+  },
+  {
+    "modifierId": "emag_dmg",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 1,
+    "value": 12.7
+  },
+  {
+    "modifierId": "emag_dmg",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 2,
+    "value": 13.8
+  },
+  {
+    "modifierId": "emag_dmg",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 3,
+    "value": 14.9
+  },
+  {
+    "modifierId": "emag_dmg",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 0,
+    "value": 19.2
+  },
+  {
+    "modifierId": "emag_dmg",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 1,
+    "value": 21.1
+  },
+  {
+    "modifierId": "emag_dmg",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 2,
+    "value": 23
+  },
+  {
+    "modifierId": "emag_dmg",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 3,
+    "value": 24.9
+  },
+  {
+    "modifierId": "emag_dmg",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 0,
+    "value": 23
+  },
+  {
+    "modifierId": "emag_dmg",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 1,
+    "value": 25.3
+  },
+  {
+    "modifierId": "emag_dmg",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 2,
+    "value": 27.6
+  },
+  {
+    "modifierId": "emag_dmg",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 3,
+    "value": 29.9
+  },
+  {
+    "modifierId": "blaze_dmg",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 0,
+    "value": 11.5
+  },
+  {
+    "modifierId": "blaze_dmg",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 1,
+    "value": 12.7
+  },
+  {
+    "modifierId": "blaze_dmg",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 2,
+    "value": 13.8
+  },
+  {
+    "modifierId": "blaze_dmg",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 3,
+    "value": 14.9
+  },
+  {
+    "modifierId": "blaze_dmg",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 0,
+    "value": 19.2
+  },
+  {
+    "modifierId": "blaze_dmg",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 1,
+    "value": 21.1
+  },
+  {
+    "modifierId": "blaze_dmg",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 2,
+    "value": 23
+  },
+  {
+    "modifierId": "blaze_dmg",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 3,
+    "value": 24.9
+  },
+  {
+    "modifierId": "blaze_dmg",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 0,
+    "value": 23
+  },
+  {
+    "modifierId": "blaze_dmg",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 1,
+    "value": 25.3
+  },
+  {
+    "modifierId": "blaze_dmg",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 2,
+    "value": 27.6
+  },
+  {
+    "modifierId": "blaze_dmg",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 3,
+    "value": 29.9
+  },
+  {
+    "modifierId": "nature_dmg",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 0,
+    "value": 11.5
+  },
+  {
+    "modifierId": "nature_dmg",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 1,
+    "value": 12.7
+  },
+  {
+    "modifierId": "nature_dmg",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 2,
+    "value": 13.8
+  },
+  {
+    "modifierId": "nature_dmg",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 3,
+    "value": 14.9
+  },
+  {
+    "modifierId": "nature_dmg",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 0,
+    "value": 19.2
+  },
+  {
+    "modifierId": "nature_dmg",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 1,
+    "value": 21.1
+  },
+  {
+    "modifierId": "nature_dmg",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 2,
+    "value": 23
+  },
+  {
+    "modifierId": "nature_dmg",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 3,
+    "value": 24.9
+  },
+  {
+    "modifierId": "nature_dmg",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 0,
+    "value": 23
+  },
+  {
+    "modifierId": "nature_dmg",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 1,
+    "value": 25.3
+  },
+  {
+    "modifierId": "nature_dmg",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 2,
+    "value": 27.6
+  },
+  {
+    "modifierId": "nature_dmg",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 3,
+    "value": 29.9
+  },
+  {
+    "modifierId": "physical_dmg",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 0,
+    "value": 11.5
+  },
+  {
+    "modifierId": "physical_dmg",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 1,
+    "value": 12.7
+  },
+  {
+    "modifierId": "physical_dmg",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 2,
+    "value": 13.8
+  },
+  {
+    "modifierId": "physical_dmg",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 3,
+    "value": 14.9
+  },
+  {
+    "modifierId": "physical_dmg",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 0,
+    "value": 19.2
+  },
+  {
+    "modifierId": "physical_dmg",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 1,
+    "value": 21.1
+  },
+  {
+    "modifierId": "physical_dmg",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 2,
+    "value": 23
+  },
+  {
+    "modifierId": "physical_dmg",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 3,
+    "value": 24.9
+  },
+  {
+    "modifierId": "physical_dmg",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 0,
+    "value": 23
+  },
+  {
+    "modifierId": "physical_dmg",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 1,
+    "value": 25.3
+  },
+  {
+    "modifierId": "physical_dmg",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 2,
+    "value": 27.6
+  },
+  {
+    "modifierId": "physical_dmg",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 3,
+    "value": 29.9
+  },
+  {
+    "modifierId": "hp",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 0,
+    "value": 41.4
+  },
+  {
+    "modifierId": "hp",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 1,
+    "value": 45.5
+  },
+  {
+    "modifierId": "hp",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 2,
+    "value": 49.7
+  },
+  {
+    "modifierId": "hp",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 3,
+    "value": 53.8
+  },
+  {
+    "modifierId": "healing_effect",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 0,
+    "value": 10.3
+  },
+  {
+    "modifierId": "healing_effect",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 1,
+    "value": 11.4
+  },
+  {
+    "modifierId": "healing_effect",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 2,
+    "value": 12.4
+  },
+  {
+    "modifierId": "healing_effect",
+    "slot": "armor",
+    "config": "Dual",
+    "refine": 3,
+    "value": 13.5
+  },
+  {
+    "modifierId": "healing_effect",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 0,
+    "value": 17.3
+  },
+  {
+    "modifierId": "healing_effect",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 1,
+    "value": 19
+  },
+  {
+    "modifierId": "healing_effect",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 2,
+    "value": 20.7
+  },
+  {
+    "modifierId": "healing_effect",
+    "slot": "gloves",
+    "config": "Dual",
+    "refine": 3,
+    "value": 22.4
+  },
+  {
+    "modifierId": "healing_effect",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 0,
+    "value": 20.7
+  },
+  {
+    "modifierId": "healing_effect",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 1,
+    "value": 22.8
+  },
+  {
+    "modifierId": "healing_effect",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 2,
+    "value": 24.8
+  },
+  {
+    "modifierId": "healing_effect",
+    "slot": "accessory",
+    "config": "Dual",
+    "refine": 3,
+    "value": 26.9
+  }
+]

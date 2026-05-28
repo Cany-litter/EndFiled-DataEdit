@@ -1,6 +1,6 @@
 package com.endfiled.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.endfiled.model.Character;
+import com.endfiled.model.GameCharacter;
 
-public interface CharacterMapper extends BaseMapper<Character> {}
+public interface CharacterMapper extends BaseMapper<GameCharacter> {}

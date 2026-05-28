@@ -4,11 +4,13 @@ import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import javax.validation.constraints.NotBlank;
 
 @Data
 @TableName("skill_action")
 public class SkillAction {
     @TableId
+    @NotBlank
     private String skillId;
     private BigDecimal castTime;
     private BigDecimal preCast;
@@ -25,6 +27,15 @@ public class SkillAction {
     private String consumeAttachment;
     private Integer consumeBreak;
     private String chainTrigger;
+    private BigDecimal duration;
+    private Integer spCost;
+    private BigDecimal gaugeGain;
+    private BigDecimal teamGaugeGain;
+    private BigDecimal cooldown;
+    private String allowedTypes;
+    private Integer ultimateGaugeMax;
+    private Integer ultimateGaugeReply;
+    private String damageTicks;
     private String reserve1;
     private String reserve2;
     @TableField(fill = FieldFill.INSERT)

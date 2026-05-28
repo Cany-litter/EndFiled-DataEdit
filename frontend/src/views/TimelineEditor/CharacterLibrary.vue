@@ -1,0 +1,181 @@
+<template>
+  <div class="char-library">
+    <div class="lib-header">
+      <span class="lib-title">技能库</span>
+      <el-tag v-if="totalSkills" size="small">{{ totalSkills }} 个技能</el-tag>
+    </div>
+
+    <div v-if="!characters.length" class="lib-empty">
+      <div>暂无干员数据</div>
+      <div class="lib-hint">请先在右侧选择一个配队</div>
+    </div>
+
+    <div v-else class="lib-char-list">
+      <div v-for="(c, ci) in characters" :key="c.id" class="lib-char-section">
+        <div class="lib-char-header">
+          <span class="lib-slot-badge" :style="{ background: slotColors[ci] }">{{ slotLabels[ci] }}</span>
+          <div class="lib-char-info">
+            <span class="lib-char-name">{{ c.name }}</span>
+            <span class="lib-char-weapon" v-if="weaponNames[c.id]">{{ weaponNames[c.id] }}</span>
+          </div>
+        </div>
+
+        <div class="lib-skills">
+          <div
+            v-for="skill in sortedSkillsByChar[c.id] || []"
+            :key="skill.id"
+            class="lib-skill-chip"
+            :class="'skill-type-' + skill.type"
+            draggable="true"
+            @dragstart="onDragStart($event, c, skill)"
+            @click="emit('select-skill', { character: c, skill })"
+          >
+            <span class="lib-skill-icon">{{ skillTypeIcon(skill.type) }}</span>
+            <div class="lib-skill-info">
+              <span class="lib-skill-name">{{ skill.name }}</span>
+              <span class="lib-skill-meta">{{ skillMeta(skill) }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { computed } from 'vue'
+import type { Character, Skill, SkillAction, SkillLevel } from '../../api'
+import type { TimelineAction } from '../../engine/types/timeline'
+
+const props = defineProps<{
+  characters: (Character | null)[]
+  skillsByChar: Record<string, Skill[]>
+  skillActionsByChar: Record<string, Record<string, SkillAction>>
+  skillLevel12Map: Record<string, number>
+  weaponNames: Record<string, string>
+}>()
+
+const emit = defineEmits<{
+  'drop-skill': [charId: string, actionData: Partial<TimelineAction>, time: number]
+  'select-skill': [data: { character: Character; skill: Skill }]
+}>()
+
+const slotLabels = ['干员1', '干员2', '干员3', '干员4']
+const slotColors = ['#e74c3c', '#e67e22', '#2ecc71', '#3498db']
+
+const typeOrder: Record<string, number> = {
+  normal: 0, attack: 0,
+  skill: 1,
+  chain: 2, link: 2,
+  ultimate: 3,
+  talent1: 4,
+  talent2: 5,
+  other: 6,
+}
+
+const sortedSkillsByChar = computed(() => {
+  const result: Record<string, any[]> = {}
+  for (const c of props.characters) {
+    if (!c) continue
+    const skills = [...(props.skillsByChar[c.id] || [])]
+    skills.sort((a, b) => (typeOrder[a.type] ?? 99) - (typeOrder[b.type] ?? 99))
+    result[c.id] = skills
+  }
+  return result
+})
+
+const totalSkills = computed(() => {
+  let n = 0
+  for (const c of props.characters) {
+    if (c) n += (props.skillsByChar[c.id]?.length || 0)
+  }
+  return n
+})
+
+const SKILL_ICONS: Record<string, string> = {
+  normal: '普', skill: '技', chain: '连', ultimate: '终',
+  talent1: '天1', talent2: '天2', other: '?',
+}
+function skillTypeIcon(type: string) {
+  return SKILL_ICONS[type] || type.slice(0, 2)
+}
+
+function skillMeta(skill: Skill): string {
+  const parts: string[] = []
+  const sa = props.skillActionsByChar[skill.characterId]?.[skill.id]
+  if (sa?.castTime) parts.push(sa.castTime + 's')
+  if (sa?.spCost) parts.push(sa.spCost + '技力')
+  if (sa?.gaugeGain) parts.push('自身充能+' + sa.gaugeGain)
+  const mult = props.skillLevel12Map[skill.id]
+  if (mult) parts.push((mult).toFixed(0) + '%')
+  return parts.join(' | ') || ''
+}
+
+function uid(prefix = 'id'): string {
+  return prefix + '_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6)
+}
+
+function onDragStart(e: DragEvent, c: Character, skill: Skill) {
+  if (!e.dataTransfer) return
+  const sa = props.skillActionsByChar[c.id]?.[skill.id]
+  const actionData: Partial<TimelineAction> = {
+    id: uid('skill'),
+    type: skill.type,
+    name: skill.name,
+    librarySource: 'character',
+    element: (c as any).element || 'physical',
+    icon: '',
+    duration: sa?.castTime ?? 1,
+    cooldown: sa?.chainCd?.valueOf() ?? sa?.cooldown?.valueOf() ?? 0,
+    spCost: sa?.techCost ?? sa?.spCost ?? 0,
+    gaugeGain: Number(sa?.gaugeGain ?? 0),
+    teamGaugeGain: Number(sa?.teamGaugeGain ?? 0),
+    damageTicks: [{ offset: 0.5, stagger: 10, sp: 0, boundEffects: [] }],
+    allowedTypes: [],
+    physicalAnomaly: [],
+  }
+  if (sa?.ultimateGaugeMax != null) actionData.gaugeCost = sa.ultimateGaugeMax
+  e.dataTransfer.setData('application/json', JSON.stringify({ characterId: c.id, actionData }))
+  e.dataTransfer.effectAllowed = 'copy'
+}
+</script>
+
+<style scoped>
+.char-library { padding: 8px; height: 100%; display: flex; flex-direction: column; }
+.lib-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; flex-shrink: 0; }
+.lib-title { font-weight: 600; font-size: 13px; color: #303133; }
+.lib-empty { padding: 20px 8px; text-align: center; color: #c0c4cc; font-size: 12px; }
+.lib-hint { margin-top: 4px; font-size: 11px; color: #e0e0e0; }
+.lib-char-list { flex: 1; overflow-y: auto; }
+.lib-char-section { margin-bottom: 10px; }
+.lib-char-header { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+.lib-slot-badge { width: 18px; height: 18px; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #fff; font-weight: 700; flex-shrink: 0; }
+.lib-char-info { display: flex; flex-direction: column; min-width: 0; }
+.lib-char-name { font-size: 12px; font-weight: 500; color: #303133; }
+.lib-char-weapon { font-size: 10px; color: #909399; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lib-skills { display: flex; flex-direction: column; gap: 3px; }
+.lib-skill-chip { display: flex; align-items: center; gap: 5px; padding: 4px 6px; border-radius: 4px; cursor: grab; transition: background 0.15s; border: 1px solid transparent; }
+.lib-skill-chip:active { cursor: grabbing; }
+.lib-skill-chip:hover { background: #f5f7fa; border-color: #e4e7ed; }
+.lib-skill-icon { width: 20px; height: 20px; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 9px; color: #fff; font-weight: 600; flex-shrink: 0; }
+
+.skill-type-normal { background-color: #ecf5ff; }  /* 极浅蓝 */
+.skill-type-skill { background-color: #fdf6ec; }   /* 极浅橙 */
+.skill-type-chain { background-color: #f0f9ec; }   /* 极浅绿 */
+.skill-type-ultimate { background-color: #fef0f0; } /* 极浅红 */
+.skill-type-talent1 { background-color: #f4e6f7; } /* 极浅紫 */
+.skill-type-talent2 { background-color: #e0f7f3; } /* 极浅青 */
+.skill-type-other { background-color: #f4f4f5; }   /* 极浅灰 */
+
+.skill-type-normal .lib-skill-icon { background: #409eff; }
+.skill-type-skill .lib-skill-icon { background: #e6a23c; }
+.skill-type-chain .lib-skill-icon { background: #67c23a; }
+.skill-type-ultimate .lib-skill-icon { background: #f56c6c; }
+.skill-type-talent1 .lib-skill-icon { background: #9b59b6; }
+.skill-type-talent2 .lib-skill-icon { background: #1abc9c; }
+.skill-type-other .lib-skill-icon { background: #909399; }
+
+.lib-skill-info { display: flex; flex-direction: column; min-width: 0; flex: 1; }
+.lib-skill-name { font-size: 11px; color: #303133; }
+.lib-skill-meta { font-size: 9px; color: #909399; }
+</style>

@@ -1,0 +1,96 @@
+import { ref, computed } from 'vue'
+
+export type Locale = 'zh-CN' | 'en'
+
+const messages: Record<Locale, Record<string, string>> = {
+  'zh-CN': {
+    'app.name': '终末地数据编辑器',
+    'timeline.new': '新建方案',
+    'timeline.save': '保存',
+    'timeline.import': '导入',
+    'timeline.export': '导出',
+    'timeline.undo': '撤销',
+    'timeline.redo': '重做',
+    'timeline.delete': '删除',
+    'timeline.run': '运行全部',
+    'timeline.copy': '复制',
+    'timeline.paste': '粘贴',
+    'enemy.select': '选择敌人',
+    'enemy.custom': '自定义',
+    'enemy.maxStagger': '失衡上限',
+    'enemy.def': '防御',
+    'enemy.resistance': '抗性',
+    'chart.sp': '技力',
+    'chart.gauge': '连携量表',
+    'chart.stagger': '失衡值',
+    'dps.title': 'DPS 总览',
+    'dps.total': '总伤害',
+    'dps.casts': '施放次数',
+    'props.name': '名称',
+    'props.type': '类型',
+    'props.duration': '持续时长',
+    'props.cooldown': '冷却时间',
+    'props.startTime': '开始时间',
+    'props.spCost': 'SP消耗',
+    'props.gaugeGain': '量表获取',
+    'props.addTick': '添加伤害帧',
+    'library.title': '技能库',
+    'library.empty': '暂无干员数据，请选择配队',
+    'library.totalSkills': '个技能',
+    'export.success': '导出成功',
+    'import.success': '导入成功',
+    'import.fail': '导入失败',
+    'save.success': '保存成功',
+    'save.fail': '保存失败',
+  },
+  'en': {
+    'app.name': 'Endfield Data Editor',
+    'timeline.new': 'New',
+    'timeline.save': 'Save',
+    'timeline.import': 'Import',
+    'timeline.export': 'Export',
+    'timeline.undo': 'Undo',
+    'timeline.redo': 'Redo',
+    'timeline.delete': 'Delete',
+    'timeline.run': 'Run All',
+    'timeline.copy': 'Copy',
+    'timeline.paste': 'Paste',
+    'enemy.select': 'Select Enemy',
+    'enemy.custom': 'Custom',
+    'enemy.maxStagger': 'Max Stagger',
+    'enemy.def': 'Defense',
+    'enemy.resistance': 'Resistance',
+    'chart.sp': 'SP',
+    'chart.gauge': 'Gauge',
+    'chart.stagger': 'Stagger',
+    'dps.title': 'DPS Overview',
+    'dps.total': 'Total DMG',
+    'dps.casts': 'Casts',
+    'props.name': 'Name',
+    'props.type': 'Type',
+    'props.duration': 'Duration',
+    'props.cooldown': 'Cooldown',
+    'props.startTime': 'Start Time',
+    'props.spCost': 'SP Cost',
+    'props.gaugeGain': 'Gauge Gain',
+    'props.addTick': 'Add Damage Tick',
+    'library.title': 'Skill Library',
+    'library.empty': 'No characters. Select a team first.',
+    'library.totalSkills': 'skills',
+    'export.success': 'Exported',
+    'import.success': 'Imported',
+    'import.fail': 'Import failed',
+    'save.success': 'Saved',
+    'save.fail': 'Save failed',
+  },
+}
+
+const currentLocale = ref<Locale>('zh-CN')
+
+export function useI18n() {
+  const t = computed(() => {
+    const m = messages[currentLocale.value]
+    return (key: string) => m[key] || key
+  })
+  return { t, currentLocale, setLocale: (l: Locale) => { currentLocale.value = l } }
+}

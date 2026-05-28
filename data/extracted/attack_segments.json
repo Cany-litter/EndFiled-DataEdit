@@ -1,0 +1,4543 @@
+{
+  "ENDMINISTRATOR": {
+    "character_id": "ENDMINISTRATOR",
+    "character_name": "管理员",
+    "segments": [
+      {
+        "segment_index": 0,
+        "duration": 0.33,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "ice_shatter",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "nature_attach",
+          "corrosion",
+          "nature_burst",
+          "cold_attach",
+          "frozen",
+          "cold_burst",
+          "emag_attach",
+          "conductive",
+          "emag_burst",
+          "blaze_burst",
+          "burning",
+          "blaze_attach",
+          "default"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.2,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 1,
+        "duration": 0.43,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "ice_shatter",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "nature_attach",
+          "corrosion",
+          "nature_burst",
+          "cold_attach",
+          "frozen",
+          "cold_burst",
+          "emag_attach",
+          "conductive",
+          "emag_burst",
+          "blaze_burst",
+          "burning",
+          "blaze_attach",
+          "default"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.17,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 2,
+        "duration": 0.6,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "ice_shatter",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "nature_attach",
+          "corrosion",
+          "nature_burst",
+          "cold_attach",
+          "frozen",
+          "cold_burst",
+          "emag_attach",
+          "conductive",
+          "emag_burst",
+          "blaze_burst",
+          "burning",
+          "blaze_attach",
+          "default"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.17,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.4,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 3,
+        "duration": 1.1,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "ice_shatter",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "nature_attach",
+          "corrosion",
+          "nature_burst",
+          "cold_attach",
+          "frozen",
+          "cold_burst",
+          "emag_attach",
+          "conductive",
+          "emag_burst",
+          "blaze_burst",
+          "burning",
+          "blaze_attach",
+          "default"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.23,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.3,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.6,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.63,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 4,
+        "duration": 0.867,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "ice_shatter",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "nature_attach",
+          "corrosion",
+          "nature_burst",
+          "cold_attach",
+          "frozen",
+          "cold_burst",
+          "emag_attach",
+          "conductive",
+          "emag_burst",
+          "blaze_burst",
+          "burning",
+          "blaze_attach",
+          "default"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.6,
+            "stagger": 18,
+            "sp": 20
+          }
+        ],
+        "anomalies": []
+      }
+    ]
+  },
+  "POGRANICHNK": {
+    "character_id": "POGRANICHNK",
+    "character_name": "骏卫",
+    "segments": [
+      {
+        "segment_index": 0,
+        "duration": 0.43,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "armor_break",
+          "break",
+          "ice_shatter",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_burst",
+          "burning",
+          "blaze_attach",
+          "nature_attach",
+          "corrosion",
+          "nature_burst",
+          "cold_attach",
+          "frozen",
+          "cold_burst",
+          "emag_attach",
+          "conductive",
+          "emag_burst"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.27,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 1,
+        "duration": 0.67,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "armor_break",
+          "break",
+          "ice_shatter",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_burst",
+          "burning",
+          "blaze_attach",
+          "nature_attach",
+          "corrosion",
+          "nature_burst",
+          "cold_attach",
+          "frozen",
+          "cold_burst",
+          "emag_attach",
+          "conductive",
+          "emag_burst"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.23,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.47,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 2,
+        "duration": 0.67,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "armor_break",
+          "break",
+          "ice_shatter",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_burst",
+          "burning",
+          "blaze_attach",
+          "nature_attach",
+          "corrosion",
+          "nature_burst",
+          "cold_attach",
+          "frozen",
+          "cold_burst",
+          "emag_attach",
+          "conductive",
+          "emag_burst"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.3,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.5,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 3,
+        "duration": 0.63,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "armor_break",
+          "break",
+          "ice_shatter",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_burst",
+          "burning",
+          "blaze_attach",
+          "nature_attach",
+          "corrosion",
+          "nature_burst",
+          "cold_attach",
+          "frozen",
+          "cold_burst",
+          "emag_attach",
+          "conductive",
+          "emag_burst"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.1,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.17,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.23,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.37,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.43,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.5,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 4,
+        "duration": 0.83,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "armor_break",
+          "break",
+          "ice_shatter",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_burst",
+          "burning",
+          "blaze_attach",
+          "nature_attach",
+          "corrosion",
+          "nature_burst",
+          "cold_attach",
+          "frozen",
+          "cold_burst",
+          "emag_attach",
+          "conductive",
+          "emag_burst"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.53,
+            "stagger": 18,
+            "sp": 20
+          }
+        ],
+        "anomalies": []
+      }
+    ]
+  },
+  "ARDELIA": {
+    "character_id": "ARDELIA",
+    "character_name": "艾尔黛拉",
+    "segments": [
+      {
+        "segment_index": 0,
+        "duration": 0.4,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "knockup",
+          "break",
+          "ice_shatter",
+          "knockdown",
+          "stagger",
+          "armor_break",
+          "emag_attach",
+          "conductive",
+          "emag_burst",
+          "cold_attach",
+          "frozen",
+          "cold_burst",
+          "nature_attach",
+          "corrosion",
+          "nature_burst",
+          "blaze_burst",
+          "burning",
+          "blaze_attach"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.2,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 1,
+        "duration": 0.7,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "knockup",
+          "break",
+          "ice_shatter",
+          "knockdown",
+          "stagger",
+          "armor_break",
+          "emag_attach",
+          "conductive",
+          "emag_burst",
+          "cold_attach",
+          "frozen",
+          "cold_burst",
+          "nature_attach",
+          "corrosion",
+          "nature_burst",
+          "blaze_burst",
+          "burning",
+          "blaze_attach"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.267,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.33,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 2,
+        "duration": 1.53,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "knockup",
+          "break",
+          "ice_shatter",
+          "knockdown",
+          "stagger",
+          "armor_break",
+          "emag_attach",
+          "conductive",
+          "emag_burst",
+          "cold_attach",
+          "frozen",
+          "cold_burst",
+          "nature_attach",
+          "corrosion",
+          "nature_burst",
+          "blaze_burst",
+          "burning",
+          "blaze_attach"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.367,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.43,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 1.3,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 3,
+        "duration": 2.167,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "knockup",
+          "break",
+          "ice_shatter",
+          "knockdown",
+          "stagger",
+          "armor_break",
+          "emag_attach",
+          "conductive",
+          "emag_burst",
+          "cold_attach",
+          "frozen",
+          "cold_burst",
+          "nature_attach",
+          "corrosion",
+          "nature_burst",
+          "blaze_burst",
+          "burning",
+          "blaze_attach"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 2.167,
+            "stagger": 18,
+            "sp": 18
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 4,
+        "duration": 0,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "knockup",
+          "break",
+          "ice_shatter",
+          "knockdown",
+          "stagger",
+          "armor_break",
+          "emag_attach",
+          "conductive",
+          "emag_burst",
+          "cold_attach",
+          "frozen",
+          "cold_burst",
+          "nature_attach",
+          "corrosion",
+          "nature_burst",
+          "blaze_burst",
+          "burning",
+          "blaze_attach"
+        ],
+        "damage_ticks": [],
+        "anomalies": []
+      }
+    ]
+  },
+  "LASTRITE": {
+    "character_id": "LASTRITE",
+    "character_name": "别礼",
+    "segments": [
+      {
+        "segment_index": 0,
+        "duration": 0.7,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "conductive",
+          "emag_attach",
+          "emag_burst",
+          "blaze_burst",
+          "burning",
+          "blaze_attach",
+          "knockup",
+          "break",
+          "ice_shatter",
+          "knockdown",
+          "nature_attach",
+          "corrosion",
+          "nature_burst",
+          "stagger",
+          "armor_break",
+          "cold_attach",
+          "frozen",
+          "cold_burst"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.4,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 1,
+        "duration": 1,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "conductive",
+          "emag_attach",
+          "emag_burst",
+          "blaze_burst",
+          "burning",
+          "blaze_attach",
+          "knockup",
+          "break",
+          "ice_shatter",
+          "knockdown",
+          "nature_attach",
+          "corrosion",
+          "nature_burst",
+          "stagger",
+          "armor_break",
+          "cold_attach",
+          "frozen",
+          "cold_burst"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.33,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.8,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 2,
+        "duration": 1.23,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "conductive",
+          "emag_attach",
+          "emag_burst",
+          "blaze_burst",
+          "burning",
+          "blaze_attach",
+          "knockup",
+          "break",
+          "ice_shatter",
+          "knockdown",
+          "nature_attach",
+          "corrosion",
+          "nature_burst",
+          "stagger",
+          "armor_break",
+          "cold_attach",
+          "frozen",
+          "cold_burst"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.3,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.9,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 3,
+        "duration": 1.567,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "conductive",
+          "emag_attach",
+          "emag_burst",
+          "blaze_burst",
+          "burning",
+          "blaze_attach",
+          "knockup",
+          "break",
+          "ice_shatter",
+          "knockdown",
+          "nature_attach",
+          "corrosion",
+          "nature_burst",
+          "stagger",
+          "armor_break",
+          "cold_attach",
+          "frozen",
+          "cold_burst"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.7,
+            "stagger": 25,
+            "sp": 30
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 4,
+        "duration": 0,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "conductive",
+          "emag_attach",
+          "emag_burst",
+          "blaze_burst",
+          "burning",
+          "blaze_attach",
+          "knockup",
+          "break",
+          "ice_shatter",
+          "knockdown",
+          "nature_attach",
+          "corrosion",
+          "nature_burst",
+          "stagger",
+          "armor_break",
+          "cold_attach",
+          "frozen",
+          "cold_burst"
+        ],
+        "damage_ticks": [],
+        "anomalies": []
+      }
+    ]
+  },
+  "GILBERTA": {
+    "character_id": "GILBERTA",
+    "character_name": "洁尔佩塔",
+    "segments": [
+      {
+        "segment_index": 0,
+        "duration": 0.63,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.23,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 1,
+        "duration": 0.767,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.13,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.267,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 2,
+        "duration": 0.8,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.233,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.333,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.467,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 3,
+        "duration": 1.367,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.767,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.833,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.9,
+            "stagger": 16,
+            "sp": 16
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 4,
+        "duration": 0,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [],
+        "anomalies": []
+      }
+    ]
+  },
+  "YVONNE": {
+    "character_id": "YVONNE",
+    "character_name": "伊冯",
+    "segments": [
+      {
+        "segment_index": 0,
+        "duration": 0.567,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.367,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 1,
+        "duration": 0.5,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.467,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 2,
+        "duration": 0.53,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.2,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 3,
+        "duration": 0.83,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.367,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 4,
+        "duration": 1.167,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.7,
+            "stagger": 17,
+            "sp": 17
+          }
+        ],
+        "anomalies": []
+      }
+    ]
+  },
+  "LAEVATAIN": {
+    "character_id": "LAEVATAIN",
+    "character_name": "莱万汀",
+    "segments": [
+      {
+        "segment_index": 0,
+        "duration": 0.367,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "magma_1",
+          "magma_2",
+          "magma_3",
+          "magma_4",
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion",
+          "magma_0"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.2,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 1,
+        "duration": 0.567,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "magma_1",
+          "magma_2",
+          "magma_3",
+          "magma_4",
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion",
+          "magma_0"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.2,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.43,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 2,
+        "duration": 0.43,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "magma_1",
+          "magma_2",
+          "magma_3",
+          "magma_4",
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion",
+          "magma_0"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.3,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 3,
+        "duration": 0.76,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "magma_1",
+          "magma_2",
+          "magma_3",
+          "magma_4",
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion",
+          "magma_0"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.2,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.4,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.63,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 4,
+        "duration": 1.167,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "magma_1",
+          "magma_2",
+          "magma_3",
+          "magma_4",
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion",
+          "magma_0"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.77,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.87,
+            "stagger": 18,
+            "sp": 20
+          }
+        ],
+        "anomalies": []
+      }
+    ]
+  },
+  "LIFENG": {
+    "character_id": "LIFENG",
+    "character_name": "黎风",
+    "segments": [
+      {
+        "segment_index": 0,
+        "duration": 0.83,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.3,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.57,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 1,
+        "duration": 0.63,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.13,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 2,
+        "duration": 0.5,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.37,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 3,
+        "duration": 1.2,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.43,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.8,
+            "stagger": 19,
+            "sp": 21
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 4,
+        "duration": 0,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [],
+        "anomalies": []
+      }
+    ]
+  },
+  "EMBER": {
+    "character_id": "EMBER",
+    "character_name": "余烬",
+    "segments": [
+      {
+        "segment_index": 0,
+        "duration": 0.83,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.43,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 1,
+        "duration": 0.63,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.2,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 2,
+        "duration": 1.2,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.6,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 3,
+        "duration": 1.767,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.87,
+            "stagger": 25,
+            "sp": 28
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 4,
+        "duration": 0,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [],
+        "anomalies": []
+      }
+    ]
+  },
+  "TANGTANG": {
+    "character_id": "TANGTANG",
+    "character_name": "汤汤",
+    "segments": [
+      {
+        "segment_index": 0,
+        "duration": 0.27,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.1,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 1,
+        "duration": 0.63,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.2,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.33,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 2,
+        "duration": 0.9,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.17,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.23,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.29,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.35,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.41,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.57,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.57,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.6,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.6,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 3,
+        "duration": 0.83,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.2,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.33,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.77,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 4,
+        "duration": 1.23,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 1,
+            "stagger": 18,
+            "sp": 18
+          }
+        ],
+        "anomalies": []
+      }
+    ]
+  },
+  "ROSSI": {
+    "character_id": "ROSSI",
+    "character_name": "洛茜",
+    "segments": [
+      {
+        "segment_index": 0,
+        "duration": 0.53,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.27,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 1,
+        "duration": 0.7,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.03,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.23,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 2,
+        "duration": 0.87,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.03,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.13,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 3,
+        "duration": 1.03,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.2,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.23,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.267,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.43,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.467,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 4,
+        "duration": 1.03,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion",
+          "talent_wulfa_02"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.5,
+            "stagger": 18,
+            "sp": 21
+          }
+        ],
+        "anomalies": []
+      }
+    ]
+  },
+  "XAIHI": {
+    "character_id": "XAIHI",
+    "character_name": "赛希",
+    "segments": [
+      {
+        "segment_index": 0,
+        "duration": 0.467,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.33,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 1,
+        "duration": 0.6,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.23,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 2,
+        "duration": 0.5,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.267,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 3,
+        "duration": 0.73,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.23,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.4,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 4,
+        "duration": 1.13,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.63,
+            "stagger": 15,
+            "sp": 15
+          }
+        ],
+        "anomalies": []
+      }
+    ]
+  },
+  "SNOWSHINE": {
+    "character_id": "SNOWSHINE",
+    "character_name": "昼雪",
+    "segments": [
+      {
+        "segment_index": 0,
+        "duration": 1.1,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.63,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 1,
+        "duration": 0.967,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.63,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 2,
+        "duration": 2.067,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.7,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 1.3,
+            "stagger": 23,
+            "sp": 25
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 3,
+        "duration": 0,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [],
+        "anomalies": []
+      },
+      {
+        "segment_index": 4,
+        "duration": 0,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [],
+        "anomalies": []
+      }
+    ]
+  },
+  "ARCLIGHT": {
+    "character_id": "ARCLIGHT",
+    "character_name": "弧光",
+    "segments": [
+      {
+        "segment_index": 0,
+        "duration": 0.33,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.17,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 1,
+        "duration": 0.367,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.17,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 2,
+        "duration": 0.7,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.23,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.43,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 3,
+        "duration": 0.93,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.17,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 4,
+        "duration": 1,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.4,
+            "stagger": 16,
+            "sp": 17
+          }
+        ],
+        "anomalies": []
+      }
+    ]
+  },
+  "AVYWENNA": {
+    "character_id": "AVYWENNA",
+    "character_name": "艾维文娜",
+    "segments": [
+      {
+        "segment_index": 0,
+        "duration": 0.3,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.23,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 1,
+        "duration": 0.5,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.23,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 2,
+        "duration": 0.367,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.23,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 3,
+        "duration": 0.767,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.17,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.6,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 4,
+        "duration": 1.53,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.8,
+            "stagger": 17,
+            "sp": 19
+          }
+        ],
+        "anomalies": []
+      }
+    ]
+  },
+  "DAPAN": {
+    "character_id": "DAPAN",
+    "character_name": "大潘",
+    "segments": [
+      {
+        "segment_index": 0,
+        "duration": 0.53,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.43,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 1,
+        "duration": 0.7,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.23,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 2,
+        "duration": 0.867,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.33,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.77,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 3,
+        "duration": 1.53,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 1.07,
+            "stagger": 20,
+            "sp": 21
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 4,
+        "duration": 0,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [],
+        "anomalies": []
+      }
+    ]
+  },
+  "WULFGARD": {
+    "character_id": "WULFGARD",
+    "character_name": "狼卫",
+    "segments": [
+      {
+        "segment_index": 0,
+        "duration": 0.83,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.23,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.467,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 1,
+        "duration": 0.8,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.33,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.53,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 2,
+        "duration": 1.1,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.4,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.6,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.8,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 3,
+        "duration": 1.767,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.767,
+            "stagger": 18,
+            "sp": 18
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 4,
+        "duration": 0,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [],
+        "anomalies": []
+      }
+    ]
+  },
+  "PERLICA": {
+    "character_id": "PERLICA",
+    "character_name": "佩丽卡",
+    "segments": [
+      {
+        "segment_index": 0,
+        "duration": 0.53,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.267,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 1,
+        "duration": 0.63,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.3,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.4,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 2,
+        "duration": 0.9,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.53,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.63,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.73,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 3,
+        "duration": 1.467,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.9,
+            "stagger": 15,
+            "sp": 15
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 4,
+        "duration": 0,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [],
+        "anomalies": []
+      }
+    ]
+  },
+  "CHENQIANYU": {
+    "character_id": "CHENQIANYU",
+    "character_name": "陈千语",
+    "segments": [
+      {
+        "segment_index": 0,
+        "duration": 0.5,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "conductive",
+          "emag_attach",
+          "emag_burst",
+          "burning",
+          "blaze_attach",
+          "blaze_burst",
+          "knockup",
+          "break",
+          "ice_shatter",
+          "nature_attach",
+          "corrosion",
+          "nature_burst",
+          "knockdown",
+          "cold_attach",
+          "frozen",
+          "cold_burst",
+          "stagger",
+          "armor_break"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.27,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.37,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 1,
+        "duration": 0.367,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "conductive",
+          "emag_attach",
+          "emag_burst",
+          "burning",
+          "blaze_attach",
+          "blaze_burst",
+          "knockup",
+          "break",
+          "ice_shatter",
+          "nature_attach",
+          "corrosion",
+          "nature_burst",
+          "knockdown",
+          "cold_attach",
+          "frozen",
+          "cold_burst",
+          "stagger",
+          "armor_break"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.23,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 2,
+        "duration": 0.63,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "conductive",
+          "emag_attach",
+          "emag_burst",
+          "burning",
+          "blaze_attach",
+          "blaze_burst",
+          "knockup",
+          "break",
+          "ice_shatter",
+          "nature_attach",
+          "corrosion",
+          "nature_burst",
+          "knockdown",
+          "cold_attach",
+          "frozen",
+          "cold_burst",
+          "stagger",
+          "armor_break"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.3,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.4,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 3,
+        "duration": 0.73,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "conductive",
+          "emag_attach",
+          "emag_burst",
+          "burning",
+          "blaze_attach",
+          "blaze_burst",
+          "knockup",
+          "break",
+          "ice_shatter",
+          "nature_attach",
+          "corrosion",
+          "nature_burst",
+          "knockdown",
+          "cold_attach",
+          "frozen",
+          "cold_burst",
+          "stagger",
+          "armor_break"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.13,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.33,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 4,
+        "duration": 1.1,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "conductive",
+          "emag_attach",
+          "emag_burst",
+          "burning",
+          "blaze_attach",
+          "blaze_burst",
+          "knockup",
+          "break",
+          "ice_shatter",
+          "nature_attach",
+          "corrosion",
+          "nature_burst",
+          "knockdown",
+          "cold_attach",
+          "frozen",
+          "cold_burst",
+          "stagger",
+          "armor_break"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.53,
+            "stagger": 16,
+            "sp": 18
+          }
+        ],
+        "anomalies": []
+      }
+    ]
+  },
+  "ALESH": {
+    "character_id": "ALESH",
+    "character_name": "阿列什",
+    "segments": [
+      {
+        "segment_index": 0,
+        "duration": 0.43,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "corrosion",
+          "nature_attach",
+          "nature_burst",
+          "burning",
+          "blaze_attach",
+          "blaze_burst",
+          "conductive",
+          "emag_attach",
+          "emag_burst",
+          "knockup",
+          "break",
+          "ice_shatter",
+          "knockdown",
+          "cold_attach",
+          "frozen",
+          "cold_burst",
+          "stagger",
+          "armor_break"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.23,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 1,
+        "duration": 0.367,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "corrosion",
+          "nature_attach",
+          "nature_burst",
+          "burning",
+          "blaze_attach",
+          "blaze_burst",
+          "conductive",
+          "emag_attach",
+          "emag_burst",
+          "knockup",
+          "break",
+          "ice_shatter",
+          "knockdown",
+          "cold_attach",
+          "frozen",
+          "cold_burst",
+          "stagger",
+          "armor_break"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.17,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 2,
+        "duration": 0.567,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "corrosion",
+          "nature_attach",
+          "nature_burst",
+          "burning",
+          "blaze_attach",
+          "blaze_burst",
+          "conductive",
+          "emag_attach",
+          "emag_burst",
+          "knockup",
+          "break",
+          "ice_shatter",
+          "knockdown",
+          "cold_attach",
+          "frozen",
+          "cold_burst",
+          "stagger",
+          "armor_break"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.43,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 3,
+        "duration": 0.767,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "corrosion",
+          "nature_attach",
+          "nature_burst",
+          "burning",
+          "blaze_attach",
+          "blaze_burst",
+          "conductive",
+          "emag_attach",
+          "emag_burst",
+          "knockup",
+          "break",
+          "ice_shatter",
+          "knockdown",
+          "cold_attach",
+          "frozen",
+          "cold_burst",
+          "stagger",
+          "armor_break"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.5,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 4,
+        "duration": 1.067,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "corrosion",
+          "nature_attach",
+          "nature_burst",
+          "burning",
+          "blaze_attach",
+          "blaze_burst",
+          "conductive",
+          "emag_attach",
+          "emag_burst",
+          "knockup",
+          "break",
+          "ice_shatter",
+          "knockdown",
+          "cold_attach",
+          "frozen",
+          "cold_burst",
+          "stagger",
+          "armor_break"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.6,
+            "stagger": 17,
+            "sp": 19
+          },
+          {
+            "offset": 0.63,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      }
+    ]
+  },
+  "CATCHER": {
+    "character_id": "CATCHER",
+    "character_name": "卡契尔",
+    "segments": [
+      {
+        "segment_index": 0,
+        "duration": 0.73,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.4,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 1,
+        "duration": 0.73,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.33,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 2,
+        "duration": 0.967,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.53,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 3,
+        "duration": 1.53,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.77,
+            "stagger": 22,
+            "sp": 25
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 4,
+        "duration": 0,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [],
+        "anomalies": []
+      }
+    ]
+  },
+  "FLUORITE": {
+    "character_id": "FLUORITE",
+    "character_name": "萤石",
+    "segments": [
+      {
+        "segment_index": 0,
+        "duration": 0.767,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.43,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 1,
+        "duration": 0.53,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.3,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 2,
+        "duration": 0.63,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.3,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 3,
+        "duration": 1.767,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.967,
+            "stagger": 15,
+            "sp": 15
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 4,
+        "duration": 0,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [],
+        "anomalies": []
+      }
+    ]
+  },
+  "ANTAL": {
+    "character_id": "ANTAL",
+    "character_name": "安塔尔",
+    "segments": [
+      {
+        "segment_index": 0,
+        "duration": 0.53,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.267,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 1,
+        "duration": 0.7,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.4,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 2,
+        "duration": 0.767,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.467,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.6,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 3,
+        "duration": 1.3,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.9,
+            "stagger": 15,
+            "sp": 15
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 4,
+        "duration": 0,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "break",
+          "armor_break",
+          "stagger",
+          "knockdown",
+          "knockup",
+          "blaze_attach",
+          "emag_attach",
+          "cold_attach",
+          "nature_attach",
+          "blaze_burst",
+          "emag_burst",
+          "cold_burst",
+          "nature_burst",
+          "burning",
+          "conductive",
+          "frozen",
+          "ice_shatter",
+          "corrosion"
+        ],
+        "damage_ticks": [],
+        "anomalies": []
+      }
+    ]
+  },
+  "ESTELLA": {
+    "character_id": "ESTELLA",
+    "character_name": "埃特拉",
+    "segments": [
+      {
+        "segment_index": 0,
+        "duration": 0.467,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "corrosion",
+          "nature_attach",
+          "nature_burst",
+          "burning",
+          "blaze_attach",
+          "blaze_burst",
+          "conductive",
+          "emag_attach",
+          "emag_burst",
+          "cold_attach",
+          "frozen",
+          "cold_burst",
+          "knockdown",
+          "break",
+          "ice_shatter",
+          "knockup",
+          "stagger",
+          "armor_break"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.2,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 1,
+        "duration": 0.567,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "corrosion",
+          "nature_attach",
+          "nature_burst",
+          "burning",
+          "blaze_attach",
+          "blaze_burst",
+          "conductive",
+          "emag_attach",
+          "emag_burst",
+          "cold_attach",
+          "frozen",
+          "cold_burst",
+          "knockdown",
+          "break",
+          "ice_shatter",
+          "knockup",
+          "stagger",
+          "armor_break"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.2,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 2,
+        "duration": 0.967,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "corrosion",
+          "nature_attach",
+          "nature_burst",
+          "burning",
+          "blaze_attach",
+          "blaze_burst",
+          "conductive",
+          "emag_attach",
+          "emag_burst",
+          "cold_attach",
+          "frozen",
+          "cold_burst",
+          "knockdown",
+          "break",
+          "ice_shatter",
+          "knockup",
+          "stagger",
+          "armor_break"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.23,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.6,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 3,
+        "duration": 1.567,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "corrosion",
+          "nature_attach",
+          "nature_burst",
+          "burning",
+          "blaze_attach",
+          "blaze_burst",
+          "conductive",
+          "emag_attach",
+          "emag_burst",
+          "cold_attach",
+          "frozen",
+          "cold_burst",
+          "knockdown",
+          "break",
+          "ice_shatter",
+          "knockup",
+          "stagger",
+          "armor_break"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.7,
+            "stagger": 17,
+            "sp": 19
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 4,
+        "duration": 0,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "corrosion",
+          "nature_attach",
+          "nature_burst",
+          "burning",
+          "blaze_attach",
+          "blaze_burst",
+          "conductive",
+          "emag_attach",
+          "emag_burst",
+          "cold_attach",
+          "frozen",
+          "cold_burst",
+          "knockdown",
+          "break",
+          "ice_shatter",
+          "knockup",
+          "stagger",
+          "armor_break"
+        ],
+        "damage_ticks": [],
+        "anomalies": []
+      }
+    ]
+  },
+  "AKEKURI": {
+    "character_id": "AKEKURI",
+    "character_name": "秋栗",
+    "segments": [
+      {
+        "segment_index": 0,
+        "duration": 0.5,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "corrosion",
+          "nature_attach",
+          "nature_burst",
+          "burning",
+          "blaze_attach",
+          "blaze_burst",
+          "conductive",
+          "emag_attach",
+          "emag_burst",
+          "cold_attach",
+          "frozen",
+          "cold_burst",
+          "ice_shatter",
+          "knockdown",
+          "break",
+          "knockup",
+          "stagger",
+          "armor_break"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.3,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 1,
+        "duration": 0.767,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "corrosion",
+          "nature_attach",
+          "nature_burst",
+          "burning",
+          "blaze_attach",
+          "blaze_burst",
+          "conductive",
+          "emag_attach",
+          "emag_burst",
+          "cold_attach",
+          "frozen",
+          "cold_burst",
+          "ice_shatter",
+          "knockdown",
+          "break",
+          "knockup",
+          "stagger",
+          "armor_break"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.27,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.53,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 2,
+        "duration": 0.733,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "corrosion",
+          "nature_attach",
+          "nature_burst",
+          "burning",
+          "blaze_attach",
+          "blaze_burst",
+          "conductive",
+          "emag_attach",
+          "emag_burst",
+          "cold_attach",
+          "frozen",
+          "cold_burst",
+          "ice_shatter",
+          "knockdown",
+          "break",
+          "knockup",
+          "stagger",
+          "armor_break"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.33,
+            "stagger": 0,
+            "sp": 0
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 3,
+        "duration": 1.2,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "corrosion",
+          "nature_attach",
+          "nature_burst",
+          "burning",
+          "blaze_attach",
+          "blaze_burst",
+          "conductive",
+          "emag_attach",
+          "emag_burst",
+          "cold_attach",
+          "frozen",
+          "cold_burst",
+          "ice_shatter",
+          "knockdown",
+          "break",
+          "knockup",
+          "stagger",
+          "armor_break"
+        ],
+        "damage_ticks": [
+          {
+            "offset": 0.63,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.67,
+            "stagger": 0,
+            "sp": 0
+          },
+          {
+            "offset": 0.7,
+            "stagger": 17,
+            "sp": 19
+          }
+        ],
+        "anomalies": []
+      },
+      {
+        "segment_index": 4,
+        "duration": 0,
+        "gauge_gain": 0,
+        "allowed_types": [
+          "corrosion",
+          "nature_attach",
+          "nature_burst",
+          "burning",
+          "blaze_attach",
+          "blaze_burst",
+          "conductive",
+          "emag_attach",
+          "emag_burst",
+          "cold_attach",
+          "frozen",
+          "cold_burst",
+          "ice_shatter",
+          "knockdown",
+          "break",
+          "knockup",
+          "stagger",
+          "armor_break"
+        ],
+        "damage_ticks": [],
+        "anomalies": []
+      }
+    ]
+  }
+}
