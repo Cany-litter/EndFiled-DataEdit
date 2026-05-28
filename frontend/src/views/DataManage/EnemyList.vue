@@ -6,11 +6,10 @@
       </div>
       <el-table :data="list" border stripe v-loading="loading" style="width:100%" :max-height="'calc(100vh - 220px)'">
         <el-table-column type="index" label="#" width="50" />
-        <el-table-column prop="id" label="ID" min-width="140" show-overflow-tooltip />
         <el-table-column prop="name" label="名称" min-width="100" />
         <el-table-column prop="tier" label="等级" width="70">
           <template #default="{ row }">
-            <el-tag :type="row.tier === 'boss' ? 'danger' : row.tier === 'elite' ? 'warning' : 'info'" size="small">{{ row.tier || '--' }}</el-tag>
+            <el-tag :type="row.tier === 'boss' ? 'danger' : row.tier === 'elite' ? 'warning' : 'info'" size="small">{{ { normal: '普通', elite: '精英', boss: 'Boss' }[row.tier] || row.tier || '--' }}</el-tag>
           </template>
         </el-table-column>
         <el-table-column prop="category" label="类型" width="80" />
