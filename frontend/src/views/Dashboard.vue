@@ -137,6 +137,7 @@ const quickLinks = [
   { path: '/builds', icon: '📋', label: '配装方案', desc: '方案列表' },
   { path: '/loadout', icon: '🔧', label: '配装编辑器', desc: '创建方案' },
   { path: '/teams', icon: '👥', label: '配队管理', desc: '四人配队' },
+  { path: '/timeline', icon: '⏱️', label: '排轴模拟', desc: '时间线编辑' },
   { path: '/damage', icon: '📊', label: '排轴伤害', desc: '配队DPS模拟' },
 ]
 
