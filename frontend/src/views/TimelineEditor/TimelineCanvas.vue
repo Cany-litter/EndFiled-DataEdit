@@ -651,7 +651,7 @@ const selectionStyle = computed(() => {
 // ============================================================
 
 /** 敌人标记颜色（循环使用） */
-const enemyColors = ['#e6a23c', '#67c23a', '#f56c6c', '#9b59b6', '#1abc9c', '#3498db', '#e74c3c', '#2ecc71']
+const enemyColors = ['#ff7875', '#67c23a', '#409eff', '#e6a23c', '#9b59b6', '#1abc9c', '#e74c3c', '#2ecc71']
 
 /** 根据敌人ID获取显示名 */
 function enemyName(id: string): string {
