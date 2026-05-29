@@ -48,6 +48,27 @@
                 </div>
               </div>
 
+              <el-divider content-position="left">敌人配置</el-divider>
+              <div style="margin-bottom:4px">
+                <el-button size="small" @click="showEnemySearch = true">+ 添加敌人</el-button>
+              </div>
+              <div class="lib-section">
+                <div v-for="e in enemyList" :key="e.id"
+                  class="enemy-card" :class="{ 'enemy-selected': selectedEnemyId === e.id }"
+                  @click="selectedEnemyId = e.id">
+                  <div style="display:flex;justify-content:space-between;align-items:center">
+                    <span style="font-weight:600;font-size:12px">{{ e.name }}</span>
+                    <el-button size="small" text type="danger" @click.stop="removeEnemy(e.id)">✕</el-button>
+                  </div>
+                  <div style="display:flex;gap:8px;margin-top:4px">
+                    <span style="font-size:11px;color:#909399">防御</span>
+                    <el-input-number v-model="e.def" :min="0" :max="500" size="small" style="width:80px" @click.stop />
+                    <span style="font-size:11px;color:#909399">抗性</span>
+                    <el-input-number v-model="e.resistance" :min="0" :max="100" size="small" style="width:80px" @click.stop />
+                  </div>
+                </div>
+              </div>
+
               <el-button type="primary" style="width:100%;margin-top:8px" @click="runSim">开始模拟</el-button>
             </template>
           </el-form>
@@ -57,12 +78,12 @@
       <div class="right-panel">
         <template v-if="result && result.members.length > 0">
           <el-tabs v-model="activeResultTab" type="border-card" size="small" style="margin-bottom:8px">
-            <el-tab-pane v-for="mr in result.members" :key="mr.name" :label="mr.name" :name="mr.name">
+            <el-tab-pane v-for="mr in result.members" :key="mr.name" :label="charNameMap[mr.name] || mr.name" :name="mr.name">
               <div class="toolbar">
                 <el-button size="small" @click="addSelfBuffCol">+ 己方增益列</el-button>
-                <el-button size="small" @click="addEnemyBuffCol">+ 敌人增益列</el-button>
+                <el-button size="small" @click="addEnemyBuffCol">+ 敌方增益列</el-button>
                 <span style="font-size:12px;color:#909399;margin-left:8px">
-                  点击技能库技能替换技能名称 | 点击增益库填入增益列
+                  点击技能库技能替换技能名称 | 点击增益/敌人填入对应列
                 </span>
               </div>
               <el-table :data="mr.actionRows" border stripe size="small" style="width:100%" max-height="320px">
@@ -79,7 +100,7 @@
                   </template>
                 </el-table-column>
                 <el-table-column label="伤害类型" width="70">
-                  <template #default="{ row }">{{ row.damageType || '-' }}</template>
+                  <template #default="{ row }">{{ damageTypeLabel(row.damageType) }}</template>
                 </el-table-column>
                 <el-table-column v-for="(_, ci) in selfBuffColCount" :key="'sb' + ci" :label="'己方增益' + (ci + 1)" width="80">
                   <template #default="{ row }">
@@ -88,9 +109,11 @@
                     </span>
                   </template>
                 </el-table-column>
-                <el-table-column label="命中目标" width="70">
+                <el-table-column label="命中敌人" width="100">
                   <template #default="{ row }">
-                    <el-input-number v-model="row.targetCount" :min="1" :max="10" size="small" style="width:60px" />
+                    <span class="clickable-cell" :class="{ filled: !!row.targetEnemyId }" @click="assignEnemy(row)">
+                      {{ row.targetEnemyId ? enemyName(row.targetEnemyId) : '+' }}
+                    </span>
                   </template>
                 </el-table-column>
                 <el-table-column v-for="(_, ci) in enemyBuffColCount" :key="'eb' + ci" :label="'敌方增益' + (ci + 1)" width="80">
@@ -110,7 +133,9 @@
           <el-card shadow="never">
             <template #header><span>伤害统计</span></template>
             <el-table :data="statRows" border stripe size="small">
-              <el-table-column prop="name" label="干员" width="80" />
+              <el-table-column label="干员" width="80">
+                <template #default="{ row }">{{ charNameMap[row.name] || row.name }}</template>
+              </el-table-column>
               <el-table-column label="总伤害" width="130">
                 <template #default="{ row }">{{ row.totalDamage.toFixed(0) }}</template>
               </el-table-column>
@@ -135,14 +160,20 @@
         </div>
       </div>
     </div>
+
+    <el-dialog v-model="showEnemySearch" title="添加敌人" width="400px">
+      <el-select v-model="searchEnemyKeyword" filterable placeholder="搜索敌人..." style="width:100%" @change="onEnemySelect">
+        <el-option v-for="e in enemyDbList" :key="e.id" :label="e.name" :value="e.id" />
+      </el-select>
+    </el-dialog>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { ElMessage } from 'element-plus'
-import { TeamApi, CharacterApi, BuildApi, WeaponApi, EquipmentApi, SkillApi, SkillLevelApi, SkillActionApi, GainApi, TimelineApi } from '../../api'
+import { ElMessage, ElMessageBox } from 'element-plus'
+import { TeamApi, CharacterApi, BuildApi, WeaponApi, EquipmentApi, SkillApi, SkillLevelApi, SkillActionApi, GainApi, TimelineApi, EnemyApi } from '../../api'
 import type { Team, Gain } from '../../api'
 import { calcFinalStats, type FinalStats } from '../../engine/formulas/stats'
 import { simulateRows } from '../../engine/simulation/teamEngine'
@@ -165,16 +196,29 @@ const selectedGainId = ref<string | null>(null)
 const selectedCharIndex = ref(0)
 const activeResultTab = ref('')
 
-// Skill data maps (for replacement lookup)
 const skillLv12Map = ref<Record<string, number>>({})
 const skillTypeMap = ref<Record<string, string>>({})
 const skillDamageTypeMap = ref<Record<string, string>>({})
 const charSkillMap = ref<Record<string, any[]>>({})
-const charOrder = ref<string[]>([])
-
 const result = ref<TeamSimulationResult | null>(null)
 
 const slotColors = ['#e74c3c', '#e67e22', '#2ecc71', '#3498db']
+
+// ── Enemy state ──
+interface EnemyBrief { id: string; name: string; def: number; resistance: number }
+
+const enemyList = ref<EnemyBrief[]>([])
+const selectedEnemyId = ref<string>('')
+const showEnemySearch = ref(false)
+const searchEnemyKeyword = ref('')
+const enemyDbList = ref<any[]>([])
+
+// ── Computed ──
+const charNameMap = computed(() => {
+  const map: Record<string, string> = {}
+  for (const mc of memberConfigs) map[mc.charId] = mc.name
+  return map
+})
 
 // ── Helpers ──
 function skillIcon(type: string) {
@@ -185,6 +229,11 @@ function skillIcon(type: string) {
 function typeLabel(t: string) {
   const m: Record<string, string> = { normal: '普攻', attack: '普攻', skill: '战技', chain: '连携', link: '连携', ultimate: '终结', execution: '处决', talent1: '天赋', talent2: '天赋' }
   return m[t] || t
+}
+
+function damageTypeLabel(t: string) {
+  const m: Record<string, string> = { pyro: '灼热', cryo: '寒冷', electro: '电磁', natural: '自然', physical: '物理', ultra: '超域', true: '真实' }
+  return m[t] || t || '-'
 }
 
 function gainMeta(g: Gain) {
@@ -199,6 +248,11 @@ function gainMeta(g: Gain) {
 function gainName(id: string) {
   const g = allGains.value.find(x => x.id === id)
   return g ? g.name : id.slice(0, 6)
+}
+
+function enemyName(id: string) {
+  const e = enemyList.value.find(x => x.id === id)
+  return e ? e.name : id.slice(0, 6)
 }
 
 function mapActionTypeToSkillType(type: string): string {
@@ -233,6 +287,8 @@ async function onScenarioSelect(id: string) {
   selectedGainId.value = null
   selfBuffColCount.value = 0
   enemyBuffColCount.value = 0
+  enemyList.value = []
+  selectedEnemyId.value = ''
 
   let tracks: Track[] = []
   if (sc.tracks) { try { tracks = JSON.parse(sc.tracks) as Track[] } catch { tracks = [] } }
@@ -241,16 +297,13 @@ async function onScenarioSelect(id: string) {
   const team = await TeamApi.get(sc.teamId)
   teamData.value = team
 
-  // Load character + build + skill data
   const chars = await CharacterApi.listAll()
   const allBuilds = await BuildApi.listAll()
   const weapons = await WeaponApi.listAll()
   const allEquipment = await EquipmentApi.listAll()
   const allSkills = await SkillApi.listAll()
   const allLevels = await SkillLevelApi.listAll()
-  const allActions = await SkillActionApi.listAll()
 
-  // Build skill lookup maps
   const lv12Map: Record<string, number> = {}
   const typeMap: Record<string, string> = {}
   const dmgTypeMap: Record<string, string> = {}
@@ -271,7 +324,6 @@ async function onScenarioSelect(id: string) {
     const c = chars.find(ch => ch.id === charId)
     if (!c) continue
     order.push(charId)
-    charOrder.value = order
 
     const build = allBuilds.find((b: any) => b.id === buildSlots[i])
     const weapon = build?.weaponId ? weapons.find((w: any) => w.id === build.weaponId) : null
@@ -316,25 +368,10 @@ async function onScenarioSelect(id: string) {
     const charId = track.id
     if (!order.includes(charId)) continue
 
-    // determine enemy buffs from enemyBuffs at each action time
-    let enemyBuffSchedule: { time: number; end: number; gainId: string }[] = []
-    if (sc.enemyBuffs) {
-      try {
-        const eb = JSON.parse(sc.enemyBuffs) as Record<string, any[]>
-        for (const list of Object.values(eb)) {
-          for (const a of list) {
-            enemyBuffSchedule.push({ time: a.startTime ?? 0, end: (a.startTime ?? 0) + (a.duration ?? 10), gainId: a.id })
-          }
-        }
-      } catch {}
-    }
-
     for (const action of track.actions) {
       const t = action.startTime ?? 0
       const skId = action.skillId ?? action.id
-      const mult = lv12Map[skId] ?? (action.damageTicks?.[0]?.hpDamage ?? 50) / 100
 
-      // Match self buffs from buff tracks
       const selfBuffs: (string | null)[] = []
       for (const bt of tracks) {
         if (!bt.id.endsWith('_buff')) continue
@@ -344,12 +381,6 @@ async function onScenarioSelect(id: string) {
           const be = bs + (ba.duration ?? 0)
           if (t >= bs && t < be) selfBuffs.push(ba.id)
         }
-      }
-
-      // Match enemy buffs
-      const enemyBuffs: (string | null)[] = []
-      for (const es of enemyBuffSchedule) {
-        if (t >= es.time && t < es.end) enemyBuffs.push(es.gainId)
       }
 
       rows.push({
@@ -362,7 +393,7 @@ async function onScenarioSelect(id: string) {
         damageType: dmgTypeMap[skId] ?? (action as any).damageType ?? action.element,
         selfBuffs,
         targetCount: 1,
-        enemyBuffs,
+        enemyBuffs: [],
         spCost: action.spCost ?? 0,
         damage: 0,
       })
@@ -370,11 +401,69 @@ async function onScenarioSelect(id: string) {
   }
   rows.sort((a, b) => a.time - b.time)
   rows.forEach((r, i) => r.seq = i + 1)
-  actionRows.value = rows
 
-  if (rows.length > 0) {
-    activeResultTab.value = memberConfigs[0]?.charId ?? ''
+  // Load enemies from scenario
+  if (sc.enemies) {
+    try {
+      const parsed = JSON.parse(sc.enemies)
+      const list = (Array.isArray(parsed) ? parsed : []).map((e: any) => ({
+        id: e.id, name: e.name || e.id,
+        def: e.def ?? 50, resistance: e.resistance ?? 20,
+      }))
+      enemyList.value = list
+      if (list.length > 0) {
+        selectedEnemyId.value = list[0].id
+        for (const r of rows) r.targetEnemyId = list[0].id
+      }
+    } catch {}
   }
+
+  actionRows.value = rows
+  if (rows.length > 0) activeResultTab.value = memberConfigs[0]?.charId ?? ''
+}
+
+// ── Enemy management ──
+async function openEnemySearch() {
+  showEnemySearch.value = true
+  searchEnemyKeyword.value = ''
+  try {
+    enemyDbList.value = await EnemyApi.listAll()
+  } catch { enemyDbList.value = [] }
+}
+
+function onEnemySelect(id: string) {
+  const found = enemyDbList.value.find((e: any) => e.id === id)
+  if (!found) return
+  if (enemyList.value.find(e => e.id === id)) { ElMessage.info('该敌人已在列表中'); return }
+  enemyList.value.push({
+    id: found.id,
+    name: found.name || found.id,
+    def: found.def ?? found.maxStagger ?? 50,
+    resistance: found.resistance ?? 20,
+  })
+  selectedEnemyId.value = found.id
+  showEnemySearch.value = false
+}
+
+async function removeEnemy(eid: string) {
+  const affected = actionRows.value.filter(r => r.targetEnemyId === eid)
+  let msg = `确认删除敌人「${enemyName(eid)}」？`
+  if (affected.length > 0) {
+    msg += ` 该操作将清空 ${affected.length} 行动作中的命中敌人设置。`
+  }
+  try {
+    await ElMessageBox.confirm(msg, '删除确认')
+    for (const r of affected) r.targetEnemyId = undefined
+    enemyList.value = enemyList.value.filter(e => e.id !== eid)
+    if (selectedEnemyId.value === eid) {
+      selectedEnemyId.value = enemyList.value[0]?.id ?? ''
+    }
+  } catch { /* cancelled */ }
+}
+
+function assignEnemy(row: ActionRow) {
+  if (!selectedEnemyId.value) { ElMessage.info('请在左侧敌人配置中先点击选择一个敌人'); return }
+  row.targetEnemyId = row.targetEnemyId === selectedEnemyId.value ? undefined : selectedEnemyId.value
 }
 
 // ── Replace skill ──
@@ -446,9 +535,10 @@ function runSim() {
   }
 
   const gainMap: SimulateRowsConfig['gainMap'] = {}
-  for (const g of allGains.value) {
-    gainMap[g.id] = g
-  }
+  for (const g of allGains.value) { gainMap[g.id] = g }
+
+  const enemyMap: Record<string, { def: number; resistance: number }> = {}
+  for (const e of enemyList.value) { enemyMap[e.id] = { def: e.def, resistance: e.resistance } }
 
   const config: SimulateRowsConfig = {
     rows: actionRows.value,
@@ -456,6 +546,7 @@ function runSim() {
     skillMap,
     gainMap: gainMap as any,
     gainCategoryMap: {},
+    enemyMap,
     targetDef: 50,
     targetResistance: 20,
     resistanceIgnore: 0,
@@ -499,7 +590,7 @@ onMounted(async () => {
 .dps-layout { display: flex; gap: 8px; height: 100%; }
 .left-panel { flex: 0 0 360px; overflow-y: auto; }
 .right-panel { flex: 1; overflow-y: auto; min-width: 0; }
-.lib-section { max-height: 240px; overflow-y: auto; margin-bottom: 4px; }
+.lib-section { max-height: 200px; overflow-y: auto; margin-bottom: 4px; }
 .char-block { margin-bottom: 6px; padding: 6px; border-radius: 6px; border: 2px solid transparent; cursor: pointer; transition: all 0.15s; background: #fafafa; }
 .char-block:hover { border-color: #e4e7ed; }
 .char-selected { border-color: #409eff; background: #f0f7ff; }
@@ -528,6 +619,9 @@ onMounted(async () => {
 .gain-icon { width: 16px; height: 16px; border-radius: 2px; display: inline-flex; align-items: center; justify-content: center; font-size: 8px; color: #fff; background: #67c23a; }
 .gain-name { color: #303133; }
 .gain-meta { color: #909399; font-size: 10px; }
+.enemy-card { margin-bottom: 6px; padding: 8px; border-radius: 6px; border: 2px solid #e4e7ed; cursor: pointer; transition: all 0.15s; background: #fafafa; }
+.enemy-card:hover { border-color: #c0c4cc; }
+.enemy-selected { border-color: #409eff; background: #f0f7ff; }
 .toolbar { display: flex; align-items: center; gap: 4px; margin-bottom: 6px; padding: 4px 8px; background: #f5f7fa; border-radius: 4px; }
 .clickable-cell { cursor: pointer; padding: 1px 4px; border-radius: 3px; transition: background 0.15s; }
 .clickable-cell:hover { background: #ecf5ff; }

@@ -77,6 +77,12 @@ export interface ActionRow {
   enemyBuffs: (string | null)[]
   spCost: number
   damage: number
+  targetEnemyId?: string
+}
+
+export interface EnemyParam {
+  def: number
+  resistance: number
 }
 
 export interface SimulateRowsConfig {
@@ -85,6 +91,7 @@ export interface SimulateRowsConfig {
   skillMap: Record<string, { multiplier: number; damageType: string; type: string }>
   gainMap: Record<string, { id: string; effectCategory?: string; effectType?: string; effectValue?: number; valueType?: string }>
   gainCategoryMap: Record<string, string>
+  enemyMap?: Record<string, EnemyParam>
   targetDef: number
   targetResistance: number
   resistanceIgnore: number

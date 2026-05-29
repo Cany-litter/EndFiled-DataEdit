@@ -226,7 +226,7 @@ function getComboMultRows(level: number, type: string): number {
 }
 
 export function simulateRows(config: SimulateRowsConfig): TeamSimulationResult {
-  const { rows, charStats, skillMap, gainMap, targetDef, targetResistance, resistanceIgnore } = config
+  const { rows, charStats, skillMap, gainMap, enemyMap, targetDef, targetResistance, resistanceIgnore } = config
   const charMap = new Map<string, { totalDamage: number; totalCasts: number; totalSpUsed: number; skillBreakdown: Record<string, { count: number; totalDamage: number }>; categoryBreakdown: Record<string, number> }>()
 
   let comboCount = 0
@@ -282,8 +282,9 @@ export function simulateRows(config: SimulateRowsConfig): TeamSimulationResult {
     const baseDamage = stats.attack * skill.multiplier
     const { finalDamage: catDamage, breakdown } = calcDamageByCategories(baseDamage, buffs, DAMAGE_CATEGORIES, context)
     const crit = collectCrit(buffs, context, stats.critRate, stats.critDamage)
-    const defMult = skill.damageType === 'true' ? 1 : 100 / (targetDef + 100)
-    const resMult = 1 - targetResistance / 100 + resistanceIgnore / 100
+    const ep = enemyMap?.[row.targetEnemyId ?? ''] ?? { def: targetDef, resistance: targetResistance }
+    const defMult = skill.damageType === 'true' ? 1 : 100 / (ep.def + 100)
+    const resMult = 1 - ep.resistance / 100 + resistanceIgnore / 100
     const comboMult = getComboMultRows(comboCount, skill.type)
 
     const finalDamage = catDamage * crit.expectedMultiplier * defMult * resMult * comboMult * row.targetCount
