@@ -131,34 +131,33 @@
             </el-tab-pane>
           </el-tabs>
 
-          <el-card shadow="never" style="margin-bottom:8px">
-            <template #header><span>伤害统计</span></template>
-            <el-table :data="statRows" border stripe size="small">
-              <el-table-column label="干员" width="80">
-                <template #default="{ row }">{{ charNameMap[row.name] || row.name }}</template>
-              </el-table-column>
-              <el-table-column label="总伤害" width="130">
-                <template #default="{ row }">{{ row.totalDamage.toFixed(0) }}</template>
-              </el-table-column>
-              <el-table-column label="DPS" width="90">
-                <template #default="{ row }">{{ row.dps.toFixed(1) }}</template>
-              </el-table-column>
-              <el-table-column label="占比" width="70">
-                <template #default="{ row }">{{ (row.pct * 100).toFixed(1) }}%</template>
-              </el-table-column>
-              <el-table-column label="消耗技力" width="80">
-                <template #default="{ row }">{{ row.totalSpUsed }}</template>
-              </el-table-column>
-            </el-table>
-          </el-card>
-
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-            <el-card shadow="never">
-              <template #header><span>元素伤害占比</span></template>
+          <div style="display:flex;gap:8px;margin-bottom:8px;align-items:stretch">
+            <el-card shadow="never" style="flex:1;min-width:0">
+              <template #header><span style="font-size:13px;font-weight:600">伤害统计</span></template>
+              <el-table :data="statRows" border stripe size="small">
+                <el-table-column label="干员" width="80">
+                  <template #default="{ row }">{{ charNameMap[row.name] || row.name }}</template>
+                </el-table-column>
+                <el-table-column label="总伤害" width="130">
+                  <template #default="{ row }">{{ row.totalDamage.toFixed(0) }}</template>
+                </el-table-column>
+                <el-table-column label="DPS" width="90">
+                  <template #default="{ row }">{{ row.dps.toFixed(1) }}</template>
+                </el-table-column>
+                <el-table-column label="占比" width="70">
+                  <template #default="{ row }">{{ (row.pct * 100).toFixed(1) }}%</template>
+                </el-table-column>
+                <el-table-column label="消耗技力" width="80">
+                  <template #default="{ row }">{{ row.totalSpUsed }}</template>
+                </el-table-column>
+              </el-table>
+            </el-card>
+            <el-card shadow="never" style="width:240px;flex-shrink:0">
+              <template #header><span style="font-size:12px;font-weight:600">元素伤害占比</span></template>
               <div ref="elementChartRef" style="height:160px" />
             </el-card>
-            <el-card shadow="never">
-              <template #header><span>技能类型伤害占比</span></template>
+            <el-card shadow="never" style="width:240px;flex-shrink:0">
+              <template #header><span style="font-size:12px;font-weight:600">技能类型伤害占比</span></template>
               <div ref="skillTypeChartRef" style="height:160px" />
             </el-card>
           </div>
@@ -636,14 +635,16 @@ function renderCharts() {
     if (!skillTypeChart) skillTypeChart = echarts.init(skillTypeChartRef.value)
     const entries = Object.entries(result.value.teamSkillTypeDamage).filter(([, v]) => v > 0)
     const total = entries.reduce((s, [, v]) => s + v, 0)
+    const labels = entries.map(([k]) => skillTypeChartLabel(k) || k)
     skillTypeChart.setOption({
-      tooltip: { trigger: 'axis', formatter: (p: any) => `${p[0].name}: ${(p[0].value).toFixed(0)} (${(p[0].value / total * 100).toFixed(1)}%)` },
-      grid: { left: 40, right: 10, top: 10, bottom: 20 },
-      xAxis: { type: 'category', data: entries.map(([k]) => skillTypeChartLabel(k) || k), axisLabel: { fontSize: 10 } },
-      yAxis: { type: 'value', axisLabel: { fontSize: 9 } },
+      tooltip: { trigger: 'axis', formatter: (p: any) => `${p[0].name}: ${Number(p[0].value).toFixed(0)} (${(Number(p[0].value) / total * 100).toFixed(1)}%)` },
+      grid: { left: 5, right: 5, top: 15, bottom: 30 },
+      xAxis: { type: 'category', data: labels, axisLabel: { fontSize: 10, rotate: 0, interval: 0 } },
+      yAxis: { type: 'value', show: false },
       series: [{
-        type: 'bar', barWidth: '50%',
+        type: 'bar', barWidth: '60%',
         data: entries.map(([k, v]) => ({ value: v, itemStyle: { color: skillTypeChartColors[k] || '#909399' } })),
+        label: { show: true, position: 'top', fontSize: 9, formatter: (p: any) => (p.value / total * 100).toFixed(0) + '%' },
       }],
     })
   }
