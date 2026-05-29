@@ -73,7 +73,7 @@
             <polygon v-if="staggerPolyline(enemy.id)" :points="staggerArea(enemy.id)" :fill="'url(#stagger-grad-'+ei+')'" />
             <polyline v-if="staggerPolyline(enemy.id)" :points="staggerPolyline(enemy.id)" fill="none" :stroke="colors[ei % colors.length]" stroke-width="1.5" stroke-linejoin="round" />
           </g>
-          <text x="4" :y="spLabelY" font-size="10" fill="#ffd700" font-weight="600">技力</text>
+          
           <line x1="0" :y1="spY(300)" :x2="contentWidth" :y2="spY(300)" stroke="#e8e8e8" stroke-width="0.5" stroke-dasharray="3,2" />
           <line x1="0" :y1="spY(200)" :x2="contentWidth" :y2="spY(200)" stroke="#e8e8e8" stroke-width="0.5" stroke-dasharray="3,2" />
           <line x1="0" :y1="spY(100)" :x2="contentWidth" :y2="spY(100)" stroke="#e8e8e8" stroke-width="0.5" stroke-dasharray="3,2" />

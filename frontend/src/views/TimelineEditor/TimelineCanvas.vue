@@ -107,6 +107,14 @@
               </div>
             </div>
           </template>
+
+          <!-- 技力区域标签 -->
+          <div v-if="enemies && enemies.length > 0" class="track-label"
+            :style="{ top: RULER_HEIGHT + enemyStaggerTop(enemies.length - 1) + ENEMY_STAGGER_HEIGHT + ENEMY_GAP + 2 + 'px', height: 60 + 'px' }">
+            <div class="track-label-content">
+              <div class="label-name">技力</div>
+            </div>
+          </div>
         </div>
       </div>
 
