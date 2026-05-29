@@ -48,27 +48,6 @@
                 </div>
               </div>
 
-              <el-divider content-position="left">敌人配置</el-divider>
-              <div style="margin-bottom:4px">
-                <el-button size="small" @click="showEnemySearch = true">+ 添加敌人</el-button>
-              </div>
-              <div class="lib-section">
-                <div v-for="e in enemyList" :key="e.id"
-                  class="enemy-card" :class="{ 'enemy-selected': selectedEnemyId === e.id }"
-                  @click="selectedEnemyId = e.id">
-                  <div style="display:flex;justify-content:space-between;align-items:center">
-                    <span style="font-weight:600;font-size:12px">{{ e.name }}</span>
-                    <el-button size="small" text type="danger" @click.stop="removeEnemy(e.id)">✕</el-button>
-                  </div>
-                  <div style="display:flex;gap:8px;margin-top:4px">
-                    <span style="font-size:11px;color:#909399">防御</span>
-                    <el-input-number v-model="e.def" :min="0" :max="500" size="small" style="width:80px" @click.stop />
-                    <span style="font-size:11px;color:#909399">抗性</span>
-                    <el-input-number v-model="e.resistance" :min="0" :max="100" size="small" style="width:80px" @click.stop />
-                  </div>
-                </div>
-              </div>
-
               <el-button type="primary" style="width:100%;margin-top:8px" @click="runSim">开始模拟</el-button>
             </template>
           </el-form>
@@ -135,20 +114,20 @@
           <div style="display:flex;gap:8px;margin-bottom:8px;align-items:stretch">
             <el-card shadow="never" style="flex:2;min-width:320px">
               <template #header><span style="font-size:13px;font-weight:600">伤害统计</span></template>
-              <el-table :data="statRows" border stripe size="small">
-                <el-table-column label="干员" width="80">
+              <el-table :data="statRows" border stripe size="small" style="width:100%">
+                <el-table-column label="干员" min-width="70">
                   <template #default="{ row }">{{ charNameMap[row.name] || row.name }}</template>
                 </el-table-column>
-                <el-table-column label="总伤害" width="130">
+                <el-table-column label="总伤害" min-width="100">
                   <template #default="{ row }">{{ row.totalDamage.toFixed(0) }}</template>
                 </el-table-column>
-                <el-table-column label="DPS" width="90">
+                <el-table-column label="DPS" min-width="80">
                   <template #default="{ row }">{{ row.dps.toFixed(1) }}</template>
                 </el-table-column>
-                <el-table-column label="占比" width="70">
+                <el-table-column label="占比" min-width="60">
                   <template #default="{ row }">{{ (row.pct * 100).toFixed(1) }}%</template>
                 </el-table-column>
-                <el-table-column label="消耗技力" width="80">
+                <el-table-column label="消耗技力" min-width="70">
                   <template #default="{ row }">{{ row.totalSpUsed }}</template>
                 </el-table-column>
               </el-table>
@@ -162,6 +141,30 @@
               <div ref="skillTypeChartRef" style="height:160px" />
             </el-card>
           </div>
+
+          <el-card shadow="never" style="margin-top:8px">
+            <template #header>
+              <span style="font-size:13px;font-weight:600">敌人配置</span>
+              <el-button size="small" style="float:right" @click="showEnemySearch = true">+ 添加敌人</el-button>
+            </template>
+            <div v-if="enemyList.length === 0" style="color:#909399;font-size:12px;padding:8px 0">暂无敌人，请点击"添加敌人"</div>
+            <div v-else style="display:flex;flex-wrap:wrap;gap:8px">
+              <div v-for="e in enemyList" :key="e.id"
+                class="enemy-card" :class="{ 'enemy-selected': selectedEnemyId === e.id }"
+                @click="selectedEnemyId = e.id" style="width:280px">
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                  <span style="font-weight:600;font-size:12px">{{ e.name }}</span>
+                  <el-button size="small" text type="danger" @click.stop="removeEnemy(e.id)">✕</el-button>
+                </div>
+                <div style="display:flex;gap:8px;margin-top:4px">
+                  <span style="font-size:11px;color:#909399">防御</span>
+                  <el-input-number v-model="e.def" :min="0" :max="500" size="small" style="width:80px" @click.stop />
+                  <span style="font-size:11px;color:#909399">抗性</span>
+                  <el-input-number v-model="e.resistance" :min="0" :max="100" size="small" style="width:80px" @click.stop />
+                </div>
+              </div>
+            </div>
+          </el-card>
         </template>
 
         <div v-else style="display:flex;align-items:center;justify-content:center;height:400px;color:#909399;font-size:14px">
@@ -699,7 +702,7 @@ onMounted(async () => {
 .dps-layout { display: flex; gap: 8px; height: 100%; }
 .left-panel { flex: 0 0 360px; overflow-y: auto; }
 .right-panel { flex: 1; overflow-y: auto; min-width: 0; }
-.lib-section { max-height: 200px; overflow-y: auto; margin-bottom: 4px; }
+.lib-section { max-height: 260px; overflow-y: auto; margin-bottom: 4px; }
 .char-block { margin-bottom: 6px; padding: 6px; border-radius: 6px; border: 2px solid transparent; cursor: pointer; transition: all 0.15s; background: #fafafa; }
 .char-block:hover { border-color: #e4e7ed; }
 .char-selected { border-color: #409eff; background: #f0f7ff; }
