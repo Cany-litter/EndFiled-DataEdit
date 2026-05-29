@@ -83,6 +83,7 @@
                 <el-button size="small" @click="addSelfBuffCol">+ 己方增益列</el-button>
                 <el-button size="small" @click="addEnemyBuffCol">+ 敌方增益列</el-button>
                 <el-button size="small" type="primary" @click="addRowToCurrentTab" style="margin-left:4px">+ 添加行</el-button>
+                <el-button size="small" :type="dirty ? 'warning' : 'primary'" style="margin-left:8px" @click="runSim">{{ dirty ? '⚠ 更新计算' : '✓ 更新计算' }}</el-button>
                 <span style="font-size:12px;color:#909399;margin-left:8px">
                   点击技能库技能替换技能名称 | 点击增益/敌人填入对应列
                 </span>
@@ -132,7 +133,7 @@
           </el-tabs>
 
           <div style="display:flex;gap:8px;margin-bottom:8px;align-items:stretch">
-            <el-card shadow="never" style="flex:1;min-width:0">
+            <el-card shadow="never" style="flex:2;min-width:320px">
               <template #header><span style="font-size:13px;font-weight:600">伤害统计</span></template>
               <el-table :data="statRows" border stripe size="small">
                 <el-table-column label="干员" width="80">
@@ -152,11 +153,11 @@
                 </el-table-column>
               </el-table>
             </el-card>
-            <el-card shadow="never" style="width:240px;flex-shrink:0">
+            <el-card shadow="never" style="flex:1;min-width:180px">
               <template #header><span style="font-size:12px;font-weight:600">元素伤害占比</span></template>
               <div ref="elementChartRef" style="height:160px" />
             </el-card>
-            <el-card shadow="never" style="width:240px;flex-shrink:0">
+            <el-card shadow="never" style="flex:1;min-width:180px">
               <template #header><span style="font-size:12px;font-weight:600">技能类型伤害占比</span></template>
               <div ref="skillTypeChartRef" style="height:160px" />
             </el-card>
@@ -213,6 +214,7 @@ const skillTypeMap = ref<Record<string, string>>({})
 const skillDamageTypeMap = ref<Record<string, string>>({})
 const charSkillMap = ref<Record<string, any[]>>({})
 const result = ref<TeamSimulationResult | null>(null)
+const dirty = ref(false)
 
 const slotColors = ['#e74c3c', '#e67e22', '#2ecc71', '#3498db']
 
@@ -491,6 +493,7 @@ async function removeEnemy(eid: string) {
 function assignEnemy(row: ActionRow) {
   if (!selectedEnemyId.value) { ElMessage.info('请在左侧敌人配置中先点击选择一个敌人'); return }
   row.targetEnemyId = row.targetEnemyId === selectedEnemyId.value ? undefined : selectedEnemyId.value
+  dirty.value = true
 }
 
 // ── Replace skill ──
@@ -501,23 +504,26 @@ function replaceSkill(row: ActionRow) {
   row.skillName = memberConfigs.flatMap(m => m.availableSkills).find(s => s.id === skId)?.name ?? skId
   row.skillType = skillTypeMap.value[skId] ?? 'other'
   row.damageType = skillDamageTypeMap.value[skId] ?? ''
+  dirty.value = true
 }
 
 // ── Fill buff cells ──
 function fillSelfBuff(row: ActionRow, ci: number) {
   if (!selectedGainId.value) { ElMessage.info('请在左侧增益库中先点击选择一个增益'); return }
   const gid = selectedGainId.value
-  if (row.selfBuffs[ci] === gid) { row.selfBuffs[ci] = null; return }
+  if (row.selfBuffs[ci] === gid) { row.selfBuffs[ci] = null; dirty.value = true; return }
   while (row.selfBuffs.length <= ci) row.selfBuffs.push(null)
   row.selfBuffs[ci] = gid
+  dirty.value = true
 }
 
 function fillEnemyBuff(row: ActionRow, ci: number) {
   if (!selectedGainId.value) { ElMessage.info('请在左侧增益库中先点击选择一个增益'); return }
   const gid = selectedGainId.value
-  if (row.enemyBuffs[ci] === gid) { row.enemyBuffs[ci] = null; return }
+  if (row.enemyBuffs[ci] === gid) { row.enemyBuffs[ci] = null; dirty.value = true; return }
   while (row.enemyBuffs.length <= ci) row.enemyBuffs.push(null)
   row.enemyBuffs[ci] = gid
+  dirty.value = true
 }
 
 // ── Add columns ──
@@ -526,6 +532,7 @@ function addSelfBuffCol() {
   for (const row of actionRows.value) {
     while (row.selfBuffs.length < selfBuffColCount.value) row.selfBuffs.push(null)
   }
+  dirty.value = true
 }
 
 function addEnemyBuffCol() {
@@ -533,6 +540,7 @@ function addEnemyBuffCol() {
   for (const row of actionRows.value) {
     while (row.enemyBuffs.length < enemyBuffColCount.value) row.enemyBuffs.push(null)
   }
+  dirty.value = true
 }
 
 // ── Add row ──
@@ -610,6 +618,7 @@ function runSim() {
   }
 
   result.value = simulateRows(config)
+  dirty.value = false
   nextTick(() => renderCharts())
 }
 
