@@ -1,19 +1,18 @@
 <template>
-  <div class="enemy-bar" :class="{ collapsed: !expanded }">
+  <div class="enemy-bar">
     <div class="enemy-bar-toolbar">
-      <div style="display:flex;align-items:center;gap:6px;cursor:pointer" @click="expanded = !expanded">
-        <span class="collapse-arrow">{{ expanded ? '▼' : '▲' }}</span>
+      <div style="display:flex;align-items:center;gap:6px">
         <span style="font-size:12px;font-weight:600;color:#303133">敌人配置</span>
-        <el-button size="small" @click.stop="addCustomEnemy" style="margin-left:4px">+ 自定义</el-button>
-        <el-button size="small" text @click.stop="loadDbEnemies">↻</el-button>
+        <el-button size="small" @click="addCustomEnemy" style="margin-left:4px">+ 自定义</el-button>
+        <el-button size="small" text @click="loadDbEnemies">↻</el-button>
       </div>
       <div style="margin-top:6px">
-        <el-select v-model="selectedDbEnemy" filterable clearable placeholder="从数据库添加..." style="width:100%" @click.stop @change="onDbEnemySelect">
+        <el-select v-model="selectedDbEnemy" filterable clearable placeholder="从数据库添加..." style="width:100%" @change="onDbEnemySelect">
           <el-option v-for="e in dbEnemyList" :key="e.id" :label="`${e.name} (${e.tier || '--'})`" :value="e.id" />
         </el-select>
       </div>
     </div>
-    <div v-show="expanded" class="enemy-tags">
+    <div class="enemy-tags">
       <div v-for="(enemy, ei) in enemies" :key="enemy.id" class="enemy-tag" :style="{ borderLeftColor: colors[ei % colors.length] }">
         <div class="enemy-tag-header">
           <span class="enemy-tag-name">{{ enemy.name }}</span>
@@ -55,7 +54,6 @@ import type { Enemy, TimelineEnemy } from '../../api'
 const props = defineProps<{ enemies: TimelineEnemy[] }>()
 const emit = defineEmits<{ update: [enemies: TimelineEnemy[]] }>()
 
-const expanded = ref(true)
 const colors = ['#ff7875', '#67c23a', '#409eff', '#e6a23c', '#9b59b6', '#1abc9c', '#e74c3c', '#2ecc71']
 const dbEnemyList = ref<Enemy[]>([])
 const selectedDbEnemy = ref('')
@@ -102,8 +100,7 @@ onMounted(loadDbEnemies)
 </script>
 
 <style scoped>
-.enemy-bar { border-top: 1px solid #e4e7ed; background: #fafafa; flex-shrink: 0; }
-.enemy-bar.collapsed { flex-shrink: 0; }
+.enemy-bar { background: #fafafa; }
 .enemy-bar-toolbar { display: flex; align-items: center; gap: 6px; padding: 4px 8px; border-bottom: 1px solid #e4e7ed; user-select: none; }
 .collapse-arrow { font-size: 10px; color: #909399; width: 14px; text-align: center; }
 .enemy-tags { display: flex; gap: 4px; padding: 4px 8px; overflow-x: auto; flex-wrap: wrap; }
