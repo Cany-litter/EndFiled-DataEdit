@@ -82,6 +82,7 @@
               <div class="toolbar">
                 <el-button size="small" @click="addSelfBuffCol">+ 己方增益列</el-button>
                 <el-button size="small" @click="addEnemyBuffCol">+ 敌方增益列</el-button>
+                <el-button size="small" type="primary" @click="addRowToCurrentTab" style="margin-left:4px">+ 添加行</el-button>
                 <span style="font-size:12px;color:#909399;margin-left:8px">
                   点击技能库技能替换技能名称 | 点击增益/敌人填入对应列
                 </span>
@@ -533,6 +534,36 @@ function addEnemyBuffCol() {
   for (const row of actionRows.value) {
     while (row.enemyBuffs.length < enemyBuffColCount.value) row.enemyBuffs.push(null)
   }
+}
+
+// ── Add row ──
+function addRowToCurrentTab() {
+  const charId = activeResultTab.value
+  if (!charId) { ElMessage.warning('请先选择一个干员标签'); return }
+  const charRows = actionRows.value.filter(r => r.charId === charId)
+  const lastTime = charRows.length > 0 ? Math.max(...charRows.map(r => r.time)) : 0
+  const mc = memberConfigs.find(m => m.charId === charId)
+  const firstSkill = mc?.availableSkills?.[0]
+  const skId = firstSkill?.id ?? ''
+  const newRow: ActionRow = {
+    seq: actionRows.value.length + 1,
+    time: lastTime + 1,
+    charId,
+    skillId: skId,
+    skillName: firstSkill?.name ?? '新动作',
+    skillType: skillTypeMap.value[skId] ?? 'other',
+    damageType: skillDamageTypeMap.value[skId] ?? firstSkill?.damageType ?? '',
+    selfBuffs: [],
+    targetCount: 1,
+    enemyBuffs: [],
+    spCost: 0,
+    damage: 0,
+    targetEnemyId: selectedEnemyId.value || undefined,
+  }
+  actionRows.value.push(newRow)
+  actionRows.value.sort((a, b) => a.time - b.time)
+  actionRows.value.forEach((r, i) => r.seq = i + 1)
+  runSim()
 }
 
 // ── Simulate ──
