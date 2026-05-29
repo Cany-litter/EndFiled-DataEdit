@@ -1,13 +1,17 @@
 <template>
   <div class="enemy-bar" :class="{ collapsed: !expanded }">
-    <div class="enemy-bar-toolbar" @click="expanded = !expanded" style="cursor:pointer">
-      <span class="collapse-arrow">{{ expanded ? '▼' : '▲' }}</span>
-      <span style="font-size:12px;font-weight:600;color:#303133">敌人配置</span>
-      <el-select v-model="selectedDbEnemy" filterable clearable placeholder="从数据库添加..." style="width:200px" @click.stop @change="onDbEnemySelect">
-        <el-option v-for="e in dbEnemyList" :key="e.id" :label="`${e.name} (${e.tier || '--'})`" :value="e.id" />
-      </el-select>
-      <el-button size="small" @click.stop="addCustomEnemy">+ 自定义</el-button>
-      <el-button size="small" text @click.stop="loadDbEnemies">↻</el-button>
+    <div class="enemy-bar-toolbar">
+      <div style="display:flex;align-items:center;gap:6px;cursor:pointer" @click="expanded = !expanded">
+        <span class="collapse-arrow">{{ expanded ? '▼' : '▲' }}</span>
+        <span style="font-size:12px;font-weight:600;color:#303133">敌人配置</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:4px;margin-top:4px">
+        <el-select v-model="selectedDbEnemy" filterable clearable placeholder="从数据库添加..." style="width:100%" @click.stop @change="onDbEnemySelect">
+          <el-option v-for="e in dbEnemyList" :key="e.id" :label="`${e.name} (${e.tier || '--'})`" :value="e.id" />
+        </el-select>
+        <el-button size="small" @click.stop="addCustomEnemy">+ 自定义</el-button>
+        <el-button size="small" text @click.stop="loadDbEnemies">↻</el-button>
+      </div>
     </div>
     <div v-show="expanded" class="enemy-tags">
       <div v-for="(enemy, ei) in enemies" :key="enemy.id" class="enemy-tag" :style="{ borderLeftColor: colors[ei % colors.length] }">
