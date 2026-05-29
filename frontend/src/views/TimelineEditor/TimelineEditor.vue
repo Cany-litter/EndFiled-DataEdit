@@ -53,6 +53,9 @@
           <el-tab-pane label="增益库" name="buff">
             <BuffLibrary />
           </el-tab-pane>
+          <el-tab-pane label="敌人配置" name="enemy">
+            <EnemyBar :enemies="enemies" @update="onEnemiesUpdate" />
+          </el-tab-pane>
         </el-tabs>
       </div>
       <div class="panel-section card-panel" v-else>
@@ -96,7 +99,6 @@
             @toggle-properties="rightPanelCollapsed = !rightPanelCollapsed"
           />
         </div>
-        <EnemyBar :enemies="enemies" @update="onEnemiesUpdate" />
       </div>
     </div>
 

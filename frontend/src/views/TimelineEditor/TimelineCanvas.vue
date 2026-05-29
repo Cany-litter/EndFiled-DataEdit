@@ -88,14 +88,12 @@
           <template v-for="(enemy, ei) in (enemies || [])" :key="'el'+ei">
             <div class="track-label" :style="{ top: RULER_HEIGHT + enemyStateTrackTop(ei) + 'px', height: ENEMY_STATE_HEIGHT + 'px' }">
               <div class="track-label-content">
-                <div class="label-slot" style="background:#9b59b6">{{ '敌' + (ei + 1) }}</div>
                 <div class="label-name">{{ enemy.name }}</div>
                 <div class="label-sub">状态</div>
               </div>
             </div>
             <div class="track-label" :style="{ top: RULER_HEIGHT + enemyBuffTrackTop(ei) + 'px', height: ENEMY_BUFF_HEIGHT + 'px' }">
               <div class="track-label-content">
-                <div class="label-slot" :style="{ background: enemyColors[ei % enemyColors.length] }">{{ '敌' + (ei + 1) }}</div>
                 <div class="label-name">{{ enemy.name }}</div>
                 <div class="label-sub">增益</div>
               </div>
