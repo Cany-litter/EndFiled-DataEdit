@@ -384,6 +384,8 @@ async function onScenarioSelect(id: string) {
     )
 
     const skills = allSkills.filter((s: any) => s.characterId === c.id)
+    const typeOrder: Record<string, number> = { normal: 0, attack: 0, skill: 1, chain: 2, link: 2, ultimate: 3, talent1: 4, talent2: 5, other: 6 }
+    skills.sort((a: any, b: any) => (typeOrder[a.type] ?? 99) - (typeOrder[b.type] ?? 99))
     charSkillMap.value[c.id] = skills
     charList.push({
       name: c.name, charId: c.id, attack: stats.attack, stats,
@@ -710,7 +712,7 @@ onMounted(async () => {
 .slot-badge { width: 18px; height: 18px; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #fff; font-weight: 700; flex-shrink: 0; }
 .char-name { font-size: 12px; font-weight: 600; color: #303133; }
 .char-atk { font-size: 10px; color: #909399; margin-left: auto; }
-.skill-chips { display: flex; flex-wrap: wrap; gap: 3px; }
+.skill-chips { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
 .skill-chip { display: inline-flex; align-items: center; gap: 3px; padding: 2px 6px; border-radius: 4px; font-size: 11px; cursor: pointer; border: 1px solid transparent; transition: all 0.15s; }
 .skill-chip:hover { border-color: #c0c4cc; }
 .skill-chip.active { border-color: #409eff; background: #ecf5ff; }

@@ -485,7 +485,7 @@ function onCtxDelete() {
 .bar-delete:hover { color: #f56c6c; font-weight: 700; }
 .track-hint {
   font-size: 10px; color: #c0c4cc; padding: 4px 8px; user-select: none;
-  width: 100%; text-align: center; box-sizing: border-box;
+  width: 100%; box-sizing: border-box;
 }
 
 /* Context menu */
