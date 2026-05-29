@@ -36,6 +36,8 @@ export interface TeamSimulationResult {
     totalDamage: number
     dps: number
     totalCasts: number
+    totalSpUsed: number
+    actionRows: ActionRow[]
     skillBreakdown: Record<string, { count: number; totalDamage: number }>
     categoryBreakdown?: Record<string, number>
   }[]
@@ -60,6 +62,32 @@ export interface SimulationConfig {
   vulnerableBonus?: number
   comboBonus?: number
   specialMultiplier?: number
+}
+
+export interface ActionRow {
+  seq: number
+  time: number
+  charId: string
+  skillId: string
+  skillName: string
+  skillType: string
+  damageType: string
+  selfBuffs: (string | null)[]
+  targetCount: number
+  enemyBuffs: (string | null)[]
+  spCost: number
+  damage: number
+}
+
+export interface SimulateRowsConfig {
+  rows: ActionRow[]
+  charStats: Record<string, { attack: number; critRate: number; critDamage: number; str: number; agi: number; int: number; wil: number }>
+  skillMap: Record<string, { multiplier: number; damageType: string; type: string }>
+  gainMap: Record<string, { id: string; effectCategory?: string; effectType?: string; effectValue?: number; valueType?: string }>
+  gainCategoryMap: Record<string, string>
+  targetDef: number
+  targetResistance: number
+  resistanceIgnore: number
 }
 
 export interface SystemConstants {

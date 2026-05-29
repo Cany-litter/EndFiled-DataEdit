@@ -140,8 +140,8 @@ CREATE TABLE IF NOT EXISTS `gain` (
 
 -- 5. 技能表
 CREATE TABLE IF NOT EXISTS `skill` (
-    `id`            VARCHAR(32)     NOT NULL PRIMARY KEY COMMENT '技能ID',
-    `character_id`  VARCHAR(32)     NOT NULL COMMENT '所属角色ID',
+    `id`            VARCHAR(64)     NOT NULL PRIMARY KEY COMMENT '技能ID',
+    `character_id`  VARCHAR(64)     NOT NULL COMMENT '所属角色ID',
     `name`          VARCHAR(50)     NOT NULL COMMENT '技能名称',
     `type`          VARCHAR(20)     NOT NULL COMMENT '技能类型 normal/skill/chain/ultimate/talent1/talent2/other',
     `damage_type`   VARCHAR(20)     NOT NULL COMMENT '伤害类型 pyro/cryo/electro/natural/physical/ultra/true/other',
@@ -157,7 +157,7 @@ CREATE TABLE IF NOT EXISTS `skill` (
 
 -- 6. 技能等级倍率表
 CREATE TABLE IF NOT EXISTS `skill_level` (
-    `skill_id`      VARCHAR(32)     NOT NULL COMMENT '技能ID',
+    `skill_id`      VARCHAR(64)     NOT NULL COMMENT '技能ID',
     `level`         TINYINT         NOT NULL CHECK (`level` BETWEEN 1 AND 12) COMMENT '等级 1~12',
     `multiplier`    DECIMAL(10,4)   NOT NULL COMMENT '倍率%',
     `created_at`    DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -168,7 +168,7 @@ CREATE TABLE IF NOT EXISTS `skill_level` (
 
 -- 7. 技能动作资源表 (v2.0+)
 CREATE TABLE IF NOT EXISTS `skill_action` (
-    `skill_id`              VARCHAR(32)     NOT NULL PRIMARY KEY COMMENT '技能ID',
+    `skill_id`              VARCHAR(64)     NOT NULL PRIMARY KEY COMMENT '技能ID',
     `cast_time`             DECIMAL(8,4)    DEFAULT 0 COMMENT '施法耗时秒',
     `pre_cast`              DECIMAL(8,4)    DEFAULT 0 COMMENT '前摇秒',
     `post_cast`             DECIMAL(8,4)    DEFAULT 0 COMMENT '后摇秒',
@@ -329,13 +329,14 @@ CREATE TABLE IF NOT EXISTS `timeline_scenario` (
 
 -- 14. 技能消耗表 (v1.2+)
 CREATE TABLE IF NOT EXISTS `skill_cost` (
-    `skill_id`          VARCHAR(32)     NOT NULL COMMENT '技能ID',
+    `skill_id`          VARCHAR(64)     NOT NULL COMMENT '技能ID',
     `level`             TINYINT         NOT NULL CHECK (`level` BETWEEN 1 AND 12) COMMENT '等级 1~12',
     `cost_value`        INT             COMMENT '技力消耗',
+    `tech_regen`        INT             COMMENT '技力恢复',
+    `tech_return`       INT             COMMENT '技力返还',
     `cool_down`         DECIMAL(8,4)    COMMENT '冷却时间(秒)',
     `usp`               INT             COMMENT '终结技能量',
     `poise`             DECIMAL(8,4)    COMMENT '失衡倍率',
-    `airborne_scale`    DECIMAL(8,4)    COMMENT '浮空倍率',
     `created_at`        DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updated_at`        DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`skill_id`, `level`),
@@ -356,7 +357,7 @@ ALTER TABLE `skill_action`
 
 -- 17. 技能伤害判定帧表 (v1.4+)
 CREATE TABLE IF NOT EXISTS `skill_damage_tick` (
-    `skill_id`          VARCHAR(32)     NOT NULL COMMENT '技能ID',
+    `skill_id`          VARCHAR(64)     NOT NULL COMMENT '技能ID',
     `tick_index`        TINYINT         NOT NULL COMMENT '伤害帧序号',
     `offset`            DECIMAL(8,4)    NOT NULL COMMENT '相对技能开始时间偏移(秒)',
     `stagger`           INT             DEFAULT 0 COMMENT '失衡值',
@@ -370,7 +371,7 @@ CREATE TABLE IF NOT EXISTS `skill_damage_tick` (
 
 -- 18. 技能异常附着表 (v1.4+)
 CREATE TABLE IF NOT EXISTS `skill_anomaly` (
-    `skill_id`          VARCHAR(32)     NOT NULL COMMENT '技能ID',
+    `skill_id`          VARCHAR(64)     NOT NULL COMMENT '技能ID',
     `anomaly_index`     TINYINT         NOT NULL COMMENT '异常序号',
     `group_index`       TINYINT         NOT NULL DEFAULT 0 COMMENT '异常组索引',
     `type`              VARCHAR(32)     NOT NULL COMMENT '异常类型',
@@ -386,7 +387,7 @@ CREATE TABLE IF NOT EXISTS `skill_anomaly` (
 
 -- 19. 普攻分段表 (v1.4+)
 CREATE TABLE IF NOT EXISTS `attack_segment` (
-    `character_id`      VARCHAR(32)     NOT NULL COMMENT '角色ID',
+    `character_id`      VARCHAR(64)     NOT NULL COMMENT '角色ID',
     `segment_index`     TINYINT         NOT NULL COMMENT '段数 0开始',
     `duration`          DECIMAL(8,4)    NOT NULL COMMENT '本段动画时长(秒)',
     `gauge_gain`        DECIMAL(8,4)    DEFAULT 0 COMMENT '连携量表获取',
@@ -399,7 +400,7 @@ CREATE TABLE IF NOT EXISTS `attack_segment` (
 
 -- 20. 普攻分段伤害帧表 (v1.4+)
 CREATE TABLE IF NOT EXISTS `attack_segment_tick` (
-    `character_id`      VARCHAR(32)     NOT NULL COMMENT '角色ID',
+    `character_id`      VARCHAR(64)     NOT NULL COMMENT '角色ID',
     `segment_index`     TINYINT         NOT NULL COMMENT '段数',
     `tick_index`        TINYINT         NOT NULL COMMENT '伤害帧序号',
     `offset`            DECIMAL(8,4)    NOT NULL COMMENT '相对段开始偏移(秒)',

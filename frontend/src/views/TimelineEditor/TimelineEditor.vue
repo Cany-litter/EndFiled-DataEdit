@@ -371,6 +371,8 @@ function onDropSkill(charId: string, actionData: Partial<TimelineAction>, time: 
   const instanceId = 'inst_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 6)
   const action: TimelineAction = {
     id: actionData.id!,
+    skillId: actionData.skillId ?? actionData.id,
+    damageType: actionData.damageType,
     type: actionData.type!,
     name: actionData.name!,
     librarySource: actionData.librarySource ?? 'character',

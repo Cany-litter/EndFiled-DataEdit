@@ -31,7 +31,7 @@
       </el-table>
     </el-card>
 
-    <el-dialog v-model="dialogVisible" :title="editing ? '编辑技能' : '新建技能'" width="700px">
+    <el-dialog v-model="dialogVisible" :title="editing ? '编辑技能' : '新建技能'" width="1000px">
       <el-tabs v-model="activeTab">
         <el-tab-pane label="基础信息" name="basic">
           <el-form :model="form" label-width="100px">
@@ -61,63 +61,44 @@
           <div style="margin-bottom:8px;font-size:13px;color:#909399">编辑 1~12 级的倍率与消耗参数</div>
           <el-table :data="formLevels" border stripe size="small" max-height="480" style="width:100%">
             <el-table-column prop="level" label="等级" width="55" />
-            <el-table-column label="倍率%">
+            <el-table-column label="倍率">
               <template #default="{ row }">
                 <el-input-number v-model="row.multiplier" :min="0" :max="99999" :step="0.01" :precision="2" size="small" style="width:100px" controls-position="right" />
               </template>
             </el-table-column>
-            <el-table-column label="技力">
+            <el-table-column label="技力消耗">
               <template #default="{ row }">
                 <el-input-number v-model="row.costValue" :min="0" :max="9999" size="small" style="width:80px" controls-position="right" :value-on-clear="null" />
               </template>
             </el-table-column>
-            <el-table-column label="冷却(秒)">
+            <el-table-column label="技力恢复">
+              <template #default="{ row }">
+                <el-input-number v-model="row.techRegen" :min="0" :max="9999" size="small" style="width:80px" controls-position="right" :value-on-clear="null" />
+              </template>
+            </el-table-column>
+            <el-table-column label="技力返还">
+              <template #default="{ row }">
+                <el-input-number v-model="row.techReturn" :min="0" :max="9999" size="small" style="width:80px" controls-position="right" :value-on-clear="null" />
+              </template>
+            </el-table-column>
+            <el-table-column label="冷却时间">
               <template #default="{ row }">
                 <el-input-number v-model="row.coolDown" :min="0" :max="999" :step="0.1" :precision="2" size="small" style="width:90px" controls-position="right" :value-on-clear="null" />
               </template>
             </el-table-column>
-            <el-table-column label="终技能量">
+            <el-table-column label="获得终结技能量">
               <template #default="{ row }">
                 <el-input-number v-model="row.usp" :min="0" :max="9999" size="small" style="width:80px" controls-position="right" :value-on-clear="null" />
               </template>
             </el-table-column>
-            <el-table-column label="削韧">
+            <el-table-column label="失衡">
               <template #default="{ row }">
                 <el-input-number v-model="row.poise" :min="0" :max="999" :step="0.01" :precision="2" size="small" style="width:80px" controls-position="right" :value-on-clear="null" />
-              </template>
-            </el-table-column>
-            <el-table-column label="击飞">
-              <template #default="{ row }">
-                <el-input-number v-model="row.airborneScale" :min="0" :max="999" :step="0.01" :precision="2" size="small" style="width:80px" controls-position="right" :value-on-clear="null" />
               </template>
             </el-table-column>
           </el-table>
         </el-tab-pane>
         <el-tab-pane label="动作参数" name="action">
-          <div style="margin-bottom:8px;font-size:13px;color:#909399">排轴模拟基础参数</div>
-          <el-form label-width="100px" size="small">
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-              <el-form-item label="持续时长">
-                <el-input-number v-model="formAction.duration" :min="0" :step="0.1" style="width:100%" :value-on-clear="null" />
-              </el-form-item>
-              <el-form-item label="冷却时间">
-                <el-input-number v-model="formAction.cooldown" :min="0" :step="0.5" style="width:100%" :value-on-clear="null" />
-              </el-form-item>
-              <el-form-item label="技力消耗">
-                <el-input-number v-model="formAction.spCost" :min="0" style="width:100%" :value-on-clear="null" />
-              </el-form-item>
-              <el-form-item label="技能获取">
-                <el-input-number v-model="formAction.techReturn" :min="0" style="width:100%" :value-on-clear="null" />
-              </el-form-item>
-              <el-form-item label="自身充能">
-                <el-input-number v-model="formAction.gaugeGain" :min="0" :step="0.5" style="width:100%" :value-on-clear="null" />
-              </el-form-item>
-              <el-form-item label="队友充能">
-                <el-input-number v-model="formAction.teamGaugeGain" :min="0" :step="0.5" style="width:100%" :value-on-clear="null" />
-              </el-form-item>
-            </div>
-          </el-form>
-          <el-divider />
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
             <span style="font-weight:600;font-size:13px;color:#606266">伤害判定帧</span>
             <el-button size="small" type="primary" @click="addTick">+ 添加</el-button>
@@ -243,6 +224,8 @@ function initFormLevels(skillId: string, existingLevels: any[], existingCosts: a
     level: lv,
     multiplier: levelMap[lv]?.multiplier ?? 0,
     costValue: costMap[lv]?.costValue ?? null,
+    techRegen: costMap[lv]?.techRegen ?? null,
+    techReturn: costMap[lv]?.techReturn ?? null,
     coolDown: costMap[lv]?.coolDown ?? null,
     usp: costMap[lv]?.usp ?? null,
     poise: costMap[lv]?.poise ?? null,
@@ -312,11 +295,11 @@ async function save() {
       ? api.put('/skill-levels', { skillId: sid, level: lv.level, multiplier: lv.multiplier })
       : api.post('/skill-levels', { skillId: sid, level: lv.level, multiplier: lv.multiplier })
 
-    const hasCost = lv.costValue != null || lv.coolDown != null || lv.usp != null || lv.poise != null
+    const hasCost = lv.costValue != null || lv.techRegen != null || lv.techReturn != null || lv.coolDown != null || lv.usp != null || lv.poise != null
     if (!hasCost) return levelReq
 
     const costExists = existingCostIds.has(lv.level)
-    const costBody = { skillId: sid, level: lv.level, costValue: lv.costValue, coolDown: lv.coolDown, usp: lv.usp, poise: lv.poise }
+    const costBody = { skillId: sid, level: lv.level, costValue: lv.costValue, techRegen: lv.techRegen, techReturn: lv.techReturn, coolDown: lv.coolDown, usp: lv.usp, poise: lv.poise }
     const costReq = costExists
       ? api.put('/skill-costs', costBody)
       : api.post('/skill-costs', costBody)
@@ -324,24 +307,6 @@ async function save() {
     return levelReq.then(() => costReq)
   })
   await Promise.all(saves)
-
-  // 保存 SkillAction
-  if (formAction.value.skillId || editing.value) {
-    const actionPayload: any = {
-      skillId: sid,
-      duration: formAction.value.duration ?? null,
-      cooldown: formAction.value.cooldown ?? null,
-      spCost: formAction.value.spCost ?? null,
-      techReturn: formAction.value.techReturn ?? null,
-      gaugeGain: formAction.value.gaugeGain ?? null,
-      teamGaugeGain: formAction.value.teamGaugeGain ?? null,
-    }
-    if (editing.value) {
-      await SkillActionApi.update(actionPayload).catch(() => {})
-    } else {
-      await SkillActionApi.save(actionPayload).catch(() => {})
-    }
-  }
 
   // 保存 SkillDamageTicks (规范化)
   await SkillDamageTickApi.list(sid).then(async existing => {

@@ -185,7 +185,7 @@ export interface CharacterTalent {
 
 export interface SkillCost {
   skillId: string; level: number;
-  costValue?: number; coolDown?: number; usp?: number; poise?: number; airborneScale?: number;
+  costValue?: number; techRegen?: number; techReturn?: number; coolDown?: number; usp?: number; poise?: number;
 }
 
 export const CharacterStatApi = {

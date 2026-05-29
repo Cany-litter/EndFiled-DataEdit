@@ -4,282 +4,206 @@
       <div class="left-panel">
         <el-card shadow="never">
           <template #header><span>排轴伤害</span></template>
+
           <el-form label-position="top" size="small">
-            <el-radio-group v-model="mode" size="small" style="margin-bottom:8px;width:100%">
-              <el-radio-button value="scenario" style="flex:1">从排轴方案</el-radio-button>
-              <el-radio-button value="manual" style="flex:1">手动创建</el-radio-button>
-            </el-radio-group>
+            <el-form-item label="排轴方案">
+              <el-select v-model="selectedScenarioId" filterable placeholder="选择方案" style="width:100%" @change="onScenarioSelect">
+                <el-option v-for="s in scenarios" :key="s.id" :label="s.name" :value="s.id" />
+              </el-select>
+            </el-form-item>
 
-            <template v-if="mode === 'scenario'">
-              <el-form-item label="选择排轴方案">
-                <el-select v-model="selectedScenarioId" filterable placeholder="选择方案" style="width:100%" @change="onScenarioSelect">
-                  <el-option v-for="s in scenarios" :key="s.id" :label="s.name" :value="s.id" />
-                </el-select>
-              </el-form-item>
-              <div v-if="currentScenario" style="font-size:12px;color:#909399;margin-bottom:8px;padding:6px 8px;background:#f5f7fa;border-radius:4px">
-                <div v-if="currentScenario.teamId && teamData">配队: {{ teamData.name }}</div>
-                <div>时间: {{ duration }}s | 角色: {{ memberConfigs.filter(m => m.rotation.length > 0).length }} 人 | 动作: {{ totalActions }}</div>
-                <el-button size="small" type="primary" link @click="goToTimeline">✏️ 在排轴编辑器中打开</el-button>
-              </div>
-            </template>
-
-            <template v-if="mode === 'manual'">
-              <el-form-item label="选择配队">
-                <el-select v-model="selectedTeam" filterable placeholder="选择配队" style="width:100%" @change="onTeamChange">
-                  <el-option v-for="t in teams" :key="t.id" :label="t.name || t.id" :value="t" />
-                </el-select>
-              </el-form-item>
-              <div style="display:flex;gap:4px;margin-bottom:8px">
-                <el-button size="small" @click="showImportDialog = true">从时间线导入</el-button>
-                <el-button size="small" @click="exportRotation">导出循环至时间线</el-button>
-              </div>
-            </template>
+            <div v-if="teamData" style="font-size:14px;font-weight:600;margin-bottom:8px;padding:6px 8px;background:#f0f5ff;border-radius:4px">
+              配队: {{ teamData.name }}
+            </div>
 
             <template v-if="memberConfigs.length">
-              <el-divider content-position="left">成员旋转</el-divider>
-              <el-collapse v-model="activeMemberPanels" style="margin-bottom:8px">
-                <el-collapse-item v-for="(mc, mi) in memberConfigs" :key="mi" :name="String(mi)">
-                  <template #title>
-                    <span style="font-weight:600;font-size:13px">{{ mc.name }}</span>
-                    <el-tag size="small" style="margin-left:8px" type="info">攻 {{ mc.attack.toFixed(0) }}</el-tag>
-                    <el-tag size="small" style="margin-left:4px" v-if="mc.stats.critRate">暴 {{ (mc.stats.critRate * 100).toFixed(1) }}%</el-tag>
-                    <el-tag size="small" style="margin-left:4px" v-if="mc.rotation.length">{{ mc.rotation.length }} 步</el-tag>
-                  </template>
-                  <div v-for="s in mc.availableSkills" :key="s.id" class="skill-row">
-                    <span style="flex:1;font-size:12px">{{ s.name || s.id }}
-                      <el-tag size="small" style="margin-left:4px">{{ skillTypeLabel(s.type) }}</el-tag>
-                    </span>
-                    <el-button size="small" type="primary" link @click="addStep(mi, s)">+</el-button>
+              <el-divider content-position="left">技能库</el-divider>
+              <div class="lib-section">
+                <div v-for="(mc, ci) in memberConfigs" :key="mc.charId" class="char-block" :class="{ 'char-selected': selectedCharIndex === ci }" @click="selectedCharIndex = ci">
+                  <div class="char-header">
+                    <span class="slot-badge" :style="{ background: slotColors[ci] }">{{ ci + 1 }}</span>
+                    <span class="char-name">{{ mc.name }}</span>
+                    <span class="char-atk">攻 {{ mc.attack.toFixed(0) }}</span>
                   </div>
-                  <div style="margin-top:6px">
-                    <div v-for="(step, si) in mc.rotation" :key="si" class="step-row">
-                      <span style="font-size:12px">{{ si+1 }}. {{ step.label }}</span>
-                      <el-button size="small" type="danger" link @click="mc.rotation.splice(si,1)">✕</el-button>
+                  <div class="skill-chips">
+                    <div v-for="sk in mc.availableSkills" :key="sk.id"
+                      class="skill-chip" :class="['type-' + sk.type, { active: selectedSkillId === sk.id }]"
+                      @click.stop="selectedSkillId = (selectedSkillId === sk.id ? null : sk.id)">
+                      <span class="skill-icon">{{ skillIcon(sk.type) }}</span>
+                      <span class="skill-name">{{ sk.name }}</span>
+                      <span class="skill-mult" v-if="skillLv12Map[sk.id]">{{ (skillLv12Map[sk.id] * 100).toFixed(0) }}%</span>
                     </div>
-                    <div v-if="!mc.rotation.length" style="color:#909399;font-size:12px">空旋转</div>
                   </div>
-                </el-collapse-item>
-              </el-collapse>
-
-              <el-divider content-position="left">敌人参数</el-divider>
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
-                <el-form-item label="时长(s)">
-                  <el-input-number v-model="duration" :min="10" :max="600" :step="10" size="small" style="width:100%" />
-                </el-form-item>
-                <el-form-item label="目标数">
-                  <el-input-number v-model="targetCount" :min="1" :max="10" size="small" style="width:100%" />
-                </el-form-item>
-                <el-form-item label="防御">
-                  <el-input-number v-model="targetDef" :min="0" :max="500" size="small" style="width:100%" />
-                </el-form-item>
-                <el-form-item label="抗性">
-                  <el-input-number v-model="targetResistance" :min="0" :max="100" size="small" style="width:100%" />
-                </el-form-item>
-                <el-form-item label="穿透">
-                  <el-input-number v-model="resistanceIgnore" :min="0" :max="100" size="small" style="width:100%" />
-                </el-form-item>
-                <el-form-item label="失衡">
-                  <el-switch v-model="isStaggered" />
-                </el-form-item>
+                </div>
               </div>
 
-              <el-divider content-position="left">Buff 选择</el-divider>
-              <div style="margin-bottom:8px;max-height:200px;overflow-y:auto">
-                <el-checkbox-group v-model="selectedGainIds" size="small">
-                  <div v-for="cat in gainCategories" :key="cat" style="margin-bottom:4px">
-                    <div style="font-size:11px;color:#909399;margin-bottom:2px">{{ cat }}</div>
-                    <el-checkbox-button v-for="g in gainsByCategory(cat)" :key="g.id" :value="g.id">
-                      {{ g.name }}
-                    </el-checkbox-button>
-                  </div>
-                </el-checkbox-group>
+              <el-divider content-position="left">增益库</el-divider>
+              <div class="lib-section gain-section">
+                <div v-for="g in allGains" :key="g.id"
+                  class="gain-chip" :class="{ active: selectedGainId === g.id }"
+                  @click="selectedGainId = (selectedGainId === g.id ? null : g.id)">
+                  <span class="gain-icon">益</span>
+                  <span class="gain-name">{{ g.name }}</span>
+                  <span class="gain-meta">{{ gainMeta(g) }}</span>
+                </div>
               </div>
 
-              <el-button type="primary" style="width:100%;margin-top:4px" @click="runSim">开始模拟</el-button>
+              <el-button type="primary" style="width:100%;margin-top:8px" @click="runSim">开始模拟</el-button>
             </template>
           </el-form>
         </el-card>
       </div>
 
       <div class="right-panel">
-        <div v-if="!result && memberConfigs.length === 0" style="display:flex;align-items:center;justify-content:center;height:400px;color:#909399;font-size:14px;text-align:center;line-height:2">
-          <div>
-            <div>📊 排轴伤害计算器</div>
-            <div style="font-size:12px">选择一个排轴方案或配队开始</div>
-          </div>
-        </div>
+        <template v-if="result && result.members.length > 0">
+          <el-tabs v-model="activeResultTab" type="border-card" size="small" style="margin-bottom:8px">
+            <el-tab-pane v-for="mr in result.members" :key="mr.name" :label="mr.name" :name="mr.name">
+              <div class="toolbar">
+                <el-button size="small" @click="addSelfBuffCol">+ 己方增益列</el-button>
+                <el-button size="small" @click="addEnemyBuffCol">+ 敌人增益列</el-button>
+                <span style="font-size:12px;color:#909399;margin-left:8px">
+                  点击技能库技能替换技能名称 | 点击增益库填入增益列
+                </span>
+              </div>
+              <el-table :data="mr.actionRows" border stripe size="small" style="width:100%" max-height="320px">
+                <el-table-column label="序号" type="index" width="50" />
+                <el-table-column label="时间" width="60">
+                  <template #default="{ row }">{{ row.time.toFixed(1) }}s</template>
+                </el-table-column>
+                <el-table-column label="技能类型" width="70">
+                  <template #default="{ row }">{{ typeLabel(row.skillType) }}</template>
+                </el-table-column>
+                <el-table-column label="技能名称" min-width="100">
+                  <template #default="{ row }">
+                    <span class="clickable-cell" @click="replaceSkill(row)">{{ row.skillName }}</span>
+                  </template>
+                </el-table-column>
+                <el-table-column label="伤害类型" width="70">
+                  <template #default="{ row }">{{ row.damageType || '-' }}</template>
+                </el-table-column>
+                <el-table-column v-for="(_, ci) in selfBuffColCount" :key="'sb' + ci" :label="'己方增益' + (ci + 1)" width="80">
+                  <template #default="{ row }">
+                    <span class="clickable-cell buff-cell" :class="{ filled: row.selfBuffs[ci] }" @click="fillSelfBuff(row, ci)">
+                      {{ row.selfBuffs[ci] ? gainName(row.selfBuffs[ci]) : '+' }}
+                    </span>
+                  </template>
+                </el-table-column>
+                <el-table-column label="命中目标" width="70">
+                  <template #default="{ row }">
+                    <el-input-number v-model="row.targetCount" :min="1" :max="10" size="small" style="width:60px" />
+                  </template>
+                </el-table-column>
+                <el-table-column v-for="(_, ci) in enemyBuffColCount" :key="'eb' + ci" :label="'敌方增益' + (ci + 1)" width="80">
+                  <template #default="{ row }">
+                    <span class="clickable-cell buff-cell" :class="{ filled: row.enemyBuffs[ci] }" @click="fillEnemyBuff(row, ci)">
+                      {{ row.enemyBuffs[ci] ? gainName(row.enemyBuffs[ci]) : '+' }}
+                    </span>
+                  </template>
+                </el-table-column>
+                <el-table-column label="造成伤害" width="100">
+                  <template #default="{ row }">{{ Math.round(row.damage).toLocaleString() }}</template>
+                </el-table-column>
+              </el-table>
+            </el-tab-pane>
+          </el-tabs>
 
-        <template v-if="result">
-          <el-card shadow="never" style="margin-bottom:8px">
-            <template #header>
-              <span>模拟结果</span>
-              <el-tag type="success" style="margin-left:12px">DPS: {{ result.teamDps.toFixed(1) }}</el-tag>
-              <el-tag style="margin-left:8px">总伤害: {{ result.teamTotalDamage.toFixed(0) }}</el-tag>
-              <el-tag type="warning" style="margin-left:8px">{{ totalCasts }} 次施放</el-tag>
-            </template>
-            <el-table :data="teamRows" border stripe size="small">
-              <el-table-column prop="name" label="成员" width="90" />
-              <el-table-column prop="totalDamage" label="总伤害" width="130">
+          <el-card shadow="never">
+            <template #header><span>伤害统计</span></template>
+            <el-table :data="statRows" border stripe size="small">
+              <el-table-column prop="name" label="干员" width="80" />
+              <el-table-column label="总伤害" width="130">
                 <template #default="{ row }">{{ row.totalDamage.toFixed(0) }}</template>
               </el-table-column>
-              <el-table-column prop="dps" label="DPS" width="90">
+              <el-table-column label="DPS" width="90">
                 <template #default="{ row }">{{ row.dps.toFixed(1) }}</template>
               </el-table-column>
-              <el-table-column prop="pct" label="占比" width="70">
+              <el-table-column label="占比" width="70">
                 <template #default="{ row }">{{ (row.pct * 100).toFixed(1) }}%</template>
               </el-table-column>
-              <el-table-column prop="casts" label="施放" width="55" />
+              <el-table-column label="消耗技力" width="80">
+                <template #default="{ row }">{{ row.totalSpUsed }}</template>
+              </el-table-column>
             </el-table>
           </el-card>
-
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
-            <el-card shadow="never">
-              <template #header><span style="font-size:12px">角色伤害占比</span></template>
-              <div ref="charChartRef" style="height:160px" />
-            </el-card>
-            <el-card shadow="never">
-              <template #header><span style="font-size:12px">乘区分析</span></template>
-              <div v-if="result.teamCategoryBreakdown" class="cat-grid">
-                <div v-for="(val, cat) in result.teamCategoryBreakdown" :key="cat" class="cat-card">
-                  <div class="cat-badge">{{ cat }}</div>
-                  <div class="cat-val">{{ (val * 100).toFixed(1) }}%</div>
-                </div>
-              </div>
-            </el-card>
-          </div>
-
-          <el-card shadow="never" style="margin-bottom:8px">
-            <template #header><span>技能详情</span></template>
-            <el-tabs type="border-card" size="small">
-              <el-tab-pane v-for="(mr, mi) in result.members" :key="mi" :label="mr.name">
-                <el-table :data="skillDetailRows(mr)" border stripe size="small">
-                  <el-table-column prop="skill" label="技能" />
-                  <el-table-column prop="count" label="次数" width="55" />
-                  <el-table-column prop="damage" label="总伤害" width="120">
-                    <template #default="{ row }">{{ row.damage.toFixed(0) }}</template>
-                  </el-table-column>
-                  <el-table-column prop="pct" label="占比" width="65">
-                    <template #default="{ row }">{{ (row.pct * 100).toFixed(1) }}%</template>
-                  </el-table-column>
-                </el-table>
-              </el-tab-pane>
-            </el-tabs>
-          </el-card>
         </template>
+
+        <div v-else style="display:flex;align-items:center;justify-content:center;height:400px;color:#909399;font-size:14px">
+          <div style="text-align:center;line-height:2">
+            <div>📊 排轴伤害计算器</div>
+            <div style="font-size:12px">选择一个排轴方案开始</div>
+          </div>
+        </div>
       </div>
     </div>
-
-    <el-dialog v-model="showImportDialog" title="从时间线导入循环" width="500px">
-      <el-alert type="info" :closable="false" style="margin-bottom:12px">
-        请先在排轴编辑器中导出循环 JSON，然后在此处导入。
-      </el-alert>
-      <el-upload drag accept=".json" :auto-upload="false" :show-file-list="false" @change="onImportFile">
-        <el-icon style="font-size:40px;color:#409eff"><UploadFilled /></el-icon>
-        <div style="margin-top:8px;font-size:14px">点击或拖拽 JSON 文件</div>
-      </el-upload>
-    </el-dialog>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed, onMounted, nextTick } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { ref, reactive, computed, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 import { ElMessage } from 'element-plus'
-import { UploadFilled } from '@element-plus/icons-vue'
-import * as echarts from 'echarts'
-import { TeamApi, CharacterApi, BuildApi, WeaponApi, EquipmentApi, SkillApi, SkillLevelApi, GainApi, TimelineApi } from '../../api'
-import type { Team, Character, Build, Weapon, Equipment, Skill, SkillLevel, Gain } from '../../api'
-import type { TimelineScenario as ApiTimelineScenario } from '../../api'
+import { TeamApi, CharacterApi, BuildApi, WeaponApi, EquipmentApi, SkillApi, SkillLevelApi, SkillActionApi, GainApi, TimelineApi } from '../../api'
+import type { Team, Gain } from '../../api'
 import { calcFinalStats, type FinalStats } from '../../engine/formulas/stats'
-import { GAIN_CATEGORY_TO_DAMAGE_CAT } from '../../engine/formulas/stats'
-import { runTeamSimulation } from '../../engine/simulation/teamEngine'
-import { DEFAULT_SKILL_CONFIGS } from '../../engine/simulation/types'
-import type { SimulationConfig, RotationStep, TeamSimulationResult, SkillConfig, SkillType } from '../../engine/simulation/types'
-import type { Buff } from '../../engine/types/buff'
-import type { Track, TimelineAction } from '../../engine/types/timeline'
+import { simulateRows } from '../../engine/simulation/teamEngine'
+import type { ActionRow, SimulateRowsConfig, TeamSimulationResult } from '../../engine/simulation/types'
+import type { Track } from '../../engine/types/timeline'
 
 const route = useRoute()
-const router = useRouter()
 
-// ── Mode ──
-const mode = ref<'scenario' | 'manual'>('scenario')
-
-// ── Scenario mode ──
-const scenarios = ref<ApiTimelineScenario[]>([])
+// ── State ──
+const scenarios = ref<any[]>([])
 const selectedScenarioId = ref('')
-const currentScenario = computed(() => scenarios.value.find(s => s.id === selectedScenarioId.value))
-
-// ── Manual mode ──
-const teams = ref<Team[]>([])
-const selectedTeam = ref<Team | null>(null)
-const showImportDialog = ref(false)
-
-// ── Shared ──
 const allGains = ref<Gain[]>([])
-const selectedGainIds = ref<string[]>([])
-const activeMemberPanels = ref<string[]>([])
-
-interface MemberConfig {
-  name: string
-  charId: string
-  attack: number
-  hp: number
-  stats: FinalStats
-  availableSkills: (Skill & { skillLevels?: SkillLevel[] })[]
-  rotation: RotationStep[]
-}
-
-const memberConfigs = reactive<MemberConfig[]>([])
+const memberConfigs = reactive<{ name: string; charId: string; attack: number; stats: FinalStats; availableSkills: any[]; weaponName: string }[]>([])
 const teamData = ref<Team | null>(null)
+const actionRows = ref<ActionRow[]>([])
+const selfBuffColCount = ref(0)
+const enemyBuffColCount = ref(0)
+const selectedSkillId = ref<string | null>(null)
+const selectedGainId = ref<string | null>(null)
+const selectedCharIndex = ref(0)
+const activeResultTab = ref('')
 
-const duration = ref(120)
-const targetCount = ref(1)
-const targetDef = ref(50)
-const targetResistance = ref(20)
-const resistanceIgnore = ref(0)
-const isStaggered = ref(false)
+// Skill data maps (for replacement lookup)
+const skillLv12Map = ref<Record<string, number>>({})
+const skillTypeMap = ref<Record<string, string>>({})
+const skillDamageTypeMap = ref<Record<string, string>>({})
+const charSkillMap = ref<Record<string, any[]>>({})
+const charOrder = ref<string[]>([])
+
 const result = ref<TeamSimulationResult | null>(null)
 
-const charChartRef = ref<HTMLDivElement | null>(null)
-let charChart: echarts.ECharts | null = null
-const colors = ['#409eff', '#67c23a', '#e6a23c', '#f56c6c']
-
-// ── Computed ──
-const totalActions = computed(() => memberConfigs.reduce((s, m) => s + m.rotation.length, 0))
-
-const gainCategories = computed(() => {
-  const cats = new Set<string>()
-  for (const g of allGains.value) {
-    if (g.effectCategory) cats.add(g.effectCategory)
-  }
-  return Array.from(cats).sort()
-})
-
-function gainsByCategory(cat: string) {
-  return allGains.value.filter(g => g.effectCategory === cat)
-}
-
-const totalCasts = computed(() => {
-  if (!result.value) return 0
-  return result.value.members.reduce((s, m) => s + m.totalCasts, 0)
-})
-
-const teamRows = computed(() => {
-  if (!result.value) return []
-  const total = result.value.teamTotalDamage
-  return result.value.members.map(m => ({
-    name: m.name,
-    totalDamage: m.totalDamage,
-    dps: m.dps,
-    pct: m.totalDamage / total,
-    casts: m.totalCasts,
-  }))
-})
+const slotColors = ['#e74c3c', '#e67e22', '#2ecc71', '#3498db']
 
 // ── Helpers ──
-function skillTypeLabel(t: string) {
-  const m: Record<string, string> = { normal: '普攻', skill: '战技', chain: '连携', ultimate: '终结技', talent1: '天赋1', talent2: '天赋2', other: '其他' }
+function skillIcon(type: string) {
+  const m: Record<string, string> = { normal: '普', attack: '普', skill: '技', chain: '连', link: '连', ultimate: '终', talent1: '天1', talent2: '天2' }
+  return m[type] || type.slice(0, 2)
+}
+
+function typeLabel(t: string) {
+  const m: Record<string, string> = { normal: '普攻', attack: '普攻', skill: '战技', chain: '连携', link: '连携', ultimate: '终结', execution: '处决', talent1: '天赋', talent2: '天赋' }
   return m[t] || t
+}
+
+function gainMeta(g: Gain) {
+  const parts: string[] = []
+  if (g.effectCategory) parts.push(g.effectCategory)
+  if (g.effectType) parts.push(g.effectType)
+  if (g.effectValue != null) parts.push(g.valueType === 'percentage' ? (g.effectValue * 100).toFixed(1) + '%' : String(g.effectValue))
+  if (g.duration) parts.push(g.duration + 's')
+  return parts.join(' | ') || ''
+}
+
+function gainName(id: string) {
+  const g = allGains.value.find(x => x.id === id)
+  return g ? g.name : id.slice(0, 6)
+}
+
+function mapActionTypeToSkillType(type: string): string {
+  const m: Record<string, string> = { attack: 'normal', skill: 'skill', link: 'chain', ultimate: 'ultimate', execution: 'other' }
+  return m[type] ?? 'other'
 }
 
 function applyAttr(equip: any, type: string, value: number) {
@@ -298,72 +222,66 @@ function applyAttr(equip: any, type: string, value: number) {
   if (type.includes('充能')) { equip.energyRecharge += v; return }
 }
 
-function mapActionTypeToSkillType(type: string): SkillType {
-  const m: Record<string, SkillType> = { attack: 'normal', skill: 'skill', link: 'chain', ultimate: 'ultimate', execution: 'other', normal: 'normal', chain: 'chain' }
-  return m[type] ?? 'other'
-}
-
-// ── Scenario: extract rotation from tracks ──
-function extractRotationFromTracks(tracks: Track[], charIndexMap: Record<string, number>): Record<string, RotationStep[]> {
-  const result: Record<string, RotationStep[]> = {}
-  for (const track of tracks) {
-    if (track.kind === 'buff' || track.kind === 'state') continue
-    const charId = track.id
-    const charIndex = charIndexMap[charId] ?? 0
-    const steps: RotationStep[] = []
-    for (const action of track.actions) {
-      steps.push({
-        skillId: action.id,
-        skillType: mapActionTypeToSkillType(action.type),
-        label: action.name,
-        charIndex,
-        timelineActionId: action.instanceId,
-      })
-    }
-    if (steps.length > 0) {
-      result[charId] = steps
-    }
-  }
-  return result
-}
-
-// ── Load team data (shared between scenario and manual) ──
-async function loadTeamData(teamId: string, rotations: Record<string, RotationStep[]> | null) {
+// ── Scenario select ──
+async function onScenarioSelect(id: string) {
+  const sc = await TimelineApi.get(id)
+  if (!sc) return
+  result.value = null
+  actionRows.value = []
   memberConfigs.length = 0
-  activeMemberPanels.value = ['0', '1', '2', '3']
+  selectedSkillId.value = null
+  selectedGainId.value = null
+  selfBuffColCount.value = 0
+  enemyBuffColCount.value = 0
 
-  const team = await TeamApi.get(teamId)
+  let tracks: Track[] = []
+  if (sc.tracks) { try { tracks = JSON.parse(sc.tracks) as Track[] } catch { tracks = [] } }
+
+  if (!sc.teamId) { ElMessage.warning('方案没有关联配队'); return }
+  const team = await TeamApi.get(sc.teamId)
   teamData.value = team
 
+  // Load character + build + skill data
   const chars = await CharacterApi.listAll()
   const allBuilds = await BuildApi.listAll()
   const weapons = await WeaponApi.listAll()
   const allEquipment = await EquipmentApi.listAll()
+  const allSkills = await SkillApi.listAll()
+  const allLevels = await SkillLevelApi.listAll()
+  const allActions = await SkillActionApi.listAll()
 
-  const slots = [
-    { charId: team.charAId, buildField: 'buildAId' as const },
-    { charId: team.charBId, buildField: 'buildBId' as const },
-    { charId: team.charCId, buildField: 'buildCId' as const },
-    { charId: team.charDId, buildField: 'buildDId' as const },
-  ]
-  const charIndexMap: Record<string, number> = {}
+  // Build skill lookup maps
+  const lv12Map: Record<string, number> = {}
+  const typeMap: Record<string, string> = {}
+  const dmgTypeMap: Record<string, string> = {}
+  for (const lv of allLevels) { if (lv.level === 12) lv12Map[lv.skillId] = lv.multiplier / 100 }
+  for (const sk of allSkills) { typeMap[sk.id] = sk.type; dmgTypeMap[sk.id] = sk.damageType }
+  skillLv12Map.value = lv12Map
+  skillTypeMap.value = typeMap
+  skillDamageTypeMap.value = dmgTypeMap
 
-  for (let i = 0; i < slots.length; i++) {
-    const slot = slots[i]
-    if (!slot.charId) continue
-    const c = chars.find(ch => ch.id === slot.charId)
+  const slots = [team.charAId, team.charBId, team.charCId, team.charDId]
+  const buildSlots = [team.buildAId, team.buildBId, team.buildCId, team.buildDId]
+  const order: string[] = []
+  const charList: typeof memberConfigs = []
+
+  for (let i = 0; i < 4; i++) {
+    const charId = slots[i]
+    if (!charId) continue
+    const c = chars.find(ch => ch.id === charId)
     if (!c) continue
+    order.push(charId)
+    charOrder.value = order
 
-    charIndexMap[slot.charId] = i
-    const build = allBuilds.find(b => b.id === (team as any)[slot.buildField])
-    const weapon = build?.weaponId ? weapons.find(w => w.id === build.weaponId) : null
-    const equipResult = { str: 0, agi: 0, int: 0, wil: 0, atkPercent: 0, hpPercent: 0, defPercent: 0, critRate: 0, critDamage: 0, damageBonus: 0, artsMastery: 0, energyRecharge: 0 }
+    const build = allBuilds.find((b: any) => b.id === buildSlots[i])
+    const weapon = build?.weaponId ? weapons.find((w: any) => w.id === build.weaponId) : null
+    const equipResult: any = { str: 0, agi: 0, int: 0, wil: 0, atkPercent: 0, hpPercent: 0, defPercent: 0, critRate: 0, critDamage: 0, damageBonus: 0, artsMastery: 0, energyRecharge: 0 }
 
     if (build) {
-      for (const equipField of ['armorId', 'gloveId', 'accessory1Id', 'accessory2Id']) {
-        const equipId = (build as any)[equipField]
-        if (!equipId) continue
-        const eq = allEquipment.find(e => e.id === equipId)
+      for (const field of ['armorId', 'gloveId', 'accessory1Id', 'accessory2Id']) {
+        const eid = (build as any)[field]
+        if (!eid) continue
+        const eq = allEquipment.find((e: any) => e.id === eid)
         if (!eq) continue
         for (let ai = 1; ai <= 3; ai++) {
           const type = (eq as any)['attr' + ai + 'Type']
@@ -376,279 +294,202 @@ async function loadTeamData(teamId: string, rotations: Record<string, RotationSt
 
     const stats = calcFinalStats(
       { baseAtk: c.baseAtk, baseHp: c.baseHp, baseStr: c.baseStr, baseAgi: c.baseAgi,
-        baseInt: c.baseInt, baseWil: c.baseWil, mainAttr: c.mainAttr, subAttr: c.subAttr,
-        trustLevel: 1 },
+        baseInt: c.baseInt, baseWil: c.baseWil, mainAttr: c.mainAttr, subAttr: c.subAttr, trustLevel: 1 },
       { baseAtk: weapon?.baseAtk ?? 0, affix1Value: weapon?.affix1Value, affix1Type: weapon?.affix1Type },
       equipResult,
     )
 
-    const skills = await SkillApi.list(c.id)
-    for (const sk of skills) {
-      (sk as any).skillLevels = await SkillLevelApi.list(sk.id)
-    }
-
-    const rotation = rotations?.[slot.charId] ?? []
-    memberConfigs.push({
-      name: c.name,
-      charId: c.id,
-      attack: stats.attack,
-      hp: stats.hp,
-      stats,
-      availableSkills: skills as any,
-      rotation,
+    const skills = allSkills.filter((s: any) => s.characterId === c.id)
+    charSkillMap.value[c.id] = skills
+    charList.push({
+      name: c.name, charId: c.id, attack: stats.attack, stats,
+      availableSkills: skills, weaponName: weapon?.name ?? '',
     })
   }
-}
+  memberConfigs.push(...charList)
 
-// ── Scenario select ──
-async function onScenarioSelect(id: string) {
-  const sc = await TimelineApi.get(id)
-  if (!sc) return
-  result.value = null
+  // Extract action rows from tracks
+  const rows: ActionRow[] = []
+  let seq = 0
+  for (const track of tracks) {
+    if (track.kind === 'buff' || track.kind === 'state') continue
+    const charId = track.id
+    if (!order.includes(charId)) continue
 
-  let tracks: Track[] = []
-  if (sc.tracks) {
-    try { tracks = JSON.parse(sc.tracks) as Track[] } catch { tracks = [] }
-  }
+    // determine enemy buffs from enemyBuffs at each action time
+    let enemyBuffSchedule: { time: number; end: number; gainId: string }[] = []
+    if (sc.enemyBuffs) {
+      try {
+        const eb = JSON.parse(sc.enemyBuffs) as Record<string, any[]>
+        for (const list of Object.values(eb)) {
+          for (const a of list) {
+            enemyBuffSchedule.push({ time: a.startTime ?? 0, end: (a.startTime ?? 0) + (a.duration ?? 10), gainId: a.id })
+          }
+        }
+      } catch {}
+    }
 
-  if (sc.enemies) {
-    try {
-      const enemies = JSON.parse(sc.enemies) as any[]
-      if (enemies.length > 0) {
-        targetDef.value = (enemies[0] as any).def ?? 50
-        targetResistance.value = (enemies[0] as any).resistance ?? 20
+    for (const action of track.actions) {
+      const t = action.startTime ?? 0
+      const skId = action.skillId ?? action.id
+      const mult = lv12Map[skId] ?? (action.damageTicks?.[0]?.hpDamage ?? 50) / 100
+
+      // Match self buffs from buff tracks
+      const selfBuffs: (string | null)[] = []
+      for (const bt of tracks) {
+        if (!bt.id.endsWith('_buff')) continue
+        if (bt.id.replace('_buff', '') !== charId) continue
+        for (const ba of bt.actions) {
+          const bs = ba.startTime ?? 0
+          const be = bs + (ba.duration ?? 0)
+          if (t >= bs && t < be) selfBuffs.push(ba.id)
+        }
       }
-    } catch { /* ignore */ }
-  }
 
-  if (sc.teamId) {
-    await loadTeamData(sc.teamId, null)
-
-    // Build charIndexMap from the loaded memberConfigs order
-    const charIndexMap: Record<string, number> = {}
-    memberConfigs.forEach((mc, i) => { charIndexMap[mc.charId] = i })
-
-    const extracted = extractRotationFromTracks(tracks, charIndexMap)
-    for (const mc of memberConfigs) {
-      if (extracted[mc.charId]) {
-        mc.rotation = extracted[mc.charId]
+      // Match enemy buffs
+      const enemyBuffs: (string | null)[] = []
+      for (const es of enemyBuffSchedule) {
+        if (t >= es.time && t < es.end) enemyBuffs.push(es.gainId)
       }
-    }
-  }
 
-  if (tracks.length > 0) {
-    const allActions = tracks.flatMap(t => t.actions)
-    if (allActions.length > 0) {
-      const maxEnd = Math.max(...allActions.map(a => a.startTime + (a.duration ?? 0)))
-      duration.value = Math.max(30, Math.ceil(maxEnd / 10) * 10)
-    }
-  }
-}
-
-// ── Manual mode: team select ──
-async function onTeamChange(team: Team) {
-  result.value = null
-  await loadTeamData(team.id, null)
-}
-
-function skillTypeToRotationType(type: string): SkillType {
-  const m: Record<string, SkillType> = { talent: 'other', talent1: 'other', talent2: 'other', normal: 'normal', skill: 'skill', chain: 'chain', ultimate: 'ultimate' }
-  return m[type] ?? 'other'
-}
-
-function addStep(mi: number, skill: Skill & { skillLevels?: SkillLevel[] }) {
-  memberConfigs[mi].rotation.push({
-    skillId: skill.id,
-    skillType: skillTypeToRotationType(skill.type),
-    label: `${skillTypeLabel(skill.type)}${skill.name ? '-' + skill.name : ''}`,
-    charIndex: mi,
-  })
-}
-
-// ── Buff building ──
-function buildSelectedBuffs(): Buff[] {
-  const selectedGains = allGains.value.filter(g => selectedGainIds.value.includes(g.id))
-  const buffs: Buff[] = []
-  for (const g of selectedGains) {
-    const cat = GAIN_CATEGORY_TO_DAMAGE_CAT[g.effectCategory ?? '']
-    if (cat && g.effectValue != null) {
-      buffs.push({
-        id: g.id,
-        name: g.name,
-        source: g.source ?? 'gain',
-        buffType: 'permanent',
-        effectCategory: g.effectCategory ?? '',
-        effectType: g.effectType ?? '',
-        effectValue: g.effectValue,
-        stackRule: 'add_same',
-        targetScope: 'self',
-        effects: [{
-          category: cat,
-          value: g.valueType === 'percentage' ? g.effectValue : g.effectValue,
-        }],
-      })
-    }
-    if (g.effectCategory === '基础属性' || g.effectCategory === '能力值') {
-      buffs.push({
-        id: g.id + '_stat',
-        name: g.name,
-        source: g.source ?? 'gain',
-        buffType: 'permanent',
-        effectCategory: g.effectCategory ?? '',
-        effectType: g.effectType ?? '',
-        effectValue: g.effectValue ?? 0,
-        stackRule: 'add_same',
-        targetScope: 'self',
+      rows.push({
+        seq: seq++,
+        time: t,
+        charId,
+        skillId: skId,
+        skillName: action.name,
+        skillType: typeMap[skId] ?? mapActionTypeToSkillType(action.type),
+        damageType: dmgTypeMap[skId] ?? (action as any).damageType ?? action.element,
+        selfBuffs,
+        targetCount: 1,
+        enemyBuffs,
+        spCost: action.spCost ?? 0,
+        damage: 0,
       })
     }
   }
-  return buffs
+  rows.sort((a, b) => a.time - b.time)
+  rows.forEach((r, i) => r.seq = i + 1)
+  actionRows.value = rows
+
+  if (rows.length > 0) {
+    activeResultTab.value = memberConfigs[0]?.charId ?? ''
+  }
+}
+
+// ── Replace skill ──
+function replaceSkill(row: ActionRow) {
+  const skId = selectedSkillId.value
+  if (!skId) { ElMessage.info('请在左侧技能库中先点击选择一个技能'); return }
+  row.skillId = skId
+  row.skillName = memberConfigs.flatMap(m => m.availableSkills).find(s => s.id === skId)?.name ?? skId
+  row.skillType = skillTypeMap.value[skId] ?? 'other'
+  row.damageType = skillDamageTypeMap.value[skId] ?? ''
+}
+
+// ── Fill buff cells ──
+function fillSelfBuff(row: ActionRow, ci: number) {
+  if (!selectedGainId.value) { ElMessage.info('请在左侧增益库中先点击选择一个增益'); return }
+  const gid = selectedGainId.value
+  if (row.selfBuffs[ci] === gid) { row.selfBuffs[ci] = null; return }
+  while (row.selfBuffs.length <= ci) row.selfBuffs.push(null)
+  row.selfBuffs[ci] = gid
+}
+
+function fillEnemyBuff(row: ActionRow, ci: number) {
+  if (!selectedGainId.value) { ElMessage.info('请在左侧增益库中先点击选择一个增益'); return }
+  const gid = selectedGainId.value
+  if (row.enemyBuffs[ci] === gid) { row.enemyBuffs[ci] = null; return }
+  while (row.enemyBuffs.length <= ci) row.enemyBuffs.push(null)
+  row.enemyBuffs[ci] = gid
+}
+
+// ── Add columns ──
+function addSelfBuffCol() {
+  selfBuffColCount.value++
+  for (const row of actionRows.value) {
+    while (row.selfBuffs.length < selfBuffColCount.value) row.selfBuffs.push(null)
+  }
+}
+
+function addEnemyBuffCol() {
+  enemyBuffColCount.value++
+  for (const row of actionRows.value) {
+    while (row.enemyBuffs.length < enemyBuffColCount.value) row.enemyBuffs.push(null)
+  }
 }
 
 // ── Simulate ──
 function runSim() {
-  const teamBuffs = buildSelectedBuffs()
-  const teamData = memberConfigs.map(mc => ({
-    name: mc.name,
-    attack: mc.attack,
-    hp: mc.hp,
-    stats: mc.stats,
-    buffs: teamBuffs,
-    skills: mc.availableSkills.map(sk => {
-      const lv12 = (sk as any).skillLevels?.find((l: SkillLevel) => l.level === 12)
-      const cfg = DEFAULT_SKILL_CONFIGS[sk.type as keyof typeof DEFAULT_SKILL_CONFIGS] ?? DEFAULT_SKILL_CONFIGS.other
-      return {
-        id: sk.id, name: sk.name, type: sk.type as any,
-        damageType: sk.damageType,
-        multiplier: (lv12?.multiplier ?? 100) / 100,
-        cooldown: cfg.cooldown, energyCost: cfg.energyCost, castTime: cfg.castTime,
-      } as SkillConfig
-    }),
-    rotation: mc.rotation.map(r => ({ ...r })),
-  }))
+  if (actionRows.value.length === 0) { ElMessage.warning('方案中没有技能动作'); return }
+  if (memberConfigs.length === 0) { ElMessage.warning('方案没有配队数据'); return }
 
-  const config: SimulationConfig = {
-    duration: duration.value, targetCount: targetCount.value,
-    targetDef: targetDef.value,
-    targetResistance: targetResistance.value,
-    targetResistanceIgnore: resistanceIgnore.value,
-    critRate: 0.05, critDamage: 1.3, damageBonus: 0,
-    isStaggered: isStaggered.value,
-  }
-
-  result.value = runTeamSimulation(teamData, config)
-  nextTick(() => renderChart())
-}
-
-// ── Export / Import ──
-function exportRotation() {
-  const data = memberConfigs.map(mc => ({
-    name: mc.name,
-    charId: mc.charId,
-    rotation: mc.rotation,
-    attack: mc.attack,
-  }))
-  const blob = new Blob([JSON.stringify({ version: 2, members: data, gains: selectedGainIds.value }, null, 2)], { type: 'application/json' })
-  const url = URL.createObjectURL(blob)
-  const a = document.createElement('a')
-  a.href = url; a.download = `rotation_export_${Date.now()}.json`
-  a.click(); URL.revokeObjectURL(url)
-  ElMessage.success('已导出循环配置，可在排轴编辑器中导入')
-}
-
-function onImportFile(uploadFile: any) {
-  const file = uploadFile.raw || uploadFile
-  if (!file) return
-  const reader = new FileReader()
-  reader.onload = (e) => {
-    try {
-      const data = JSON.parse(e.target?.result as string)
-      if (data.version === 2 && Array.isArray(data.members)) {
-        for (const imported of data.members) {
-          const mc = memberConfigs.find(m => m.charId === imported.charId || m.name === imported.name)
-          if (mc && Array.isArray(imported.rotation)) {
-            mc.rotation = imported.rotation.map((r: any) => ({
-              skillId: r.skillId,
-              skillType: r.skillType,
-              label: r.label,
-              charIndex: r.charIndex,
-            }))
-          }
-        }
-        if (Array.isArray(data.gains)) {
-          selectedGainIds.value = data.gains
-        }
-        ElMessage.success('已导入循环配置')
-        showImportDialog.value = false
-      }
-    } catch (err) {
-      ElMessage.error('导入失败: ' + (err as Error).message)
+  const charStats: SimulateRowsConfig['charStats'] = {}
+  for (const mc of memberConfigs) {
+    charStats[mc.charId] = {
+      attack: mc.attack,
+      critRate: mc.stats.critRate,
+      critDamage: mc.stats.critDamage,
+      str: mc.stats.str, agi: mc.stats.agi, int: mc.stats.int, wil: mc.stats.wil,
     }
   }
-  reader.readAsText(file)
-}
 
-// ── Navigation ──
-function goToTimeline() {
-  if (selectedScenarioId.value) {
-    router.push(`/timeline?scenarioId=${selectedScenarioId.value}`)
+  const skillMap: SimulateRowsConfig['skillMap'] = {}
+  for (const mc of memberConfigs) {
+    for (const sk of mc.availableSkills) {
+      skillMap[sk.id] = {
+        multiplier: skillLv12Map.value[sk.id] ?? 1,
+        damageType: sk.damageType,
+        type: sk.type,
+      }
+    }
   }
+
+  const gainMap: SimulateRowsConfig['gainMap'] = {}
+  for (const g of allGains.value) {
+    gainMap[g.id] = g
+  }
+
+  const config: SimulateRowsConfig = {
+    rows: actionRows.value,
+    charStats,
+    skillMap,
+    gainMap: gainMap as any,
+    gainCategoryMap: {},
+    targetDef: 50,
+    targetResistance: 20,
+    resistanceIgnore: 0,
+  }
+
+  result.value = simulateRows(config)
 }
 
-// ── Chart ──
-function skillDetailRows(mr: TeamSimulationResult['members'][0]) {
-  const total = mr.totalDamage
-  return Object.entries(mr.skillBreakdown).map(([id, data]) => ({
-    skill: id,
-    count: data.count,
-    damage: data.totalDamage,
-    pct: data.totalDamage / total,
+// ── Computed ──
+const statRows = computed(() => {
+  if (!result.value) return []
+  const total = result.value.teamTotalDamage
+  return result.value.members.map(m => ({
+    name: m.name,
+    totalDamage: m.totalDamage,
+    dps: m.dps,
+    pct: m.totalDamage / total,
+    totalSpUsed: m.totalSpUsed,
   }))
-}
-
-function renderChart() {
-  if (!charChartRef.value || !result.value) return
-  if (!charChart) charChart = echarts.init(charChartRef.value)
-  charChart.setOption({
-    tooltip: { trigger: 'item', formatter: '{b}: {c} ({d}%)' },
-    series: [{
-      type: 'pie', radius: ['30%', '60%'],
-      data: result.value.members.map((m, i) => ({
-        name: m.name, value: m.totalDamage, itemStyle: { color: colors[i % colors.length] },
-      })),
-      label: { formatter: '{b}\n{d}%', fontSize: 10 },
-    }],
-  })
-}
+})
 
 // ── Init ──
 onMounted(async () => {
-  try {
-    allGains.value = await GainApi.listAll()
-  } catch { /* ignore */ }
+  const [scList, gains] = await Promise.all([
+    TimelineApi.listAll().catch(() => []),
+    GainApi.listAll().catch(() => []),
+  ])
+  scenarios.value = scList
+  allGains.value = gains
 
-  try {
-    const allScenarios = await TimelineApi.listAll()
-    scenarios.value = allScenarios
-  } catch { /* ignore */ }
-
-  try {
-    teams.value = await TeamApi.listAll()
-  } catch { /* ignore */ }
-
-  const teamId = route.query.teamId as string
   const scenarioId = route.query.scenarioId as string
-  if (scenarioId) {
-    mode.value = 'scenario'
+  if (scenarioId && scenarios.value.find((s: any) => s.id === scenarioId)) {
     selectedScenarioId.value = scenarioId
     await onScenarioSelect(scenarioId)
-  } else if (teamId) {
-    mode.value = 'manual'
-    const team = teams.value.find(t => t.id === teamId)
-    if (team) {
-      selectedTeam.value = team
-      await onTeamChange(team)
-    }
   }
 })
 </script>
@@ -656,12 +497,40 @@ onMounted(async () => {
 <style scoped>
 .dps-page { padding: 8px; height: calc(100vh - 80px); }
 .dps-layout { display: flex; gap: 8px; height: 100%; }
-.left-panel { flex: 0 0 400px; overflow-y: auto; }
+.left-panel { flex: 0 0 360px; overflow-y: auto; }
 .right-panel { flex: 1; overflow-y: auto; min-width: 0; }
-.skill-row { display: flex; align-items: center; padding: 3px 0; border-bottom: 1px solid #f0f0f0; }
-.step-row { display: flex; align-items: center; justify-content: space-between; padding: 2px 6px; margin: 1px 0; background: #f9f9f9; border-radius: 4px; }
-.cat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
-.cat-card { background: #f5f7fa; border-radius: 6px; padding: 8px; text-align: center; }
-.cat-badge { font-size: 10px; color: #909399; }
-.cat-val { font-size: 14px; font-weight: 700; color: #303133; }
+.lib-section { max-height: 240px; overflow-y: auto; margin-bottom: 4px; }
+.char-block { margin-bottom: 6px; padding: 6px; border-radius: 6px; border: 2px solid transparent; cursor: pointer; transition: all 0.15s; background: #fafafa; }
+.char-block:hover { border-color: #e4e7ed; }
+.char-selected { border-color: #409eff; background: #f0f7ff; }
+.char-header { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+.slot-badge { width: 18px; height: 18px; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #fff; font-weight: 700; flex-shrink: 0; }
+.char-name { font-size: 12px; font-weight: 600; color: #303133; }
+.char-atk { font-size: 10px; color: #909399; margin-left: auto; }
+.skill-chips { display: flex; flex-wrap: wrap; gap: 3px; }
+.skill-chip { display: inline-flex; align-items: center; gap: 3px; padding: 2px 6px; border-radius: 4px; font-size: 11px; cursor: pointer; border: 1px solid transparent; transition: all 0.15s; }
+.skill-chip:hover { border-color: #c0c4cc; }
+.skill-chip.active { border-color: #409eff; background: #ecf5ff; }
+.skill-icon { width: 16px; height: 16px; border-radius: 2px; display: inline-flex; align-items: center; justify-content: center; font-size: 8px; color: #fff; font-weight: 600; }
+.skill-name { color: #303133; }
+.skill-mult { color: #909399; font-size: 10px; }
+.type-normal .skill-icon { background: #409eff; }
+.type-skill .skill-icon { background: #e6a23c; }
+.type-chain .skill-icon { background: #67c23a; }
+.type-ultimate .skill-icon { background: #f56c6c; }
+.type-talent1 .skill-icon { background: #9b59b6; }
+.type-talent2 .skill-icon { background: #1abc9c; }
+.type-other .skill-icon { background: #909399; }
+.gain-section { display: flex; flex-wrap: wrap; gap: 4px; }
+.gain-chip { display: inline-flex; align-items: center; gap: 3px; padding: 3px 8px; border-radius: 4px; font-size: 11px; cursor: pointer; border: 1px solid transparent; background: #f0f9eb; transition: all 0.15s; }
+.gain-chip:hover { border-color: #b7eb8f; }
+.gain-chip.active { border-color: #67c23a; background: #e1f3d8; }
+.gain-icon { width: 16px; height: 16px; border-radius: 2px; display: inline-flex; align-items: center; justify-content: center; font-size: 8px; color: #fff; background: #67c23a; }
+.gain-name { color: #303133; }
+.gain-meta { color: #909399; font-size: 10px; }
+.toolbar { display: flex; align-items: center; gap: 4px; margin-bottom: 6px; padding: 4px 8px; background: #f5f7fa; border-radius: 4px; }
+.clickable-cell { cursor: pointer; padding: 1px 4px; border-radius: 3px; transition: background 0.15s; }
+.clickable-cell:hover { background: #ecf5ff; }
+.buff-cell { display: inline-block; min-width: 50px; text-align: center; color: #909399; }
+.buff-cell.filled { color: #67c23a; font-weight: 500; }
 </style>

@@ -25,6 +25,8 @@ export interface TimelineAction {
   id: string
   type: TimelineActionType
   name: string
+  skillId?: string
+  damageType?: string
   librarySource: string
   element: ElementType
   icon: string

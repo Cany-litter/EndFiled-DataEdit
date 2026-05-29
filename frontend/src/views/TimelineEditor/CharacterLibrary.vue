@@ -119,9 +119,11 @@ function onDragStart(e: DragEvent, c: Character, skill: Skill) {
   if (!e.dataTransfer) return
   const sa = props.skillActionsByChar[c.id]?.[skill.id]
   const actionData: Partial<TimelineAction> = {
-    id: uid('skill'),
+    id: skill.id,
+    skillId: skill.id,
     type: skill.type,
     name: skill.name,
+    damageType: skill.damageType,
     librarySource: 'character',
     element: (c as any).element || 'physical',
     icon: '',

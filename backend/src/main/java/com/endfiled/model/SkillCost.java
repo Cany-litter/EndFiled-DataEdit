@@ -15,10 +15,11 @@ public class SkillCost {
     @NotNull
     private Integer level;
     private Integer costValue;
+    private Integer techRegen;
+    private Integer techReturn;
     private BigDecimal coolDown;
     private Integer usp;
     private BigDecimal poise;
-    private BigDecimal airborneScale;
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createdAt;
     @TableField(fill = FieldFill.INSERT_UPDATE)

@@ -9,10 +9,10 @@
         <el-table-column prop="name" label="名称" min-width="100" />
         <el-table-column prop="tier" label="等级" width="70">
           <template #default="{ row }">
-            <el-tag :type="row.tier === 'boss' ? 'danger' : row.tier === 'elite' ? 'warning' : 'info'" size="small">{{ { normal: '普通', elite: '精英', boss: 'Boss', champion: '冠军' }[row.tier] || row.tier || '--' }}</el-tag>
+            <el-tag :type="row.tier === 'boss' ? 'danger' : row.tier === 'head' ? 'warning' : row.tier === 'champion' ? 'primary' : row.tier === 'elite' ? 'success' : 'info'" size="small">{{ { normal: '普通', elite: '进阶', champion: '精英', head: '头目', boss: '首领' }[row.tier] || row.tier || '--' }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="category" label="类型" width="80" />
+        <el-table-column prop="category" label="类型" width="120" />
         <el-table-column prop="maxStagger" label="失衡上限" width="80" />
         <el-table-column prop="staggerNodeCount" label="失衡节点" width="80" />
         <el-table-column prop="staggerNodeDuration" label="节点时长" width="80">
@@ -41,9 +41,10 @@
           <el-form-item label="等级">
             <el-select v-model="form.tier" style="width:100%">
               <el-option label="普通" value="normal" />
-              <el-option label="精英" value="elite" />
-              <el-option label="冠军" value="champion" />
-              <el-option label="Boss" value="boss" />
+              <el-option label="进阶" value="elite" />
+              <el-option label="精英" value="champion" />
+              <el-option label="头目" value="head" />
+              <el-option label="首领" value="boss" />
             </el-select>
           </el-form-item>
           <el-form-item label="类型"><el-input v-model="form.category" /></el-form-item>
