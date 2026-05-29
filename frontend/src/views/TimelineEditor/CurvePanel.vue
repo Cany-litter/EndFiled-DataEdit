@@ -2,25 +2,45 @@
   <div class="curve-panel" @dragover.prevent @drop.prevent="onPanelDrop">
     <div class="curve-scroll" :style="{ transform: 'translateX(-' + scrollLeft + 'px)' }">
       <div class="curve-buff-tracks" :style="{ width: contentWidth + 'px', height: (enemySectionEnd) + 'px' }">
-          <div v-for="(enemy, ei) in enemies" :key="'bt'+ei"
-               class="enemy-buff-track"
+        <template v-for="(enemy, ei) in enemies" :key="enemy.id">
+          <div class="enemy-state-track"
+               :style="{ top: stateTrackTop(ei) + 'px', width: contentWidth + 'px' }"
+               @dragover.prevent @drop.prevent="onEnemyStateDrop($event, enemy.id)"
+               @contextmenu.prevent="onTrackContextMenu($event, enemy.id, 'state')">
+            <span class="enemy-track-label">
+              <span class="enemy-track-slot" :style="{ background: '#9b59b6' }">{{ '敌' + (ei + 1) }}</span>
+              <span class="enemy-track-name">{{ enemy.name }} 状态</span>
+            </span>
+            <div v-for="item in stateList(enemy.id)" :key="item.instanceId"
+                 class="enemy-state-bar"
+                 :data-instance-id="item.instanceId"
+                 :style="itemBarStyle(item, stateLayerMap[enemy.id]?.get(item.instanceId) ?? 0)"
+                 :title="item.name + ' (' + item.duration.toFixed(1) + 's)'">
+              <span class="enemy-bar-label">{{ item.name }}</span>
+              <span class="enemy-bar-delete" @click.stop="deleteItem(enemy.id, item.instanceId)">✕</span>
+            </div>
+            <div v-if="stateList(enemy.id).length === 0" class="enemy-buff-hint">拖入状态到此处</div>
+          </div>
+
+          <div class="enemy-buff-track"
                :style="{ top: buffTrackTop(ei) + 'px', width: contentWidth + 'px' }"
                @dragover.prevent @drop.prevent="onEnemyBuffDrop($event, enemy.id)"
-               @contextmenu.prevent="onBuffTrackContextMenu($event, enemy.id)">
+               @contextmenu.prevent="onTrackContextMenu($event, enemy.id, 'buff')">
             <span class="enemy-track-label">
               <span class="enemy-track-slot" :style="{ background: colors[ei % colors.length] }">{{ '敌' + (ei + 1) }}</span>
-              <span class="enemy-track-name">{{ enemy.name }}</span>
+              <span class="enemy-track-name">{{ enemy.name }} 增益</span>
             </span>
-            <div v-for="buff in (enemyBuffs[enemy.id] || [])" :key="buff.instanceId"
-                 class="enemy-buff-bar"
-                 :data-instance-id="buff.instanceId"
-                 :style="enemyBuffBarStyle(buff, buffLayerMap[enemy.id]?.get(buff.instanceId) ?? 0)"
-                 @dblclick.prevent="emit('edit-action', buff)"
-                 :title="buff.name + ' (' + buff.duration.toFixed(1) + 's)'">
-              <span class="enemy-buff-bar-label">{{ buff.name }}</span>
+            <div v-for="item in buffList(enemy.id)" :key="item.instanceId"
+                 class="enemy-item-bar"
+                 :data-instance-id="item.instanceId"
+                 :style="itemBarStyle(item, buffLayerMap[enemy.id]?.get(item.instanceId) ?? 0)"
+                 :title="item.name + ' (' + item.duration.toFixed(1) + 's)'">
+              <span class="enemy-bar-label">{{ item.name }}</span>
+              <span class="enemy-bar-delete" @click.stop="deleteItem(enemy.id, item.instanceId)">✕</span>
             </div>
-            <div v-if="!(enemyBuffs[enemy.id] && enemyBuffs[enemy.id].length)" class="enemy-buff-hint">拖入增益到此处</div>
-         </div>
+            <div v-if="buffList(enemy.id).length === 0" class="enemy-buff-hint">拖入增益到此处</div>
+          </div>
+        </template>
       </div>
 
       <svg :width="contentWidth" :height="totalHeight" class="curve-svg">
@@ -78,7 +98,8 @@
     <Teleport to="body">
       <div v-if="ctxMenu.visible" class="context-menu" :style="{ left: ctxMenu.x + 'px', top: ctxMenu.y + 'px' }">
         <div class="context-item" @click="onCtxAddBuff">添加增益</div>
-        <div v-if="ctxMenu.buff" class="context-item" @click="onCtxDeleteBuff">删除</div>
+        <div class="context-item" @click="onCtxAddState">添加状态</div>
+        <div v-if="ctxMenu.item" class="context-item" @click="onCtxDelete">删除</div>
       </div>
     </Teleport>
   </div>
@@ -106,23 +127,27 @@ const emit = defineEmits<{
   'edit-action': [action: TimelineAction]
 }>()
 
-const ENEMY_BUFF_HEIGHT = 32
+const STATE_HEIGHT = 24
+const BUFF_HEIGHT = 24
 const colors = ['#ff7875', '#67c23a', '#409eff', '#e6a23c', '#9b59b6', '#1abc9c', '#e74c3c', '#2ecc71']
 const SP_HEIGHT = 60
 const STAGGER_HEIGHT = 30
 const GAP = 2
 
-const enemySectionHeight = ENEMY_BUFF_HEIGHT + GAP + STAGGER_HEIGHT
-
-function buffTrackTop(ei: number) { return GAP + ei * (enemySectionHeight + GAP) }
-function staggerTop(ei: number) { return buffTrackTop(ei) + ENEMY_BUFF_HEIGHT + GAP }
+function stateTrackTop(ei: number) { return GAP + ei * (STATE_HEIGHT + GAP + BUFF_HEIGHT + GAP + STAGGER_HEIGHT + GAP) }
+function buffTrackTop(ei: number) { return stateTrackTop(ei) + STATE_HEIGHT + GAP }
+function staggerTop(ei: number) { return buffTrackTop(ei) + BUFF_HEIGHT + GAP }
 
 const enemySectionEnd = computed(() => {
   if (props.enemies.length === 0) return 0
-  return buffTrackTop(props.enemies.length - 1) + ENEMY_BUFF_HEIGHT + GAP
+  const last = props.enemies.length - 1
+  return staggerTop(last) + STAGGER_HEIGHT + GAP
 })
 
-const totalHeight = computed(() => props.enemies.length * (enemySectionHeight + GAP) + SP_HEIGHT + 4)
+const totalHeight = computed(() => {
+  const trackCount = props.enemies.length
+  return trackCount > 0 ? enemySectionEnd.value + SP_HEIGHT + 4 : SP_HEIGHT + 4
+})
 const contentWidth = computed(() => Math.max(800, props.tracks.reduce((s, t) => {
   return Math.max(s, ...t.actions.map(a => (a.startTime + a.duration) * props.pxPerSecond + 200))
 }, 800)))
@@ -130,8 +155,10 @@ const result = computed(() => {
   if (!props.enemies.length) return { spCurve: [], enemyCurves: {}, enemyNodeSegments: {}, enemyLockSegments: {} }
   return runStaggerSimulation(props.tracks, props.enemies, props.systemConstants)
 })
-const spSectionTop = computed(() => props.enemies.length * (enemySectionHeight + GAP))
-const spSectionBottom = computed(() => spSectionTop.value + SP_HEIGHT)
+const spSectionTop = computed(() => {
+  if (props.enemies.length === 0) return 0
+  return enemySectionEnd.value + 2
+})
 
 const spLabelY = computed(() => spSectionTop.value + 14)
 
@@ -210,8 +237,16 @@ const gridTicks = computed(() => {
   return ticks
 })
 
-// --- Buff layer computation ---
-function computeBuffLayers(actions: TimelineAction[]): Map<string, number> {
+// --- Filter by kind ---
+function buffList(enemyId: string) {
+  return (props.enemyBuffs[enemyId] || []).filter(a => !a.kind || a.kind === 'buff')
+}
+function stateList(enemyId: string) {
+  return (props.enemyBuffs[enemyId] || []).filter(a => a.kind === 'state')
+}
+
+// --- Layer computation ---
+function computeLayers(actions: TimelineAction[]): Map<string, number> {
   const sorted = [...actions].sort((a, b) => a.startTime - b.startTime)
   const layerEnds = [0, 0, 0]
   const result = new Map<string, number>()
@@ -234,21 +269,23 @@ function computeBuffLayers(actions: TimelineAction[]): Map<string, number> {
 const buffLayerMap = computed(() => {
   const map: Record<string, Map<string, number>> = {}
   for (const enemy of props.enemies) {
-    const buffs = props.enemyBuffs[enemy.id]
-    if (buffs && buffs.length) {
-      map[enemy.id] = computeBuffLayers(buffs)
-    } else {
-      map[enemy.id] = new Map()
-    }
+    map[enemy.id] = computeLayers(buffList(enemy.id))
+  }
+  return map
+})
+const stateLayerMap = computed(() => {
+  const map: Record<string, Map<string, number>> = {}
+  for (const enemy of props.enemies) {
+    map[enemy.id] = computeLayers(stateList(enemy.id))
   }
   return map
 })
 
-function enemyBuffBarStyle(buff: TimelineAction, layer: number) {
-  const left = buff.startTime * props.pxPerSecond
-  const width = Math.max(buff.duration * props.pxPerSecond, 4)
-  const trackH = ENEMY_BUFF_HEIGHT - 4
-  const layerH = Math.max(trackH / 3, 8)
+function itemBarStyle(item: TimelineAction, layer: number) {
+  const left = item.startTime * props.pxPerSecond
+  const width = Math.max(item.duration * props.pxPerSecond, 4)
+  const trackH = 20
+  const layerH = Math.max(trackH / 3, 7)
   const top = 2 + layer * layerH
   return {
     left: left + 'px',
@@ -259,54 +296,18 @@ function enemyBuffBarStyle(buff: TimelineAction, layer: number) {
 }
 
 // --- DnD ---
-function onPanelDrop(e: DragEvent) {
-  e.stopPropagation()
-  if (!e.dataTransfer) return
-  const raw = e.dataTransfer.getData('application/json')
-  if (!raw) return
-  try {
-    const data = JSON.parse(raw)
-    if (!data.buffData) return
-    const viewport = document.querySelector('.timeline-viewport') as HTMLElement
-    if (!viewport) return
-    const vpRect = viewport.getBoundingClientRect()
-    const scrollTop = viewport.scrollTop
-    const relY = (e.clientY - vpRect.top) + scrollTop - 28
-    let targetEnemyId = ''
-    for (const enemy of props.enemies) {
-      const btTop = buffTrackTop(props.enemies.indexOf(enemy))
-      if (relY >= btTop && relY < btTop + ENEMY_BUFF_HEIGHT) {
-        targetEnemyId = enemy.id
-        break
-      }
-    }
-    if (targetEnemyId) addBuffToEnemy(targetEnemyId, data.buffData, e.clientX)
-  } catch { /* ignore */ }
-}
-
-function onEnemyBuffDrop(e: DragEvent, enemyId: string) {
-  e.stopPropagation()
-  if (!e.dataTransfer) return
-  const raw = e.dataTransfer.getData('application/json')
-  if (!raw) return
-  try {
-    const data = JSON.parse(raw)
-    if (data.buffData) addBuffToEnemy(enemyId, data.buffData, e.clientX)
-  } catch { /* ignore */ }
-}
-
-function addBuffToEnemy(enemyId: string, buffData: Partial<TimelineAction>, clientX: number) {
+function addBuffToEnemy(enemyId: string, buffData: Partial<TimelineAction>, clientX: number, kind: 'buff' | 'state') {
   const rect = (document.querySelector('.timeline-viewport') as HTMLElement)
   if (!rect) return
   const vr = rect.getBoundingClientRect()
   const scrollLeft = rect.scrollLeft
   const x = clientX - vr.left + scrollLeft
   const time = Math.round((x / props.pxPerSecond) * 10) / 10
-  const instanceId = 'ebuff_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6)
-  const buff: TimelineAction = {
+  const instanceId = 'eitem_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6)
+  const item: TimelineAction = {
     id: buffData.id || instanceId,
     type: 'skill',
-    name: buffData.name || '新增益',
+    name: buffData.name || (kind === 'state' ? '新状态' : '新增益'),
     librarySource: 'enemy-buff',
     element: 'physical',
     icon: '',
@@ -318,62 +319,157 @@ function addBuffToEnemy(enemyId: string, buffData: Partial<TimelineAction>, clie
     allowedTypes: [],
     physicalAnomaly: [],
     instanceId,
+    kind,
   }
   const current = { ...props.enemyBuffs }
   if (!current[enemyId]) current[enemyId] = []
-  current[enemyId] = [...current[enemyId], buff]
+  current[enemyId] = [...current[enemyId], item]
   current[enemyId].sort((a, b) => a.startTime - b.startTime)
   emit('update-enemy-buffs', current)
 }
 
+function resolveEnemyId(clientY: number): string | null {
+  const viewport = document.querySelector('.timeline-viewport') as HTMLElement
+  if (!viewport) return null
+  const vpRect = viewport.getBoundingClientRect()
+  const scrollTop = viewport.scrollTop
+  const relY = (clientY - vpRect.top) + scrollTop - 28
+  for (const enemy of props.enemies) {
+    const ei = props.enemies.indexOf(enemy)
+    const stTop = stateTrackTop(ei)
+    const bfTop = buffTrackTop(ei)
+    const endTop = staggerTop(ei) + STAGGER_HEIGHT
+    if (relY >= stTop && relY < endTop) return enemy.id
+  }
+  return null
+}
+
+function resolveKind(clientY: number): 'buff' | 'state' {
+  const viewport = document.querySelector('.timeline-viewport') as HTMLElement
+  if (!viewport) return 'buff'
+  const vpRect = viewport.getBoundingClientRect()
+  const scrollTop = viewport.scrollTop
+  const relY = (clientY - vpRect.top) + scrollTop - 28
+  for (const enemy of props.enemies) {
+    const ei = props.enemies.indexOf(enemy)
+    const stTop = stateTrackTop(ei)
+    const bfTop = buffTrackTop(ei)
+    if (relY >= stTop && relY < stTop + STATE_HEIGHT) return 'state'
+    if (relY >= bfTop && relY < bfTop + BUFF_HEIGHT) return 'buff'
+  }
+  return 'buff'
+}
+
+function onPanelDrop(e: DragEvent) {
+  e.stopPropagation()
+  if (!e.dataTransfer) return
+  const raw = e.dataTransfer.getData('application/json')
+  if (!raw) return
+  try {
+    const data = JSON.parse(raw)
+    if (!data.buffData) return
+    const enemyId = resolveEnemyId(e.clientY)
+    if (enemyId) {
+      const kind = resolveKind(e.clientY)
+      addBuffToEnemy(enemyId, data.buffData, e.clientX, kind)
+    }
+  } catch { /* ignore */ }
+}
+
+function onEnemyBuffDrop(e: DragEvent, enemyId: string) {
+  e.stopPropagation()
+  if (!e.dataTransfer) return
+  const raw = e.dataTransfer.getData('application/json')
+  if (!raw) return
+  try {
+    const data = JSON.parse(raw)
+    if (data.buffData) addBuffToEnemy(enemyId, data.buffData, e.clientX, 'buff')
+  } catch { /* ignore */ }
+}
+
+function onEnemyStateDrop(e: DragEvent, enemyId: string) {
+  e.stopPropagation()
+  if (!e.dataTransfer) return
+  const raw = e.dataTransfer.getData('application/json')
+  if (!raw) return
+  try {
+    const data = JSON.parse(raw)
+    if (data.buffData) addBuffToEnemy(enemyId, data.buffData, e.clientX, 'state')
+  } catch { /* ignore */ }
+}
+
+// --- Delete ---
+function deleteItem(enemyId: string, instanceId: string) {
+  const current = { ...props.enemyBuffs }
+  if (current[enemyId]) {
+    current[enemyId] = current[enemyId].filter(b => b.instanceId !== instanceId)
+    if (current[enemyId].length === 0) delete current[enemyId]
+    emit('update-enemy-buffs', current)
+  }
+}
+
 // --- Context menu ---
-const ctxMenu = ref<{ visible: boolean; x: number; y: number; enemyId: string; buff: TimelineAction | null }>({
-  visible: false, x: 0, y: 0, enemyId: '', buff: null,
+const ctxMenu = ref<{ visible: boolean; x: number; y: number; enemyId: string; item: TimelineAction | null; kind: string }>({
+  visible: false, x: 0, y: 0, enemyId: '', item: null, kind: 'buff',
 })
 
-function onBuffTrackContextMenu(e: MouseEvent, enemyId: string) {
-  const buffEl = (e.target as HTMLElement).closest('.enemy-buff-bar')
-  let buff: TimelineAction | null = null
-  if (buffEl) {
-    const instanceId = (buffEl as any)?.dataset?.instanceId
+function onTrackContextMenu(e: MouseEvent, enemyId: string, kind: string) {
+  const barEl = (e.target as HTMLElement).closest('.enemy-item-bar, .enemy-state-bar')
+  let item: TimelineAction | null = null
+  if (barEl) {
+    const instanceId = (barEl as any)?.dataset?.instanceId
     if (instanceId) {
       const list = props.enemyBuffs[enemyId] || []
-      buff = list.find(b => b.instanceId === instanceId) || null
+      item = list.find(b => b.instanceId === instanceId) || null
     }
   }
-  ctxMenu.value = { visible: true, x: e.clientX, y: e.clientY, enemyId, buff }
+  ctxMenu.value = { visible: true, x: e.clientX, y: e.clientY, enemyId, item, kind }
   document.addEventListener('click', hideCtxMenu, { once: true })
 }
 
 function hideCtxMenu() { ctxMenu.value.visible = false }
 
-function onCtxAddBuff() {
-  const time = 0
-  const instanceId = 'ebuff_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6)
-  const buff: TimelineAction = {
-    id: instanceId, instanceId,
-    type: 'skill', name: '新增益', librarySource: 'enemy-buff',
+function makeItem(name: string, kind: string): TimelineAction {
+  const instanceId = 'eitem_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6)
+  return {
+    id: instanceId, instanceId, kind,
+    type: 'skill', name, librarySource: 'enemy-buff',
     element: 'physical', icon: '',
     duration: 5, cooldown: 0,
-    startTime: time, logicalStartTime: time,
+    startTime: 0, logicalStartTime: 0,
     damageTicks: [], allowedTypes: [], physicalAnomaly: [],
   }
+}
+
+function onCtxAddBuff() {
+  const item = makeItem('新增益', 'buff')
   const current = { ...props.enemyBuffs }
   const eid = ctxMenu.value.enemyId
   if (!current[eid]) current[eid] = []
-  current[eid] = [...current[eid], buff]
+  current[eid] = [...current[eid], item]
   current[eid].sort((a, b) => a.startTime - b.startTime)
   emit('update-enemy-buffs', current)
   hideCtxMenu()
 }
 
-function onCtxDeleteBuff() {
+function onCtxAddState() {
+  const item = makeItem('新状态', 'state')
+  const current = { ...props.enemyBuffs }
   const eid = ctxMenu.value.enemyId
-  const buff = ctxMenu.value.buff
-  if (!eid || !buff) return
+  if (!current[eid]) current[eid] = []
+  current[eid] = [...current[eid], item]
+  current[eid].sort((a, b) => a.startTime - b.startTime)
+  emit('update-enemy-buffs', current)
+  hideCtxMenu()
+}
+
+function onCtxDelete() {
+  const eid = ctxMenu.value.enemyId
+  const item = ctxMenu.value.item
+  if (!eid || !item) return
   const current = { ...props.enemyBuffs }
   if (current[eid]) {
-    current[eid] = current[eid].filter(b => b.instanceId !== buff.instanceId)
+    current[eid] = current[eid].filter(b => b.instanceId !== item.instanceId)
     emit('update-enemy-buffs', current)
   }
   hideCtxMenu()
@@ -385,12 +481,14 @@ function onCtxDeleteBuff() {
 .curve-scroll { transition: none; position: relative; min-width: 100%; }
 .curve-svg { display: block; }
 .curve-buff-tracks { position: absolute; top: 0; left: 0; z-index: 5; pointer-events: none; }
+.enemy-state-track,
 .enemy-buff-track {
-  position: absolute; left: 0; height: 32px; pointer-events: auto;
+  position: absolute; left: 0; height: 24px; pointer-events: auto;
   border-bottom: 1px dashed #e0e0e0; background: #f8f9fc;
   cursor: pointer; overflow: hidden;
 }
-.enemy-buff-track:hover { background: rgba(240, 249, 235, 0.6); }
+.enemy-state-track:hover { background: rgba(155, 89, 182, 0.08); }
+.enemy-buff-track:hover { background: rgba(103, 194, 58, 0.08); }
 .enemy-track-label {
   position: absolute; left: 0; top: 0; height: 100%;
   display: flex; align-items: center; gap: 4px; padding: 0 4px;
@@ -402,23 +500,37 @@ function onCtxDeleteBuff() {
   font-size: 9px; color: #fff; font-weight: 700; flex-shrink: 0;
 }
 .enemy-track-name {
-  font-size: 11px; font-weight: 500; color: #303133;
+  font-size: 10px; font-weight: 500; color: #303133;
   white-space: nowrap; flex-shrink: 0;
 }
-.enemy-buff-bar {
+.enemy-item-bar,
+.enemy-state-bar {
   position: absolute; z-index: 1; border-radius: 3px;
-  background: rgba(103, 194, 58, 0.25); border: 1px solid rgba(103, 194, 58, 0.5);
   cursor: pointer; overflow: hidden; display: flex; align-items: center; padding: 0 4px;
-  transition: box-shadow 0.1s; min-width: 12px;
+  transition: box-shadow 0.1s; min-width: 16px;
 }
-.enemy-buff-bar:hover { box-shadow: 0 0 0 1px #67c23a; background: rgba(103, 194, 58, 0.35); }
-.enemy-buff-bar-label {
-  font-size: 10px; color: #2d5e2d; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  user-select: none;
+.enemy-item-bar {
+  background: rgba(103, 194, 58, 0.25); border: 1px solid rgba(103, 194, 58, 0.5);
 }
+.enemy-item-bar:hover { box-shadow: 0 0 0 1px #67c23a; background: rgba(103, 194, 58, 0.35); }
+.enemy-state-bar {
+  background: rgba(155, 89, 182, 0.2); border: 1px solid rgba(155, 89, 182, 0.45);
+}
+.enemy-state-bar:hover { box-shadow: 0 0 0 1px #9b59b6; background: rgba(155, 89, 182, 0.3); }
+.enemy-bar-label {
+  font-size: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  user-select: none; flex: 1; min-width: 0;
+}
+.enemy-item-bar .enemy-bar-label { color: #2d5e2d; }
+.enemy-state-bar .enemy-bar-label { color: #6c3483; }
+.enemy-bar-delete {
+  font-size: 9px; color: rgba(0,0,0,0.35); flex-shrink: 0;
+  padding: 0 1px; margin-left: 2px; line-height: 1;
+}
+.enemy-bar-delete:hover { color: #f56c6c; font-weight: 700; }
 .enemy-buff-hint {
-  font-size: 10px; color: #c0c4cc; padding: 6px 8px 6px 52px; user-select: none; width: 100%; text-align: center;
-  box-sizing: border-box;
+  font-size: 10px; color: #c0c4cc; padding: 4px 8px 4px 60px; user-select: none;
+  width: 100%; text-align: center; box-sizing: border-box;
 }
 .context-menu {
   position: fixed; z-index: 9999; background: #fff; border: 1px solid #e4e7ed; border-radius: 6px;
