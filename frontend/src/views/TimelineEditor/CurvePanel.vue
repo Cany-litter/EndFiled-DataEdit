@@ -473,18 +473,19 @@ function onCtxDelete() {
 }
 .track-label-row {
   position: absolute; left: 0; width: 100%;
-  display: flex; align-items: center; gap: 3px; padding: 0 4px;
+  display: flex; align-items: center; gap: 5px; padding: 0 6px;
   box-sizing: border-box; border-bottom: 1px dashed #e0e0e0;
+  font-size: 11px;
 }
-.stagger-row { background: transparent; border-bottom: none; }
+.stagger-row { border-bottom: none; }
 .label-slot {
   width: 18px; height: 18px; border-radius: 3px;
   display: flex; align-items: center; justify-content: center;
   font-size: 9px; color: #fff; font-weight: 700; flex-shrink: 0;
 }
-.label-name { font-size: 10px; font-weight: 500; color: #303133; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.label-sub { font-size: 9px; color: #909399; white-space: nowrap; flex-shrink: 0; }
-.stagger-value { font-size: 9px; font-weight: 700; color: #ff7875; margin-left: auto; padding-right: 2px; }
+.label-name { font-size: 11px; font-weight: 500; color: #303133; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.label-sub { font-size: 11px; color: #606266; white-space: nowrap; flex-shrink: 0; }
+.stagger-value { font-size: 10px; font-weight: 700; color: #ff7875; margin-left: auto; padding-right: 4px; }
 
 /* Scrollable content area */
 .curve-scroll-wrapper { position: relative; }
