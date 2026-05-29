@@ -245,7 +245,7 @@ export function simulateRows(config: SimulateRowsConfig): TeamSimulationResult {
     lastComboTime = row.time
 
     if (!charMap.has(row.charId)) {
-      charMap.set(row.charId, { totalDamage: 0, totalCasts: 0, totalSpUsed: 0, skillBreakdown: {}, categoryBreakdown: {} })
+      charMap.set(row.charId, { totalDamage: 0, totalCasts: 0, totalSpUsed: 0, skillBreakdown: {}, categoryBreakdown: {}, elementDamage: {}, skillTypeDamage: {} })
     }
     const cm = charMap.get(row.charId)!
 
@@ -291,6 +291,12 @@ export function simulateRows(config: SimulateRowsConfig): TeamSimulationResult {
     row.damage = finalDamage
     cm.totalDamage += finalDamage
 
+    const elem = row.damageType || 'physical'
+    cm.elementDamage[elem] = (cm.elementDamage[elem] || 0) + finalDamage
+
+    const st = row.skillType || 'other'
+    cm.skillTypeDamage[st] = (cm.skillTypeDamage[st] || 0) + finalDamage
+
     if (!cm.skillBreakdown[row.skillId]) {
       cm.skillBreakdown[row.skillId] = { count: 0, totalDamage: 0 }
     }
@@ -314,16 +320,30 @@ export function simulateRows(config: SimulateRowsConfig): TeamSimulationResult {
       actionRows: charRows,
       skillBreakdown: m.skillBreakdown,
       categoryBreakdown: m.categoryBreakdown,
+      elementDamage: m.elementDamage,
+      skillTypeDamage: m.skillTypeDamage,
     }
   })
 
   const teamTotalDamage = memberResults.reduce((s, m) => s + m.totalDamage, 0)
   const teamDuration = rows.length > 0 ? Math.max(...rows.map(r => r.time)) + 1 : 30
   const teamCategoryBreakdown: Record<string, number> = {}
+  const teamElementDamage: Record<string, number> = {}
+  const teamSkillTypeDamage: Record<string, number> = {}
   for (const mr of memberResults) {
     if (mr.categoryBreakdown) {
       for (const [k, v] of Object.entries(mr.categoryBreakdown)) {
         teamCategoryBreakdown[k] = (teamCategoryBreakdown[k] ?? 0) + v
+      }
+    }
+    if (mr.elementDamage) {
+      for (const [k, v] of Object.entries(mr.elementDamage)) {
+        teamElementDamage[k] = (teamElementDamage[k] ?? 0) + v
+      }
+    }
+    if (mr.skillTypeDamage) {
+      for (const [k, v] of Object.entries(mr.skillTypeDamage)) {
+        teamSkillTypeDamage[k] = (teamSkillTypeDamage[k] ?? 0) + v
       }
     }
   }
@@ -333,5 +353,7 @@ export function simulateRows(config: SimulateRowsConfig): TeamSimulationResult {
     teamTotalDamage,
     teamDps: teamTotalDamage / teamDuration,
     teamCategoryBreakdown,
+    teamElementDamage,
+    teamSkillTypeDamage,
   }
 }

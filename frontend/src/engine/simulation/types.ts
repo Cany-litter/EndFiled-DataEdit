@@ -40,10 +40,14 @@ export interface TeamSimulationResult {
     actionRows: ActionRow[]
     skillBreakdown: Record<string, { count: number; totalDamage: number }>
     categoryBreakdown?: Record<string, number>
+    elementDamage?: Record<string, number>
+    skillTypeDamage?: Record<string, number>
   }[]
   teamTotalDamage: number
   teamDps: number
   teamCategoryBreakdown?: Record<string, number>
+  teamElementDamage?: Record<string, number>
+  teamSkillTypeDamage?: Record<string, number>
 }
 
 export interface SimulationConfig {

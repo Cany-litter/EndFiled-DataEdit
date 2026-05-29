@@ -130,7 +130,7 @@
             </el-tab-pane>
           </el-tabs>
 
-          <el-card shadow="never">
+          <el-card shadow="never" style="margin-bottom:8px">
             <template #header><span>伤害统计</span></template>
             <el-table :data="statRows" border stripe size="small">
               <el-table-column label="干员" width="80">
@@ -150,6 +150,17 @@
               </el-table-column>
             </el-table>
           </el-card>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <el-card shadow="never">
+              <template #header><span>元素伤害占比</span></template>
+              <div ref="elementChartRef" style="height:160px" />
+            </el-card>
+            <el-card shadow="never">
+              <template #header><span>技能类型伤害占比</span></template>
+              <div ref="skillTypeChartRef" style="height:160px" />
+            </el-card>
+          </div>
         </template>
 
         <div v-else style="display:flex;align-items:center;justify-content:center;height:400px;color:#909399;font-size:14px">
@@ -170,9 +181,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed, onMounted } from 'vue'
+import { ref, reactive, computed, onMounted, nextTick } from 'vue'
 import { useRoute } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
+import * as echarts from 'echarts'
 import { TeamApi, CharacterApi, BuildApi, WeaponApi, EquipmentApi, SkillApi, SkillLevelApi, SkillActionApi, GainApi, TimelineApi, EnemyApi } from '../../api'
 import type { Team, Gain } from '../../api'
 import { calcFinalStats, type FinalStats } from '../../engine/formulas/stats'
@@ -203,6 +215,21 @@ const charSkillMap = ref<Record<string, any[]>>({})
 const result = ref<TeamSimulationResult | null>(null)
 
 const slotColors = ['#e74c3c', '#e67e22', '#2ecc71', '#3498db']
+
+// ── Chart refs ──
+const elementChartRef = ref<HTMLDivElement | null>(null)
+const skillTypeChartRef = ref<HTMLDivElement | null>(null)
+let elementChart: echarts.ECharts | null = null
+let skillTypeChart: echarts.ECharts | null = null
+
+const elementColors: Record<string, string> = {
+  physical: '#909399', pyro: '#f56c6c', electro: '#e6a23c',
+  cryo: '#409eff', natural: '#67c23a', ultra: '#b37feb', true: '#ffd700',
+}
+const skillTypeChartColors: Record<string, string> = {
+  normal: '#409eff', skill: '#e6a23c', chain: '#67c23a',
+  ultimate: '#f56c6c', talent1: '#9b59b6', talent2: '#1abc9c', other: '#909399',
+}
 
 // ── Enemy state ──
 interface EnemyBrief { id: string; name: string; def: number; resistance: number }
@@ -553,6 +580,47 @@ function runSim() {
   }
 
   result.value = simulateRows(config)
+  nextTick(() => renderCharts())
+}
+
+function renderCharts() {
+  // Element damage pie
+  if (elementChartRef.value && result.value?.teamElementDamage) {
+    if (!elementChart) elementChart = echarts.init(elementChartRef.value)
+    const data = Object.entries(result.value.teamElementDamage)
+      .filter(([, v]) => v > 0)
+      .map(([k, v]) => ({
+        name: damageTypeLabel(k) || k,
+        value: v,
+        itemStyle: { color: elementColors[k] || '#909399' },
+      }))
+    elementChart.setOption({
+      tooltip: { trigger: 'item', formatter: '{b}: {c} ({d}%)' },
+      series: [{ type: 'pie', radius: ['30%', '60%'], data, label: { fontSize: 10, formatter: '{b}\n{d}%' } }],
+    })
+  }
+
+  // Skill type damage bar
+  if (skillTypeChartRef.value && result.value?.teamSkillTypeDamage) {
+    if (!skillTypeChart) skillTypeChart = echarts.init(skillTypeChartRef.value)
+    const entries = Object.entries(result.value.teamSkillTypeDamage).filter(([, v]) => v > 0)
+    const total = entries.reduce((s, [, v]) => s + v, 0)
+    skillTypeChart.setOption({
+      tooltip: { trigger: 'axis', formatter: (p: any) => `${p[0].name}: ${(p[0].value).toFixed(0)} (${(p[0].value / total * 100).toFixed(1)}%)` },
+      grid: { left: 40, right: 10, top: 10, bottom: 20 },
+      xAxis: { type: 'category', data: entries.map(([k]) => skillTypeChartLabel(k) || k), axisLabel: { fontSize: 10 } },
+      yAxis: { type: 'value', axisLabel: { fontSize: 9 } },
+      series: [{
+        type: 'bar', barWidth: '50%',
+        data: entries.map(([k, v]) => ({ value: v, itemStyle: { color: skillTypeChartColors[k] || '#909399' } })),
+      }],
+    })
+  }
+}
+
+function skillTypeChartLabel(t: string) {
+  const m: Record<string, string> = { normal: '普攻', skill: '战技', chain: '连携', ultimate: '终结', talent1: '天赋', talent2: '天赋', other: '其他' }
+  return m[t] || t
 }
 
 // ── Computed ──
