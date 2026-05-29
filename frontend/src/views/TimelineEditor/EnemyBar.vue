@@ -101,8 +101,8 @@ onMounted(loadDbEnemies)
 
 <style scoped>
 .enemy-bar { background: #fafafa; }
-.enemy-bar-toolbar { display: flex; align-items: center; gap: 6px; padding: 4px 8px; border-bottom: 1px solid #e4e7ed; user-select: none; }
-.collapse-arrow { font-size: 10px; color: #909399; width: 14px; text-align: center; }
+.enemy-bar-toolbar { padding: 4px 8px; border-bottom: 1px solid #e4e7ed; user-select: none; }
+
 .enemy-tags { display: flex; gap: 4px; padding: 4px 8px; overflow-x: auto; flex-wrap: wrap; }
 .enemy-tag { border: 1px solid #e4e7ed; border-left: 3px solid; border-radius: 4px; padding: 4px 6px; background: #fff; min-width: 280px; }
 .enemy-tag-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
