@@ -8,18 +8,22 @@
                @dragover.prevent @drop.prevent="onEnemyStateDrop($event, enemy.id)"
                @contextmenu.prevent="onTrackContextMenu($event, enemy.id, 'state')">
             <span class="enemy-track-label">
-              <span class="enemy-track-slot" :style="{ background: '#9b59b6' }">{{ '敌' + (ei + 1) }}</span>
-              <span class="enemy-track-name">{{ enemy.name }} 状态</span>
+              <span class="enemy-track-slot" style="background:#9b59b6">{{ '敌' + (ei + 1) }}</span>
+              <span class="enemy-track-name">{{ enemy.name }}</span>
+              <span class="enemy-track-sub">状态</span>
             </span>
-            <div v-for="item in stateList(enemy.id)" :key="item.instanceId"
-                 class="enemy-state-bar"
-                 :data-instance-id="item.instanceId"
-                 :style="itemBarStyle(item, stateLayerMap[enemy.id]?.get(item.instanceId) ?? 0)"
-                 :title="item.name + ' (' + item.duration.toFixed(1) + 's)'">
-              <span class="enemy-bar-label">{{ item.name }}</span>
-              <span class="enemy-bar-delete" @click.stop="deleteItem(enemy.id, item.instanceId)">✕</span>
+            <span class="enemy-track-divider" />
+            <div class="enemy-track-content">
+              <div v-for="item in stateList(enemy.id)" :key="item.instanceId"
+                   class="enemy-state-bar"
+                   :data-instance-id="item.instanceId"
+                   :style="itemBarStyle(item, stateLayerMap[enemy.id]?.get(item.instanceId) ?? 0)"
+                   :title="item.name + ' (' + item.duration.toFixed(1) + 's)'">
+                <span class="enemy-bar-label">{{ item.name }}</span>
+                <span class="enemy-bar-delete" @click.stop="deleteItem(enemy.id, item.instanceId)">✕</span>
+              </div>
+              <div v-if="stateList(enemy.id).length === 0" class="enemy-buff-hint">拖入状态到此处</div>
             </div>
-            <div v-if="stateList(enemy.id).length === 0" class="enemy-buff-hint">拖入状态到此处</div>
           </div>
 
           <div class="enemy-buff-track"
@@ -28,17 +32,21 @@
                @contextmenu.prevent="onTrackContextMenu($event, enemy.id, 'buff')">
             <span class="enemy-track-label">
               <span class="enemy-track-slot" :style="{ background: colors[ei % colors.length] }">{{ '敌' + (ei + 1) }}</span>
-              <span class="enemy-track-name">{{ enemy.name }} 增益</span>
+              <span class="enemy-track-name">{{ enemy.name }}</span>
+              <span class="enemy-track-sub">增益</span>
             </span>
-            <div v-for="item in buffList(enemy.id)" :key="item.instanceId"
-                 class="enemy-item-bar"
-                 :data-instance-id="item.instanceId"
-                 :style="itemBarStyle(item, buffLayerMap[enemy.id]?.get(item.instanceId) ?? 0)"
-                 :title="item.name + ' (' + item.duration.toFixed(1) + 's)'">
-              <span class="enemy-bar-label">{{ item.name }}</span>
-              <span class="enemy-bar-delete" @click.stop="deleteItem(enemy.id, item.instanceId)">✕</span>
+            <span class="enemy-track-divider" />
+            <div class="enemy-track-content">
+              <div v-for="item in buffList(enemy.id)" :key="item.instanceId"
+                   class="enemy-item-bar"
+                   :data-instance-id="item.instanceId"
+                   :style="itemBarStyle(item, buffLayerMap[enemy.id]?.get(item.instanceId) ?? 0)"
+                   :title="item.name + ' (' + item.duration.toFixed(1) + 's)'">
+                <span class="enemy-bar-label">{{ item.name }}</span>
+                <span class="enemy-bar-delete" @click.stop="deleteItem(enemy.id, item.instanceId)">✕</span>
+              </div>
+              <div v-if="buffList(enemy.id).length === 0" class="enemy-buff-hint">拖入增益到此处</div>
             </div>
-            <div v-if="buffList(enemy.id).length === 0" class="enemy-buff-hint">拖入增益到此处</div>
           </div>
         </template>
       </div>
@@ -485,14 +493,19 @@ function onCtxDelete() {
 .enemy-buff-track {
   position: absolute; left: 0; height: 24px; pointer-events: auto;
   border-bottom: 1px dashed #e0e0e0; background: #f8f9fc;
-  cursor: pointer; overflow: hidden;
+  cursor: pointer; display: flex; align-items: stretch;
 }
 .enemy-state-track:hover { background: rgba(155, 89, 182, 0.08); }
 .enemy-buff-track:hover { background: rgba(103, 194, 58, 0.08); }
 .enemy-track-label {
-  position: absolute; left: 0; top: 0; height: 100%;
-  display: flex; align-items: center; gap: 4px; padding: 0 4px;
-  z-index: 2; pointer-events: none; background: inherit;
+  width: 78px; flex-shrink: 0;
+  display: flex; align-items: center; gap: 3px; padding: 0 4px;
+  background: #f0f2f5; border-right: 1px solid #e4e7ed;
+  z-index: 3; pointer-events: none;
+}
+.enemy-track-divider { width: 0; flex-shrink: 0; }
+.enemy-track-content {
+  flex: 1; position: relative; overflow: hidden; min-width: 0;
 }
 .enemy-track-slot {
   width: 18px; height: 18px; border-radius: 3px;
@@ -501,7 +514,10 @@ function onCtxDelete() {
 }
 .enemy-track-name {
   font-size: 10px; font-weight: 500; color: #303133;
-  white-space: nowrap; flex-shrink: 0;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.enemy-track-sub {
+  font-size: 9px; color: #909399; white-space: nowrap; flex-shrink: 0;
 }
 .enemy-item-bar,
 .enemy-state-bar {
@@ -529,7 +545,7 @@ function onCtxDelete() {
 }
 .enemy-bar-delete:hover { color: #f56c6c; font-weight: 700; }
 .enemy-buff-hint {
-  font-size: 10px; color: #c0c4cc; padding: 4px 8px 4px 60px; user-select: none;
+  font-size: 10px; color: #c0c4cc; padding: 4px 8px; user-select: none;
   width: 100%; text-align: center; box-sizing: border-box;
 }
 .context-menu {
