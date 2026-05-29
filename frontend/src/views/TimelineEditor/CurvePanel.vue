@@ -1,26 +1,6 @@
 <template>
   <div class="curve-panel" @dragover.prevent @drop.prevent="onPanelDrop">
-    <div class="curve-track-labels" :style="{ height: enemySectionEnd + 'px' }">
-      <template v-for="(enemy, ei) in enemies" :key="enemy.id">
-        <div class="track-label-row" :style="{ top: stateTrackTop(ei) + 'px', height: STATE_HEIGHT + 'px' }">
-          <span class="label-slot" style="background:#9b59b6">{{ '敌' + (ei + 1) }}</span>
-          <span class="label-name">{{ enemy.name }}</span>
-          <span class="label-sub">状态</span>
-        </div>
-        <div class="track-label-row" :style="{ top: buffTrackTop(ei) + 'px', height: BUFF_HEIGHT + 'px' }">
-          <span class="label-slot" :style="{ background: colors[ei % colors.length] }">{{ '敌' + (ei + 1) }}</span>
-          <span class="label-name">{{ enemy.name }}</span>
-          <span class="label-sub">增益</span>
-        </div>
-        <div class="track-label-row stagger-row" :style="{ top: staggerTop(ei) + 'px', height: STAGGER_HEIGHT + 'px' }">
-          <span class="label-name">{{ enemy.name }}</span>
-          <span class="label-sub">失衡</span>
-          <span class="stagger-value">{{ lastStagger(enemy.id) }}/{{ enemy.maxStagger }}</span>
-        </div>
-      </template>
-    </div>
-
-    <div class="curve-scroll-wrapper" :style="{ marginLeft: LABEL_WIDTH + 'px' }">
+    <div class="curve-scroll-wrapper">
       <div class="curve-scroll" :style="{ transform: 'translateX(-' + scrollLeft + 'px)' }">
         <div class="curve-buff-tracks" :style="{ width: contentWidth + 'px', height: (enemySectionEnd) + 'px' }">
           <template v-for="(enemy, ei) in enemies" :key="enemy.id">
@@ -141,7 +121,6 @@ const emit = defineEmits<{
   'edit-action': [action: TimelineAction]
 }>()
 
-const LABEL_WIDTH = 90
 const STATE_HEIGHT = 24
 const BUFF_HEIGHT = 24
 const colors = ['#ff7875', '#67c23a', '#409eff', '#e6a23c', '#9b59b6', '#1abc9c', '#e74c3c', '#2ecc71']
@@ -465,29 +444,6 @@ function onCtxDelete() {
 <style scoped>
 .curve-panel { width: 100%; overflow: hidden; background: #fff; position: relative; }
 
-/* Fixed left label column */
-.curve-track-labels {
-  position: absolute; left: 0; top: 0; width: 90px;
-  z-index: 10; pointer-events: none;
-  border-right: 1px solid #e4e7ed; background: #f0f2f5;
-}
-.track-label-row {
-  position: absolute; left: 0; width: 100%;
-  display: flex; align-items: center; gap: 5px; padding: 0 6px;
-  box-sizing: border-box; border-bottom: 1px dashed #e0e0e0;
-  font-size: 11px;
-}
-.stagger-row { border-bottom: none; }
-.label-slot {
-  width: 18px; height: 18px; border-radius: 3px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 9px; color: #fff; font-weight: 700; flex-shrink: 0;
-}
-.label-name { font-size: 11px; font-weight: 500; color: #303133; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.label-sub { font-size: 11px; color: #606266; white-space: nowrap; flex-shrink: 0; }
-.stagger-value { font-size: 10px; font-weight: 700; color: #ff7875; margin-left: auto; padding-right: 4px; }
-
-/* Scrollable content area */
 .curve-scroll-wrapper { position: relative; }
 .curve-scroll { transition: none; position: relative; min-width: 100%; }
 .curve-svg { display: block; }

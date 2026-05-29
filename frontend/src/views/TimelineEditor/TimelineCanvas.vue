@@ -59,8 +59,9 @@
       <!-- === 左侧轨道标签列（固定 90px，与视口同步滚动） === -->
       <div class="track-labels-col">
         <div class="labels-inner"
-          :style="{ height: (trackAreaHeight + RULER_HEIGHT) + 'px', transform: 'translateY(' + labelsOffset + 'px)' }">
-          <!-- 遍历每个轨道，显示对应的标签文字 -->
+          :style="{ height: (totalContentHeight + RULER_HEIGHT) + 'px', transform: 'translateY(' + labelsOffset + 'px)' }">
+
+          <!-- 干员轨道标签 -->
           <div v-for="(track, ti) in tracks" :key="track.id" class="track-label"
             :class="{
               'track-label-buff': track.kind === 'buff',
@@ -68,11 +69,9 @@
             }"
             :style="{ top: RULER_HEIGHT + trackLayouts[ti].top + 'px', height: trackLayouts[ti].height + 'px' }">
             <div class="track-label-content">
-              <!-- 状态轨道只显示"状态"文字 -->
               <template v-if="track.kind === 'state'">
                 <div class="label-name">状态</div>
               </template>
-              <!-- 动作/增益轨道：显示槽位标记 + 干员名 -->
               <template v-else>
                 <div class="label-slot"
                   :class="{ 'label-slot-buff': track.kind === 'buff', 'label-slot-state': track.kind === 'state' }">
@@ -81,10 +80,33 @@
                 <div class="label-name">{{ track.kind === 'buff' ? '增益' : (charNameMap?.[track.id] ?? track.id.substring(0, 6)) }}</div>
               </template>
             </div>
-            <!-- 动作轨道的元素色条 -->
             <div v-if="track.kind !== 'buff' && track.kind !== 'state'" class="label-element-bar"
               :style="{ background: elementColor(charElementMap?.[track.id] ?? 'physical') }"></div>
           </div>
+
+          <!-- 敌人轨道标签 -->
+          <template v-for="(enemy, ei) in (enemies || [])" :key="'el'+ei">
+            <div class="track-label" :style="{ top: RULER_HEIGHT + enemyStateTrackTop(ei) + 'px', height: ENEMY_STATE_HEIGHT + 'px' }">
+              <div class="track-label-content">
+                <div class="label-slot" style="background:#9b59b6">{{ '敌' + (ei + 1) }}</div>
+                <div class="label-name">{{ enemy.name }}</div>
+                <div class="label-sub">状态</div>
+              </div>
+            </div>
+            <div class="track-label" :style="{ top: RULER_HEIGHT + enemyBuffTrackTop(ei) + 'px', height: ENEMY_BUFF_HEIGHT + 'px' }">
+              <div class="track-label-content">
+                <div class="label-slot" :style="{ background: enemyColors[ei % enemyColors.length] }">{{ '敌' + (ei + 1) }}</div>
+                <div class="label-name">{{ enemy.name }}</div>
+                <div class="label-sub">增益</div>
+              </div>
+            </div>
+            <div class="track-label" :style="{ top: RULER_HEIGHT + enemyStaggerTop(ei) + 'px', height: ENEMY_STAGGER_HEIGHT + 'px' }">
+              <div class="track-label-content">
+                <div class="label-name">{{ enemy.name }}</div>
+                <div class="label-sub">失衡</div>
+              </div>
+            </div>
+          </template>
         </div>
       </div>
 
@@ -337,6 +359,26 @@ const trackAreaHeight = computed(() => {
   const last = trackLayouts.value[trackLayouts.value.length - 1]
   return last ? last.top + last.height : 150
 })
+
+/** 敌人轨道布局常量 */
+const ENEMY_STATE_HEIGHT = 24
+const ENEMY_BUFF_HEIGHT = 24
+const ENEMY_STAGGER_HEIGHT = 30
+const ENEMY_GAP = 2
+
+function enemyStateTrackTop(ei: number) {
+  return trackAreaHeight.value + ENEMY_GAP + ei * (ENEMY_STATE_HEIGHT + ENEMY_GAP + ENEMY_BUFF_HEIGHT + ENEMY_GAP + ENEMY_STAGGER_HEIGHT + ENEMY_GAP)
+}
+function enemyBuffTrackTop(ei: number) { return enemyStateTrackTop(ei) + ENEMY_STATE_HEIGHT + ENEMY_GAP }
+function enemyStaggerTop(ei: number) { return enemyBuffTrackTop(ei) + ENEMY_BUFF_HEIGHT + ENEMY_GAP }
+
+const enemyAreaHeight = computed(() => {
+  if (!props.enemies || props.enemies.length === 0) return 0
+  const last = props.enemies.length - 1
+  return enemyStaggerTop(last) + ENEMY_STAGGER_HEIGHT + ENEMY_GAP - trackAreaHeight.value
+})
+
+const totalContentHeight = computed(() => trackAreaHeight.value + enemyAreaHeight.value)
 
 /** 槽位显示标签 */
 const slotLabels = ['1', '2', '3', '4']
@@ -1210,6 +1252,7 @@ onUnmounted(() => {
 .track-label-buff .label-name { color: #606266; }
 .track-label-state .label-name { color: #606266; }
 .track-label-buff .label-slot { color: #67c23a; background: #f0f9eb; }
+.label-sub { font-size: 11px; color: #606266; white-space: nowrap; flex-shrink: 0; }
 /* 选中增益轨道时的标签高亮 */
 .track-label-selected { background: #e1f3d8 !important; box-shadow: inset 3px 0 0 #67c23a; }
 
