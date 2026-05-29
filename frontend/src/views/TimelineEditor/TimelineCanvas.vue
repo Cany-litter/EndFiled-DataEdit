@@ -88,19 +88,19 @@
           <template v-for="(enemy, ei) in (enemies || [])" :key="'el'+ei">
             <div class="track-label" :style="{ top: RULER_HEIGHT + enemyStateTrackTop(ei) + 'px', height: ENEMY_STATE_HEIGHT + 'px' }">
               <div class="track-label-content">
-                <div class="label-name">{{ enemy.name }}</div>
+                <div class="label-name" :style="{ color: enemyColors[ei % enemyColors.length] }">{{ enemy.name }}</div>
                 <div class="label-sub">状态</div>
               </div>
             </div>
             <div class="track-label" :style="{ top: RULER_HEIGHT + enemyBuffTrackTop(ei) + 'px', height: ENEMY_BUFF_HEIGHT + 'px' }">
               <div class="track-label-content">
-                <div class="label-name">{{ enemy.name }}</div>
+                <div class="label-name" :style="{ color: enemyColors[ei % enemyColors.length] }">{{ enemy.name }}</div>
                 <div class="label-sub">增益</div>
               </div>
             </div>
             <div class="track-label" :style="{ top: RULER_HEIGHT + enemyStaggerTop(ei) + 'px', height: ENEMY_STAGGER_HEIGHT + 'px' }">
               <div class="track-label-content">
-                <div class="label-name">{{ enemy.name }}</div>
+                <div class="label-name" :style="{ color: enemyColors[ei % enemyColors.length] }">{{ enemy.name }}</div>
                 <div class="label-sub">失衡</div>
               </div>
             </div>
