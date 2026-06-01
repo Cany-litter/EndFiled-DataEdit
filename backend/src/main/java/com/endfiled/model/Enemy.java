@@ -21,6 +21,18 @@ public class Enemy {
     private BigDecimal staggerNodeDuration;
     private BigDecimal staggerBreakDuration;
     private BigDecimal executionRecovery;
+    private String description;
+    private BigDecimal critRate;
+    private BigDecimal critDamage;
+    private BigDecimal attackRange;
+    private Integer weight;
+    private BigDecimal executionAtkMult;
+    private String physicalResist;
+    private String burnResist;
+    private String electroResist;
+    private String coldResist;
+    private String natureResist;
+    private String traits;
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createdAt;
     @TableField(fill = FieldFill.INSERT_UPDATE)

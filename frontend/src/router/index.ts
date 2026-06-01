@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, type RouteLocationNormalized } from 'vue-router'
 import Dashboard from '../views/Dashboard.vue'
 import CharacterList from '../views/DataManage/CharacterList.vue'
 import WeaponList from '../views/DataManage/WeaponList.vue'
@@ -26,7 +26,7 @@ const routes = [
   { path: '/loadout/:id', name: 'LoadoutEditorEdit', component: LoadoutEditor, meta: { title: '配装编辑器' } },
   { path: '/teams', name: 'TeamList', component: TeamList, meta: { title: '配队管理' } },
   { path: '/team/:id', name: 'TeamDetail', component: TeamDetail, meta: { title: '配队详情' } },
-  { path: '/timeline', name: 'TimelineEditor', component: TimelineEditor, meta: { title: '排轴模拟' }, props: route => ({ teamId: route.query.teamId as string }) },
+  { path: '/timeline', name: 'TimelineEditor', component: TimelineEditor, meta: { title: '排轴模拟' }, props: (route: RouteLocationNormalized) => ({ teamId: route.query.teamId as string }) },
   { path: '/damage', name: 'DpsSimulator', component: DpsSimulator, meta: { title: '排轴伤害' } },
 ]
 

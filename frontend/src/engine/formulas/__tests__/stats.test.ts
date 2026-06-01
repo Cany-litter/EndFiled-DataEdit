@@ -10,7 +10,7 @@ const baseChar = {
 
 const baseWeapon = { baseAtk: 200 }
 
-const baseEquip = { str: 10, agi: 5, int: 15, wil: 8, atkPercent: 0.1, hpPercent: 0.08, defPercent: 0, critRate: 0, critDamage: 0, damageBonus: 0 }
+const baseEquip = { str: 10, agi: 5, int: 15, wil: 8, atkPercent: 0.1, hpPercent: 0.08, defPercent: 0, critRate: 0, critDamage: 0, damageBonus: 0, artsMastery: 0, energyRecharge: 0, baseDef: 0 }
 
 describe('calcFinalStats', () => {
   it('计算四维（含信赖/装备）', () => {

@@ -1,5 +1,5 @@
+import type { ElementType } from './character'
 export type TimelineActionType = 'attack' | 'skill' | 'link' | 'ultimate' | 'execution'
-export type ElementType = 'physical' | 'blaze' | 'emag' | 'cold' | 'nature'
 export type AnomalyType = 'blaze_attach' | 'emag_attach' | 'cold_attach' | 'nature_attach'
   | 'blaze_burst' | 'emag_burst' | 'cold_burst' | 'nature_burst'
   | 'burning' | 'conductive' | 'frozen' | 'ice_shatter'
@@ -17,7 +17,7 @@ export interface DamageTick {
   offset: number
   stagger: number
   sp: number
-  boundEffects: string[]
+  boundEffects?: string[]
   hpDamage?: number
 }
 
@@ -34,7 +34,7 @@ export interface TimelineAction {
   cooldown: number
   spCost?: number
   gaugeCost?: number
-  gaugeGain: number
+  gaugeGain?: number
   teamGaugeGain?: number
   enhancementTime?: number
   animationTime?: number
@@ -46,7 +46,7 @@ export interface TimelineAction {
   dragOffsetY?: number
   instanceId: string
   sourceWeaponId?: string | null
-  logicalStartTime: number
+  logicalStartTime?: number
   startTime: number
   hiddenInLibraryGrid?: boolean
   kind?: string

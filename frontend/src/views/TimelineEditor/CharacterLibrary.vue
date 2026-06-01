@@ -65,12 +65,15 @@ const slotColors = ['#e74c3c', '#e67e22', '#2ecc71', '#3498db']
 
 const typeOrder: Record<string, number> = {
   normal: 0, attack: 0,
-  skill: 1,
-  chain: 2, link: 2,
-  ultimate: 3,
-  talent1: 4,
-  talent2: 5,
-  other: 6,
+  charged: 1,
+  plunge: 2,
+  execution: 3,
+  skill: 4,
+  chain: 5, link: 5,
+  ultimate: 6,
+  talent1: 7,
+  talent2: 8,
+  other: 9,
 }
 
 const sortedSkillsByChar = computed(() => {
@@ -93,7 +96,8 @@ const totalSkills = computed(() => {
 })
 
 const SKILL_ICONS: Record<string, string> = {
-  normal: '普', skill: '技', chain: '连', ultimate: '终',
+  normal: '普', execution: '处', plunge: '落', charged: '重',
+  skill: '技', chain: '连', ultimate: '终',
   talent1: '天1', talent2: '天2', other: '?',
 }
 function skillTypeIcon(type: string) {
@@ -161,21 +165,27 @@ function onDragStart(e: DragEvent, c: Character, skill: Skill) {
 .lib-skill-chip:hover { background: #f5f7fa; border-color: #e4e7ed; }
 .lib-skill-icon { width: 20px; height: 20px; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 9px; color: #fff; font-weight: 600; flex-shrink: 0; }
 
-.skill-type-normal { background-color: #ecf5ff; }  /* 极浅蓝 */
-.skill-type-skill { background-color: #fdf6ec; }   /* 极浅橙 */
-.skill-type-chain { background-color: #f0f9ec; }   /* 极浅绿 */
-.skill-type-ultimate { background-color: #fef0f0; } /* 极浅红 */
-.skill-type-talent1 { background-color: #f4e6f7; } /* 极浅紫 */
-.skill-type-talent2 { background-color: #e0f7f3; } /* 极浅青 */
-.skill-type-other { background-color: #f4f4f5; }   /* 极浅灰 */
+.skill-type-normal,
+.skill-type-execution,
+.skill-type-plunge,
+.skill-type-charged { background-color: var(--skill-bg-normal); }
+.skill-type-skill { background-color: var(--skill-bg-skill); }
+.skill-type-chain { background-color: var(--skill-bg-chain); }
+.skill-type-ultimate { background-color: var(--skill-bg-ultimate); }
+.skill-type-talent1 { background-color: var(--skill-bg-talent1); }
+.skill-type-talent2 { background-color: var(--skill-bg-talent2); }
+.skill-type-other { background-color: var(--skill-bg-other); }
 
-.skill-type-normal .lib-skill-icon { background: #409eff; }
-.skill-type-skill .lib-skill-icon { background: #e6a23c; }
-.skill-type-chain .lib-skill-icon { background: #67c23a; }
-.skill-type-ultimate .lib-skill-icon { background: #f56c6c; }
-.skill-type-talent1 .lib-skill-icon { background: #9b59b6; }
-.skill-type-talent2 .lib-skill-icon { background: #1abc9c; }
-.skill-type-other .lib-skill-icon { background: #909399; }
+.skill-type-normal .lib-skill-icon,
+.skill-type-execution .lib-skill-icon,
+.skill-type-plunge .lib-skill-icon,
+.skill-type-charged .lib-skill-icon { background: var(--skill-normal); }
+.skill-type-skill .lib-skill-icon { background: var(--skill-skill); }
+.skill-type-chain .lib-skill-icon { background: var(--skill-chain); }
+.skill-type-ultimate .lib-skill-icon { background: var(--skill-ultimate); }
+.skill-type-talent1 .lib-skill-icon { background: var(--skill-talent1); }
+.skill-type-talent2 .lib-skill-icon { background: var(--skill-talent2); }
+.skill-type-other .lib-skill-icon { background: var(--skill-other); }
 
 .lib-skill-info { display: flex; flex-direction: column; min-width: 0; flex: 1; }
 .lib-skill-name { font-size: 11px; color: #303133; }

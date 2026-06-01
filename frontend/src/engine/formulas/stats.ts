@@ -53,6 +53,7 @@ export interface LayerBreakdown {
   base: StatLayer
   weapon: StatLayer
   equip: StatLayer
+  set: StatLayer
   gains: StatLayer
   final: StatLayer
 }
@@ -335,6 +336,48 @@ export function buildGainsLayer(gains: Array<{
     if (sk) {
       const val = g.valueType === 'percentage' ? g.effectValue : g.effectValue
       addToLayer(layer, sk, val)
+    }
+  }
+  return layer
+}
+
+/**
+ * 将装备套组效果转换为 StatLayer
+ * @param setEffects - 装备的 set_effect1/2 字段数组，每个包含 name/type/etype/value
+ * @param activeSetNames - 已激活(>=3件)的套装名称列表
+ */
+export function buildSetEffectsLayer(
+  setEffects: Array<{ setName: string; etype?: string; value?: number; desc?: string }>,
+  activeSetNames: string[]
+): StatLayer {
+  const layer: StatLayer = {}
+  for (const eff of setEffects) {
+    if (!eff.setName || !activeSetNames.includes(eff.setName)) continue
+    if (eff.value == null || !eff.etype) continue
+    // etype 到 StatKey 的映射
+    const ETYPE_MAP: Record<string, string> = {
+      hp: 'hp', hp_up: 'hpPercent', atk: 'atkPercent', def: 'defPercent',
+      str: 'str', agi: 'agi', int: 'int', wil: 'wil',
+      crit_rate: 'critRate', crit_damage: 'critDamage',
+      phys_dmg_up: 'physicalDmgBonus', phy_dmg_up: 'physicalDmgBonus',
+      burn_dmg_up: 'burnDmgBonus', blaze_dmg_up: 'burnDmgBonus',
+      electro_dmg_up: 'electroDmgBonus', emag_dmg_up: 'electroDmgBonus',
+      frost_dmg_up: 'frostDmgBonus', cold_dmg_up: 'frostDmgBonus',
+      nature_dmg_up: 'natureDmgBonus', extra_dmg_up: 'extraDmgBonus',
+      all_dmg_up: 'damageBonus',
+      skill_dmg_up: 'skillDmgBonus',
+      link_dmg_up: 'chainDmgBonus',
+      ult_dmg_up: 'ultimateDmgBonus',
+      normal_atk_dmg_up: 'normalAtkDmgBonus',
+      stagger_dmg_up: 'staggerDmgBonus',
+      heal_eff_up: 'healEfficiency',
+      arts_mastery: 'artsMastery',
+      ult_charge_eff: 'energyRecharge',
+      def_up: 'def',
+    }
+    const sk = ETYPE_MAP[eff.etype]
+    if (sk) {
+      addToLayer(layer, sk, eff.value)
     }
   }
   return layer

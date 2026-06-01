@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.endfiled.common.PageResult;
 import com.endfiled.common.Result;
 import com.endfiled.mapper.EnemyMapper;
+import com.endfiled.mapper.EnemyStatMapper;
 import com.endfiled.model.Enemy;
+import com.endfiled.model.EnemyStat;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -14,7 +16,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/enemies")
 public class EnemyController extends BaseController<Enemy, EnemyMapper> {
-    public EnemyController(EnemyMapper enemyMapper) { super(enemyMapper); }
+
+    private final EnemyStatMapper enemyStatMapper;
+
+    public EnemyController(EnemyMapper enemyMapper, EnemyStatMapper enemyStatMapper) {
+        super(enemyMapper);
+        this.enemyStatMapper = enemyStatMapper;
+    }
 
     @GetMapping("/all")
     public Result<List<Enemy>> all() { return defaultAll(); }
@@ -39,6 +47,13 @@ public class EnemyController extends BaseController<Enemy, EnemyMapper> {
 
     @PutMapping("/{id}")
     public Result<Enemy> update(@PathVariable String id, @Valid @RequestBody Enemy e) { return defaultUpdate(id, e); }
+
+    @GetMapping("/{id}/stats")
+    public Result<List<EnemyStat>> stats(@PathVariable String id) {
+        return Result.success(enemyStatMapper.selectList(
+                new LambdaQueryWrapper<EnemyStat>().eq(EnemyStat::getEnemyId, id)
+                        .orderByAsc(EnemyStat::getLevel)));
+    }
 
     @DeleteMapping("/{id}")
     public Result<Void> delete(@PathVariable String id) { return defaultDelete(id); }

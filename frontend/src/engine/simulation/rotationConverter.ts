@@ -1,5 +1,5 @@
-import type { TimelineAction, Track } from '../types/timeline'
-import type { RotationStep } from './types'
+import type { TimelineAction, Track, TimelineActionType } from '../types/timeline'
+import type { RotationStep, SkillType } from './types'
 
 export interface CyclePattern {
   startIndex: number
@@ -141,8 +141,8 @@ export function buildTrackFromRotation(
   }
 }
 
-function mapActionTypeToSkillType(type: string): string {
-  const map: Record<string, string> = {
+function mapActionTypeToSkillType(type: string): SkillType {
+  const map: Record<string, SkillType> = {
     attack: 'normal',
     skill: 'skill',
     link: 'chain',
@@ -152,8 +152,8 @@ function mapActionTypeToSkillType(type: string): string {
   return map[type] ?? 'other'
 }
 
-function mapSkillTypeToActionType(type: string): string {
-  const map: Record<string, string> = {
+function mapSkillTypeToActionType(type: string): TimelineActionType {
+  const map: Record<string, TimelineActionType> = {
     normal: 'attack',
     skill: 'skill',
     chain: 'link',

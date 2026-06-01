@@ -18,13 +18,16 @@ export interface BuffManagerConfig {
   fieldBuffs: Buff[]
   foodBuffs: Record<string, Buff>
   duration: number
+  gainLookup?: Record<string, { effectCategory?: string; effectType?: string; effectValue?: number }>
 }
 
 export class TimelineBuffManager {
   private schedule: Map<string, ActiveBuffSnapshot[]> = new Map()
   private allBuffIds: Set<string> = new Set()
+  private gainLookup: Record<string, { effectCategory?: string; effectType?: string; effectValue?: number }> = {}
 
   build(config: BuffManagerConfig): void {
+    this.gainLookup = config.gainLookup ?? {}
     this.schedule.clear()
     this.allBuffIds.clear()
 
@@ -128,14 +131,15 @@ export class TimelineBuffManager {
 
   private actionToBuff(action: TimelineAction): Buff | null {
     if (!action.id) return null
+    const gain = this.gainLookup[action.id]
     return {
       id: action.id,
       name: action.name,
       source: action.librarySource ?? 'timeline',
       buffType: 'limited',
-      effectCategory: '',
-      effectType: '',
-      effectValue: 0,
+      effectCategory: gain?.effectCategory ?? '',
+      effectType: gain?.effectType ?? '',
+      effectValue: gain?.effectValue ?? 0,
       stackRule: 'add_same',
       targetScope: 'self',
       duration: action.duration,

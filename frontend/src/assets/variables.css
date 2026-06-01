@@ -1,0 +1,45 @@
+/* 终末地数据编辑器 — 字体颜色设计规范 */
+/* 参照: md/字体颜色设计规范讨论.md */
+
+:root {
+  /* — 文字层级 — */
+  --text-primary:      #303133;
+  --text-regular:      #606266;
+  --text-secondary:    #909399;
+  --text-placeholder:  #c0c4cc;
+  --text-white:        #ffffff;
+
+  /* — 技能类型 (图标/标签底色) — */
+  --skill-normal:      #409eff;
+  --skill-skill:       #e6a23c;
+  --skill-chain:       #67c23a;
+  --skill-ultimate:    #f56c6c;
+  --skill-talent1:     #9b59b6;
+  --skill-talent2:     #1abc9c;
+  --skill-other:       #909399;
+
+  /* — 技能类型 (卡片/标签浅色背景) — */
+  --skill-bg-normal:   #ecf5ff;
+  --skill-bg-skill:    #fdf6ec;
+  --skill-bg-chain:    #f0f9eb;
+  --skill-bg-ultimate: #fef0f0;
+  --skill-bg-talent1:  #f9f0ff;
+  --skill-bg-talent2:  #ecfdf5;
+  --skill-bg-other:    #f4f4f5;
+
+  /* — 伤害类型 — */
+  --dmg-physical:      #909399;
+  --dmg-pyro:          #f56c6c;
+  --dmg-electro:       #e6a23c;
+  --dmg-cryo:          #409eff;
+  --dmg-nature:        #67c23a;
+  --dmg-ultra:         #b37feb;
+  --dmg-true:          #ffd700;
+
+  /* — 状态色 — */
+  --status-success:    #67c23a;
+  --status-warning:    #e6a23c;
+  --status-danger:     #f56c6c;
+  --status-info:       #909399;
+  --status-primary:    #409eff;
+}

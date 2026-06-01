@@ -26,37 +26,10 @@ interface MemberState {
   categoryBreakdown: Record<string, number>
 }
 
-const COMBO_WINDOW = 3
-
-const 连击增伤Map: Record<number, { skill: number; ultimate: number }> = {
-  1: { skill: 0.3, ultimate: 0.2 },
-  2: { skill: 0.45, ultimate: 0.3 },
-  3: { skill: 0.6, ultimate: 0.4 },
-  4: { skill: 0.75, ultimate: 0.5 },
-}
-
-function getComboMultiplier(level: number, type: string): number {
-  const entry = 连击增伤Map[level]
-  if (!entry) return 1
-  const bonus = type === 'ultimate' ? entry.ultimate : entry.skill
-  return 1 + bonus
-}
-
-function updateCombo(state: MemberState, now: number) {
-  if (now - state.lastComboTime <= COMBO_WINDOW) {
-    state.comboCount = Math.min(state.comboCount + 1, 4)
-  } else {
-    state.comboCount = 1
-  }
-  state.lastComboTime = now
-}
-
 function fireDamage(
   member: MemberState, skill: SkillConfig, t: number,
   config: SimulationConfig, events: any[],
 ) {
-  updateCombo(member, t)
-
   const buffContext = {
     skillType: skill.type,
     element: skill.damageType,
@@ -75,9 +48,8 @@ function fireDamage(
 
   const defMult = skill.damageType === 'true' ? 1 : 100 / (config.targetDef + 100)
   const staggerMult = config.isStaggered ? (config.staggerMultiplier ?? 1.3) : 1
-  const comboMult = getComboMultiplier(member.comboCount, skill.type)
 
-  const finalDamage = catDamage * defMult * crit.expectedMultiplier * staggerMult * comboMult
+  const finalDamage = catDamage * defMult * crit.expectedMultiplier * staggerMult
 
   const total = finalDamage * config.targetCount
   member.totalDamage += total
@@ -100,7 +72,7 @@ function fireDamage(
 
   events.push({
     time: t, char: member.name, type: 'damage', skillName: skill.name,
-    damage: total, breakdown, crit, defMult, staggerMult, comboMult,
+    damage: total, breakdown, crit, defMult, staggerMult,
   })
 }
 
@@ -181,13 +153,15 @@ export function runTeamSimulation(
     simulateMember(state, config)
   }
 
-  const memberResults = states.map(s => {
+    const memberResults = states.map(s => {
     const effectiveDuration = config.duration
     return {
       name: s.name,
       totalDamage: s.totalDamage,
       dps: s.totalDamage / effectiveDuration,
       totalCasts: s.totalCasts,
+      totalSpUsed: 0,
+      actionRows: [],
       skillBreakdown: s.skillBreakdown,
       categoryBreakdown: s.categoryBreakdown,
     }
@@ -211,38 +185,13 @@ export function runTeamSimulation(
   }
 }
 
-const 连击增伤Map_rows: Record<number, { skill: number; ultimate: number }> = {
-  1: { skill: 0.3, ultimate: 0.2 },
-  2: { skill: 0.45, ultimate: 0.3 },
-  3: { skill: 0.6, ultimate: 0.4 },
-  4: { skill: 0.75, ultimate: 0.5 },
-}
-
-function getComboMultRows(level: number, type: string): number {
-  const entry = 连击增伤Map_rows[level]
-  if (!entry) return 1
-  const bonus = type === 'ultimate' ? entry.ultimate : entry.skill
-  return 1 + bonus
-}
-
 export function simulateRows(config: SimulateRowsConfig): TeamSimulationResult {
-  const { rows, charStats, skillMap, gainMap, enemyMap, targetDef, targetResistance, resistanceIgnore } = config
-  const charMap = new Map<string, { totalDamage: number; totalCasts: number; totalSpUsed: number; skillBreakdown: Record<string, { count: number; totalDamage: number }>; categoryBreakdown: Record<string, number> }>()
-
-  let comboCount = 0
-  let lastComboTime = -10
-  const COMBO_WINDOW = 3
+  const { rows, charStats, skillMap, gainMap, enemyMap, targetDef, targetResistance, resistanceIgnore, charDamageSources } = config
+    const charMap = new Map<string, { totalDamage: number; totalCasts: number; totalSpUsed: number; skillBreakdown: Record<string, { count: number; totalDamage: number }>; categoryBreakdown: Record<string, number>; elementDamage: Record<string, number>; skillTypeDamage: Record<string, number> }>()
 
   for (const row of rows) {
     const stats = charStats[row.charId]
     if (!stats) continue
-
-    if (row.time - lastComboTime <= COMBO_WINDOW) {
-      comboCount = Math.min(comboCount + 1, 4)
-    } else {
-      comboCount = 1
-    }
-    lastComboTime = row.time
 
     if (!charMap.has(row.charId)) {
       charMap.set(row.charId, { totalDamage: 0, totalCasts: 0, totalSpUsed: 0, skillBreakdown: {}, categoryBreakdown: {}, elementDamage: {}, skillTypeDamage: {} })
@@ -260,7 +209,7 @@ export function simulateRows(config: SimulateRowsConfig): TeamSimulationResult {
       const g = gainMap[gid]
       if (!g) continue
       const cat = GAIN_CATEGORY_TO_DAMAGE_CAT[g.effectCategory ?? '']
-      if (cat && g.effectValue != null) {
+      if (cat && g.effectValue != null && g.effectCategory !== '失衡') {
         buffs.push({
           id: g.id,
           name: g.name ?? g.id,
@@ -271,6 +220,19 @@ export function simulateRows(config: SimulateRowsConfig): TeamSimulationResult {
           effects: [{ category: cat, value: g.valueType === 'percentage' ? g.effectValue : g.effectValue }],
         })
       }
+    }
+
+    // Add damage sources as individual virtual buffs
+    const dmgSources = charDamageSources?.[row.charId] ?? []
+    for (const src of dmgSources) {
+      buffs.push({
+        id: `_src_${src.sourceName}`,
+        name: src.sourceName,
+        source: 'statLayer', buffType: 'permanent',
+        effectCategory: '虚拟', effectType: '面板加成', effectValue: 0,
+        stackRule: 'add_same', targetScope: 'self',
+        effects: [{ category: src.category, value: src.value }],
+      } as Buff)
     }
 
     const context = {
@@ -284,14 +246,23 @@ export function simulateRows(config: SimulateRowsConfig): TeamSimulationResult {
     const crit = collectCrit(buffs, context, stats.critRate, stats.critDamage)
     const ep = enemyMap?.[row.targetEnemyId ?? ''] ?? { def: targetDef, resistance: targetResistance }
     const defMult = skill.damageType === 'true' ? 1 : 100 / (ep.def + 100)
-    const resMult = 1 - ep.resistance / 100 + resistanceIgnore / 100
-    const comboMult = getComboMultRows(comboCount, skill.type)
+    const ELEMENT_RESIST_KEY: Record<string, string> = {
+      physical: 'physicalResist', pyro: 'burnResist',
+      electro: 'electroResist', cryo: 'coldResist',
+      natural: 'natureResist',
+    }
+    const elem = skill.damageType || 'physical'
+    const resistKey = ELEMENT_RESIST_KEY[elem]
+    const elemResist = resistKey ? (ep as any)?.[resistKey] : undefined
+    const resValue = elemResist != null ? elemResist : ep.resistance
+    const resMult = 1 - resValue / 100 + resistanceIgnore / 100
 
-    const finalDamage = catDamage * crit.expectedMultiplier * defMult * resMult * comboMult * row.targetCount
+    const finalDamage = catDamage * crit.expectedMultiplier * defMult * resMult * row.targetCount
     row.damage = finalDamage
+    row.nonCritDmg = catDamage * defMult * resMult * row.targetCount
+    row.critDmg = catDamage * (1 + crit.critDamage) * defMult * resMult * row.targetCount
     cm.totalDamage += finalDamage
 
-    const elem = row.damageType || 'physical'
     cm.elementDamage[elem] = (cm.elementDamage[elem] || 0) + finalDamage
 
     const st = row.skillType || 'other'

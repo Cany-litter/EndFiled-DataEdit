@@ -28,6 +28,18 @@ public class GameCharacter {
     private String element;
     private String weaponType;
     private Integer potential;
+    private String englishName;
+    private String description;
+    private String specialty;
+    private String vaJp;
+    private String vaEn;
+    private String vaCn;
+    private String vaKr;
+    private String faction;
+    private String race;
+    private String specialties;
+    private String hobbies;
+    private String charBattleTags;
     private String reserve1;
     private String reserve2;
     @TableField(fill = FieldFill.INSERT)

@@ -36,6 +36,9 @@ public class Weapon {
     private String affix3Effect2;
     private String affix3Effect3;
     private String affix3Desc;
+    private String description;
+    private String lore;
+    private Integer sortOrder;
     private String reserve1;
     private String reserve2;
     @TableField(fill = FieldFill.INSERT)

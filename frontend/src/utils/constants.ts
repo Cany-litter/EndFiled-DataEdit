@@ -2,7 +2,12 @@ export const elementMap: Record<string,string> = { pyro:'灼热', cryo:'寒冷',
 export const weaponMap: Record<string,string> = { sword:'单手剑', greatsword:'双手剑', polearm:'长柄武器', pistol:'手铳', caster_unit:'施术单元' }
 export const professionMap: Record<string,string> = { assault:'突击', guard:'近卫', caster:'术师', heavy:'重装', vanguard:'先锋', support:'辅助' }
 export const slotMap: Record<string,string> = { armor:'护甲', glove:'护手', accessory:'配件' }
-export const skillTypeMap: Record<string,string> = { normal:'普通攻击', skill:'战技', chain:'连携技', ultimate:'终结技', talent1:'天赋1', talent2:'天赋2', other:'其他' }
+export const skillTypeMap: Record<string,string> = {
+  normal:'普通攻击', charged:'普通攻击·重击', execution:'普通攻击·处决', plunge:'普通攻击·下落攻击',
+  skill:'战技', chain:'连携技', ultimate:'终结技',
+  talent1:'天赋1', talent2:'天赋2', other:'其他',
+}
+export const mapSkillType = (v:string) => skillTypeMap[v] ?? v
 export const damageTypeMap: Record<string,string> = { ...elementMap, ultra:'真实', true:'纯粹', other:'其他' }
 export const attrTypeMap: Record<string,string> = { str:'力量', agi:'敏捷', int:'智识', wil:'意志' }
 export const gainTypeMap: Record<string,string> = { permanent:'常驻', limited:'限定' }
@@ -14,7 +19,6 @@ export const mapElement = (v:string) => elementMap[v] ?? v
 export const mapWeapon = (v:string) => weaponMap[v] ?? v
 export const mapProfession = (v:string) => professionMap[v] ?? v
 export const mapSlot = (v:string) => slotMap[v] ?? v
-export const mapSkillType = (v:string) => skillTypeMap[v] ?? v
 export const mapDamageType = (v:string) => damageTypeMap[v] ?? v
 export const mapAttrType = (v:string) => attrTypeMap[v] ?? v
 export const mapGainType = (v:string) => gainTypeMap[v] ?? v

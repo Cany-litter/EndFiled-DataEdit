@@ -3,6 +3,8 @@ import { DEFAULT_SYSTEM_CONSTANTS, type SkillType } from './types'
 import { calcDamageByCategories, DAMAGE_CATEGORIES } from '../formulas/damageCategories'
 import { collectCrit, piecewiseLinear, ARTS_INTENSITY_CURVE } from '../formulas/effectResolver'
 import type { Buff } from '../types/buff'
+import { calcSpellAnomalyDamage, calcPhysicalAnomalyDamage, spellAnomalyMultiplierMap, physicalAnomalyMultiplierMap, calcAnomalyLevel } from '../formulas/anomaly'
+import { getComboMultiplier, updateCombo, COMBO_WINDOW } from './comboSystem'
 
 export interface SimEvent {
   time: number
@@ -11,6 +13,15 @@ export interface SimEvent {
   actionName?: string
   actionType?: string
   value?: number
+}
+
+export interface AnomalyEvent {
+  time: number
+  charId: string
+  type: string
+  anomalyType: string
+  anomalyLevel: number
+  damage: number
 }
 
 export interface DamageEvent {
@@ -29,6 +40,7 @@ export interface DamageEvent {
   comboLevel: number
   isStaggered: boolean
   categoryBreakdown: Record<string, { multiplier: number; rawTotal: number }>
+  anomalyDamage?: number
 }
 
 export interface SimResult {
@@ -41,6 +53,8 @@ export interface SimResult {
   totalDamage?: number
   damageCurve?: { time: number; damage: number }[]
   memberDamage?: Record<string, { total: number; skillBreakdown: Record<string, { count: number; total: number }> }>
+  anomalyEvents?: AnomalyEvent[]
+  totalAnomalyDamage?: number
 }
 
 export interface SimConfig {
@@ -83,18 +97,12 @@ const DEFAULT_SIM_CONFIG: SimConfig = {
   staggerBreakDuration: 11,
 }
 
-const 连击增伤Map: Record<number, { skill: number; ultimate: number }> = {
-  1: { skill: 0.3, ultimate: 0.2 },
-  2: { skill: 0.45, ultimate: 0.3 },
-  3: { skill: 0.6, ultimate: 0.4 },
-  4: { skill: 0.75, ultimate: 0.5 },
-}
-
-function getComboMultiplier(level: number, type: string): number {
-  const entry = 连击增伤Map[level]
-  if (!entry) return 1
-  const bonus = type === 'ultimate' ? entry.ultimate : entry.skill
-  return 1 + bonus
+interface AnomalyAccum {
+  conductive: number
+  corrode: number
+  burn: number
+  freeze: number
+  shatterReady: boolean
 }
 
 interface SimState {
@@ -111,17 +119,7 @@ interface SimState {
   lastEventTime: number
   comboCount: number
   lastComboTime: number
-}
-
-const COMBO_WINDOW = 3
-
-function updateCombo(state: SimState, now: number) {
-  if (now - state.lastComboTime <= COMBO_WINDOW) {
-    state.comboCount = Math.min(state.comboCount + 1, 4)
-  } else {
-    state.comboCount = 1
-  }
-  state.lastComboTime = now
+  anomalyAccum: Record<string, AnomalyAccum>
 }
 
 function createState(sc: SystemConstants, cfg: SimConfig): SimState {
@@ -139,6 +137,7 @@ function createState(sc: SystemConstants, cfg: SimConfig): SimState {
     lastEventTime: 0,
     comboCount: 0,
     lastComboTime: -10,
+    anomalyAccum: {},
   }
 }
 
@@ -190,6 +189,28 @@ function collectActions(tracks: Track[]): SimAction[] {
   return actions
 }
 
+interface ScheduledEvent {
+  time: number
+  type: 'action_start' | 'action_end' | 'damage_tick'
+  action: SimAction
+  tickIndex?: number
+}
+
+function buildSimQueue(actions: SimAction[]): ScheduledEvent[] {
+  const queue: ScheduledEvent[] = []
+  for (const a of actions) {
+    queue.push({ time: a.startTime, type: 'action_start', action: a })
+    const endTime = a.startTime + (a.duration || 0)
+    queue.push({ time: endTime, type: 'action_end', action: a })
+    for (let ti = 0; ti < (a.damageTicks || []).length; ti++) {
+      const dt = a.damageTicks![ti]
+      queue.push({ time: a.startTime + dt.offset, type: 'damage_tick', action: a, tickIndex: ti })
+    }
+  }
+  queue.sort((a, b) => a.time - b.time || (a.type === 'action_end' && b.type !== 'action_end' ? -1 : 1))
+  return queue
+}
+
 export function runTimelineSimulation(
   tracks: Track[],
   systemConstants: SystemConstants = DEFAULT_SYSTEM_CONSTANTS,
@@ -205,24 +226,7 @@ export function runTimelineSimulation(
     return { curves, events, totalStaggerDamage: 0, totalSpUsed: 0, totalGaugeGained: 0 }
   }
 
-  interface ScheduledEvent {
-    time: number
-    type: 'action_start' | 'action_end' | 'damage_tick'
-    action: SimAction
-    tickIndex?: number
-  }
-  const queue: ScheduledEvent[] = []
-
-  for (const a of actions) {
-    queue.push({ time: a.startTime, type: 'action_start', action: a })
-    const endTime = a.startTime + (a.duration || 0)
-    queue.push({ time: endTime, type: 'action_end', action: a })
-    for (let ti = 0; ti < (a.damageTicks || []).length; ti++) {
-      const dt = a.damageTicks![ti]
-      queue.push({ time: a.startTime + dt.offset, type: 'damage_tick', action: a, tickIndex: ti })
-    }
-  }
-  queue.sort((a, b) => a.time - b.time || (a.type === 'action_end' && b.type !== 'action_end' ? -1 : 1))
+  const queue = buildSimQueue(actions)
 
   for (const ev of queue) {
     const t = ev.time
@@ -297,31 +301,49 @@ export function runTimelineSimulationWithDamage(
   const charSnapshots = simConfig.charSnapshots
   const buffManager = simConfig.buffSchedule
   const damageEvents: DamageEvent[] = []
+  const anomalyEvents: AnomalyEvent[] = []
   const memberDamage: Record<string, { total: number; skillBreakdown: Record<string, { count: number; total: number }> }> = {}
   const damageCurve: { time: number; damage: number }[] = []
   let cumulativeDamage = 0
+  let totalAnomalyDamage = 0
   const state = createState(systemConstants, simConfig)
+
+  const ELEMENT_TO_ANOMALY: Record<string, string> = {
+    pyro: 'burn', cryo: 'freeze', electro: 'conductive', natural: 'corrode',
+  }
+  function getOrInitAnomaly(charId: string): AnomalyAccum {
+    if (!state.anomalyAccum[charId]) {
+      state.anomalyAccum[charId] = { conductive: 0, corrode: 0, burn: 0, freeze: 0, shatterReady: false }
+    }
+    return state.anomalyAccum[charId]
+  }
+  function processAnomaly(anomalyType: string, charStats: CharSimSnapshot, t: number, a: SimAction): number {
+    const anomKey = anomalyType as keyof AnomalyAccum
+    if (anomKey === 'shatterReady') return 0
+    const baseMult = spellAnomalyMultiplierMap[anomalyType]
+    if (!baseMult) return 0
+    const accum = getOrInitAnomaly(a.charId)
+    accum[anomKey] += 1
+    if (accum[anomKey] >= 3) {
+      const consumed = accum[anomKey]
+      accum[anomKey] = 0
+      const level = calcAnomalyLevel(consumed)
+      const dmg = calcSpellAnomalyDamage({
+        baseMultiplier: baseMult,
+        anomalyLevel: level,
+        casterLevel: charStats.charLevel,
+        artsIntensity: charStats.artsPower,
+      })
+      anomalyEvents.push({ time: t, charId: a.charId, type: 'anomaly_burst', anomalyType, anomalyLevel: level, damage: dmg })
+      return dmg
+    }
+    return 0
+  }
 
   const actions = collectActions(tracks)
   if (actions.length === 0) return { ...baseResult, damageEvents, totalDamage: 0, damageCurve, memberDamage }
 
-  interface ScheduledEvent {
-    time: number
-    type: 'action_start' | 'action_end' | 'damage_tick'
-    action: SimAction
-    tickIndex?: number
-  }
-  const queue: ScheduledEvent[] = []
-  for (const a of actions) {
-    queue.push({ time: a.startTime, type: 'action_start', action: a })
-    const endTime = a.startTime + (a.duration || 0)
-    queue.push({ time: endTime, type: 'action_end', action: a })
-    for (let ti = 0; ti < (a.damageTicks || []).length; ti++) {
-      const dt = a.damageTicks![ti]
-      queue.push({ time: a.startTime + dt.offset, type: 'damage_tick', action: a, tickIndex: ti })
-    }
-  }
-  queue.sort((a, b) => a.time - b.time || (a.type === 'action_end' && b.type !== 'action_end' ? -1 : 1))
+  const queue = buildSimQueue(actions)
 
   for (const ev of queue) {
     const t = ev.time
@@ -369,11 +391,16 @@ export function runTimelineSimulationWithDamage(
       const comboMult = getComboMultiplier(state.comboCount, a.type)
 
       let artsMult = 1
-      if (a.type === 'status') {
+      if (a.trackKind === 'state') {
         artsMult = piecewiseLinear(charStats.artsPower, ARTS_INTENSITY_CURVE)
       }
 
       const finalDamage = catDamage * defMult * crit.expectedMultiplier * staggerMult * comboMult * artsMult
+
+      let anomalyDamage = 0
+      if (a.element && ELEMENT_TO_ANOMALY[a.element]) {
+        anomalyDamage = processAnomaly(ELEMENT_TO_ANOMALY[a.element], charStats, t, a)
+      }
 
       if (!memberDamage[a.charId]) {
         memberDamage[a.charId] = { total: 0, skillBreakdown: {} }
@@ -385,7 +412,8 @@ export function runTimelineSimulationWithDamage(
       memberDamage[a.charId].skillBreakdown[a.name].count++
       memberDamage[a.charId].skillBreakdown[a.name].total += finalDamage
 
-      cumulativeDamage += finalDamage
+      cumulativeDamage += finalDamage + anomalyDamage
+      totalAnomalyDamage += anomalyDamage
       if (Math.abs(t - Math.round(t / 0.5) * 0.5) < 0.3) {
         damageCurve.push({ time: Math.round(t * 10) / 10, damage: Math.round(cumulativeDamage * 10) / 10 })
       }
@@ -411,6 +439,7 @@ export function runTimelineSimulationWithDamage(
         comboLevel: state.comboCount,
         isStaggered: state.staggered,
         categoryBreakdown,
+        anomalyDamage: anomalyDamage || undefined,
       })
     }
   }
@@ -421,5 +450,7 @@ export function runTimelineSimulationWithDamage(
     totalDamage: cumulativeDamage,
     damageCurve,
     memberDamage,
+    anomalyEvents: anomalyEvents.length > 0 ? anomalyEvents : undefined,
+    totalAnomalyDamage,
   }
 }

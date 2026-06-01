@@ -1,4 +1,5 @@
-import type { EffectDef, MetaDef, ConditionDef } from '../formulas/effectResolver'
+import type { ConditionDef, EffectDef, MetaDef } from '../formulas/effectResolver'
+export type { EffectDef, MetaDef }
 
 export type BuffType = 'permanent' | 'limited'
 export type StackRule = 'add_same' | 'multi_diff'

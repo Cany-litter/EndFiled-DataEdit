@@ -66,6 +66,7 @@ export interface SimulationConfig {
   vulnerableBonus?: number
   comboBonus?: number
   specialMultiplier?: number
+  staggerMultiplier?: number
 }
 
 export interface ActionRow {
@@ -81,24 +82,38 @@ export interface ActionRow {
   enemyBuffs: (string | null)[]
   spCost: number
   damage: number
+  nonCritDmg?: number
+  critDmg?: number
   targetEnemyId?: string
 }
 
 export interface EnemyParam {
   def: number
   resistance: number
+  physicalResist?: number
+  burnResist?: number
+  electroResist?: number
+  coldResist?: number
+  natureResist?: number
 }
 
 export interface SimulateRowsConfig {
   rows: ActionRow[]
   charStats: Record<string, { attack: number; critRate: number; critDamage: number; str: number; agi: number; int: number; wil: number }>
   skillMap: Record<string, { multiplier: number; damageType: string; type: string }>
-  gainMap: Record<string, { id: string; effectCategory?: string; effectType?: string; effectValue?: number; valueType?: string }>
+  gainMap: Record<string, { id: string; name?: string; effectCategory?: string; effectType?: string; effectValue?: number; valueType?: string }>
   gainCategoryMap: Record<string, string>
+  charDamageSources?: Record<string, DamageSource[]>
   enemyMap?: Record<string, EnemyParam>
   targetDef: number
   targetResistance: number
   resistanceIgnore: number
+}
+
+export interface DamageSource {
+  category: string
+  value: number
+  sourceName: string
 }
 
 export interface SystemConstants {
@@ -138,7 +153,7 @@ export const DEFAULT_SYSTEM_CONSTANTS: SystemConstants = {
   executionRecovery: 100,
 }
 
-export const DEFAULT_SKILL_CONFIGS: Record<SkillType, Omit<SkillConfig, 'id' | 'name' | 'damageType' | 'multiplier'>> = {
+export const DEFAULT_SKILL_CONFIGS: Record<SkillType, Omit<SkillConfig, 'id' | 'name' | 'damageType' | 'multiplier' | 'type'>> = {
   normal: { cooldown: 0, energyCost: 0, castTime: 1.0 },
   skill: { cooldown: 5, energyCost: 20, castTime: 1.5 },
   chain: { cooldown: 10, energyCost: 0, castTime: 2.0 },

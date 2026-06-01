@@ -1,7 +1,9 @@
 import axios from 'axios'
 
+/** Axios instance targeting the Spring Boot backend at `/api/v1/` */
 const api = axios.create({ baseURL: 'http://localhost:8080/api/v1' })
 
+/** Generic paginated response wrapper matching backend PageResult */
 export interface PageResult<T> {
   items: T[]
   total: number
@@ -10,19 +12,26 @@ export interface PageResult<T> {
   pages: number
 }
 
+/** Unwraps the backend's `Result.data` so callers receive the entity directly */
 api.interceptors.response.use(
   res => { res.data = res.data?.data; return res },
   err => Promise.reject(err)
 )
 
+/** Character entity — base stats, attributes, profession, element, voice actors */
 export interface Character {
   id: string; name: string; icon?: string; rarity: number; level: number;
   baseHp: number; baseAtk: number; baseStr: number; baseAgi: number;
   baseInt: number; baseWil: number; mainAttr: string; subAttr: string;
   profession: string; element: string; weaponType: string;
   potential: number;
+  englishName?: string; description?: string; specialty?: string;
+  vaJp?: string; vaEn?: string; vaCn?: string; vaKr?: string;
+  faction?: string; race?: string;
+  specialties?: string; hobbies?: string; charBattleTags?: string;
 }
 
+/** Weapon entity — base atk, rarity, type, 3 affixes with potential levels */
 export interface Weapon {
   id: string; name: string; icon?: string; rarity: number; potential: number;
   type: string; level: number; baseAtk: number;
@@ -30,6 +39,7 @@ export interface Weapon {
   affix2Name?: string; affix2Type?: string; affix2Size?: string; affix2Level?: number; affix2Value?: number;
   affix3Name?: string; affix3Type?: string; affix3Level?: number;
   affix3Effect1?: string; affix3Effect2?: string; affix3Effect3?: string; affix3Desc?: string;
+  description?: string; lore?: string; sortOrder?: number;
 }
 
 export interface Equipment {
@@ -48,6 +58,7 @@ export interface Equipment {
   setEffect2Duration?: number; setEffect2Desc?: string;
 }
 
+/** Skill entity — links a character to a skill with type and damage type */
 export interface Skill {
   id: string; characterId: string; name: string; type: string;
   damageType: string; description?: string;
@@ -71,6 +82,7 @@ export interface SkillAction {
   ultimateGaugeReply?: number; damageTicks?: string;
 }
 
+/** Build/loadout — character + weapon + 4 equipment slots + selected gains */
 export interface Build {
   id?: string; name: string; characterId: string;
   weaponId?: string; armorId?: string; gloveId?: string;
@@ -79,8 +91,10 @@ export interface Build {
   charPotential?: number; weaponPotential?: number;
   affix1Level?: number; affix2Level?: number; affix3Level?: number;
   equipRefines?: string; selectedGains?: string;
+  reserve1?: string;
 }
 
+/** Gain/buff entity — category, effect value, stacking rules, target scope */
 export interface Gain {
   id: string; name: string; source?: string; gainType: string;
   effectCategory?: string; effectType?: string; effectValue?: number;
@@ -90,20 +104,30 @@ export interface Gain {
   sourceType?: string; sourceRefId?: string;
 }
 
+/** Character CRUD + sub-table queries (archives, voices, potentials, promotions, logistics, profiles) */
 export const CharacterApi = {
   listAll: () => api.get('/characters/all').then(r => r.data as Character[]),
   list: (name?: string) => api.get('/characters', { params: { name } }).then(r => (r.data as PageResult<Character>).items),
   get: (id: string) => api.get(`/characters/${id}`).then(r => r.data as Character),
   save: (c: Character) => c.id ? api.put(`/characters/${c.id}`, c) : api.post('/characters', c),
   delete: (id: string) => api.delete(`/characters/${id}`),
+  archives: (id: string) => api.get(`/characters/${id}/archives`).then(r => r.data as CharacterArchive[]),
+  voices: (id: string) => api.get(`/characters/${id}/voices`).then(r => r.data as CharacterVoice[]),
+  potentials: (id: string) => api.get(`/characters/${id}/potentials`).then(r => r.data as CharacterPotential[]),
+  promotions: (id: string) => api.get(`/characters/${id}/promotions`).then(r => r.data as CharacterPromotion[]),
+  logistics: (id: string) => api.get(`/characters/${id}/logistics`).then(r => r.data as CharacterLogistics[]),
+  profiles: (id: string) => api.get(`/characters/${id}/profiles`).then(r => r.data as CharacterProfile[]),
 }
 
+/** Weapon CRUD + sub-table queries (level-costs, ascensions) */
 export const WeaponApi = {
   listAll: () => api.get('/weapons/all').then(r => r.data as Weapon[]),
   list: (params?: { name?: string; type?: string }) => api.get('/weapons', { params }).then(r => (r.data as PageResult<Weapon>).items),
   get: (id: string) => api.get(`/weapons/${id}`).then(r => r.data as Weapon),
   save: (w: Weapon) => w.id ? api.put(`/weapons/${w.id}`, w) : api.post('/weapons', w),
   delete: (id: string) => api.delete(`/weapons/${id}`),
+  levelCosts: (id: string) => api.get(`/weapons/${id}/level-costs`).then(r => r.data as WeaponLevelCost[]),
+  ascensions: (id: string) => api.get(`/weapons/${id}/ascensions`).then(r => r.data as WeaponAscension[]),
 }
 
 export const EquipmentApi = {
@@ -130,6 +154,7 @@ export const SkillLevelApi = {
   delete: (skillId: string, level: number) => api.delete(`/skill-levels/${skillId}/${level}`),
 }
 
+/** Build/loadout CRUD */
 export const BuildApi = {
   listAll: () => api.get('/builds/all').then(r => r.data as Build[]),
   list: (characterId?: string) => api.get('/builds', { params: { characterId } }).then(r => (r.data as PageResult<Build>).items),
@@ -138,6 +163,7 @@ export const BuildApi = {
   delete: (id: string) => api.delete(`/builds/${id}`),
 }
 
+/** Team entity — 4 character slots each with a build */
 export interface Team {
   id?: string; name: string;
   charAId?: string; buildAId?: string;
@@ -146,6 +172,7 @@ export interface Team {
   charDId?: string; buildDId?: string;
 }
 
+/** Skill action parameters (cast time, costs, gauge gain, damage ticks) */
 export const SkillActionApi = {
   listAll: () => api.get('/skill-actions/all').then(r => r.data as SkillAction[]),
   list: (skillId?: string) => api.get('/skill-actions', { params: { skillId } }).then(r => (r.data as PageResult<SkillAction>).items),
@@ -154,6 +181,7 @@ export const SkillActionApi = {
   update: (a: SkillAction) => api.put('/skill-actions', a),
 }
 
+/** Team CRUD */
 export const TeamApi = {
   listAll: () => api.get('/teams/all').then(r => r.data as Team[]),
   list: () => api.get('/teams').then(r => (r.data as PageResult<Team>).items),
@@ -221,6 +249,7 @@ export const SkillCostApi = {
   delete: (skillId: string, level: number) => api.delete(`/skill-costs/${skillId}/${level}`),
 }
 
+/** Gain/buff CRUD */
 export const GainApi = {
   listAll: (params?: Record<string, string>) => api.get('/gains/all', { params }).then(r => r.data as Gain[]),
   list: (params?: Record<string, string>) => api.get('/gains', { params }).then(r => (r.data as PageResult<Gain>).items),
@@ -228,6 +257,7 @@ export const GainApi = {
   delete: (id: string) => api.delete(`/gains/${id}`),
 }
 
+/** Timeline scenario — tracks JSON, enemy config, system constants (stored as JSON strings) */
 export interface TimelineScenario {
   id?: string
   name: string
@@ -247,6 +277,7 @@ export interface TimelineScenario {
   updatedAt?: string
 }
 
+/** Timeline scenario CRUD */
 export const TimelineApi = {
   listAll: () => api.get('/timelines/all').then(r => r.data as TimelineScenario[]),
   list: (teamId?: string) => api.get('/timelines', { params: teamId ? { teamId } : {} }).then(r => (r.data as PageResult<TimelineScenario>).items),
@@ -255,25 +286,46 @@ export const TimelineApi = {
   delete: (id: string) => api.delete(`/timelines/${id}`),
 }
 
+/** Enemy entity — stagger/break parameters for damage simulation */
 export interface Enemy {
   id: string; name: string; category?: string; tier?: string;
   maxStagger?: number; staggerNodeCount?: number;
   staggerNodeDuration?: number; staggerBreakDuration?: number;
   executionRecovery?: number;
+  description?: string;
+  critRate?: number; critDamage?: number;
+  attackRange?: number; weight?: number;
+  executionAtkMult?: number;
+  physicalResist?: string; burnResist?: string;
+  electroResist?: string; coldResist?: string; natureResist?: string;
+  traits?: string;
 }
 
+export interface EnemyStat {
+  enemyId: string; level: number;
+  hp: number; atk: number; def: number;
+}
+
+/** Enemy CRUD */
 export const EnemyApi = {
   listAll: () => api.get('/enemies/all').then(r => r.data as Enemy[]),
   list: (params?: { name?: string; category?: string }) => api.get('/enemies', { params }).then(r => (r.data as PageResult<Enemy>).items),
   get: (id: string) => api.get(`/enemies/${id}`).then(r => r.data as Enemy),
   save: (e: Enemy) => e.id ? api.put(`/enemies/${e.id}`, e) : api.post('/enemies', e),
   delete: (id: string) => api.delete(`/enemies/${id}`),
+  stats: (id: string) => api.get(`/enemies/${id}/stats`).then(r => r.data as EnemyStat[]),
+}
+
+export const EnemyStatApi = {
+  listAll: () => api.get('/enemy-stats/all').then(r => r.data as EnemyStat[]),
+  list: (enemyId?: string) => api.get('/enemy-stats', { params: { enemyId } }).then(r => (r.data as PageResult<EnemyStat>).items),
 }
 
 export interface ModifierDef {
   id: string; label: string; unit?: string;
 }
 
+/** Modifier definition (modifier labels/units for weapon/equipment templates) */
 export const ModifierDefApi = {
   listAll: () => api.get('/modifier-defs/all').then(r => r.data as ModifierDef[]),
   list: (label?: string) => api.get('/modifier-defs', { params: { label } }).then(r => (r.data as PageResult<ModifierDef>).items),
@@ -333,6 +385,169 @@ export const AttackSegmentTickApi = {
   save: (t: AttackSegmentTick) => api.post('/attack-segment-ticks', t),
   update: (t: AttackSegmentTick) => api.put('/attack-segment-ticks', t),
   delete: (characterId: string, segmentIndex: number, tickIndex: number) => api.delete(`/attack-segment-ticks/${characterId}/${segmentIndex}/${tickIndex}`),
+}
+
+// ========== Huafalin Wiki imported data ==========
+
+export interface CharacterArchive {
+  id: string; characterId: string; archiveIndex: number;
+  title?: string; content: string;
+}
+
+export interface CharacterVoice {
+  id: string; characterId: string; category: string;
+  language?: string; text: string;
+}
+
+export interface CharacterPotential {
+  id: string; characterId: string; potentialIndex: number;
+  name?: string; effect?: string;
+}
+
+export interface CharacterPromotion {
+  id: string; characterId: string; eliteStage: number; levelCap: number;
+  material1Id?: string; material1Count?: number;
+  material2Id?: string; material2Count?: number;
+  material3Id?: string; material3Count?: number;
+  goldCost?: number;
+}
+
+export interface CharacterLogistics {
+  id: string; characterId: string; name?: string;
+  unlockStage?: number; description?: string;
+}
+
+export interface CharacterProfile {
+  id: string; characterId: string; profileType: string;
+  label?: string; description?: string;
+}
+
+export interface WeaponLevelCost {
+  weaponId: string; level: number;
+  expCost?: number; goldCost?: number;
+}
+
+export interface WeaponAscension {
+  id: string; weaponId: string; phase: number; levelRequired: number;
+  material1Id?: string; material1Count?: number;
+  material2Id?: string; material2Count?: number;
+  material3Id?: string; material3Count?: number;
+  goldCost?: number;
+}
+
+export interface WeaponSkill {
+  id: string; weaponId: string; skillName: string; skillIndex: number;
+  rankCurrent?: number; rankMax?: number;
+}
+
+export interface WeaponSkillRank {
+  id: string; weaponSkillId: string; rankLevel: number;
+  valueDesc?: string;
+}
+
+export interface EquipmentSet {
+  id: string; name: string; pieceCount?: number; setEffectDesc?: string;
+}
+
+export interface CharacterSkillMaterial {
+  id: string; characterId: string; skillType: string; level: number;
+  material1Id?: string; material1Count?: number;
+  material2Id?: string; material2Count?: number;
+  goldCost?: number;
+}
+
+export interface CharacterRecommendedWeapon {
+  id: string; characterId: string; weaponId?: string;
+  weaponName?: string; recommendType: string;
+}
+
+export const CharacterArchiveApi = {
+  listAll: () => api.get('/character-archives/all').then(r => r.data as CharacterArchive[]),
+  list: (characterId?: string) => api.get('/character-archives', { params: { characterId } }).then(r => (r.data as PageResult<CharacterArchive>).items),
+  save: (a: CharacterArchive) => a.id ? api.put(`/character-archives/${a.id}`, a) : api.post('/character-archives', a),
+  delete: (id: string) => api.delete(`/character-archives/${id}`),
+}
+
+export const CharacterVoiceApi = {
+  listAll: () => api.get('/character-voices/all').then(r => r.data as CharacterVoice[]),
+  list: (characterId?: string, language?: string) => api.get('/character-voices', { params: { characterId, language } }).then(r => (r.data as PageResult<CharacterVoice>).items),
+  save: (v: CharacterVoice) => v.id ? api.put(`/character-voices/${v.id}`, v) : api.post('/character-voices', v),
+  delete: (id: string) => api.delete(`/character-voices/${id}`),
+}
+
+export const CharacterPotentialApi = {
+  listAll: () => api.get('/character-potentials/all').then(r => r.data as CharacterPotential[]),
+  list: (characterId?: string) => api.get('/character-potentials', { params: { characterId } }).then(r => (r.data as PageResult<CharacterPotential>).items),
+  save: (p: CharacterPotential) => p.id ? api.put(`/character-potentials/${p.id}`, p) : api.post('/character-potentials', p),
+  delete: (id: string) => api.delete(`/character-potentials/${id}`),
+}
+
+export const CharacterPromotionApi = {
+  listAll: () => api.get('/character-promotions/all').then(r => r.data as CharacterPromotion[]),
+  list: (characterId?: string) => api.get('/character-promotions', { params: { characterId } }).then(r => (r.data as PageResult<CharacterPromotion>).items),
+  save: (p: CharacterPromotion) => p.id ? api.put(`/character-promotions/${p.id}`, p) : api.post('/character-promotions', p),
+  delete: (id: string) => api.delete(`/character-promotions/${id}`),
+}
+
+export const CharacterLogisticsApi = {
+  listAll: () => api.get('/character-logistics/all').then(r => r.data as CharacterLogistics[]),
+  list: (characterId?: string) => api.get('/character-logistics', { params: { characterId } }).then(r => (r.data as PageResult<CharacterLogistics>).items),
+  save: (l: CharacterLogistics) => l.id ? api.put(`/character-logistics/${l.id}`, l) : api.post('/character-logistics', l),
+  delete: (id: string) => api.delete(`/character-logistics/${id}`),
+}
+
+export const CharacterProfileApi = {
+  listAll: () => api.get('/character-profiles/all').then(r => r.data as CharacterProfile[]),
+  list: (characterId?: string) => api.get('/character-profiles', { params: { characterId } }).then(r => (r.data as PageResult<CharacterProfile>).items),
+  save: (p: CharacterProfile) => p.id ? api.put(`/character-profiles/${p.id}`, p) : api.post('/character-profiles', p),
+  delete: (id: string) => api.delete(`/character-profiles/${id}`),
+}
+
+export const WeaponLevelCostApi = {
+  listAll: () => api.get('/weapon-level-costs/all').then(r => r.data as WeaponLevelCost[]),
+  list: (weaponId?: string) => api.get('/weapon-level-costs', { params: { weaponId } }).then(r => (r.data as PageResult<WeaponLevelCost>).items),
+  save: (c: WeaponLevelCost) => api.post('/weapon-level-costs', c),
+  delete: (weaponId: string, level: number) => api.delete(`/weapon-level-costs/${weaponId}/${level}`),
+}
+
+export const WeaponAscensionApi = {
+  listAll: () => api.get('/weapon-ascensions/all').then(r => r.data as WeaponAscension[]),
+  list: (weaponId?: string) => api.get('/weapon-ascensions', { params: { weaponId } }).then(r => (r.data as PageResult<WeaponAscension>).items),
+  save: (a: WeaponAscension) => a.id ? api.put(`/weapon-ascensions/${a.id}`, a) : api.post('/weapon-ascensions', a),
+  delete: (id: string) => api.delete(`/weapon-ascensions/${id}`),
+}
+
+export const EquipmentSetApi = {
+  listAll: () => api.get('/equipment-sets/all').then(r => r.data as EquipmentSet[]),
+  list: (name?: string) => api.get('/equipment-sets', { params: { name } }).then(r => (r.data as PageResult<EquipmentSet>).items),
+  save: (e: EquipmentSet) => e.id ? api.put(`/equipment-sets/${e.id}`, e) : api.post('/equipment-sets', e),
+  delete: (id: string) => api.delete(`/equipment-sets/${id}`),
+}
+
+export const WeaponSkillApi = {
+  listAll: () => api.get('/weapon-skills/all').then(r => r.data as WeaponSkill[]),
+  list: (weaponId?: string) => api.get('/weapon-skills', { params: { weaponId } }).then(r => (r.data as PageResult<WeaponSkill>).items),
+  save: (s: WeaponSkill) => s.id ? api.put(`/weapon-skills/${s.id}`, s) : api.post('/weapon-skills', s),
+  delete: (id: string) => api.delete(`/weapon-skills/${id}`),
+}
+
+export const WeaponSkillRankApi = {
+  listAll: () => api.get('/weapon-skill-ranks/all').then(r => r.data as WeaponSkillRank[]),
+  list: (weaponSkillId?: string) => api.get('/weapon-skill-ranks', { params: { weaponSkillId } }).then(r => (r.data as PageResult<WeaponSkillRank>).items),
+  save: (r: WeaponSkillRank) => r.id ? api.put(`/weapon-skill-ranks/${r.id}`, r) : api.post('/weapon-skill-ranks', r),
+  delete: (id: string) => api.delete(`/weapon-skill-ranks/${id}`),
+}
+
+export const CharacterSkillMaterialApi = {
+  listAll: () => api.get('/character-skill-materials/all').then(r => r.data as CharacterSkillMaterial[]),
+  list: (characterId?: string) => api.get('/character-skill-materials', { params: { characterId } }).then(r => (r.data as PageResult<CharacterSkillMaterial>).items),
+  save: (m: CharacterSkillMaterial) => m.id ? api.put(`/character-skill-materials/${m.id}`, m) : api.post('/character-skill-materials', m),
+  delete: (id: string) => api.delete(`/character-skill-materials/${id}`),
+}
+
+export const CharacterRecommendedWeaponApi = {
+  listAll: () => api.get('/character-recommended-weapons/all').then(r => r.data as CharacterRecommendedWeapon[]),
+  list: (characterId?: string) => api.get('/character-recommended-weapons', { params: { characterId } }).then(r => (r.data as PageResult<CharacterRecommendedWeapon>).items),
 }
 
 export default api

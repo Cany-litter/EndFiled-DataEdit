@@ -7,14 +7,18 @@
       <el-table :data="list" border stripe v-loading="loading" style="width:100%" :max-height="'calc(100vh - 220px)'">
         <el-table-column type="index" label="#" width="50" fixed="left" />
         <el-table-column prop="name" label="名称" min-width="120" show-overflow-tooltip fixed="left" />
-        <el-table-column label="角色" min-width="100" show-overflow-tooltip>
+        <el-table-column label="角色" width="100" show-overflow-tooltip>
           <template #default="{ row }">{{ charName(row.characterId) }}</template>
         </el-table-column>
-        <el-table-column label="技能类型" width="90">
-          <template #default="{ row }">{{ mapSkillType(row.type) }}</template>
+        <el-table-column label="技能类型" width="160">
+          <template #default="{ row }">
+            <span class="skill-tag" :class="'s-' + row.type">{{ mapSkillType(row.type) }}</span>
+          </template>
         </el-table-column>
         <el-table-column label="伤害类型" width="90">
-          <template #default="{ row }">{{ mapDamageType(row.damageType) }}</template>
+          <template #default="{ row }">
+            <span class="dmg-tag" :class="'d-' + row.damageType">{{ mapDamageType(row.damageType) }}</span>
+          </template>
         </el-table-column>
         <el-table-column label="描述" min-width="260" show-overflow-tooltip>
           <template #default="{ row }">{{ cleanSkillDesc(row.description) || '-' }}</template>
@@ -187,10 +191,12 @@ async function load() {
   characters.value = await CharacterApi.listAll()
   const skills = await SkillApi.listAll()
 
-  const [allLevels, allCosts] = await Promise.all([
+  let [allLevels, allCosts] = await Promise.all([
     SkillLevelApi.listAll(),
     SkillCostApi.listAll(),
   ])
+  if (!Array.isArray(allCosts)) allCosts = []
+  if (!Array.isArray(allLevels)) allLevels = []
 
   const levelsBySkill: Record<string, any[]> = {}
   for (const lv of allLevels) {
@@ -380,4 +386,24 @@ onMounted(load)
 <style>
 .col-ops .el-button { white-space: nowrap; }
 .col-ops { text-align: right; }
+
+/* 技能类型标签 */
+.skill-tag { display: inline-block; padding: 0 8px; border-radius: 4px; font-size: 12px; line-height: 22px; font-weight: 500; }
+.s-skill { color: var(--skill-skill, #e6a23c); background: var(--skill-bg-skill, #fdf6ec); }
+.s-chain { color: var(--skill-chain, #67c23a); background: var(--skill-bg-chain, #f0f9eb); }
+.s-ultimate { color: var(--skill-ultimate, #f56c6c); background: var(--skill-bg-ultimate, #fef0f0); }
+.s-talent1 { color: var(--skill-talent1, #9b59b6); background: var(--skill-bg-talent1, #f9f0ff); }
+.s-talent2 { color: var(--skill-talent2, #1abc9c); background: var(--skill-bg-talent2, #ecfdf5); }
+.s-normal, .s-execution, .s-plunge, .s-charged { color: var(--skill-normal, #409eff); background: var(--skill-bg-normal, #ecf5ff); }
+.s-other { color: var(--skill-other, #909399); background: var(--skill-bg-other, #f4f4f5); }
+
+/* 伤害类型标签 */
+.dmg-tag { display: inline-block; padding: 0 8px; border-radius: 4px; font-size: 12px; line-height: 22px; }
+.d-physical { color: var(--dmg-physical, #909399); background: #f4f4f5; }
+.d-pyro { color: var(--dmg-pyro, #f56c6c); background: #fef0f0; }
+.d-electro { color: var(--dmg-electro, #e6a23c); background: #fdf6ec; }
+.d-cryo { color: var(--dmg-cryo, #409eff); background: #ecf5ff; }
+.d-natural { color: var(--dmg-nature, #67c23a); background: #f0f9eb; }
+.d-ultra { color: var(--dmg-ultra, #b37feb); background: #f9f0ff; }
+.d-true { color: var(--dmg-true, #ffd700); background: #fef8e7; }
 </style>

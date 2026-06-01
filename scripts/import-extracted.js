@@ -218,6 +218,27 @@ async function main() {
   console.log(`攻击分段: ${segCount}`);
   console.log(`攻击段伤害帧: ${segTickCount}`);
 
+  // ── 3. Cleanup English-named character skills and characters ──
+  console.log('\n--- 清理英文名角色 ---');
+  const [engChars] = await conn.execute(
+    `SELECT id, name FROM \`character\` WHERE name NOT REGEXP '[\\u4e00-\\u9fff]'`
+  );
+  if (engChars.length > 0) {
+    for (const c of engChars) {
+      console.log(`  删除: ${c.name} (${c.id})`);
+      await conn.execute('DELETE FROM skill_level WHERE skill_id IN (SELECT id FROM skill WHERE character_id = ?)', [c.id]);
+      await conn.execute('DELETE FROM skill_damage_tick WHERE skill_id IN (SELECT id FROM skill_action WHERE skill_id IN (SELECT id FROM skill WHERE character_id = ?))', [c.id]);
+      await conn.execute('DELETE FROM skill_action WHERE skill_id IN (SELECT id FROM skill WHERE character_id = ?)', [c.id]);
+      await conn.execute('DELETE FROM skill_anomaly WHERE skill_id IN (SELECT id FROM skill WHERE character_id = ?)', [c.id]);
+      await conn.execute('DELETE FROM skill WHERE character_id = ?', [c.id]);
+      await conn.execute('DELETE FROM attack_segment_tick WHERE character_id = ?', [c.id]);
+      await conn.execute('DELETE FROM attack_segment WHERE character_id = ?', [c.id]);
+      await conn.execute('DELETE FROM `character` WHERE id = ?', [c.id]);
+    }
+  } else {
+    console.log('  无非中文名角色需要清理');
+  }
+
   await conn.end();
   console.log('\n=== 导入完成 ===');
 }

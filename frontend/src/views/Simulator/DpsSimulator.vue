@@ -72,16 +72,20 @@
                 <el-table-column label="时间" width="60">
                   <template #default="{ row }">{{ row.time.toFixed(1) }}s</template>
                 </el-table-column>
-                <el-table-column label="技能类型" width="70">
-                  <template #default="{ row }">{{ typeLabel(row.skillType) }}</template>
+                <el-table-column label="技能类型" width="80">
+                  <template #default="{ row }">
+                    <span class="skill-tag" :class="'s-' + row.skillType">{{ typeLabel(row.skillType) }}</span>
+                  </template>
                 </el-table-column>
                 <el-table-column label="技能名称" min-width="100">
                   <template #default="{ row }">
                     <span class="clickable-cell" @click="replaceSkill(row)">{{ row.skillName }}</span>
                   </template>
                 </el-table-column>
-                <el-table-column label="伤害类型" width="70">
-                  <template #default="{ row }">{{ damageTypeLabel(row.damageType) }}</template>
+                <el-table-column label="伤害类型" width="75">
+                  <template #default="{ row }">
+                    <span class="dmg-tag" :class="'d-' + row.damageType">{{ damageTypeLabel(row.damageType) }}</span>
+                  </template>
                 </el-table-column>
                 <el-table-column v-for="(_, ci) in selfBuffColCount" :key="'sb' + ci" :label="'己方增益' + (ci + 1)" width="80">
                   <template #default="{ row }">
@@ -710,8 +714,8 @@ onMounted(async () => {
 .char-selected { border-color: #409eff; background: #f0f7ff; }
 .char-header { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
 .slot-badge { width: 18px; height: 18px; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #fff; font-weight: 700; flex-shrink: 0; }
-.char-name { font-size: 12px; font-weight: 600; color: #303133; }
-.char-atk { font-size: 10px; color: #909399; margin-left: auto; }
+.char-name { font-size: 12px; font-weight: 600; color: var(--text-primary); }
+.char-atk { font-size: 10px; color: var(--text-secondary); margin-left: auto; }
 .skill-chips { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
 .skill-chip { display: inline-flex; align-items: center; gap: 3px; padding: 2px 6px; border-radius: 4px; font-size: 11px; cursor: pointer; border: 1px solid transparent; transition: all 0.15s; }
 .skill-chip:hover { border-color: #c0c4cc; }
@@ -719,26 +723,26 @@ onMounted(async () => {
 .skill-icon { width: 16px; height: 16px; border-radius: 2px; display: inline-flex; align-items: center; justify-content: center; font-size: 8px; color: #fff; font-weight: 600; }
 .skill-name { color: #303133; }
 .skill-mult { color: #909399; font-size: 10px; }
-.type-normal .skill-icon { background: #409eff; }
-.type-skill .skill-icon { background: #e6a23c; }
-.type-chain .skill-icon { background: #67c23a; }
-.type-ultimate .skill-icon { background: #f56c6c; }
-.type-talent1 .skill-icon { background: #9b59b6; }
-.type-talent2 .skill-icon { background: #1abc9c; }
-.type-other .skill-icon { background: #909399; }
+.type-normal .skill-icon { background: var(--skill-normal); }
+.type-skill .skill-icon { background: var(--skill-skill); }
+.type-chain .skill-icon { background: var(--skill-chain); }
+.type-ultimate .skill-icon { background: var(--skill-ultimate); }
+.type-talent1 .skill-icon { background: var(--skill-talent1); }
+.type-talent2 .skill-icon { background: var(--skill-talent2); }
+.type-other .skill-icon { background: var(--skill-other); }
 .gain-section { display: flex; flex-wrap: wrap; gap: 4px; }
 .gain-chip { display: inline-flex; align-items: center; gap: 3px; padding: 3px 8px; border-radius: 4px; font-size: 11px; cursor: pointer; border: 1px solid transparent; background: #f0f9eb; transition: all 0.15s; }
 .gain-chip:hover { border-color: #b7eb8f; }
-.gain-chip.active { border-color: #67c23a; background: #e1f3d8; }
-.gain-icon { width: 16px; height: 16px; border-radius: 2px; display: inline-flex; align-items: center; justify-content: center; font-size: 8px; color: #fff; background: #67c23a; }
-.gain-name { color: #303133; }
-.gain-meta { color: #909399; font-size: 10px; }
+.gain-chip.active { border-color: var(--status-success); background: #e1f3d8; }
+.gain-icon { width: 16px; height: 16px; border-radius: 2px; display: inline-flex; align-items: center; justify-content: center; font-size: 8px; color: var(--text-white); background: var(--status-success); }
+.gain-name { color: var(--text-primary); }
+.gain-meta { color: var(--text-secondary); font-size: 10px; }
 .enemy-card { margin-bottom: 6px; padding: 8px; border-radius: 6px; border: 2px solid #e4e7ed; cursor: pointer; transition: all 0.15s; background: #fafafa; }
-.enemy-card:hover { border-color: #c0c4cc; }
-.enemy-selected { border-color: #409eff; background: #f0f7ff; }
+.enemy-card:hover { border-color: var(--text-placeholder); }
+.enemy-selected { border-color: var(--status-primary); background: #f0f7ff; }
 .toolbar { display: flex; align-items: center; gap: 4px; margin-bottom: 6px; padding: 4px 8px; background: #f5f7fa; border-radius: 4px; }
 .clickable-cell { cursor: pointer; padding: 1px 4px; border-radius: 3px; transition: background 0.15s; }
-.clickable-cell:hover { background: #ecf5ff; }
-.buff-cell { display: inline-block; min-width: 50px; text-align: center; color: #909399; }
-.buff-cell.filled { color: #67c23a; font-weight: 500; }
+.clickable-cell:hover { background: var(--skill-bg-normal); }
+.buff-cell { display: inline-block; min-width: 50px; text-align: center; color: var(--text-secondary); }
+.buff-cell.filled { color: var(--status-success); font-weight: 500; }
 </style>
