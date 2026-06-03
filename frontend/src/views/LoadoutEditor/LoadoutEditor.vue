@@ -232,16 +232,44 @@
         </div>
 
         <div class="damage-panel">
-          <div class="section-header">技能伤害</div>
+          <div class="section-header">技能配置</div>
           <el-table :data="skillDamageRows" border stripe size="small" class="damage-table">
-            <el-table-column prop="name" label="技能名称" width="100" />
-            <el-table-column prop="level" label="等级" width="60" />
-            <el-table-column prop="multiplier" label="倍率" width="80">
+            <el-table-column prop="name" label="技能名称" width="180">
+              <template #default="{ row }">{{ row.name }}</template>
+            </el-table-column>
+            <el-table-column label="等级" width="150">
+              <template #default="{ row }">
+                <div style="display:flex;align-items:center;gap:10px">
+                  <el-slider :model-value="skillLevels[row.id] ?? (row.isTalent ? 0 : 12)"
+                    :min="row.isTalent ? 0 : 1" :max="row.isTalent ? 2 : 12"
+                    :step="1" show-stops size="small" style="flex:1"
+                    @input="(v: number) => onSkillLevelChange(row, v)" />
+                  <span style="font-weight:600;color:var(--text-primary);min-width:16px;text-align:center">{{ skillLevels[row.id] ?? (row.isTalent ? 0 : 12) }}</span>
+                </div>
+              </template>
+            </el-table-column>
+            <el-table-column label="倍率" width="80">
               <template #default="{ row }">
                 {{ row.multiplier }}%
               </template>
             </el-table-column>
-            <el-table-column prop="damage" label="技能伤害" width="120" />
+            <el-table-column label="期望伤害" width="120">
+              <template #header>
+                <span>
+                  期望伤害
+                  <el-tooltip content="参考对象为100防御0抗性的普通敌人" placement="top">
+                    <el-icon style="cursor:help;color:var(--text-placeholder);vertical-align:middle;margin-left:2px"><QuestionFilled /></el-icon>
+                  </el-tooltip>
+                </span>
+              </template>
+              <template #default="{ row }">{{ row.damage }}</template>
+            </el-table-column>
+            <el-table-column label="不暴击伤害" width="100">
+              <template #default="{ row }">{{ row.nonCritDmg }}</template>
+            </el-table-column>
+            <el-table-column label="暴击伤害" width="100">
+              <template #default="{ row }">{{ row.critDmg }}</template>
+            </el-table-column>
           </el-table>
         </div>
       </div>
@@ -261,10 +289,12 @@
 import { ref, computed, reactive, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { ElMessage } from 'element-plus'
+import { QuestionFilled } from '@element-plus/icons-vue'
 import { CharacterApi, WeaponApi, WeaponAffixApi, EquipmentApi, SkillApi, SkillLevelApi, BuildApi, GainApi, CharacterStatApi, WeaponStatApi } from '../../api'
 import type { Character, Weapon, Equipment, Skill, SkillLevel, Gain, WeaponAffix, CharacterStat } from '../../api'
 import { mapAttrType, formatPct } from '../../utils/constants'
-import { calcDamage } from '../../engine/formulas'
+import { calcDamageByCategories, DAMAGE_CATEGORIES } from '../../engine/formulas/damageCategories'
+import { collectCrit } from '../../engine/formulas/effectResolver'
 import { calcFinalStats } from '../../engine/formulas/stats'
 import type { FinalStats, StatLayer } from '../../engine/formulas/stats'
 import {
@@ -409,52 +439,78 @@ const groupedGains = computed(() => {
 })
 
 // --- 技能伤害汇总表（从分层数据取面板属性，使用默认战斗参数） ---
+const TYPE_ORDER: Record<string, number> = {
+  normal: 0, attack: 0, charged: 1, plunge: 2, execution: 3,
+  skill: 4, chain: 5, ultimate: 6,
+  talent1: 7, talent2: 8, other: 9,
+}
+const ELEMENT_DMG_KEY: Record<string, string> = {
+  physical: 'physicalDmgBonus', pyro: 'burnDmgBonus',
+  electro: 'electroDmgBonus', cryo: 'frostDmgBonus',
+  natural: 'natureDmgBonus', ultra: 'extraDmgBonus',
+}
+const SKILLTYPE_DMG_KEY: Record<string, string> = {
+  normal: 'normalAtkDmgBonus', skill: 'skillDmgBonus',
+  chain: 'chainDmgBonus', ultimate: 'ultimateDmgBonus',
+}
 const skillDamageRows = computed(() => {
   const f = layerData.final || {}
   const attack = f['atk'] || 0
-  const critRate = ((f['critRate'] || 0) + 5) / 100
-  const critDamage = ((f['critDamage'] || 0) + 50) / 100
-  const damageBonus = (
-    (f['physicalDmgBonus'] || 0) +
-    (f['burnDmgBonus'] || 0) +
-    (f['electroDmgBonus'] || 0) +
-    (f['frostDmgBonus'] || 0) +
-    (f['natureDmgBonus'] || 0) +
-    (f['extraDmgBonus'] || 0) +
-    (f['normalAtkDmgBonus'] || 0) +
-    (f['skillDmgBonus'] || 0) +
-    (f['chainDmgBonus'] || 0) +
-    (f['ultimateDmgBonus'] || 0) +
-    (f['staggerDmgBonus'] || 0)
-  ) / 100
-  return skills.value.map(sk => {
+  const baseCritRate = (f['critRate'] || 5) / 100
+  const baseCritDamage = (f['critDamage'] || 50) / 100
+
+  return skills.value
+    .slice()
+    .sort((a, b) => (TYPE_ORDER[a.type] ?? 99) - (TYPE_ORDER[b.type] ?? 99))
+    .map(sk => {
     const mult = skillMult[sk.id] ?? 0
-    const dmg = calcDamage({
-      attack, skillMultiplier: mult,
-      baseDamageFlat: battleConfig.baseDamageFlat,
-      critRate, critDamage,
-      damageBonus,
-      damageReduction: battleConfig.damageReduction > 0 ? [battleConfig.damageReduction] : [],
-      amplifyBonus: battleConfig.amplifyBonus,
-      weakenReduction: battleConfig.weakenReduction > 0 ? [battleConfig.weakenReduction] : [],
-      shelterValue: battleConfig.shelterValue,
-      fragileBonus: battleConfig.fragileBonus,
-      vulnerableBonus: battleConfig.vulnerableBonus,
-      defense: battleConfig.targetDef,
-      isTrueDamage: sk.damageType === 'true',
-      isStaggered: battleConfig.isStaggered,
-      staggerMultiplier: battleConfig.staggerMultiplier,
-      resistance: battleConfig.targetResistance,
-      resistanceIgnore: battleConfig.targetResistanceIgnore,
-      nonControlledReduction: battleConfig.nonControlledReduction,
-      comboBonus: battleConfig.comboBonus,
-      specialMultiplier: battleConfig.specialMultiplier,
-    })
+    const baseDamage = attack * mult
+
+    const buffs: any[] = []
+
+    const allDmgBonus = (f['damageBonus'] ?? 0) / 100
+    if (allDmgBonus > 0) {
+      buffs.push({ id: '_all', name: '全伤害加成', effects: [{ category: 'DMG_Dealt', value: allDmgBonus }] })
+    }
+
+    const elemKey = ELEMENT_DMG_KEY[sk.damageType]
+    const elemBonus = elemKey ? ((f[elemKey] ?? 0) / 100) : 0
+    if (elemBonus > 0) {
+      buffs.push({ id: '_elem', name: '元素伤害加成', effects: [{ category: 'DMG_Dealt', value: elemBonus }] })
+    }
+
+    const stKey = SKILLTYPE_DMG_KEY[sk.type]
+    const stBonus = stKey ? ((f[stKey] ?? 0) / 100) : 0
+    if (stBonus > 0) {
+      buffs.push({ id: '_st', name: '技能类型伤害加成', effects: [{ category: 'DMG_Dealt', value: stBonus }] })
+    }
+
+    const staggerBonus = (f['staggerDmgBonus'] ?? 0) / 100
+    if (staggerBonus > 0) {
+      buffs.push({ id: '_stagger', name: '对失衡目标伤害加成', effects: [{ category: 'Staggered', value: staggerBonus }] })
+    }
+
+    const context = { skillType: sk.type, element: sk.damageType }
+    const { finalDamage: catDamage } = calcDamageByCategories(baseDamage, buffs, DAMAGE_CATEGORIES, context)
+    const crit = collectCrit(buffs, context, baseCritRate, baseCritDamage)
+    const defMult = sk.damageType === 'true' ? 1 : 100 / ((battleConfig.targetDef || 100) + 100)
+    const resMult = 1 - (battleConfig.targetResistance || 0) / 100
+
+    const nonCritDmg = catDamage * defMult * resMult
+    const critHitDmg = catDamage * (1 + crit.critDamage) * defMult * resMult
+    const finalDmg = catDamage * crit.expectedMultiplier * defMult * resMult
+
     return {
-      name: skillLabel(sk),
+      id: sk.id,
+      name: sk.name,
+      fullName: sk.name,
       level: skillLevels[sk.id] ?? 12,
+      isTalent: sk.type === 'talent1' || sk.type === 'talent2',
+      skillType: sk.type,
       multiplier: (mult * 100).toFixed(1),
-      damage: dmg.finalDamage.toFixed(1),
+      damage: finalDmg.toFixed(1),
+      nonCritDmg: nonCritDmg.toFixed(1),
+      critDmg: critHitDmg.toFixed(1),
     }
   })
 })
@@ -597,6 +653,17 @@ async function selectChar(c: Character) {
   recalc()
 }
 
+// --- 技能等级联动（同类型的技能统一调节） ---
+function onSkillLevelChange(row: any, v: number) {
+  skillLevels[row.id] = v
+  for (const r of skillDamageRows.value) {
+    if (r.id !== row.id && r.skillType === row.skillType) {
+      skillLevels[r.id] = v
+    }
+  }
+  recalc()
+}
+
 // --- 核心计算：面板属性 + 技能倍率 ---
 function recalc() {
   const c = selectedChar.value
@@ -695,7 +762,7 @@ function recalc() {
     const lvs = skillLevelMap.value[sk.id]
     if (lvs) {
       const lvRec = lvs.find(l => l.level === (skillLevels[sk.id] ?? 12))
-      skillMult[sk.id] = lvRec ? lvRec.multiplier / 100 : 0
+      skillMult[sk.id] = lvRec ? lvRec.multiplier : 0
     }
   }
 }
@@ -734,6 +801,7 @@ async function saveBuild() {
     affix3Level: getAffixLevel(3),
     equipRefines: JSON.stringify(equipRefines),
     selectedGains: JSON.stringify(selectedGainIds.value),
+    skillLevels: JSON.stringify(skillLevels),
   }
   if (currentBuildId.value) data.id = currentBuildId.value
   try {
@@ -789,6 +857,14 @@ async function loadBuild(id: string) {
       const saved = JSON.parse(build.selectedGains)
       const validIds = new Set(filteredGains.value.map(g => g.id))
       selectedGainIds.value = saved.filter((id: string) => validIds.has(id))
+    } catch {}
+  }
+  if (build.skillLevels) {
+    try {
+      const saved = JSON.parse(build.skillLevels)
+      for (const [k, v] of Object.entries(saved)) {
+        skillLevels[k] = v as number
+      }
     } catch {}
   }
   recalc()

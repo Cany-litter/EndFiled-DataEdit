@@ -29,7 +29,7 @@ public class Build {
     private String selectedGains;
     private Integer charPotential;
     private Integer weaponPotential;
-    private String reserve1;
+    private String skillLevels;
     private String reserve2;
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createdAt;

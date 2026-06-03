@@ -289,6 +289,7 @@ async function onDelete() {
   if (!selectedScenarioId.value) return
   try {
     await ElMessageBox.confirm('确定删除该方案？', '确认')
+    await TimelineApi.delete(selectedScenarioId.value)
     store.removeScenario(selectedScenarioId.value)
     selectedScenarioId.value = store.activeScenarioId
   } catch { }
@@ -534,6 +535,7 @@ async function onSaveScenario() {
           store.scenarios = [...scList]
         }
         selectedScenarioId.value = newId
+        store.setActiveScenario(newId)
       }
       savedScenarioIds.value.add(newId || scenario.id)
     }
@@ -606,11 +608,13 @@ async function loadTeamSkills() {
     SkillApi.listAll().catch(() => { console.warn('SkillApi.listAll 失败'); return null }),
     SkillActionApi.listAll().catch(() => { console.warn('SkillActionApi.listAll 失败'); return null }),
     SkillLevelApi.listAll().catch(() => { console.warn('SkillLevelApi.listAll 失败'); return null }),
+    BuildApi.listAll().catch(() => { console.warn('BuildApi.listAll 失败'); return null }),
   ])
   const allWeapons = raw[0] || []
   const allSkills = raw[1] || []
   const allActions = raw[2] || []
   const allLevels = raw[3] || []
+  const allBuilds = raw[4] || []
 
   console.log('loadTeamSkills: 武器', allWeapons.length, '技能', allSkills.length, '动作', allActions.length, '等级', allLevels.length)
 
@@ -637,6 +641,23 @@ async function loadTeamSkills() {
   for (const lv of allLevels) {
     if (lv.level === 12) sl12[lv.skillId] = lv.multiplier
   }
+
+  // Override with build's saved skill levels
+  const buildIds = teamBuildIds.value
+  for (const bid of buildIds) {
+    if (!bid) continue
+    const build = allBuilds.find((b: any) => b.id === bid)
+    if (build?.skillLevels) {
+      try {
+        const savedLevels: Record<string, number> = JSON.parse(build.skillLevels)
+        for (const [skillId, level] of Object.entries(savedLevels)) {
+          const lvEntry = allLevels.find((l: any) => l.skillId === skillId && l.level === level)
+          if (lvEntry) sl12[skillId] = lvEntry.multiplier
+        }
+      } catch {}
+    }
+  }
+
   teamSkills.value = sk
   teamSkillActions.value = sa
   teamSkillLevel12.value = sl12

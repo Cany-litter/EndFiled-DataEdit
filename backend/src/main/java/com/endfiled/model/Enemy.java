@@ -32,6 +32,7 @@ public class Enemy {
     private String electroResist;
     private String coldResist;
     private String natureResist;
+    private Integer def;
     private String traits;
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createdAt;

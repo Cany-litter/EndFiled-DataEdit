@@ -30,7 +30,7 @@
             @dragstart="onDragStart($event, c, skill)"
             @click="emit('select-skill', { character: c, skill })"
           >
-            <span class="lib-skill-icon">{{ skillTypeIcon(skill.type) }}</span>
+            <span class="lib-skill-icon">{{ skillShortName(skill.type, skill.id) }}</span>
             <div class="lib-skill-info">
               <span class="lib-skill-name">{{ skill.name }}</span>
               <span class="lib-skill-meta">{{ skillMeta(skill) }}</span>
@@ -46,6 +46,7 @@
 import { computed } from 'vue'
 import type { Character, Skill, SkillAction, SkillLevel } from '../../api'
 import type { TimelineAction } from '../../engine/types/timeline'
+import { skillShortName } from '../../utils/constants'
 
 const props = defineProps<{
   characters: (Character | null)[]
@@ -111,7 +112,7 @@ function skillMeta(skill: Skill): string {
   if (sa?.spCost) parts.push(sa.spCost + '技力')
   if (sa?.gaugeGain) parts.push('自身充能+' + sa.gaugeGain)
   const mult = props.skillLevel12Map[skill.id]
-  if (mult) parts.push((mult).toFixed(0) + '%')
+  if (mult) parts.push((mult * 100).toFixed(0) + '%')
   return parts.join(' | ') || ''
 }
 

@@ -94,3 +94,19 @@ export const anomalyTypeMap: Record<string, string> = {
 }
 export const mapAnomalyType = (v: string) => anomalyTypeMap[v] ?? v
 export const anomalyTypeOpts = Object.entries(anomalyTypeMap)
+
+/** 技能短名称：时间轴中简化为 "普1" "战2" "终F" 等 */
+const SHORT_PREFIX: Record<string, string> = {
+  normal: '普', charged: '重', execution: '处', plunge: '落',
+  skill: '战', chain: '连', ultimate: '终',
+  talent1: '天1', talent2: '天2', other: '?',
+}
+export function skillShortName(type: string, skillId: string): string {
+  const prefix = SHORT_PREFIX[type]
+  if (!prefix) return type
+  if (skillId.endsWith('_finisher')) return '终F'
+  if (type.startsWith('talent')) return prefix
+  const m = skillId.match(/_(\d+)$/)
+  if (m) return prefix + m[1]
+  return prefix
+}

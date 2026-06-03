@@ -104,7 +104,7 @@ onMounted(loadDbEnemies)
 .enemy-bar-toolbar { padding: 4px 8px; border-bottom: 1px solid #e4e7ed; user-select: none; }
 
 .enemy-tags { display: flex; gap: 4px; padding: 4px 8px; overflow-x: auto; flex-wrap: wrap; }
-.enemy-tag { border: 1px solid #e4e7ed; border-left: 3px solid; border-radius: 4px; padding: 4px 6px; background: #fff; min-width: 280px; }
+.enemy-tag { border: 1px solid #e4e7ed; border-left: 3px solid; border-radius: 4px; padding: 4px 6px; background: #fff; min-width: 200px; }
 .enemy-tag-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
 .enemy-tag-name { font-size: 11px; font-weight: 600; color: #303133; }
 .enemy-tag-params { display: flex; gap: 6px; flex-wrap: wrap; }

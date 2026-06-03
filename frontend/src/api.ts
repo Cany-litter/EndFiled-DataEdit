@@ -91,7 +91,7 @@ export interface Build {
   charPotential?: number; weaponPotential?: number;
   affix1Level?: number; affix2Level?: number; affix3Level?: number;
   equipRefines?: string; selectedGains?: string;
-  reserve1?: string;
+  skillLevels?: string;
 }
 
 /** Gain/buff entity — category, effect value, stacking rules, target scope */
@@ -298,6 +298,7 @@ export interface Enemy {
   executionAtkMult?: number;
   physicalResist?: string; burnResist?: string;
   electroResist?: string; coldResist?: string; natureResist?: string;
+  def?: number;
   traits?: string;
 }
 
@@ -319,6 +320,7 @@ export const EnemyApi = {
 export const EnemyStatApi = {
   listAll: () => api.get('/enemy-stats/all').then(r => r.data as EnemyStat[]),
   list: (enemyId?: string) => api.get('/enemy-stats', { params: { enemyId } }).then(r => (r.data as PageResult<EnemyStat>).items),
+  save: (s: EnemyStat) => api.post('/enemy-stats', s),
 }
 
 export interface ModifierDef {

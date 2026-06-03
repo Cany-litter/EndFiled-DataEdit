@@ -183,7 +183,7 @@ function charName(id: string) {
 function level12Mult(row: any) {
   if (!row._levels || !row._levels.length) return '-'
   const lv12 = row._levels.find((l: any) => l.level === 12)
-  return lv12 ? lv12.multiplier + '%' : '-'
+  return lv12 ? (lv12.multiplier * 100).toFixed(1) + '%' : '-'
 }
 
 async function load() {
